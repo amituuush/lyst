@@ -121,8 +121,6 @@ var ListItem = React.createClass({
     }
 });
 
-ReactDOM.render(<ToDoListContainer />, document.getElementById('content'));
-
 module.exports = ToDoListContainer;
 
 // finish deleting items // DONE

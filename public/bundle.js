@@ -48,9 +48,9 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	var HelloWorld = __webpack_require__(159);
+	var ToDoListContainer = __webpack_require__(159);
 
-	ReactDOM.render(React.createElement(HelloWorld, null), document.body);
+	ReactDOM.render(React.createElement(ToDoListContainer, null), document.body);
 
 /***/ },
 /* 1 */
@@ -19661,19 +19661,169 @@
 
 	var React = __webpack_require__(1);
 
-	var HelloWorld = React.createClass({
-	    displayName: 'HelloWorld',
+	var ToDoListContainer = React.createClass({
+	    displayName: 'ToDoListContainer',
+
+	    getInitialState: function getInitialState() {
+	        return { itemList: [] };
+	    },
+
+	    _addItem: function _addItem(value) {
+	        this.setState({
+	            itemList: this.state.itemList.concat({
+	                name: value,
+	                completed: false,
+	                changed: false
+	            })
+	        });
+	    },
+
+	    _markComplete: function _markComplete(index) {
+	        var itemList = this.state.itemList;
+
+	        itemList[index].completed = true;
+	        this.setState({
+	            itemList: itemList
+	        });
+	    },
+
+	    _deleteItem: function _deleteItem(index) {
+	        var itemList = this.state.itemList;
+
+	        itemList.splice(index, 1);
+	        this.setState({
+	            itemList: itemList
+	        });
+	    },
+
+	    _clearList: function _clearList() {
+	        var userAnswer = confirm('Are you sure you want to completely delete this list?');
+	        if (userAnswer) {
+	            this.setState({
+	                itemList: []
+	            });
+	        }
+	    },
+
+	    render: function render() {
+	        return React.createElement(ToDoList, { items: this.state.itemList, addItem: this._addItem, deleteItem: this._deleteItem, clearList: this._clearList, markComplete: this._markComplete });
+	    }
+	});
+
+	var ToDoList = React.createClass({
+	    displayName: 'ToDoList',
 
 	    render: function render() {
 	        return React.createElement(
 	            'div',
 	            null,
-	            'hey whats up jhkhhkl'
+	            React.createElement(UserForm, { onFormSubmit: this.props.addItem, clearList: this.props.clearList }),
+	            React.createElement(ListItemContainer, { items: this.props.items, deleteItem: this.props.deleteItem, markComplete: this.props.markComplete })
 	        );
 	    }
 	});
 
-	module.exports = HelloWorld;
+	var UserForm = React.createClass({
+	    displayName: 'UserForm',
+
+	    getInitialState: function getInitialState() {
+	        return { item: '' };
+	    },
+
+	    _handleSubmit: function _handleSubmit(event) {
+	        event.preventDefault();
+	        if (this.state.item) {
+	            this.props.onFormSubmit(this.state.item);
+	        }
+	        this.setState({
+	            item: ''
+	        });
+	    },
+
+	    _handleNumberChange: function _handleNumberChange(event) {
+	        this.setState({ item: event.target.value });
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'form',
+	                { onSubmit: this._handleSubmit },
+	                React.createElement('input', { type: 'text', onChange: this._handleNumberChange, value: this.state.item }),
+	                React.createElement('input', { type: 'submit', value: 'Add item' })
+	            ),
+	            React.createElement(
+	                'button',
+	                { onClick: this.props.clearList },
+	                'Reset'
+	            )
+	        );
+	    }
+	});
+
+	var ListItemContainer = React.createClass({
+	    displayName: 'ListItemContainer',
+
+	    render: function render() {
+	        var _this = this;
+
+	        var items = this.props.items.map(function (arrayItem, index) {
+	            var handleDelete = function handleDelete() {
+	                _this.props.deleteItem(index);
+	            };
+	            var handleComplete = function handleComplete() {
+	                _this.props.markComplete(index);
+	            };
+	            return React.createElement(ListItem, { deleteItem: handleDelete, key: index, index: index, item: arrayItem, markComplete: handleComplete });
+	        });
+
+	        return React.createElement(
+	            'ul',
+	            null,
+	            items
+	        );
+	    }
+	});
+
+	var ListItem = React.createClass({
+	    displayName: 'ListItem',
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'li',
+	                { style: { color: 'red', textDecoration: this.props.item.completed ? 'line-through' : 'none' } },
+	                this.props.item.name
+	            ),
+	            React.createElement(
+	                'button',
+	                { onClick: this.props.markComplete },
+	                'Complete'
+	            ),
+	            React.createElement(
+	                'button',
+	                { onClick: this.props.deleteItem },
+	                'Delete'
+	            )
+	        );
+	    }
+	});
+
+	module.exports = ToDoListContainer;
+
+	// finish deleting items // DONE
+	// finish completing items // DONE
+	// clear list button // DONE
+	// node intro // DONE
+	// local storage setup
+	// save button
+	// automatic saving upon changes
+	// set up server in node
+	// styling
 
 /***/ }
 /******/ ]);
