@@ -113,7 +113,7 @@ var ListItem = React.createClass({
     render: function() {
         return (
             <div>
-                <li style={{color: 'red', textDecoration: this.props.item.completed ? 'line-through' : 'none'}}>{this.props.item.name}</li>
+                <li className={this.props.item.completed ? 'style-complete' : 'style-incomplete'}>{this.props.item.name}</li>
                 <button onClick={this.props.markComplete}>Complete</button>
                 <button onClick={this.props.deleteItem}>Delete</button>
             </div>
@@ -132,3 +132,4 @@ module.exports = ToDoListContainer;
 // automatic saving upon changes
 // set up server in node
 // styling
+// set up directory structure with components

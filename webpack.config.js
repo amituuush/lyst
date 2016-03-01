@@ -13,11 +13,15 @@ module.exports = {
             query: {
               presets: ['es2015', 'react', 'stage-0']
             }
+          },
+          {
+        test: /\.less$/,
+        loader: "style!css!less"
           }
         ]
       },
       resolve: {
-        extensions: ["", ".js", ".jsx", ".es6"]
+        extensions: ["", ".js", ".jsx", ".es6"] // allow you to not include file type when requiring
       }
 
 };
