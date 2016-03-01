@@ -20176,7 +20176,7 @@
 
 
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, ".style-complete {\n  text-decoration: line-through;\n}\n", ""]);
 
 	// exports
 
