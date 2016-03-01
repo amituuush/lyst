@@ -48,7 +48,7 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	var ToDoListContainer = __webpack_require__(159);
+	var ToDoListContainer = __webpack_require__(164);
 	var less = __webpack_require__(160);
 
 	ReactDOM.render(React.createElement(ToDoListContainer, null), document.getElementById('content'));
@@ -19655,179 +19655,7 @@
 
 
 /***/ },
-/* 159 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var ToDoListContainer = React.createClass({
-	    displayName: 'ToDoListContainer',
-
-	    getInitialState: function getInitialState() {
-	        return { itemList: [] };
-	    },
-
-	    _addItem: function _addItem(value) {
-	        this.setState({
-	            itemList: this.state.itemList.concat({
-	                name: value,
-	                completed: false,
-	                changed: false
-	            })
-	        });
-	    },
-
-	    _markComplete: function _markComplete(index) {
-	        var itemList = this.state.itemList;
-
-	        itemList[index].completed = true;
-	        this.setState({
-	            itemList: itemList
-	        });
-	    },
-
-	    _deleteItem: function _deleteItem(index) {
-	        var itemList = this.state.itemList;
-
-	        itemList.splice(index, 1);
-	        this.setState({
-	            itemList: itemList
-	        });
-	    },
-
-	    _clearList: function _clearList() {
-	        var userAnswer = confirm('Are you sure you want to completely delete this list?');
-	        if (userAnswer) {
-	            this.setState({
-	                itemList: []
-	            });
-	        }
-	    },
-
-	    render: function render() {
-	        return React.createElement(ToDoList, { items: this.state.itemList, addItem: this._addItem, deleteItem: this._deleteItem, clearList: this._clearList, markComplete: this._markComplete });
-	    }
-	});
-
-	var ToDoList = React.createClass({
-	    displayName: 'ToDoList',
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(UserForm, { onFormSubmit: this.props.addItem, clearList: this.props.clearList }),
-	            React.createElement(ListItemContainer, { items: this.props.items, deleteItem: this.props.deleteItem, markComplete: this.props.markComplete })
-	        );
-	    }
-	});
-
-	var UserForm = React.createClass({
-	    displayName: 'UserForm',
-
-	    getInitialState: function getInitialState() {
-	        return { item: '' };
-	    },
-
-	    _handleSubmit: function _handleSubmit(event) {
-	        event.preventDefault();
-	        if (this.state.item) {
-	            this.props.onFormSubmit(this.state.item);
-	        }
-	        this.setState({
-	            item: ''
-	        });
-	    },
-
-	    _handleNumberChange: function _handleNumberChange(event) {
-	        this.setState({ item: event.target.value });
-	    },
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(
-	                'form',
-	                { onSubmit: this._handleSubmit },
-	                React.createElement('input', { type: 'text', onChange: this._handleNumberChange, value: this.state.item }),
-	                React.createElement('input', { type: 'submit', value: 'Add item' })
-	            ),
-	            React.createElement(
-	                'button',
-	                { onClick: this.props.clearList },
-	                'Reset'
-	            )
-	        );
-	    }
-	});
-
-	var ListItemContainer = React.createClass({
-	    displayName: 'ListItemContainer',
-
-	    render: function render() {
-	        var _this = this;
-
-	        var items = this.props.items.map(function (arrayItem, index) {
-	            var handleDelete = function handleDelete() {
-	                _this.props.deleteItem(index);
-	            };
-	            var handleComplete = function handleComplete() {
-	                _this.props.markComplete(index);
-	            };
-	            return React.createElement(ListItem, { deleteItem: handleDelete, key: index, index: index, item: arrayItem, markComplete: handleComplete });
-	        });
-
-	        return React.createElement(
-	            'ul',
-	            null,
-	            items
-	        );
-	    }
-	});
-
-	var ListItem = React.createClass({
-	    displayName: 'ListItem',
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(
-	                'li',
-	                { className: this.props.item.completed ? 'style-complete' : 'style-incomplete' },
-	                this.props.item.name
-	            ),
-	            React.createElement(
-	                'button',
-	                { onClick: this.props.markComplete },
-	                'Complete'
-	            ),
-	            React.createElement(
-	                'button',
-	                { onClick: this.props.deleteItem },
-	                'Delete'
-	            )
-	        );
-	    }
-	});
-
-	module.exports = ToDoListContainer;
-
-	// finish deleting items // DONE
-	// finish completing items // DONE
-	// clear list button // DONE
-	// node intro // DONE
-	// local storage setup
-	// save button
-	// automatic saving upon changes
-	// set up server in node
-	// styling
-	// set up directory structure with components
-
-/***/ },
+/* 159 */,
 /* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -20175,6 +20003,313 @@
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
+
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var ListItemContainer = __webpack_require__(165);
+	var UserForm = __webpack_require__(168);
+	__webpack_require__(171);
+
+	var ToDoListContainer = React.createClass({
+	    displayName: 'ToDoListContainer',
+
+	    getInitialState: function getInitialState() {
+	        return { itemList: [] };
+	    },
+
+	    _addItem: function _addItem(value) {
+	        this.setState({
+	            itemList: this.state.itemList.concat({
+	                name: value,
+	                completed: false,
+	                changed: false
+	            })
+	        });
+	    },
+
+	    _markComplete: function _markComplete(index) {
+	        var itemList = this.state.itemList;
+
+	        itemList[index].completed = true;
+	        this.setState({
+	            itemList: itemList
+	        });
+	    },
+
+	    _deleteItem: function _deleteItem(index) {
+	        var itemList = this.state.itemList;
+
+	        itemList.splice(index, 1);
+	        this.setState({
+	            itemList: itemList
+	        });
+	    },
+
+	    _clearList: function _clearList() {
+	        var userAnswer = confirm('Are you sure you want to completely delete this list?');
+	        if (userAnswer) {
+	            this.setState({
+	                itemList: []
+	            });
+	        }
+	    },
+
+	    render: function render() {
+	        return React.createElement(ToDoList, { items: this.state.itemList, addItem: this._addItem, deleteItem: this._deleteItem, clearList: this._clearList, markComplete: this._markComplete });
+	    }
+	});
+
+	var ToDoList = React.createClass({
+	    displayName: 'ToDoList',
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(UserForm, { onFormSubmit: this.props.addItem, clearList: this.props.clearList }),
+	            React.createElement(ListItemContainer, { items: this.props.items, deleteItem: this.props.deleteItem, markComplete: this.props.markComplete })
+	        );
+	    }
+	});
+
+	module.exports = ToDoListContainer;
+
+/***/ },
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	__webpack_require__(166);
+
+	var ListItemContainer = React.createClass({
+	    displayName: 'ListItemContainer',
+
+	    render: function render() {
+	        var _this = this;
+
+	        var items = this.props.items.map(function (arrayItem, index) {
+	            var handleDelete = function handleDelete() {
+	                _this.props.deleteItem(index);
+	            };
+	            var handleComplete = function handleComplete() {
+	                _this.props.markComplete(index);
+	            };
+	            return React.createElement(ListItem, { deleteItem: handleDelete, key: index, index: index, item: arrayItem, markComplete: handleComplete });
+	        });
+
+	        return React.createElement(
+	            'ul',
+	            null,
+	            items
+	        );
+	    }
+	});
+
+	var ListItem = React.createClass({
+	    displayName: 'ListItem',
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'li',
+	                { className: this.props.item.completed ? 'style-complete' : 'style-incomplete' },
+	                this.props.item.name
+	            ),
+	            React.createElement(
+	                'button',
+	                { onClick: this.props.markComplete },
+	                'Complete'
+	            ),
+	            React.createElement(
+	                'button',
+	                { onClick: this.props.deleteItem },
+	                'Delete'
+	            )
+	        );
+	    }
+	});
+
+	module.exports = ListItemContainer;
+
+/***/ },
+/* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(167);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(163)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./list-item-container.less", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./list-item-container.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(162)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "", ""]);
+
+	// exports
+
+
+/***/ },
+/* 168 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	__webpack_require__(169);
+
+	var UserForm = React.createClass({
+	    displayName: 'UserForm',
+
+	    getInitialState: function getInitialState() {
+	        return { item: '' };
+	    },
+
+	    _handleSubmit: function _handleSubmit(event) {
+	        event.preventDefault();
+	        if (this.state.item) {
+	            this.props.onFormSubmit(this.state.item);
+	        }
+	        this.setState({
+	            item: ''
+	        });
+	    },
+
+	    _handleNumberChange: function _handleNumberChange(event) {
+	        this.setState({ item: event.target.value });
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'form',
+	                { onSubmit: this._handleSubmit },
+	                React.createElement('input', { type: 'text', onChange: this._handleNumberChange, value: this.state.item }),
+	                React.createElement('input', { type: 'submit', value: 'Add item' })
+	            ),
+	            React.createElement(
+	                'button',
+	                { onClick: this.props.clearList },
+	                'Reset'
+	            )
+	        );
+	    }
+	});
+
+	module.exports = UserForm;
+
+/***/ },
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(170);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(163)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./user-form.less", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./user-form.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(162)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "", ""]);
+
+	// exports
+
+
+/***/ },
+/* 171 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(172);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(163)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./to-do-list-container.less", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./to-do-list-container.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(162)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "", ""]);
+
+	// exports
 
 
 /***/ }
