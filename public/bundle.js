@@ -20086,8 +20086,6 @@
 
 	'use strict';
 
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 	var React = __webpack_require__(1);
 	__webpack_require__(166);
 
@@ -20119,12 +20117,13 @@
 	    displayName: 'ListItem',
 
 	    render: function render() {
+
 	        return React.createElement(
 	            'div',
 	            { className: 'list-item-parent' },
 	            React.createElement(
 	                'li',
-	                _defineProperty({ className: this.props.item.completed ? 'style-complete' : 'style-incomplete' }, 'className', 'list-item'),
+	                { className: this.props.item.completed ? 'style-complete list-item' : 'style-incomplete list-item' },
 	                this.props.item.name,
 	                React.createElement(
 	                    'button',
@@ -20178,7 +20177,7 @@
 
 
 	// module
-	exports.push([module.id, ".style-complete {\n  text-decoration: line-through;\n}\ndiv.list-item-parent li:nth-child(odd) {\n  color: #9ba1a3;\n}\ndiv.list-item-parent li:nth-child(even) {\n  color: #646e71;\n}\nli.list-item {\n  font-size: 2em;\n  padding-top: 0.6em;\n  border-bottom: 2px solid #1C272E;\n  list-style: none;\n  text-align: left;\n}\n", ""]);
+	exports.push([module.id, "div li.style-complete {\n  text-decoration: line-through;\n  color: #222F3B;\n}\nli.list-item {\n  font-size: 2em;\n  padding-top: 0.6em;\n  border-bottom: 2px solid #1C272E;\n  list-style: none;\n  text-align: left;\n  color: #9ba1a3;\n}\n", ""]);
 
 	// exports
 

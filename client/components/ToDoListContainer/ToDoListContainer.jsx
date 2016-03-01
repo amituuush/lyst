@@ -36,11 +36,15 @@ var ToDoListContainer = React.createClass({
     },
 
     _clearList: function() {
-        var userAnswer = confirm('Are you sure you want to completely delete this list?');
-        if (userAnswer) {
-            this.setState({
-                itemList: []
-            })
+        if (this.state.itemList.length > 0) {
+            var userAnswer = confirm('Are you sure you want to completely delete this list?');
+            if (userAnswer) {
+                this.setState({
+                    itemList: []
+                })
+            }
+        } else {
+            alert('There are no items in your list to delete!');
         }
     },
 
