@@ -19690,7 +19690,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\n  font-family: 'Proxima Nova Soft', Helvetica, 'open-sans';\n  background: #293844;\n}\n#container {\n  width: 100%;\n  text-align: center;\n}\n#container header {\n  font-family: 'Proxima Nova Soft', Helvetica, 'open-sans';\n  text-align: center;\n  color: #fff;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n#container #content {\n  width: 33rem;\n  border: 1px solid #000;\n  margin: 0 auto;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: 'Proxima Nova Soft', Helvetica, 'open-sans';\n  background: #293844;\n  -webkit-font-smoothing: antialiased;\n}\n#container {\n  width: 100%;\n  text-align: center;\n}\n#container header {\n  font-family: 'Proxima Nova Soft', Helvetica, 'open-sans';\n  text-align: center;\n  color: #fff;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n#container #content {\n  width: 33rem;\n  margin: 0 auto;\n}\n", ""]);
 
 	// exports
 
@@ -20086,6 +20086,8 @@
 
 	'use strict';
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	var React = __webpack_require__(1);
 	__webpack_require__(166);
 
@@ -20119,21 +20121,21 @@
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            null,
+	            { className: 'list-item-parent' },
 	            React.createElement(
 	                'li',
-	                { className: this.props.item.completed ? 'style-complete' : 'style-incomplete' },
-	                this.props.item.name
-	            ),
-	            React.createElement(
-	                'button',
-	                { onClick: this.props.markComplete },
-	                'Complete'
-	            ),
-	            React.createElement(
-	                'button',
-	                { onClick: this.props.deleteItem },
-	                'Delete'
+	                _defineProperty({ className: this.props.item.completed ? 'style-complete' : 'style-incomplete' }, 'className', 'list-item'),
+	                this.props.item.name,
+	                React.createElement(
+	                    'button',
+	                    { onClick: this.props.markComplete },
+	                    'Complete'
+	                ),
+	                React.createElement(
+	                    'button',
+	                    { onClick: this.props.deleteItem },
+	                    'Delete'
+	                )
 	            )
 	        );
 	    }
@@ -20176,7 +20178,7 @@
 
 
 	// module
-	exports.push([module.id, ".style-complete {\n  text-decoration: line-through;\n}\n", ""]);
+	exports.push([module.id, ".style-complete {\n  text-decoration: line-through;\n}\ndiv.list-item-parent li:nth-child(odd) {\n  color: #9ba1a3;\n}\ndiv.list-item-parent li:nth-child(even) {\n  color: #646e71;\n}\nli.list-item {\n  font-size: 2em;\n  padding-top: 0.6em;\n  border-bottom: 2px solid #1C272E;\n  list-style: none;\n  text-align: left;\n}\n", ""]);
 
 	// exports
 
@@ -20218,13 +20220,17 @@
 	            React.createElement(
 	                'form',
 	                { onSubmit: this._handleSubmit },
-	                React.createElement('input', { type: 'text', onChange: this._handleNumberChange, value: this.state.item, className: 'item-input' }),
-	                React.createElement('button', { type: 'submit', value: 'Add item', className: 'add-item' })
-	            ),
-	            React.createElement(
-	                'button',
-	                { onClick: this.props.clearList },
-	                'Reset'
+	                React.createElement(
+	                    'div',
+	                    { onClick: this.props.clearList, className: 'reset-list' },
+	                    React.createElement('i', { className: 'fa fa-trash-o fa-lg' })
+	                ),
+	                React.createElement('input', { type: 'text', onChange: this._handleNumberChange, value: this.state.item, className: 'item-input', placeholder: 'Enter item here.' }),
+	                React.createElement(
+	                    'button',
+	                    { type: 'submit', value: 'Add item', className: 'add-item' },
+	                    React.createElement('i', { className: 'fa fa-plus-circle fa-4x' })
+	                )
 	            )
 	        );
 	    }
@@ -20267,7 +20273,7 @@
 
 
 	// module
-	exports.push([module.id, ".item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 20rem;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.5em;\n  font-weight: 300;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n}\n.add-item {\n  background: green;\n  border: none;\n  padding-top: 10px;\n  outline: none;\n  margin: 0 auto;\n  width: 30px;\n}\n", ""]);
+	exports.push([module.id, ".item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 20rem;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.5em;\n  font-weight: 300;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n}\nbutton.add-item {\n  background: transparent;\n  border: none;\n  outline: none;\n  width: 40px;\n  height: 40px;\n  position: relative;\n  top: 13px;\n  left: 10px;\n}\nbutton.add-item:hover {\n  cursor: pointer;\n}\nbutton.add-item .fa-plus-circle {\n  color: #3FB083;\n  position: relative;\n  bottom: 6px;\n  right: 7px;\n}\nbutton.add-item .fa-plus-circle:hover {\n  color: #52c195;\n}\n.reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.reset-list:hover {\n  cursor: pointer;\n}\n.reset-list .fa-trash-o {\n  color: #962D2D;\n}\n", ""]);
 
 	// exports
 

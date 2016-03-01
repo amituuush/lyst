@@ -25,10 +25,16 @@ var ListItemContainer = React.createClass({
 var ListItem = React.createClass({
     render: function() {
         return (
-            <div>
-                <li className={this.props.item.completed ? 'style-complete' : 'style-incomplete'}>{this.props.item.name}</li>
-                <button onClick={this.props.markComplete}>Complete</button>
-                <button onClick={this.props.deleteItem}>Delete</button>
+            <div className='list-item-parent'>
+                <li className={this.props.item.completed ? 'style-complete' : 'style-incomplete'} className='list-item'>
+                    {this.props.item.name}
+                    <button onClick={this.props.markComplete}>
+                        Complete
+                    </button>
+                    <button onClick={this.props.deleteItem}>
+                        Delete
+                    </button>
+                </li>
             </div>
         )
     }

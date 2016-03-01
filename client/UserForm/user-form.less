@@ -17,12 +17,46 @@
     }
 }
 
-.add-item {
-    background: green;
+button.add-item {
+    background: transparent;
     border: none;
-    padding-top: 10px;
     outline: none;
-    margin: 0 auto;
-    width: 30px;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top: 13px;
+    left: 10px;
 
+    &:hover {
+        cursor: pointer;
+    }
+
+    .fa-plus-circle {
+        color: #3FB083;
+        position: relative;
+        bottom: 6px;
+        right: 7px;
+
+        &:hover {
+            color: lighten(#3FB083, 7%);
+        }
+    }
+}
+
+.reset-list {
+    background: transparent;
+    border: none;
+    outline: none;
+    margin-right: 15px;
+    position: relative;
+    bottom: 3px;
+    display: inline-block;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    .fa-trash-o {
+        color: #962D2D;
+    }
 }
