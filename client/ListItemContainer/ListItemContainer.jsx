@@ -34,12 +34,12 @@ var ListItem = React.createClass({
 
                     {this.props.item.name}
 
-                    <button onClick={this.props.markComplete}>
-                        Complete
+                    <button onClick={this.props.deleteItem} className='delete-button'>
+                        <i className="fa fa-times fa-2x"></i>
                     </button>
 
-                    <button onClick={this.props.deleteItem}>
-                        Delete
+                    <button onClick={this.props.markComplete} className='check-button'>
+                        <i className="fa fa-check-circle fa-4x"></i>
                     </button>
 
                 </li>

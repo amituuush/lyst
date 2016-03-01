@@ -18,4 +18,51 @@ li.list-item {
     list-style: none;
     text-align: left;
     color: #9ba1a3;
+
+    .fa-times {
+        color: #962D2D;
+        position: relative;
+        right: 6px;
+        bottom: 4px;
+
+        &:hover {
+            color: lighten(#962D2D, 7%);
+        }
+    }
+
+    .fa-check-circle {
+        color: #3FB083;
+        position: relative;
+        right: 5px;
+        bottom: 5px;
+
+        &:hover {
+            color: lighten(#3FB083, 7%);
+        }
+    }
+
+    button {
+        background: transparent;
+        border: none;
+        outline: none;
+
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    button.delete-button {
+        width: 20px;
+        height: 20px;
+        margin-left: 10px;
+    }
+
+    button.check-button {
+        width: 40px;
+        height: 40px;
+        float: right;
+        position: relative;
+        bottom: 3px;
+    }
 }
