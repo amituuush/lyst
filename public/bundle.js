@@ -19690,7 +19690,7 @@
 
 
 	// module
-	exports.push([module.id, ".style-complete {\n  text-decoration: line-through;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: 'Proxima Nova Soft', Helvetica, 'open-sans';\n  background: #293844;\n}\n#container {\n  width: 100%;\n  text-align: center;\n}\n#container header {\n  font-family: 'Proxima Nova Soft', Helvetica, 'open-sans';\n  text-align: center;\n  color: #fff;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n#container #content {\n  width: 33rem;\n  border: 1px solid #000;\n  margin: 0 auto;\n}\n", ""]);
 
 	// exports
 
@@ -20218,8 +20218,8 @@
 	            React.createElement(
 	                'form',
 	                { onSubmit: this._handleSubmit },
-	                React.createElement('input', { type: 'text', onChange: this._handleNumberChange, value: this.state.item }),
-	                React.createElement('input', { type: 'submit', value: 'Add item' })
+	                React.createElement('input', { type: 'text', onChange: this._handleNumberChange, value: this.state.item, className: 'item-input' }),
+	                React.createElement('button', { type: 'submit', value: 'Add item', className: 'add-item' })
 	            ),
 	            React.createElement(
 	                'button',
@@ -20267,7 +20267,7 @@
 
 
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, ".item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 20rem;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.5em;\n  font-weight: 300;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n}\n.add-item {\n  background: green;\n  border: none;\n  padding-top: 10px;\n  outline: none;\n  margin: 0 auto;\n  width: 30px;\n}\n", ""]);
 
 	// exports
 

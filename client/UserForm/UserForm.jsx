@@ -24,8 +24,8 @@ var UserForm = React.createClass({
         return (
         <div>
             <form onSubmit={this._handleSubmit}>
-                <input type="text" onChange={this._handleNumberChange} value={this.state.item}/>
-                <input type="submit" value="Add item" />
+                <input type="text" onChange={this._handleNumberChange} value={this.state.item} className='item-input'/>
+                <button type="submit" value="Add item" className='add-item'></button>
             </form>
             <button onClick={this.props.clearList}>Reset</button>
         </div>
