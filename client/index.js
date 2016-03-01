@@ -1,6 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const HelloWorld = require('./HelloWorld');
+const ToDoListContainer = require('./todo');
 
 
-ReactDOM.render(<HelloWorld />, document.body);
+ReactDOM.render(<ToDoListContainer />, document.body);
