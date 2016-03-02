@@ -26,13 +26,13 @@ var ListItem = React.createClass({
     render: function() {
         return (
             <div className='list-item-parent'>
-                <li className={this.props.item.completed ? 'style-complete' : 'style-incomplete'} className='list-item'>
+                <li className={this.props.item.completed ? 'style-complete list-item' : 'style-incomplete list-item'}>
                     {this.props.item.name}
-                    <button onClick={this.props.markComplete}>
-                        Complete
+                    <button onClick={this.props.deleteItem} className='delete-button'>
+                        <i className="fa fa-times fa-2x"></i>
                     </button>
-                    <button onClick={this.props.deleteItem}>
-                        Delete
+                    <button onClick={this.props.markComplete} className='check-button'>
+                        <i className="fa fa-check-circle fa-4x"></i>
                     </button>
                 </li>
             </div>
