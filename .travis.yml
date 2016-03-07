@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "4.1"
+  - "4.0"
+  - "0.12"
+  - "0.11"
+  - "0.10"
+  - "0.8"
+  - "0.6"
+  - "iojs"
+deploy:
+  provider: heroku
+  api_key:
+    secure: "4b6355e3-7d9d-4fab-954d-352d9a37af58"
+script: bundle exec rspec spec
