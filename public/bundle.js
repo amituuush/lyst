@@ -19703,7 +19703,7 @@
 
 	    _clearList: function _clearList() {
 	        if (this.state.itemList.length > 0) {
-	            var userAnswer = confirm('Are you sure you want to completely delete this list????');
+	            var userAnswer = confirm('Are you sure you want to completely delete this list?');
 	            if (userAnswer) {
 	                this.setState({
 	                    itemList: []
@@ -20337,9 +20337,15 @@
 
 	var increment = _require2.increment;
 
+	// Create a Redux store holding the state of your app.
+	// Its API is { subscribe, dispatch, getState }.
 
-	var store = createStore(appReducer);
-	console.log(store.getState());
+	var store = createStore(appReducer); // use let or const? won't store be changed so better to use let?
+
+	var unsubscribe = store.subscribe(function () {
+	    return console.log(store.getState());
+	});
+
 	store.dispatch(increment()); // takes return value from increment(), which is the action (object), and passes it to the dispatch method (redux method on store).
 
 	// the action that goes into dispatch function gets passed as the second argument to the reducer. See example below:
@@ -20347,9 +20353,10 @@
 	// store.dispatch = (action) => {
 	//   return appReducer(store.state, action)
 	// }
-	console.log(store.getState());
 
 	module.exports = { store: store };
+
+	// is dispatch kind of like setState?
 
 /***/ },
 /* 173 */
@@ -21085,18 +21092,37 @@
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
 	    var action = arguments[1];
 
-	    console.log(action);
 	    switch (action.type) {
 	        case INCREMENT:
-	            console.log('case INCREMENT hit');
 	            return state + 1;
 	        default:
-	            console.log('case default hit');
 	            return state;
 	    }
 	};
+	// This is a reducer, a pure function with (state, action) => state signature.
+	// It describes how an action transforms the state into the next state.
+	//
+	// The shape of the state is up to you: it can be a primitive, an array, an object,
+	// or even an Immutable.js data structure. The only important part is that you should
+	// not mutate the state object, but return a new object if the state changes.
+
+	// function counter(state = 0, action) {
+	//   switch (action.type) {
+	//   case 'INCREMENT':
+	//     return state + 1
+	//   case 'DECREMENT':
+	//     return state - 1
+	//   default:
+	//     return state
+	//   }
+	// }
 
 	module.exports = { appReducer: appReducer };
+
+	// making sure bundle is actually being included when deploying to bundle
+
+	// dont commit bundle on local version, but have it on heroku, let CI server create bundle and push to heroku
+	// dont push bundle to heroku, let CI server do that, just push to github
 
 /***/ },
 /* 184 */
@@ -21108,7 +21134,6 @@
 
 	var increment = function increment() {
 	    // ACTION CREATER, returns an action (an object with an action type, which has the option to take parameters and use them when returning the action)
-	    console.log('increment function running');
 	    return {
 	        type: INCREMENT // ACTION (which is an object)
 	    };
