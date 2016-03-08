@@ -1,49 +1,21 @@
 const redux = require('redux');
 const {createStore} = redux;
 const {appReducer} = require('./reducers');
-const {increment} = require('./actions')
 const React = require('react');
 const ReactDOM = require('react-dom');
-const ToDoList = require('./components/ToDoListContainer/ToDoListContainer');
 const less = require('./style.less');
-const ReactRedux = require('react-redux');
 const {Provider} = require('react-redux');
-const {clearItems} = require('./actions')
+const {App} = require('./handlers');
 // _____________________________________________
 
 
 const store = createStore(appReducer);
-const handleClearItems = (dispatch) => {
-    return () => {
-        if (confirm('Are you sure you want to completely delete this list?')) {
-            dispatch(clearItems())
-        }
-    }
-}
-
-// if (store.getState().items.length ... confirm(...)) { .. }
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        clearList: handleClearItems(dispatch)
-    }
-}
-
-const mapStateToProps = state => state
-
-const App = ReactRedux.connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ToDoList)
-
-
-const contentEl = document.getElementById('content');
 
 ReactDOM.render(
     <Provider store={store} >
         <App />
     </Provider>,
-    contentEl
+    document.getElementById('content')
 );
 
 let unsubscribe = store.subscribe(() =>

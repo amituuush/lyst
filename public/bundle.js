@@ -53,55 +53,26 @@
 
 	var appReducer = _require.appReducer;
 
-	var _require2 = __webpack_require__(13);
-
-	var increment = _require2.increment;
-
 	var React = __webpack_require__(14);
 	var ReactDOM = __webpack_require__(170);
-	var ToDoList = __webpack_require__(171);
 	var less = __webpack_require__(182);
-	var ReactRedux = __webpack_require__(184);
 
-	var _require3 = __webpack_require__(184);
+	var _require2 = __webpack_require__(184);
 
-	var Provider = _require3.Provider;
+	var Provider = _require2.Provider;
 
-	var _require4 = __webpack_require__(13);
+	var _require3 = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./handlers\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
-	var clearItems = _require4.clearItems;
+	var App = _require3.App;
 	// _____________________________________________
 
 	var store = createStore(appReducer);
-	var handleClearItems = function handleClearItems(dispatch) {
-	    return function () {
-	        if (confirm('Are you sure you want to completely delete this list?')) {
-	            dispatch(clearItems());
-	        }
-	    };
-	};
-
-	// if (store.getState().items.length ... confirm(...)) { .. }
-
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	    return {
-	        clearList: handleClearItems(dispatch)
-	    };
-	};
-
-	var mapStateToProps = function mapStateToProps(state) {
-	    return state;
-	};
-
-	var App = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ToDoList);
-
-	var contentEl = document.getElementById('content');
 
 	ReactDOM.render(React.createElement(
 	    Provider,
 	    { store: store },
 	    React.createElement(App, null)
-	), contentEl);
+	), document.getElementById('content'));
 
 	var unsubscribe = store.subscribe(function () {
 	    return console.log(store.getState());
@@ -20530,191 +20501,10 @@
 
 
 /***/ },
-/* 171 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(14);
-	var ListItemContainer = __webpack_require__(172);
-	var UserForm = __webpack_require__(177);
-	__webpack_require__(180);
-
-	// _____________________________________________
-
-	var ToDoListContainer = React.createClass({
-	    displayName: 'ToDoListContainer',
-
-	    getInitialState: function getInitialState() {
-	        return { itemList: [] };
-	    },
-
-	    _addItem: function _addItem(value) {
-	        this.setState({
-	            itemList: this.state.itemList.concat({
-	                name: value,
-	                completed: false,
-	                changed: false
-	            })
-	        });
-	    },
-
-	    _markComplete: function _markComplete(index) {
-	        var itemList = this.state.itemList;
-
-	        itemList[index].completed = true;
-	        this.setState({
-	            itemList: itemList
-	        });
-	    },
-
-	    _deleteItem: function _deleteItem(index) {
-	        var itemList = this.state.itemList;
-
-	        itemList.splice(index, 1);
-	        this.setState({
-	            itemList: itemList
-	        });
-	    },
-
-	    _clearList: function _clearList() {
-	        if (this.state.itemList.length > 0) {
-	            var userAnswer = confirm('Are you sure you want to completely delete this list?');
-	            if (userAnswer) {
-	                this.setState({
-	                    itemList: []
-	                });
-	            }
-	        } else {
-	            alert('There are no items in your list to delete!');
-	        }
-	    },
-
-	    render: function render() {
-	        return React.createElement(ToDoList, { items: this.state.itemList, addItem: this._addItem, deleteItem: this._deleteItem, clearList: this._clearList, markComplete: this._markComplete });
-	    }
-	});
-
-	var ToDoList = React.createClass({
-	    displayName: 'ToDoList',
-
-	    render: function render() {
-	        console.log(this.props);
-	        return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(UserForm, { onFormSubmit: this.props.addItem, clearList: this.props.clearList }),
-	            React.createElement(ListItemContainer, { items: this.props.items, deleteItem: this.props.deleteItem, markComplete: this.props.markComplete })
-	        );
-	    }
-	});
-
-	module.exports = ToDoList;
-
-/***/ },
-/* 172 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(14);
-	__webpack_require__(173);
-
-	// _____________________________________________
-
-	var ListItemContainer = React.createClass({
-	    displayName: 'ListItemContainer',
-
-	    render: function render() {
-	        var _this = this;
-
-	        var items = this.props.items.map(function (arrayItem, index) {
-	            var handleDelete = function handleDelete() {
-	                _this.props.deleteItem(index);
-	            };
-	            var handleComplete = function handleComplete() {
-	                _this.props.markComplete(index);
-	            };
-	            return React.createElement(ListItem, { deleteItem: handleDelete, key: index, index: index, item: arrayItem, markComplete: handleComplete });
-	        });
-
-	        return React.createElement(
-	            'ul',
-	            null,
-	            items
-	        );
-	    }
-	});
-
-	var ListItem = React.createClass({
-	    displayName: 'ListItem',
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            { className: 'list-item-parent' },
-	            React.createElement(
-	                'li',
-	                { className: this.props.item.completed ? 'style-complete list-item' : 'style-incomplete list-item' },
-	                this.props.item.name,
-	                React.createElement(
-	                    'button',
-	                    { onClick: this.props.deleteItem, className: 'delete-button' },
-	                    React.createElement('i', { className: 'fa fa-times fa-2x' })
-	                ),
-	                React.createElement(
-	                    'button',
-	                    { onClick: this.props.markComplete, className: 'check-button' },
-	                    React.createElement('i', { className: 'fa fa-check-circle fa-4x' })
-	                )
-	            )
-	        );
-	    }
-	});
-
-	module.exports = ListItemContainer;
-
-/***/ },
-/* 173 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(174);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(176)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-item-container.less", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-item-container.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 174 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(175)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "div li.style-complete {\n  text-decoration: line-through;\n  color: #222F3B;\n}\nli.list-item {\n  font-size: 2em;\n  padding-top: 0.6em;\n  border-bottom: 2px solid #1C272E;\n  list-style: none;\n  text-align: left;\n  color: #9ba1a3;\n}\nli.list-item .fa-times {\n  color: #962D2D;\n  position: relative;\n  right: 6px;\n  bottom: 4px;\n}\nli.list-item .fa-times:hover {\n  color: #b13535;\n}\nli.list-item .fa-check-circle {\n  color: #3FB083;\n  position: relative;\n  right: 5px;\n  bottom: 5px;\n}\nli.list-item .fa-check-circle:hover {\n  color: #52c195;\n}\nli.list-item button {\n  background: transparent;\n  border: none;\n  outline: none;\n}\nli.list-item button:hover {\n  cursor: pointer;\n}\nli.list-item button.delete-button {\n  width: 20px;\n  height: 20px;\n  margin-left: 10px;\n}\nli.list-item button.check-button {\n  width: 40px;\n  height: 40px;\n  float: right;\n  position: relative;\n  bottom: 3px;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
+/* 171 */,
+/* 172 */,
+/* 173 */,
+/* 174 */,
 /* 175 */
 /***/ function(module, exports) {
 
@@ -21025,143 +20815,11 @@
 
 
 /***/ },
-/* 177 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(14);
-	__webpack_require__(178);
-
-	// _____________________________________________
-
-	var UserForm = React.createClass({
-	    displayName: 'UserForm',
-
-	    getInitialState: function getInitialState() {
-	        return { item: '' };
-	    },
-
-	    _handleSubmit: function _handleSubmit(event) {
-	        event.preventDefault();
-	        if (this.state.item) {
-	            this.props.onFormSubmit(this.state.item);
-	        }
-	        this.setState({
-	            item: ''
-	        });
-	    },
-
-	    _handleNumberChange: function _handleNumberChange(event) {
-	        this.setState({ item: event.target.value });
-	    },
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(
-	                'form',
-	                { onSubmit: this._handleSubmit },
-	                React.createElement(
-	                    'div',
-	                    { onClick: this.props.clearList, className: 'reset-list' },
-	                    React.createElement('i', { className: 'fa fa-trash-o fa-lg' })
-	                ),
-	                React.createElement('input', { type: 'text', onChange: this._handleNumberChange, value: this.state.item, className: 'item-input', placeholder: 'Enter item here.' }),
-	                React.createElement(
-	                    'button',
-	                    { type: 'submit', value: 'Add item', className: 'add-item' },
-	                    React.createElement('i', { className: 'fa fa-plus-circle fa-4x' })
-	                )
-	            )
-	        );
-	    }
-	});
-
-	module.exports = UserForm;
-
-/***/ },
-/* 178 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(179);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(176)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./user-form.less", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./user-form.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 179 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(175)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 20rem;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.5em;\n  font-weight: 300;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n}\nbutton.add-item {\n  background: transparent;\n  border: none;\n  outline: none;\n  width: 40px;\n  height: 40px;\n  position: relative;\n  top: 13px;\n  left: 10px;\n}\nbutton.add-item:hover {\n  cursor: pointer;\n}\nbutton.add-item .fa-plus-circle {\n  color: #3FB083;\n  position: relative;\n  bottom: 6px;\n  right: 7px;\n}\nbutton.add-item .fa-plus-circle:hover {\n  color: #52c195;\n}\n.reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.reset-list:hover {\n  cursor: pointer;\n}\n.reset-list .fa-trash-o {\n  color: #962D2D;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 180 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(181);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(176)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./to-do-list-container.less", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./to-do-list-container.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 181 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(175)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "", ""]);
-
-	// exports
-
-
-/***/ },
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
 /* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
