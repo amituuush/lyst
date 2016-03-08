@@ -21,7 +21,7 @@ const handleClearItems = (dispatch) => {
     }
 }
 
-if (store.getState().items.length ... confirm(...)) { .. }
+// if (store.getState().items.length ... confirm(...)) { .. }
 
 const mapDispatchToProps = (dispatch) => {
     return {

@@ -81,6 +81,8 @@
 	    };
 	};
 
+	// if (store.getState().items.length ... confirm(...)) { .. }
+
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	    return {
 	        clearList: handleClearItems(dispatch)
@@ -949,6 +951,7 @@
 
 	var CLEAR_ITEMS = _require.CLEAR_ITEMS;
 
+	// _____________________________________________
 
 	var appReducer = function appReducer() {
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
@@ -1011,6 +1014,7 @@
 	'use strict';
 
 	var CLEAR_ITEMS = 'CLEAR_ITEMS'; // ACTION TYPE being assigned to variable so we can export it later and import it when using a reducer.
+	// _____________________________________________
 
 	var clearItems = function clearItems() {
 	    // ACTION CREATER, returns an action (an object with an action type, which has the option to take parameters and use them when returning the action)
@@ -20536,6 +20540,8 @@
 	var UserForm = __webpack_require__(177);
 	__webpack_require__(180);
 
+	// _____________________________________________
+
 	var ToDoListContainer = React.createClass({
 	    displayName: 'ToDoListContainer',
 
@@ -20613,6 +20619,8 @@
 
 	var React = __webpack_require__(14);
 	__webpack_require__(173);
+
+	// _____________________________________________
 
 	var ListItemContainer = React.createClass({
 	    displayName: 'ListItemContainer',
@@ -21024,6 +21032,8 @@
 
 	var React = __webpack_require__(14);
 	__webpack_require__(178);
+
+	// _____________________________________________
 
 	var UserForm = React.createClass({
 	    displayName: 'UserForm',

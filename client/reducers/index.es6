@@ -1,5 +1,6 @@
 const {CLEAR_ITEMS} = require('../actions');
 
+// _____________________________________________
 
 const appReducer = (state = 0, action) => {
     console.log('appReducer log');

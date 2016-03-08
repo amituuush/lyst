@@ -1,6 +1,8 @@
 const React = require('react');
 require('./user-form.less');
 
+// _____________________________________________
+
 var UserForm = React.createClass({
     getInitialState: function() {
         return {item: ''}
@@ -29,7 +31,7 @@ var UserForm = React.createClass({
                 </div>
 
                 <input type="text" onChange={this._handleNumberChange} value={this.state.item} className='item-input' placeholder='Enter item here.'/>
-                
+
                 <button type="submit" value="Add item" className='add-item'>
                     <i className="fa fa-plus-circle fa-4x"></i>
                 </button>
