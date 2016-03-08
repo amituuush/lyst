@@ -1,9 +1,9 @@
-const INCREMENT = 'INCREMENT'; // ACTION TYPE being assigned to variable so we can export it later and import it when using a reducer.
+const CLEAR_ITEMS = 'CLEAR_ITEMS'; // ACTION TYPE being assigned to variable so we can export it later and import it when using a reducer.
 
-const increment = () => { // ACTION CREATER, returns an action (an object with an action type, which has the option to take parameters and use them when returning the action)
+const clearItems = () => { // ACTION CREATER, returns an action (an object with an action type, which has the option to take parameters and use them when returning the action)
     return {
-        type: INCREMENT // ACTION (which is an object)
+        type: CLEAR_ITEMS, // ACTION (which is an object)
     }
 }
 
-module.exports = {INCREMENT, increment}; // es6 shorthand for {INCREMENT: INCREMENT, increment: increment}
+module.exports = {CLEAR_ITEMS, clearItems}; // es6 shorthand for {INCREMENT: INCREMENT, increment: increment}

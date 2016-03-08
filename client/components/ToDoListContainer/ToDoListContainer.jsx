@@ -55,6 +55,7 @@ var ToDoListContainer = React.createClass({
 
 var ToDoList = React.createClass({
     render: function () {
+        console.log(this.props);
         return (
             <div>
                 <UserForm onFormSubmit={this.props.addItem} clearList={this.props.clearList}/>
@@ -64,4 +65,4 @@ var ToDoList = React.createClass({
     }
 });
 
-module.exports = ToDoListContainer;
+module.exports = ToDoList;

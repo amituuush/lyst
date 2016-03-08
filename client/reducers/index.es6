@@ -1,13 +1,29 @@
-const {INCREMENT} = require('../actions');
+const {CLEAR_ITEMS} = require('../actions');
+
 
 const appReducer = (state = 0, action) => {
+    console.log('appReducer log');
+    return {
+        items: itemAdder(state.items, action)
+    }
+}
+
+const itemAdder = (state = [{name: 'hey'}, {name: 'there'}], action) => {
+    console.log('itemAdder log');
     switch(action.type) {
-        case INCREMENT:
-            return state + 1;
+        case 'CLEAR_ITEMS':
+            return [];
         default:
             return state;
     }
 }
+
+// store = {
+//   dispatch: function(action) {
+//     this.state = appReducer(this.state, action)
+//   }
+// }
+
 // This is a reducer, a pure function with (state, action) => state signature.
 // It describes how an action transforms the state into the next state.
 //
