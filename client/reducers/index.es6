@@ -1,23 +1,17 @@
-const {CLEAR_ITEMS} = require('../actions');
+const {combineReducers} = require('redux');
+const {firstReducer} = require('./firstReducer');
+const {itemReducer} = require('./itemReducer');
 
 // _____________________________________________
 
-const appReducer = (state = 0, action) => {
-    console.log('appReducer log');
-    return {
-        items: itemAdder(state.items, action)
-    }
-}
+const appReducer = combineReducers({
+    items: itemReducer
+})
 
-const itemAdder = (state = [{name: 'hey'}, {name: 'there'}], action) => {
-    console.log('itemAdder log');
-    switch(action.type) {
-        case 'CLEAR_ITEMS':
-            return [];
-        default:
-            return state;
-    }
-}
+// _____________________________________________
+
+module.exports = {appReducer};
+
 
 // store = {
 //   dispatch: function(action) {
@@ -31,20 +25,6 @@ const itemAdder = (state = [{name: 'hey'}, {name: 'there'}], action) => {
 // The shape of the state is up to you: it can be a primitive, an array, an object,
 // or even an Immutable.js data structure. The only important part is that you should
 // not mutate the state object, but return a new object if the state changes.
-
-
-// function counter(state = 0, action) {
-//   switch (action.type) {
-//   case 'INCREMENT':
-//     return state + 1
-//   case 'DECREMENT':
-//     return state - 1
-//   default:
-//     return state
-//   }
-// }
-
-module.exports = {appReducer};
 
 
 // making sure bundle is actually being included when deploying to bundle

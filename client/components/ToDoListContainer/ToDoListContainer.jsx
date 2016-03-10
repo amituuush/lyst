@@ -6,19 +6,19 @@ require('./to-do-list-container.less');
 // _____________________________________________
 
 var ToDoListContainer = React.createClass({
-    getInitialState: function() {
-        return {itemList: []}
-    },
+    // getInitialState: function() {
+    //     return {itemList: []}
+    // },
 
-    _addItem: function(value) {
-        this.setState({
-            itemList: this.state.itemList.concat({
-                name: value,
-                completed: false,
-                changed: false
-            })
-        });
-    },
+    // _addItem: function(value) {
+    //     this.setState({
+    //         itemList: this.state.itemList.concat({
+    //             name: value,
+    //             completed: false,
+    //             changed: false
+    //         })
+    //     });
+    // },
 
     _markComplete: function(index) {
         let {itemList} = this.state;
@@ -36,18 +36,6 @@ var ToDoListContainer = React.createClass({
         });
     },
 
-    _clearList: function() {
-        if (this.state.itemList.length > 0) {
-            var userAnswer = confirm('Are you sure you want to completely delete this list?');
-            if (userAnswer) {
-                this.setState({
-                    itemList: []
-                })
-            }
-        } else {
-            alert('There are no items in your list to delete!');
-        }
-    },
 
     render: function() {
         return <ToDoList items={this.state.itemList} addItem={this._addItem} deleteItem={this._deleteItem} clearList={this._clearList} markComplete={this._markComplete}/>
@@ -65,5 +53,7 @@ var ToDoList = React.createClass({
         )
     }
 });
+
+// _____________________________________________
 
 module.exports = ToDoList;
