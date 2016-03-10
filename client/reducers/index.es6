@@ -1,5 +1,4 @@
 const {combineReducers} = require('redux');
-const {firstReducer} = require('./firstReducer');
 const {itemReducer} = require('./itemReducer');
 
 // _____________________________________________

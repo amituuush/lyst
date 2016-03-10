@@ -1,7 +1,7 @@
 const {CLEAR_ITEMS} = require('../actions');
 
 // _____________________________________________
-
+let counter = 0;
 
 const itemReducer = (state = [], action) => {
     console.log('itemReducer log');
@@ -11,10 +11,13 @@ const itemReducer = (state = [], action) => {
             return state.concat({
                 name: action.newItem,
                 completed: false,
-                changed: false
+                changed: false,
+                id: counter++
             })
         case 'CLEAR_ITEMS':
             return [];
+        case 'COMPLETE_ITEM':
+            return
         default:
             return state;
     }
@@ -23,3 +26,6 @@ const itemReducer = (state = [], action) => {
 // _____________________________________________
 
 module.exports = {itemReducer};
+
+
+// create counter, use map and filter for remove and complete

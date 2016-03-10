@@ -21566,6 +21566,7 @@
 
 	var CLEAR_ITEMS = 'CLEAR_ITEMS';
 	var ADD_ITEM = 'ADD_ITEM';
+	var COMPLETE_ITEM = 'COMPLETE_ITEM';
 
 	// _____________________________________________
 
@@ -21579,6 +21580,12 @@
 	var clearItems = function clearItems() {
 	    return {
 	        type: CLEAR_ITEMS
+	    };
+	};
+
+	var completeItem = function completeItem() {
+	    return {
+	        type: COMPLETE_ITEM
 	    };
 	};
 
@@ -21910,27 +21917,32 @@
 
 	var redux = __webpack_require__(169);
 	var createStore = redux.createStore;
+	var compose = redux.compose;
 	// var createStore = redux.createStore;
 	// import { createStore } from 'redux';
 
 	var _require = __webpack_require__(196);
 
 	var appReducer = _require.appReducer;
-
 	// _____________________________________________
 
-	var store = createStore(appReducer);
+	var finalCreateStore = compose(window.devToolsExtension ? window.devToolsExtension() : function (f) {
+	  return f;
+	})(createStore);
+
+	var store = finalCreateStore(appReducer);
 
 	var unsubscribe = store.subscribe(function () {
-	    return console.log(store.getState());
+	  return console.log(store.getState());
 	});
+
 	// _____________________________________________
 
 	module.exports = { store: store };
 
 	// _____________________________________________
 
-	//Redux is an attempt to consolidate the “inputs” to that function in one place (the store), so that you can guarantee what the app’s view should look like (the output) at any time, given the state (the input) and the react components (the function)
+	// Redux is an attempt to consolidate the “inputs” to that function in one place (the store), so that you can guarantee what the app’s view should look like (the output) at any time, given the state (the input) and the react components (the function)
 
 /***/ },
 /* 196 */
@@ -21942,13 +21954,9 @@
 
 	var combineReducers = _require.combineReducers;
 
-	var _require2 = __webpack_require__(197);
+	var _require2 = __webpack_require__(198);
 
-	var firstReducer = _require2.firstReducer;
-
-	var _require3 = __webpack_require__(198);
-
-	var itemReducer = _require3.itemReducer;
+	var itemReducer = _require2.itemReducer;
 
 	// _____________________________________________
 
@@ -21979,31 +21987,7 @@
 	// dont push bundle to heroku, let CI server do that, just push to github
 
 /***/ },
-/* 197 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _require = __webpack_require__(198);
-
-	var itemReducer = _require.itemReducer;
-
-	// _____________________________________________
-
-	var firstReducer = function firstReducer() {
-	    var state = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
-	    var action = arguments[1];
-
-	    return {
-	        items: itemReducer(state.items, action)
-	    };
-	};
-
-	// _____________________________________________
-
-	module.exports = { firstReducer: firstReducer };
-
-/***/ },
+/* 197 */,
 /* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22014,6 +21998,8 @@
 	var CLEAR_ITEMS = _require.CLEAR_ITEMS;
 
 	// _____________________________________________
+
+	var counter = 0;
 
 	var itemReducer = function itemReducer() {
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
@@ -22026,10 +22012,13 @@
 	            return state.concat({
 	                name: action.newItem,
 	                completed: false,
-	                changed: false
+	                changed: false,
+	                id: counter++
 	            });
 	        case 'CLEAR_ITEMS':
 	            return [];
+	        case 'COMPLETE_ITEM':
+	            return;
 	        default:
 	            return state;
 	    }
@@ -22038,6 +22027,8 @@
 	// _____________________________________________
 
 	module.exports = { itemReducer: itemReducer };
+
+	// create counter, use map and filter for remove and complete
 
 /***/ }
 /******/ ]);
