@@ -1,27 +1,33 @@
-const {CLEAR_ITEMS} = require('../actions');
+const {CLEAR_ITEMS, ADD_ITEM, COMPLETE_ITEM} = require('../actions');
 
 // _____________________________________________
-let counter = 0;
 
 const itemReducer = (state = [], action) => {
-    console.log('itemReducer log');
     switch(action.type) {
         case 'ADD_ITEM':
-            console.log('add item');
             return state.concat({
                 name: action.newItem,
                 completed: false,
                 changed: false,
-                id: counter++
+                id: action.id
             })
         case 'CLEAR_ITEMS':
             return [];
         case 'COMPLETE_ITEM':
-            return
+            return [];
         default:
             return state;
     }
 }
+//
+// const singleItemReducer = (state, action) => {
+//   switch (action.type) {
+//     case 'COMPLETE_ITEM':
+//       if (state.items.id !== action.id)
+//     default:
+//       return state
+//   }
+// }
 
 // _____________________________________________
 

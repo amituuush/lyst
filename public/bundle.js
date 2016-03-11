@@ -21487,6 +21487,7 @@
 
 	var clearItems = _require.clearItems;
 	var addItem = _require.addItem;
+	var completeItem = _require.completeItem;
 
 	var ToDoList = __webpack_require__(186);
 
@@ -21526,10 +21527,18 @@
 	    };
 	};
 
+	var handleComplete = function handleComplete(dispatch) {
+	    return function (itemId) {
+	        dispatch(completeItem(itemId));
+	    };
+	};
+
+	// define prop name below to pass to ToDoList
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	    return {
 	        clearList: handleClearItems(dispatch),
-	        addItem: handleAddItem(dispatch)
+	        addItem: handleAddItem(dispatch),
+	        markComplete: handleComplete(dispatch)
 	    };
 	};
 
@@ -21569,11 +21578,13 @@
 	var COMPLETE_ITEM = 'COMPLETE_ITEM';
 
 	// _____________________________________________
+	var idCounter = 0;
 
 	var addItem = function addItem(newItem) {
 	    return {
 	        type: ADD_ITEM,
-	        newItem: newItem
+	        newItem: newItem,
+	        id: idCounter++
 	    };
 	};
 
@@ -21583,15 +21594,23 @@
 	    };
 	};
 
-	var completeItem = function completeItem() {
+	var completeItem = function completeItem(itemId) {
 	    return {
-	        type: COMPLETE_ITEM
+	        type: COMPLETE_ITEM,
+	        id: itemId
 	    };
 	};
 
+	// const deleteItem = (itemId) => {
+	//     return {
+	//         type: DELETE_ITEM,
+	//         id: itemId
+	//     }
+	// }
+
 	// _____________________________________________
 
-	module.exports = { CLEAR_ITEMS: CLEAR_ITEMS, clearItems: clearItems, ADD_ITEM: ADD_ITEM, addItem: addItem };
+	module.exports = { CLEAR_ITEMS: CLEAR_ITEMS, clearItems: clearItems, ADD_ITEM: ADD_ITEM, addItem: addItem, COMPLETE_ITEM: COMPLETE_ITEM, completeItem: completeItem };
 
 /***/ },
 /* 186 */
@@ -21606,51 +21625,47 @@
 
 	// _____________________________________________
 
-	var ToDoListContainer = React.createClass({
-	    displayName: 'ToDoListContainer',
+	// var ToDoListContainer = React.createClass({
+	// getInitialState: function() {
+	//     return {itemList: []}
+	// },
 
-	    // getInitialState: function() {
-	    //     return {itemList: []}
-	    // },
+	// _addItem: function(value) {
+	//     this.setState({
+	//         itemList: this.state.itemList.concat({
+	//             name: value,
+	//             completed: false,
+	//             changed: false
+	//         })
+	//     });
+	// },
 
-	    // _addItem: function(value) {
-	    //     this.setState({
-	    //         itemList: this.state.itemList.concat({
-	    //             name: value,
-	    //             completed: false,
-	    //             changed: false
-	    //         })
-	    //     });
-	    // },
-
-	    _markComplete: function _markComplete(index) {
-	        var itemList = this.state.itemList;
-
-	        itemList[index].completed = true;
-	        this.setState({
-	            itemList: itemList
-	        });
-	    },
-
-	    _deleteItem: function _deleteItem(index) {
-	        var itemList = this.state.itemList;
-
-	        itemList.splice(index, 1);
-	        this.setState({
-	            itemList: itemList
-	        });
-	    },
-
-	    render: function render() {
-	        return React.createElement(ToDoList, { items: this.state.itemList, addItem: this._addItem, deleteItem: this._deleteItem, clearList: this._clearList, markComplete: this._markComplete });
-	    }
-	});
+	// _markComplete: function(index) {
+	//     let {itemList} = this.state;
+	//     itemList[index].completed = true;
+	//     this.setState({
+	//         itemList: itemList
+	//     })
+	// },
+	//
+	// _deleteItem: function(index) {
+	//     let {itemList} = this.state;
+	//     itemList.splice(index, 1);
+	//     this.setState({
+	//         itemList: itemList
+	//     });
+	// },
+	//
+	//
+	// render: function() {
+	//     return <ToDoList items={this.state.itemList} addItem={this._addItem} deleteItem={this._deleteItem} clearList={this._clearList} markComplete={this._markComplete}/>
+	// }
+	// });
 
 	var ToDoList = React.createClass({
 	    displayName: 'ToDoList',
 
 	    render: function render() {
-	        console.log(this.props);
 	        return React.createElement(
 	            'div',
 	            null,
@@ -21690,14 +21705,12 @@
 	            };
 	            return React.createElement(ListItem, { deleteItem: handleDelete, key: index, index: index, item: arrayItem, markComplete: handleComplete });
 	        });
-
 	        return React.createElement(
 	            'ul',
 	            null,
 	            items
 	        );
 	    }
-
 	});
 
 	var ListItem = React.createClass({
@@ -21718,7 +21731,7 @@
 	                ),
 	                React.createElement(
 	                    'button',
-	                    { onClick: this.props.markComplete, className: 'check-button' },
+	                    { onClick: this.props.markComplete(this.props.item.id), className: 'check-button' },
 	                    React.createElement('i', { className: 'fa fa-check-circle fa-4x' })
 	                )
 	            )
@@ -21954,11 +21967,12 @@
 
 	var combineReducers = _require.combineReducers;
 
-	var _require2 = __webpack_require__(198);
+	var _require2 = __webpack_require__(197);
 
 	var itemReducer = _require2.itemReducer;
 
 	// _____________________________________________
+	// define prop name for array of items that ToDoList will receive below
 
 	var appReducer = combineReducers({
 	    items: itemReducer
@@ -21987,8 +22001,7 @@
 	// dont push bundle to heroku, let CI server do that, just push to github
 
 /***/ },
-/* 197 */,
-/* 198 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21996,33 +22009,40 @@
 	var _require = __webpack_require__(185);
 
 	var CLEAR_ITEMS = _require.CLEAR_ITEMS;
+	var ADD_ITEM = _require.ADD_ITEM;
+	var COMPLETE_ITEM = _require.COMPLETE_ITEM;
 
 	// _____________________________________________
-
-	var counter = 0;
 
 	var itemReducer = function itemReducer() {
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 	    var action = arguments[1];
 
-	    console.log('itemReducer log');
 	    switch (action.type) {
 	        case 'ADD_ITEM':
-	            console.log('add item');
 	            return state.concat({
 	                name: action.newItem,
 	                completed: false,
 	                changed: false,
-	                id: counter++
+	                id: action.id
 	            });
 	        case 'CLEAR_ITEMS':
 	            return [];
 	        case 'COMPLETE_ITEM':
-	            return;
+	            return [];
 	        default:
 	            return state;
 	    }
 	};
+	//
+	// const singleItemReducer = (state, action) => {
+	//   switch (action.type) {
+	//     case 'COMPLETE_ITEM':
+	//       if (state.items.id !== action.id)
+	//     default:
+	//       return state
+	//   }
+	// }
 
 	// _____________________________________________
 

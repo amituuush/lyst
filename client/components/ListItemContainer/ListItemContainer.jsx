@@ -15,15 +15,12 @@ var ListItemContainer = React.createClass({
                 }
                 return <ListItem deleteItem={handleDelete} key={index} index={index} item={arrayItem} markComplete={handleComplete} />
         });
-
         return (
             <ul>
                 {items}
             </ul>
         )
     }
-
-
 });
 
 var ListItem = React.createClass({
@@ -35,7 +32,7 @@ var ListItem = React.createClass({
                     <button onClick={this.props.deleteItem} className='delete-button'>
                         <i className="fa fa-times fa-2x"></i>
                     </button>
-                    <button onClick={this.props.markComplete} className='check-button'>
+                    <button onClick={this.props.markComplete(this.props.item.id)} className='check-button'>
                         <i className="fa fa-check-circle fa-4x"></i>
                     </button>
                 </li>

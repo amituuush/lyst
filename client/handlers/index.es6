@@ -1,5 +1,5 @@
 const ReactRedux = require('react-redux');
-const {clearItems, addItem} = require('../actions');
+const {clearItems, addItem, completeItem} = require('../actions');
 const ToDoList = require('../components/ToDoListContainer/ToDoListContainer');
 const {store} = require('../store');
 
@@ -35,11 +35,18 @@ const handleAddItem = (dispatch) => {
     }
 }
 
+const handleComplete = (dispatch) => {
+    return (itemId) => {
+        dispatch(completeItem(itemId))
+    }
+}
 
+// define prop name below to pass to ToDoList
 const mapDispatchToProps = (dispatch) => {
     return {
         clearList: handleClearItems(dispatch),
-        addItem: handleAddItem(dispatch)
+        addItem: handleAddItem(dispatch),
+        markComplete: handleComplete(dispatch)
     }
 }
 

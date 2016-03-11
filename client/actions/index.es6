@@ -3,11 +3,13 @@ const ADD_ITEM = 'ADD_ITEM';
 const COMPLETE_ITEM = 'COMPLETE_ITEM';
 
 // _____________________________________________
+let idCounter = 0;
 
 const addItem = (newItem) => {
     return {
         type: ADD_ITEM,
         newItem: newItem,
+        id: idCounter++
     }
 }
 
@@ -17,12 +19,20 @@ const clearItems = () => {
     }
 }
 
-const completeItem = () => {
+const completeItem = (itemId) => {
     return {
-        type: COMPLETE_ITEM
+        type: COMPLETE_ITEM,
+        id: itemId
     }
 }
 
+// const deleteItem = (itemId) => {
+//     return {
+//         type: DELETE_ITEM,
+//         id: itemId
+//     }
+// }
+
 // _____________________________________________
 
-module.exports = {CLEAR_ITEMS, clearItems, ADD_ITEM, addItem};
+module.exports = {CLEAR_ITEMS, clearItems, ADD_ITEM, addItem, COMPLETE_ITEM, completeItem};
