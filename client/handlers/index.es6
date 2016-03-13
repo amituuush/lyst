@@ -1,5 +1,5 @@
 const ReactRedux = require('react-redux');
-const {clearItems, addItem} = require('../actions');
+const {clearItems, addItem, completeItem, deleteItem} = require('../actions');
 const ToDoList = require('../components/ToDoListContainer/ToDoListContainer');
 const {store} = require('../store');
 
@@ -35,11 +35,24 @@ const handleAddItem = (dispatch) => {
     }
 }
 
+const handleCompleteItem = (dispatch) => {
+    return (itemId) => {
+        dispatch(completeItem(itemId))
+    }
+}
+
+var handleDeleteItem = function(dispatch) {
+    return function(itemId) {
+        dispatch(deleteItem(itemId))
+    }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
         clearList: handleClearItems(dispatch),
-        addItem: handleAddItem(dispatch)
+        addItem: handleAddItem(dispatch),
+        markComplete: handleCompleteItem(dispatch),
+        deleteItem: handleDeleteItem(dispatch)
     }
 }
 

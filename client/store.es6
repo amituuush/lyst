@@ -1,8 +1,8 @@
-const redux = require('redux');
-const {createStore, compose} = redux;
+const redux = require('redux')
+import {createStore, compose} from 'redux'
 // var createStore = redux.createStore;
 // import { createStore } from 'redux';
-const {appReducer} = require('./reducers');
+import {appReducer} from './reducers'
 // _____________________________________________
 
 const finalCreateStore = compose(
@@ -11,9 +11,9 @@ const finalCreateStore = compose(
 
 const store = finalCreateStore(appReducer);
 
-let unsubscribe = store.subscribe(() =>
-    console.log(store.getState())
-)
+let unsubscribe = store.subscribe(function() {
+    console.log('store has been updated. Latest store state:', store.getState())
+})
 
 // _____________________________________________
 
