@@ -1,13 +1,13 @@
 const {combineReducers} = require('redux');
 const {itemReducer} = require('./itemReducer');
 
-// _____________________________________________
+// __________________________________________
 
 const appReducer = combineReducers({
     items: itemReducer
 })
 
-// _____________________________________________
+// __________________________________________
 
 module.exports = {appReducer};
 

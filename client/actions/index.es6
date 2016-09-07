@@ -3,7 +3,7 @@ const ADD_ITEM = 'ADD_ITEM';
 const COMPLETE_ITEM = 'COMPLETE_ITEM';
 const DELETE_ITEM = 'DELETE_ITEM';
 
-// _____________________________________________
+// __________________________________________
 
 const addItem = (newItem) => {
     return {

@@ -3,7 +3,7 @@ const {clearItems, addItem, completeItem, deleteItem} = require('../actions');
 const ToDoList = require('../components/ToDoListContainer/ToDoListContainer');
 const {store} = require('../store');
 
-// _____________________________________________
+// __________________________________________
 
 // In addition to reading the state, container components can dispatch actions.
 
