@@ -36,7 +36,6 @@ require('./to-do-list-container.less');
     //     });
     // },
     //
-    //
     // render: function() {
     //     return <ToDoList items={this.state.itemList} addItem={this._addItem} deleteItem={this._deleteItem} clearList={this._clearList} markComplete={this._markComplete}/>
      // }

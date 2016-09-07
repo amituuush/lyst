@@ -1,13 +1,13 @@
 const {combineReducers} = require('redux');
 const {itemReducer} = require('./itemReducer');
 
-// _____________________________________________
+// __________________________________________
 // define prop name for array of items that ToDoList will receive below
 const appReducer = combineReducers({
     items: itemReducer
 })
 
-// _____________________________________________
+// __________________________________________
 
 module.exports = {appReducer};
 

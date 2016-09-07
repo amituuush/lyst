@@ -2,7 +2,7 @@ const CLEAR_ITEMS = 'CLEAR_ITEMS';
 const ADD_ITEM = 'ADD_ITEM';
 const COMPLETE_ITEM = 'COMPLETE_ITEM';
 
-// _____________________________________________
+// _________________________________________
 let idCounter = 0;
 
 const addItem = (newItem) => {
