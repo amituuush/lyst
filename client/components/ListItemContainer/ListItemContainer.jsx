@@ -1,7 +1,7 @@
 const React = require('react');
 require('./list-item-container.less');
 
-// _____________________________________________
+// __________________________________________
 
 var ListItemContainer = React.createClass({
     render: function() {
