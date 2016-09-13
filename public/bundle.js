@@ -21496,7 +21496,7 @@
 
 	var store = _require2.store;
 
-	// _____________________________________________
+	// __________________________________________
 
 	// In addition to reading the state, container components can dispatch actions.
 
@@ -21585,7 +21585,7 @@
 	var COMPLETE_ITEM = 'COMPLETE_ITEM';
 	var DELETE_ITEM = 'DELETE_ITEM';
 
-	// _____________________________________________
+	// __________________________________________
 
 	var addItem = function addItem(newItem) {
 	    return {
@@ -21661,8 +21661,6 @@
 	//             itemList: itemList
 	//         });
 	//     },
-	//
-	//
 	//     render: function() {
 	//         return <ToDoList items={this.state.itemList} addItem={this._addItem} deleteItem={this._deleteItem} clearList={this._clearList} markComplete={this._markComplete}/>
 	//     }
@@ -21697,7 +21695,7 @@
 	var React = __webpack_require__(1);
 	__webpack_require__(188);
 
-	// _____________________________________________
+	// __________________________________________
 
 	var ListItemContainer = React.createClass({
 	    displayName: 'ListItemContainer',
@@ -21986,13 +21984,13 @@
 
 	var itemReducer = _require2.itemReducer;
 
-	// _____________________________________________
+	// __________________________________________
 
 	var appReducer = combineReducers({
 	    items: itemReducer
 	});
 
-	// _____________________________________________
+	// __________________________________________
 
 	module.exports = { appReducer: appReducer };
 
