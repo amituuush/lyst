@@ -21585,7 +21585,7 @@
 	var COMPLETE_ITEM = 'COMPLETE_ITEM';
 	var DELETE_ITEM = 'DELETE_ITEM';
 
-	// __________________________________________
+	// ________________________________________
 
 	var addItem = function addItem(newItem) {
 	    return {
