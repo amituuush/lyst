@@ -8,6 +8,13 @@ var Storage = {
     this.items.push(item);
     this.setId += 1;
     return item;
+  },
+  delete: function(id) {
+     this.items = this.items.filter(function(item) {
+     return item.id !== id;
+   })
+   // Note that nothing is returned here, because the item was
+   // removed and no longer exists in the Array
   }
 };
 
@@ -39,6 +46,11 @@ app.post('/items', jsonParser, function(request, response) {
     }
     var item = storage.add(request.body.name);
     response.status(201).json(item);
+});
+
+app.delete('/items/:id', jsonParser, function(request, response) {
+    storage.delete(Number(request.params.id));
+    response.sendStatus(204);
 })
 
 app.listen(process.env.PORT || 5000, process.env.IP);
