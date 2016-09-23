@@ -14,7 +14,7 @@ var Storage = {
      return item.id !== id;
    })
    // Note that nothing is returned here, because the item was
-   // removed and no longer exists in the Array
+   /// removed and no longer exists in the Array
   }
 };
 
