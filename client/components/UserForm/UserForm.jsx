@@ -1,7 +1,7 @@
 const React = require('react');
 require('./user-form.less');
 
-// _____________________________________________
+// _________________________________________
 
 var UserForm = React.createClass({
     getInitialState: function() {
