@@ -1,5 +1,5 @@
 const ReactRedux = require('react-redux');
-const {clearItems, addItem, completeItem, deleteItem} = require('../actions');
+const {fetchItems, clearItems, addItem, completeItem, deleteItem} = require('../actions');
 const ToDoList = require('../components/ToDoListContainer/ToDoListContainer');
 const {store} = require('../store');
 
@@ -16,6 +16,13 @@ const {store} = require('../store');
 // then when the form is submitted or a delete item button is clicked, you just call the callback and let your reducers handle the changes
 
 // after the changes happen, `App` will update with the new redux state, causing `ToDoList` to rerender. React will figure out what the new view is supposed to look like and make the required changes to the DOM
+
+const handleFetchItems = (dispatch) => {
+    return () => {
+        console.log('fetching items');
+        dispatch(fetchItems)
+    }
+}
 
 const handleClearItems = (dispatch) => {
     return () => {
@@ -49,6 +56,7 @@ var handleDeleteItem = function(dispatch) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        fetchItems: handleFetchItems(dispatch),
         clearList: handleClearItems(dispatch),
         addItem: handleAddItem(dispatch),
         markComplete: handleCompleteItem(dispatch),

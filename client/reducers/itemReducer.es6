@@ -1,4 +1,4 @@
-import {CLEAR_ITEMS, ADD_ITEM, COMPLETE_ITEM, DELETE_ITEM} from '../actions'
+import {FETCH_ITEMS, CLEAR_ITEMS, ADD_ITEM, COMPLETE_ITEM, DELETE_ITEM} from '../actions/'
 
 // _____________________________________________
 var counter = 0;
@@ -7,6 +7,9 @@ var itemReducer = function(state = [], action) {
     console.log('itemReducer was called with state', state, 'and action', action);
 
     switch(action.type) {
+        case FETCH_ITEMS:
+            console.log('fetching some mutha fuckin items');
+            return action.items
         case ADD_ITEM:
             return state.concat({
                 name: action.newItem,

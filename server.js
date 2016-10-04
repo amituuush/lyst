@@ -5,16 +5,20 @@ var jsonParser = bodyParser.json();
 var mongoose   = require('mongoose');
 var Item = require('./app/models/items');
 
-mongoose.connect('mongodb://amituuush:lyst123!@ds025409.mlab.com:25409/lyst'); // connect to our database
+// connect to our database
+mongoose.connect('mongodb://amituuush:lyst123!@ds025409.mlab.com:25409/lyst');
+
+// creates special route for handling static files (.js, .html, .css). These will automatically be served from public directory when something is requested
+app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 var port = process.env.PORT || 8088;
-
 var router = express.Router();
 
-router.use(function(req, res, next) {
+// ----------------------------------------------
+
+router.use(function(req, res, next) { // every api call will run through this
   console.log('Something is happening.');
   next(); // make sure we go to the next routes and don't stop here
 });
@@ -24,18 +28,6 @@ router.get('/', function(req, res) {
 });
 
 router.route('/items')
-  .post(function(req, res) {
-    var item = new Item();
-    item.name = req.body.name;
-
-    item.save(function(err) {
-      if (err) {
-        res.send(err);
-      }
-      res.json({message: 'Item created!'});
-    });
-  })
-
   .get(function(req, res) {
     Item.find(function(err, items) {
       if (err) {
@@ -43,6 +35,21 @@ router.route('/items')
       }
       res.json(items);
     })
+  })
+
+  .post(function(req, res) {
+    var counter = 0;
+    var item = new Item();
+    item.name = req.body.name; // did I do this part correctly?
+    item.completed = false;
+    item.id = counter++;
+
+    item.save(function(err) {
+      if (err) {
+        res.send(err);
+      }
+      res.json({message: 'Item created!'});
+    });
   });
 
 router.route('/items/:item_id')
@@ -79,12 +86,41 @@ router.route('/items/:item_id')
     });
   });
 
+
+// app.post('/users', jsonParser, function(req, res) {
+//   if (!req.body) {
+//     return res.status(400).json({
+//       message: 'No request body'
+//     });
+//   }
+//
+//   if (!('username' in req.body)) {
+//     return res.status(422).json({
+//       message: 'Missing field: username'
+//     });
+//   }
+//
+//   var username = req.body.username;
+//
+//   if (username === '') {
+//     return res.status(422).json({
+//       message: 'Incorrect field length: username'
+//     })
+//   }
+//
+// })
+
 // REGISTER OUR ROUTES ----------------------
 // all of our routes will be prefixed with /api
 app.use('/api', router);
 
 app.listen(port);
 console.log('Magic happens on port ' + port);
+
+// how would I create another parent URI like /api?
+// could we further modularize this by route?
+// tell Thomas about submitting multiple report typos on Thinkful
+
 
 // app.use(express.static('public'));
 //

@@ -41,6 +41,12 @@ require('./to-do-list-container.less');
 // });
 
 var ToDoList = React.createClass({
+
+  componentWillMount: function() {
+    this.props.fetchItems();
+  },
+
+
     render: function () {
         return (
             <div>

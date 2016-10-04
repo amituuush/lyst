@@ -36,7 +36,6 @@ var UserForm = React.createClass({
                     <i className="fa fa-plus-circle fa-4x"></i>
                 </button>
             </form>
-
         </div>
         )
     }
