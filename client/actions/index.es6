@@ -44,30 +44,28 @@ const clearItems = () => {
 
 const completeItem = (itemId) => {
   return function(dispatch) {
-    request.post('/api/items/' + itemId)
+    request.put('/api/items/' + itemId)
       .set('Content-Type', 'application/json')
-      .send({
-          name: newItemName
-      })
       .end((err, res) => {
           dispatch({
-            type: ADD_ITEM,
-            newItem: res.body,
+            type: COMPLETE_ITEM,
+            item: res.body,
           })
       });
   }
-
-    return {
-        type: COMPLETE_ITEM,
-        _id: itemId
-    }
 }
 
 var deleteItem = function(itemId) {
-    return {
-        type: DELETE_ITEM,
-        _id: itemId
-    }
+  return function(dispatch) {
+    request.delete('/api/items/' + itemId)
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+          dispatch({
+            type: DELETE_ITEM,
+            item: res.body,
+          })
+      });
+  }
 }
 
 // _____________________________________________

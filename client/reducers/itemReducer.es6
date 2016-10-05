@@ -14,7 +14,7 @@ var itemReducer = function(state = [], action) {
             return [];
         case COMPLETE_ITEM:
             var newState = state.map(function(item) {
-                if (item._id === action._id) {
+                if (item._id === action.item._id) {
                     item.completed = true;
                 }
                 return item;
@@ -22,7 +22,7 @@ var itemReducer = function(state = [], action) {
             return newState;
         case DELETE_ITEM:
             var newState = state.filter(function(item) {
-                return item._id !== action._id;
+                return item._id !== action.item._id;
             })
             return newState;
         default:

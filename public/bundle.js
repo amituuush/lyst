@@ -21603,58 +21603,55 @@
 	// ________________________________________
 
 	var fetchItems = function fetchItems() {
-	    return function (dispatch) {
-	        _superagent2.default.get('/api/items').end(function (err, res) {
-	            dispatch({
-	                type: FETCH_ITEMS,
-	                items: res.body
-	            });
-	        });
-	    };
+	  return function (dispatch) {
+	    _superagent2.default.get('/api/items').end(function (err, res) {
+	      dispatch({
+	        type: FETCH_ITEMS,
+	        items: res.body
+	      });
+	    });
+	  };
 	};
 
 	var addItem = function addItem(newItemName) {
-	    return function (dispatch) {
-	        _superagent2.default.post('/api/items').set('Content-Type', 'application/json').send({
-	            name: newItemName
-	        }).end(function (err, res) {
-	            dispatch({
-	                type: ADD_ITEM,
-	                newItem: res.body
-	            });
-	        });
-	    };
+	  return function (dispatch) {
+	    _superagent2.default.post('/api/items').set('Content-Type', 'application/json').send({
+	      name: newItemName
+	    }).end(function (err, res) {
+	      dispatch({
+	        type: ADD_ITEM,
+	        newItem: res.body
+	      });
+	    });
+	  };
 	};
 
 	var clearItems = function clearItems() {
-	    return {
-	        type: CLEAR_ITEMS
-	    };
+	  return {
+	    type: CLEAR_ITEMS
+	  };
 	};
 
 	var completeItem = function completeItem(itemId) {
-	    return function (dispatch) {
-	        _superagent2.default.post('/api/items/' + itemId).set('Content-Type', 'application/json').send({
-	            name: newItemName
-	        }).end(function (err, res) {
-	            dispatch({
-	                type: ADD_ITEM,
-	                newItem: res.body
-	            });
-	        });
-	    };
-
-	    return {
+	  return function (dispatch) {
+	    _superagent2.default.put('/api/items/' + itemId).set('Content-Type', 'application/json').end(function (err, res) {
+	      dispatch({
 	        type: COMPLETE_ITEM,
-	        _id: itemId
-	    };
+	        item: res.body
+	      });
+	    });
+	  };
 	};
 
 	var deleteItem = function deleteItem(itemId) {
-	    return {
+	  return function (dispatch) {
+	    _superagent2.default.delete('/api/items/' + itemId).set('Content-Type', 'application/json').end(function (err, res) {
+	      dispatch({
 	        type: DELETE_ITEM,
-	        _id: itemId
-	    };
+	        item: res.body
+	      });
+	    });
+	  };
 	};
 
 	// _____________________________________________
@@ -22106,7 +22103,7 @@
 	            return [];
 	        case _actions.COMPLETE_ITEM:
 	            var newState = state.map(function (item) {
-	                if (item._id === action._id) {
+	                if (item._id === action.item._id) {
 	                    item.completed = true;
 	                }
 	                return item;
@@ -22114,7 +22111,7 @@
 	            return newState;
 	        case _actions.DELETE_ITEM:
 	            var newState = state.filter(function (item) {
-	                return item._id !== action._id;
+	                return item._id !== action.item._id;
 	            });
 	            return newState;
 	        default:
