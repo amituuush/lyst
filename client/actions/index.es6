@@ -37,9 +37,14 @@ const addItem = (newItemName) => {
 }
 
 const clearItems = () => {
-    return {
-        type: CLEAR_ITEMS,
-    }
+  return function(dispatch) {
+    request.delete('/api/items')
+      .end((err, res) => {
+          dispatch({
+            type: CLEAR_ITEMS
+          })
+      });
+  }
 }
 
 const completeItem = (itemId) => {

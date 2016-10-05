@@ -21627,8 +21627,12 @@
 	};
 
 	var clearItems = function clearItems() {
-	  return {
-	    type: CLEAR_ITEMS
+	  return function (dispatch) {
+	    _superagent2.default.delete('/api/items').end(function (err, res) {
+	      dispatch({
+	        type: CLEAR_ITEMS
+	      });
+	    });
 	  };
 	};
 
