@@ -11,7 +11,7 @@ var UserForm = React.createClass({
     _handleSubmit: function(event) {
         event.preventDefault();
         if(this.state.item) {
-            this.props.onFormSubmit(this.state.item);
+            this.props.addItem(this.state.item);
         }
         this.setState({
             item: ''

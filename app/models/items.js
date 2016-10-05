@@ -3,8 +3,7 @@ var Schema = mongoose.Schema;
 
 var ItemSchema = new Schema({
   name: String,
-  completed: Boolean,
-  id: Number
+  completed: Boolean
 });
 
 var Item = mongoose.model('Item', ItemSchema);

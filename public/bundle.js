@@ -21513,8 +21513,7 @@
 
 	var handleFetchItems = function handleFetchItems(dispatch) {
 	    return function () {
-	        console.log('fetching items');
-	        dispatch(fetchItems);
+	        dispatch(fetchItems());
 	    };
 	};
 
@@ -21603,8 +21602,7 @@
 
 	// ________________________________________
 
-	var fetchItems = function fetchItems(items) {
-	    console.log('fetching!!');
+	var fetchItems = function fetchItems() {
 	    return function (dispatch) {
 	        _superagent2.default.get('/api/items').end(function (err, res) {
 	            dispatch({
@@ -21615,14 +21613,14 @@
 	    };
 	};
 
-	var addItem = function addItem(newItem) {
+	var addItem = function addItem(newItemName) {
 	    return function (dispatch) {
 	        _superagent2.default.post('/api/items').set('Content-Type', 'application/json').send({
-	            name: newItem
+	            name: newItemName
 	        }).end(function (err, res) {
 	            dispatch({
 	                type: ADD_ITEM,
-	                newItem: newItem
+	                newItem: res.body
 	            });
 	        });
 	    };
@@ -21635,16 +21633,27 @@
 	};
 
 	var completeItem = function completeItem(itemId) {
+	    return function (dispatch) {
+	        _superagent2.default.post('/api/items/' + itemId).set('Content-Type', 'application/json').send({
+	            name: newItemName
+	        }).end(function (err, res) {
+	            dispatch({
+	                type: ADD_ITEM,
+	                newItem: res.body
+	            });
+	        });
+	    };
+
 	    return {
 	        type: COMPLETE_ITEM,
-	        id: itemId
+	        _id: itemId
 	    };
 	};
 
 	var deleteItem = function deleteItem(itemId) {
 	    return {
 	        type: DELETE_ITEM,
-	        id: itemId
+	        _id: itemId
 	    };
 	};
 
@@ -21713,7 +21722,7 @@
 	            'div',
 	            null,
 	            React.createElement(UserForm, {
-	                onFormSubmit: this.props.addItem, clearList: this.props.clearList }),
+	                addItem: this.props.addItem, clearList: this.props.clearList }),
 	            React.createElement(ListItemContainer, {
 	                items: this.props.items,
 	                deleteItem: this.props.deleteItem, markComplete: this.props.markComplete })
@@ -21743,7 +21752,7 @@
 	        var items = this.props.items.map(function (arrayItem) {
 	            return React.createElement(ListItem, {
 	                deleteItem: this.props.deleteItem,
-	                key: arrayItem.id,
+	                key: arrayItem._id,
 	                item: arrayItem,
 	                markComplete: this.props.markComplete });
 	        }, this);
@@ -21762,11 +21771,11 @@
 
 
 	    _handleCompleteItem: function _handleCompleteItem() {
-	        this.props.markComplete(this.props.item.id);
+	        this.props.markComplete(this.props.item._id);
 	    },
 
 	    _handleDeleteItem: function _handleDeleteItem() {
-	        this.props.deleteItem(this.props.item.id);
+	        this.props.deleteItem(this.props.item._id);
 	    },
 
 	    render: function render() {
@@ -21857,7 +21866,7 @@
 	    _handleSubmit: function _handleSubmit(event) {
 	        event.preventDefault();
 	        if (this.state.item) {
-	            this.props.onFormSubmit(this.state.item);
+	            this.props.addItem(this.state.item);
 	        }
 	        this.setState({
 	            item: ''
@@ -21930,7 +21939,7 @@
 
 
 	// module
-	exports.push([module.id, ".item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 20rem;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.5em;\n  font-weight: 300;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n}\nbutton.add-item {\n  background: transparent;\n  border: none;\n  outline: none;\n  width: 40px;\n  height: 40px;\n  position: relative;\n  top: 13px;\n  left: 10px;\n}\nbutton.add-item:hover {\n  cursor: pointer;\n}\nbutton.add-item .fa-plus-circle {\n  color: #3FB083;\n  position: relative;\n  bottom: 6px;\n  right: 7px;\n}\nbutton.add-item .fa-plus-circle:hover {\n  color: #52c195;\n}\n.reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.reset-list:hover {\n  cursor: pointer;\n}\n.reset-list .fa-trash-o {\n  color: #962D2D;\n}\n", ""]);
+	exports.push([module.id, ".item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 20rem;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.5em;\n  font-weight: 300;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\nbutton.add-item {\n  background: transparent;\n  border: none;\n  outline: none;\n  width: 40px;\n  height: 40px;\n  position: relative;\n  top: 13px;\n  left: 10px;\n}\nbutton.add-item:hover {\n  cursor: pointer;\n}\nbutton.add-item .fa-plus-circle {\n  color: #3FB083;\n  position: relative;\n  bottom: 6px;\n  right: 7px;\n}\nbutton.add-item .fa-plus-circle:hover {\n  color: #52c195;\n}\n.reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.reset-list:hover {\n  cursor: pointer;\n}\n.reset-list .fa-trash-o {\n  color: #962D2D;\n}\n", ""]);
 
 	// exports
 
@@ -22081,7 +22090,6 @@
 	var _actions = __webpack_require__(185);
 
 	// _____________________________________________
-	var counter = 0;
 
 	var itemReducer = function itemReducer() {
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
@@ -22091,20 +22099,14 @@
 
 	    switch (action.type) {
 	        case _actions.FETCH_ITEMS:
-	            console.log('fetching some mutha fuckin items');
 	            return action.items;
 	        case _actions.ADD_ITEM:
-	            return state.concat({
-	                name: action.newItem,
-	                completed: false,
-	                changed: false,
-	                id: counter++
-	            });
+	            return state.concat(action.newItem);
 	        case _actions.CLEAR_ITEMS:
 	            return [];
 	        case _actions.COMPLETE_ITEM:
 	            var newState = state.map(function (item) {
-	                if (item.id === action.id) {
+	                if (item._id === action._id) {
 	                    item.completed = true;
 	                }
 	                return item;
@@ -22112,7 +22114,7 @@
 	            return newState;
 	        case _actions.DELETE_ITEM:
 	            var newState = state.filter(function (item) {
-	                return item.id !== action.id;
+	                return item._id !== action._id;
 	            });
 	            return newState;
 	        default:

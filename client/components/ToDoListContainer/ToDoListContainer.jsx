@@ -46,19 +46,18 @@ var ToDoList = React.createClass({
     this.props.fetchItems();
   },
 
+  render: function () {
+      return (
+          <div>
+              <UserForm
+                  addItem={this.props.addItem} clearList={this.props.clearList} />
 
-    render: function () {
-        return (
-            <div>
-                <UserForm
-                    onFormSubmit={this.props.addItem} clearList={this.props.clearList}/>
-
-                <ListItemContainer
-                    items={this.props.items}
-                    deleteItem={this.props.deleteItem} markComplete={this.props.markComplete} />
-            </div>
-        )
-    }
+              <ListItemContainer
+                  items={this.props.items}
+                  deleteItem={this.props.deleteItem} markComplete={this.props.markComplete} />
+          </div>
+      )
+  }
 });
 
 // _____________________________________________

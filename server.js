@@ -11,10 +11,11 @@ mongoose.connect('mongodb://amituuush:lyst123!@ds025409.mlab.com:25409/lyst');
 // creates special route for handling static files (.js, .html, .css). These will automatically be served from public directory when something is requested
 app.use(express.static(__dirname + '/public'));
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 var port = process.env.PORT || 8088;
 var router = express.Router();
+
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
 
 // ----------------------------------------------
 
@@ -38,17 +39,15 @@ router.route('/items')
   })
 
   .post(function(req, res) {
-    var counter = 0;
     var item = new Item();
     item.name = req.body.name; // did I do this part correctly?
     item.completed = false;
-    item.id = counter++;
 
-    item.save(function(err) {
+    item.save(function(err, result) {
       if (err) {
         res.send(err);
       }
-      res.json({message: 'Item created!'});
+      res.json(result);
     });
   });
 
@@ -67,12 +66,12 @@ router.route('/items/:item_id')
       if (err) {
         res.send(err);
       }
-      item.name = req.body.name;
-      item.save(function(err) {
+      item.completed = true;
+      item.save(function(err, result) {
         if (err) {
           res.send(err);
         }
-        res.json({message: 'item name updated!'});
+        res.json(result);
       });
     });
   })
@@ -112,6 +111,7 @@ router.route('/items/:item_id')
 
 // REGISTER OUR ROUTES ----------------------
 // all of our routes will be prefixed with /api
+
 app.use('/api', router);
 
 app.listen(port);

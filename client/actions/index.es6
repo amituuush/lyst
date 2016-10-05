@@ -8,8 +8,7 @@ const DELETE_ITEM = 'DELETE_ITEM';
 
 // ________________________________________
 
-const fetchItems = (items) => {
-  console.log('fetching!!');
+const fetchItems = () => {
     return function(dispatch) {
         request.get('/api/items')
           .end((err, res) => {
@@ -21,17 +20,17 @@ const fetchItems = (items) => {
     }
 }
 
-const addItem = (newItem) => {
+const addItem = (newItemName) => {
   return function(dispatch) {
     request.post('/api/items')
       .set('Content-Type', 'application/json')
       .send({
-          name: newItem
+          name: newItemName
       })
       .end((err, res) => {
           dispatch({
             type: ADD_ITEM,
-            newItem: newItem,
+            newItem: res.body,
           })
       });
   }
@@ -44,16 +43,30 @@ const clearItems = () => {
 }
 
 const completeItem = (itemId) => {
+  return function(dispatch) {
+    request.post('/api/items/' + itemId)
+      .set('Content-Type', 'application/json')
+      .send({
+          name: newItemName
+      })
+      .end((err, res) => {
+          dispatch({
+            type: ADD_ITEM,
+            newItem: res.body,
+          })
+      });
+  }
+
     return {
         type: COMPLETE_ITEM,
-        id: itemId
+        _id: itemId
     }
 }
 
 var deleteItem = function(itemId) {
     return {
         type: DELETE_ITEM,
-        id: itemId
+        _id: itemId
     }
 }
 

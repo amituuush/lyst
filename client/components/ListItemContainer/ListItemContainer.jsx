@@ -9,7 +9,7 @@ var ListItemContainer = React.createClass({
             function(arrayItem) {
                 return <ListItem
                     deleteItem={this.props.deleteItem}
-                    key={arrayItem.id}
+                    key={arrayItem._id}
                     item={arrayItem}
                     markComplete={this.props.markComplete} />
             }, this);
@@ -28,11 +28,11 @@ var ListItemContainer = React.createClass({
 var ListItem = React.createClass({
 
     _handleCompleteItem: function() {
-        this.props.markComplete(this.props.item.id);
+        this.props.markComplete(this.props.item._id);
     },
 
     _handleDeleteItem: function() {
-        this.props.deleteItem(this.props.item.id);
+        this.props.deleteItem(this.props.item._id);
     },
 
     render: function() {

@@ -19,8 +19,7 @@ const {store} = require('../store');
 
 const handleFetchItems = (dispatch) => {
     return () => {
-        console.log('fetching items');
-        dispatch(fetchItems)
+        dispatch(fetchItems())
     }
 }
 
