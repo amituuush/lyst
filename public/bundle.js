@@ -19707,7 +19707,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\n  font-family: 'Proxima Nova Soft', Helvetica, 'open-sans';\n  background: #293844;\n  -webkit-font-smoothing: antialiased;\n}\n#container {\n  width: 100%;\n  text-align: center;\n}\n#container header {\n  font-family: 'Proxima Nova Soft', Helvetica, 'open-sans';\n  text-align: center;\n  color: #fff;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n#container #content {\n  width: 33rem;\n  margin: 0 auto;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: 'Proxima Nova Soft', Helvetica, 'open-sans';\n  background: #293844;\n  -webkit-font-smoothing: antialiased;\n}\n", ""]);
 
 	// exports
 
@@ -21673,65 +21673,35 @@
 	var UserForm = __webpack_require__(190);
 	__webpack_require__(193);
 
-	// _____________________________________________
-	//
-	// var ToDoListContainer = React.createClass({
-	//     // getInitialState: function() {
-	//     //     return {itemList: []}
-	//     // },
-	//
-	//     // _addItem: function(value) {
-	//     //     this.setState({
-	//     //         itemList: this.state.itemList.concat({
-	//     //             name: value,
-	//     //             completed: false,
-	//     //             changed: false
-	//     //         })
-	//     //     });
-	//     // },
-	//
-	//     _markComplete: function(index) {
-	//         let {itemList} = this.state;
-	//         itemList[index].completed = true;
-	//         this.setState({
-	//             itemList: itemList
-	//         })
-	//     },
-	//
-	//     _deleteItem: function(index) {
-	//         let {itemList} = this.state;
-	//         itemList.splice(index, 1);
-	//         this.setState({
-	//             itemList: itemList
-	//         });
-	//     },
-	//     render: function() {
-	//         return <ToDoList items={this.state.itemList} addItem={this._addItem} deleteItem={this._deleteItem} clearList={this._clearList} markComplete={this._markComplete}/>
-	//     }
-	// });
-
 	var ToDoList = React.createClass({
-	    displayName: 'ToDoList',
+	  displayName: 'ToDoList',
 
 
-	    componentWillMount: function componentWillMount() {
-	        this.props.fetchItems();
-	    },
+	  componentWillMount: function componentWillMount() {
+	    this.props.fetchItems();
+	  },
 
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(UserForm, {
-	                addItem: this.props.addItem, clearList: this.props.clearList }),
-	            React.createElement(ListItemContainer, {
-	                items: this.props.items,
-	                deleteItem: this.props.deleteItem, markComplete: this.props.markComplete })
-	        );
-	    }
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { id: 'container' },
+	      React.createElement(
+	        'div',
+	        { id: 'content' },
+	        React.createElement(
+	          'header',
+	          null,
+	          'Lyst'
+	        ),
+	        React.createElement(UserForm, {
+	          addItem: this.props.addItem, clearList: this.props.clearList }),
+	        React.createElement(ListItemContainer, {
+	          items: this.props.items,
+	          deleteItem: this.props.deleteItem, markComplete: this.props.markComplete })
+	      )
+	    );
+	  }
 	});
-
-	// _____________________________________________
 
 	module.exports = ToDoList;
 
@@ -21742,6 +21712,7 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
+	var ListItem = __webpack_require__(204);
 	__webpack_require__(188);
 
 	// __________________________________________
@@ -21760,44 +21731,8 @@
 
 	        return React.createElement(
 	            'ul',
-	            null,
+	            { className: 'list-ul' },
 	            items
-	        );
-	    }
-
-	});
-
-	var ListItem = React.createClass({
-	    displayName: 'ListItem',
-
-
-	    _handleCompleteItem: function _handleCompleteItem() {
-	        this.props.markComplete(this.props.item._id);
-	    },
-
-	    _handleDeleteItem: function _handleDeleteItem() {
-	        this.props.deleteItem(this.props.item._id);
-	    },
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            { className: 'list-item-parent' },
-	            React.createElement(
-	                'li',
-	                { className: this.props.item.completed ? 'style-complete list-item' : 'style-incomplete list-item' },
-	                this.props.item.name,
-	                React.createElement(
-	                    'button',
-	                    { onClick: this._handleDeleteItem, className: 'delete-button' },
-	                    React.createElement('i', { className: 'fa fa-times fa-2x' })
-	                ),
-	                React.createElement(
-	                    'button',
-	                    { onClick: this._handleCompleteItem, className: 'check-button' },
-	                    React.createElement('i', { className: 'fa fa-check-circle fa-4x' })
-	                )
-	            )
 	        );
 	    }
 	});
@@ -21841,7 +21776,7 @@
 
 
 	// module
-	exports.push([module.id, "div li.style-complete {\n  text-decoration: line-through;\n  color: #222F3B;\n}\ndiv.list-item-parent:nth-child(odd) li {\n  color: #9ba1a3;\n}\ndiv.list-item-parent:nth-child(even) li {\n  color: #646e71;\n}\nli.list-item {\n  font-size: 2em;\n  padding-top: 0.6em;\n  border-bottom: 2px solid #1C272E;\n  list-style: none;\n  text-align: left;\n  color: #9ba1a3;\n}\nli.list-item .fa-times {\n  color: #962D2D;\n  position: relative;\n  right: 6px;\n  bottom: 4px;\n}\nli.list-item .fa-times:hover {\n  color: #b13535;\n}\nli.list-item .fa-check-circle {\n  color: #3FB083;\n  position: relative;\n  right: 5px;\n  bottom: 5px;\n}\nli.list-item .fa-check-circle:hover {\n  color: #52c195;\n}\nli.list-item button {\n  background: transparent;\n  border: none;\n  outline: none;\n}\nli.list-item button:hover {\n  cursor: pointer;\n}\nli.list-item button.delete-button {\n  width: 20px;\n  height: 20px;\n  margin-left: 10px;\n}\nli.list-item button.check-button {\n  width: 40px;\n  height: 40px;\n  float: right;\n  position: relative;\n  bottom: 3px;\n}\n", ""]);
+	exports.push([module.id, ".list-ul {\n  padding: 0;\n}\n", ""]);
 
 	// exports
 
@@ -21890,7 +21825,7 @@
 	                    { onClick: this.props.clearList, className: 'reset-list' },
 	                    React.createElement('i', { className: 'fa fa-trash-o fa-lg' })
 	                ),
-	                React.createElement('input', { type: 'text', onChange: this._handleNumberChange, value: this.state.item, className: 'item-input', placeholder: 'Enter item here.' }),
+	                React.createElement('input', { type: 'text', onChange: this._handleNumberChange, value: this.state.item, className: 'item-input', placeholder: 'What needs to get done?' }),
 	                React.createElement(
 	                    'button',
 	                    { type: 'submit', value: 'Add item', className: 'add-item' },
@@ -21940,7 +21875,7 @@
 
 
 	// module
-	exports.push([module.id, ".item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 20rem;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.5em;\n  font-weight: 300;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\nbutton.add-item {\n  background: transparent;\n  border: none;\n  outline: none;\n  width: 40px;\n  height: 40px;\n  position: relative;\n  top: 13px;\n  left: 10px;\n}\nbutton.add-item:hover {\n  cursor: pointer;\n}\nbutton.add-item .fa-plus-circle {\n  color: #3FB083;\n  position: relative;\n  bottom: 6px;\n  right: 7px;\n}\nbutton.add-item .fa-plus-circle:hover {\n  color: #52c195;\n}\n.reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.reset-list:hover {\n  cursor: pointer;\n}\n.reset-list .fa-trash-o {\n  color: #962D2D;\n}\n", ""]);
+	exports.push([module.id, ".item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.1em;\n  font-weight: 300;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\nbutton.add-item {\n  background: transparent;\n  border: none;\n  outline: none;\n  width: 40px;\n  height: 40px;\n  position: relative;\n  top: 13px;\n  left: 10px;\n}\nbutton.add-item:hover {\n  cursor: pointer;\n}\nbutton.add-item .fa-plus-circle {\n  color: #3FB083;\n  position: relative;\n  bottom: 6px;\n  right: 7px;\n}\nbutton.add-item .fa-plus-circle:hover {\n  color: #52c195;\n}\n.reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.reset-list:hover {\n  cursor: pointer;\n}\n.reset-list .fa-trash-o {\n  color: #962D2D;\n}\n", ""]);
 
 	// exports
 
@@ -21980,7 +21915,7 @@
 
 
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, "#container {\n  width: 100%;\n  text-align: center;\n}\n#container #content {\n  width: 95%;\n  margin: 0 auto;\n}\n#container #content header {\n  text-align: center;\n  color: #fff;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n@media only screen and (min-width: 500px) {\n  #content {\n    width: 30em;\n    margin: 0 auto;\n  }\n}\n", ""]);
 
 	// exports
 
@@ -23756,6 +23691,94 @@
 	}
 
 	module.exports = request;
+
+
+/***/ },
+/* 204 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	__webpack_require__(205);
+
+	var ListItem = React.createClass({
+	    displayName: 'ListItem',
+
+
+	    _handleCompleteItem: function _handleCompleteItem() {
+	        this.props.markComplete(this.props.item._id);
+	    },
+
+	    _handleDeleteItem: function _handleDeleteItem() {
+	        this.props.deleteItem(this.props.item._id);
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { className: 'list-item-parent' },
+	            React.createElement(
+	                'li',
+	                { className: this.props.item.completed ? 'style-complete list-item' : 'style-incomplete list-item' },
+	                this.props.item.name,
+	                React.createElement(
+	                    'button',
+	                    { onClick: this._handleDeleteItem, className: 'delete-button' },
+	                    React.createElement('i', { className: 'fa fa-times fa-2x' })
+	                ),
+	                React.createElement(
+	                    'button',
+	                    { onClick: this._handleCompleteItem, className: 'check-button' },
+	                    React.createElement('i', { className: 'fa fa-check-circle fa-4x' })
+	                )
+	            )
+	        );
+	    }
+	});
+
+	// _____________________________________________
+
+	module.exports = ListItem;
+
+/***/ },
+/* 205 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(206);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(162)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-item.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-item.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 206 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(161)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "div li.style-complete {\n  text-decoration: line-through;\n  color: #222F3B;\n}\ndiv.list-item-parent:nth-child(odd) li {\n  color: #9ba1a3;\n}\ndiv.list-item-parent:nth-child(even) li {\n  color: #646e71;\n}\nli.list-item {\n  font-size: 2em;\n  padding-top: 0.6em;\n  border-bottom: 2px solid #1C272E;\n  list-style: none;\n  text-align: left;\n  color: #9ba1a3;\n}\nli.list-item .fa-times {\n  color: #962D2D;\n  position: relative;\n  right: 6px;\n  bottom: 4px;\n}\nli.list-item .fa-times:hover {\n  color: #b13535;\n}\nli.list-item .fa-check-circle {\n  color: #3FB083;\n  position: relative;\n  right: 5px;\n  bottom: 5px;\n}\nli.list-item .fa-check-circle:hover {\n  color: #52c195;\n}\nli.list-item button {\n  background: transparent;\n  border: none;\n  outline: none;\n}\nli.list-item button:hover {\n  cursor: pointer;\n}\nli.list-item button.delete-button {\n  width: 20px;\n  height: 20px;\n  margin-left: 10px;\n}\nli.list-item button.check-button {\n  width: 40px;\n  height: 40px;\n  float: right;\n  position: relative;\n  bottom: 3px;\n}\n", ""]);
+
+	// exports
 
 
 /***/ }

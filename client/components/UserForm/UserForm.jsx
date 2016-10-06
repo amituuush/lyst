@@ -30,7 +30,7 @@ var UserForm = React.createClass({
                     <i className="fa fa-trash-o fa-lg"></i>
                 </div>
 
-                <input type="text" onChange={this._handleNumberChange} value={this.state.item} className='item-input' placeholder='Enter item here.'/>
+                <input type="text" onChange={this._handleNumberChange} value={this.state.item} className='item-input' placeholder='What needs to get done?'/>
 
                 <button type="submit" value="Add item" className='add-item'>
                     <i className="fa fa-plus-circle fa-4x"></i>
