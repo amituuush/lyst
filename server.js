@@ -5,10 +5,10 @@ var jsonParser = bodyParser.json();
 var mongoose   = require('mongoose');
 var Item = require('./app/models/items');
 
-// connect to our database
-mongoose.connect(process.env.MONGODB_URI);
+MongoURI = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://amituuush:lyst123!@ds025409.mlab.com:25409/lyst'
 
-// 'mongodb://amituuush:lyst123!@ds025409.mlab.com:25409/lyst'
+// connect to our database
+mongoose.connect(MongoURI);
 
 // creates special route for handling static files (.js, .html, .css). These will automatically be served from public directory when something is requested
 app.use(express.static(__dirname + '/public'));
