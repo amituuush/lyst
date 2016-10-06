@@ -19,7 +19,7 @@ var router = express.Router();
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-// ----------------------------------------------
+// --------------------------------------------
 
 router.use(function(req, res, next) { // every api call will run through this
   console.log('Something is happening.');
