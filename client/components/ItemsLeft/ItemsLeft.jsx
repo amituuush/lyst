@@ -22,6 +22,7 @@ var ItemsLeft = React.createClass({
         return (
             <div className="items-left-container">
                 <div id="items-left">{itemsLeftText}</div>
+            <div id="clear-completed" onClick={this.props.deleteCompletedItems}>Clear completed</div>
             </div>
         )
     }

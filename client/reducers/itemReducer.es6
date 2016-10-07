@@ -1,7 +1,5 @@
 import {FETCH_ITEMS, CLEAR_ITEMS, ADD_ITEM, COMPLETE_ITEM, DELETE_ITEM} from '../actions/items'
 
-// _____________________________________________
-
 var itemReducer = function(state = [], action) {
 
     switch(action.type) {
@@ -28,22 +26,5 @@ var itemReducer = function(state = [], action) {
             return state;
     }
 }
-
-// const singleItemReducer = (state, action) => {
-//   switch (action.type) {
-//     case 'COMPLETE_ITEM':
-//       if (state.id !== action.id) {
-//         return state
-//       }
-//
-//       return Object.assign({}, state, {
-//         completed: !state.completed
-//       })
-//     default:
-//       return state
-//   }
-// }
-
-// _____________________________________________
 
 module.exports = {itemReducer};

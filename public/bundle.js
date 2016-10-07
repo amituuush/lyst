@@ -21495,6 +21495,7 @@
 	var addItem = _require.addItem;
 	var completeItem = _require.completeItem;
 	var deleteItem = _require.deleteItem;
+	var deleteCompletedItems = _require.deleteCompletedItems;
 
 	var _require2 = __webpack_require__(211);
 
@@ -21558,6 +21559,12 @@
 	    };
 	};
 
+	var handleDeleteCompletedItems = function handleDeleteCompletedItems(dispatch) {
+	    return function () {
+	        dispatch(deleteCompletedItems());
+	    };
+	};
+
 	var handleAllItemFilter = function handleAllItemFilter(dispatch) {
 	    return function () {
 	        dispatch(allItemFilter());
@@ -21585,7 +21592,8 @@
 	        deleteItem: handleDeleteItem(dispatch),
 	        allItemFilter: handleAllItemFilter(dispatch),
 	        activeItemFilter: handleActiveItemFilter(dispatch),
-	        completedItemFilter: handleCompletedItemFilter(dispatch)
+	        completedItemFilter: handleCompletedItemFilter(dispatch),
+	        deleteCompletedItems: handleDeleteCompletedItems(dispatch)
 	    };
 	};
 
@@ -21629,43 +21637,44 @@
 	var ItemsLeft = __webpack_require__(213);
 
 	var ToDoList = React.createClass({
-	  displayName: 'ToDoList',
+	    displayName: 'ToDoList',
 
 
-	  componentWillMount: function componentWillMount() {
-	    this.props.fetchItems();
-	  },
+	    componentWillMount: function componentWillMount() {
+	        this.props.fetchItems();
+	    },
 
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { id: 'container' },
-	      React.createElement(
-	        'header',
-	        null,
-	        'Lyst'
-	      ),
-	      React.createElement(
-	        'div',
-	        { id: 'content' },
-	        React.createElement(UserForm, {
-	          addItem: this.props.addItem, clearList: this.props.clearList }),
-	        React.createElement(ControlBar, {
-	          items: this.props.items,
-	          filter: this.props.filter,
-	          allItemFilter: this.props.allItemFilter,
-	          activeItemFilter: this.props.activeItemFilter,
-	          completedItemFilter: this.props.completedItemFilter }),
-	        React.createElement(ListItemContainer, {
-	          items: this.props.items,
-	          deleteItem: this.props.deleteItem,
-	          markComplete: this.props.markComplete,
-	          filter: this.props.filter }),
-	        React.createElement(ItemsLeft, {
-	          items: this.props.items })
-	      )
-	    );
-	  }
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { id: 'container' },
+	            React.createElement(
+	                'header',
+	                null,
+	                'Lyst'
+	            ),
+	            React.createElement(
+	                'div',
+	                { id: 'content' },
+	                React.createElement(UserForm, {
+	                    addItem: this.props.addItem, clearList: this.props.clearList }),
+	                React.createElement(ControlBar, {
+	                    items: this.props.items,
+	                    filter: this.props.filter,
+	                    allItemFilter: this.props.allItemFilter,
+	                    activeItemFilter: this.props.activeItemFilter,
+	                    completedItemFilter: this.props.completedItemFilter }),
+	                React.createElement(ListItemContainer, {
+	                    items: this.props.items,
+	                    deleteItem: this.props.deleteItem,
+	                    markComplete: this.props.markComplete,
+	                    filter: this.props.filter }),
+	                React.createElement(ItemsLeft, {
+	                    items: this.props.items,
+	                    deleteCompletedItems: this.props.deleteCompletedItems })
+	            )
+	        );
+	    }
 	});
 
 	module.exports = ToDoList;
@@ -21989,14 +21998,11 @@
 
 	var filterReducer = _require3.filterReducer;
 
-	// __________________________________________
 
 	var appReducer = combineReducers({
 	    items: itemReducer,
 	    filter: filterReducer
 	});
-
-	// __________________________________________
 
 	module.exports = { appReducer: appReducer };
 
@@ -22025,8 +22031,6 @@
 	'use strict';
 
 	var _items = __webpack_require__(212);
-
-	// _____________________________________________
 
 	var itemReducer = function itemReducer() {
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
@@ -22057,23 +22061,6 @@
 	            return state;
 	    }
 	};
-
-	// const singleItemReducer = (state, action) => {
-	//   switch (action.type) {
-	//     case 'COMPLETE_ITEM':
-	//       if (state.id !== action.id) {
-	//         return state
-	//       }
-	//
-	//       return Object.assign({}, state, {
-	//         completed: !state.completed
-	//       })
-	//     default:
-	//       return state
-	//   }
-	// }
-
-	// _____________________________________________
 
 	module.exports = { itemReducer: itemReducer };
 
@@ -23868,8 +23855,6 @@
 
 	var _filter = __webpack_require__(211);
 
-	// _____________________________________________
-
 	var filterReducer = function filterReducer() {
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? 'all' : arguments[0];
 	    var action = arguments[1];
@@ -23890,11 +23875,7 @@
 	    }
 	};
 
-	// _____________________________________________
-
 	module.exports = { filterReducer: filterReducer };
-
-	// create counter, use map and filter for remove and complete
 
 /***/ },
 /* 211 */
@@ -23950,6 +23931,7 @@
 	var ADD_ITEM = 'ADD_ITEM';
 	var COMPLETE_ITEM = 'COMPLETE_ITEM';
 	var DELETE_ITEM = 'DELETE_ITEM';
+	var DELETE_COMPLETED_ITEMS = 'DELETE_COMPLETED_ITEMS';
 
 	// ________________________________________
 
@@ -24009,9 +23991,20 @@
 	  };
 	};
 
+	var deleteCompletedItems = function deleteCompletedItems() {
+	  console.log('deleting completed items!');
+	  return function (dispatch) {
+	    _superagent2.default.delete('/api/items').end(function (err, res) {
+	      dispatch({
+	        type: DELETE_COMPLETED_ITEMS
+	      });
+	    });
+	  };
+	};
+
 	// _____________________________________________
 
-	module.exports = { FETCH_ITEMS: FETCH_ITEMS, fetchItems: fetchItems, CLEAR_ITEMS: CLEAR_ITEMS, clearItems: clearItems, ADD_ITEM: ADD_ITEM, addItem: addItem, COMPLETE_ITEM: COMPLETE_ITEM, completeItem: completeItem, DELETE_ITEM: DELETE_ITEM, deleteItem: deleteItem };
+	module.exports = { FETCH_ITEMS: FETCH_ITEMS, fetchItems: fetchItems, CLEAR_ITEMS: CLEAR_ITEMS, clearItems: clearItems, ADD_ITEM: ADD_ITEM, addItem: addItem, COMPLETE_ITEM: COMPLETE_ITEM, completeItem: completeItem, DELETE_ITEM: DELETE_ITEM, deleteItem: deleteItem, DELETE_COMPLETED_ITEMS: DELETE_COMPLETED_ITEMS, deleteCompletedItems: deleteCompletedItems };
 
 /***/ },
 /* 213 */
@@ -24049,6 +24042,11 @@
 	        'div',
 	        { id: 'items-left' },
 	        itemsLeftText
+	      ),
+	      React.createElement(
+	        'div',
+	        { id: 'clear-completed', onClick: this.props.deleteCompletedItems },
+	        'Clear completed'
 	      )
 	    );
 	  }
@@ -24093,7 +24091,7 @@
 
 
 	// module
-	exports.push([module.id, ".items-left-container {\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 1em;\n  padding: 0.4em;\n}\n.items-left-container #items-left {\n  color: #9BA1A3;\n}\n", ""]);
+	exports.push([module.id, ".items-left-container {\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 1em;\n  padding: 0.4em;\n}\n.items-left-container #items-left {\n  color: #9BA1A3;\n}\n.items-left-container #clear-completed:hover {\n  cursor: pointer;\n}\n", ""]);
 
 	// exports
 

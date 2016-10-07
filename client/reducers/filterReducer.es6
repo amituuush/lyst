@@ -1,6 +1,5 @@
 import {ALL_ITEM_FILTER, ACTIVE_ITEM_FILTER, COMPLETED_ITEM_FILTER} from '../actions/filter'
 
-// _____________________________________________
 
 var filterReducer = function(state = 'all', action) {
 
@@ -19,9 +18,5 @@ var filterReducer = function(state = 'all', action) {
     }
 }
 
-// _____________________________________________
 
 module.exports = {filterReducer};
-
-
-// create counter, use map and filter for remove and complete

@@ -5,6 +5,7 @@ const CLEAR_ITEMS = 'CLEAR_ITEMS';
 const ADD_ITEM = 'ADD_ITEM';
 const COMPLETE_ITEM = 'COMPLETE_ITEM';
 const DELETE_ITEM = 'DELETE_ITEM';
+const DELETE_COMPLETED_ITEMS = 'DELETE_COMPLETED_ITEMS';
 
 // ________________________________________
 
@@ -73,7 +74,19 @@ var deleteItem = function(itemId) {
   }
 }
 
+var deleteCompletedItems = function() {
+    console.log('deleting completed items!');
+  return function(dispatch) {
+      request.delete('/api/items')
+        .end((err, res) => {
+            dispatch({
+              type: DELETE_COMPLETED_ITEMS
+            })
+        });
+  }
+}
+
 
 // _____________________________________________
 
-module.exports = {FETCH_ITEMS, fetchItems, CLEAR_ITEMS, clearItems, ADD_ITEM, addItem, COMPLETE_ITEM, completeItem, DELETE_ITEM, deleteItem};
+module.exports = {FETCH_ITEMS, fetchItems, CLEAR_ITEMS, clearItems, ADD_ITEM, addItem, COMPLETE_ITEM, completeItem, DELETE_ITEM, deleteItem, DELETE_COMPLETED_ITEMS, deleteCompletedItems};

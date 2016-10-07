@@ -30,7 +30,8 @@ var ToDoList = React.createClass({
                   markComplete={this.props.markComplete}
                   filter={this.props.filter} />
               <ItemsLeft
-                  items={this.props.items} />
+                  items={this.props.items}
+                  deleteCompletedItems={this.props.deleteCompletedItems} />
             </div>
           </div>
       )
