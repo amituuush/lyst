@@ -33,7 +33,7 @@ var UserForm = React.createClass({
                 <input type="text" onChange={this._handleNumberChange} value={this.state.item} className='item-input' placeholder='What needs to get done?'/>
 
                 <button type="submit" value="Add item" className='add-item'>
-                    <i className="fa fa-plus-circle fa-4x"></i>
+                    <i className="fa fa-plus fa-3x"></i>
                 </button>
             </form>
         </div>

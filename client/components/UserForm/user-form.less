@@ -8,7 +8,7 @@
     height: 2rem;
     background: #4F6373;
     font-size: 1.1em;
-    font-weight: 300;
+    font-weight: 400;
     text-align: center;
     color: #fff;
 
@@ -32,7 +32,7 @@ button.add-item {
         cursor: pointer;
     }
 
-    .fa-plus-circle {
+    .fa-plus{
         color: #3FB083;
         position: relative;
         bottom: 6px;
@@ -59,5 +59,9 @@ button.add-item {
 
     .fa-trash-o {
         color: #962D2D;
+
+        &:hover {
+          color: lighten(#962D2D, 7%);
+        }
     }
 }
