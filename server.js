@@ -42,7 +42,7 @@ router.route('/items')
 
   .post(function(req, res) {
     var item = new Item();
-    item.name = req.body.name; // did I do this part correctly?
+    item.name = req.body.name;
     item.completed = false;
 
     item.save(function(err, result) {
@@ -54,24 +54,12 @@ router.route('/items')
   })
 
   .delete(function(req, res) {
-    // Item.update(req.params.item_id, function(err, item) {
-    //   if (err) {
-    //     res.send(err);
-    //   }
-    //   res.json(item);
-    // });
       Item.remove({}, function(err, items) {
         if (err) {
           res.send(err);
         }
         res.json(items);
       })
-      //
-      // Item.update({ $pull: { items: [] }}, function(err, affected){
-      //   console.log('affected: ', affected);
-      //   res.json("list cleared!");
-      // });
-
   });
 
 

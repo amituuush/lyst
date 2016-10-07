@@ -1,10 +1,12 @@
-const {combineReducers} = require('redux');
-const {itemReducer} = require('./itemReducer');
+const { combineReducers } = require('redux');
+const { itemReducer } = require('./itemReducer');
+const { filterReducer } = require('./filterReducer');
 
 // __________________________________________
 
 const appReducer = combineReducers({
-    items: itemReducer
+    items: itemReducer,
+    filter: filterReducer
 })
 
 // __________________________________________

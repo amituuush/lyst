@@ -1,7 +1,8 @@
 const ReactRedux = require('react-redux');
-const {fetchItems, clearItems, addItem, completeItem, deleteItem} = require('../actions');
-const ToDoList = require('../components/ToDoListContainer/ToDoListContainer');
-const {store} = require('../store');
+const { fetchItems, clearItems, addItem, completeItem, deleteItem } = require('../actions/items');
+const { allItemFilter, activeItemFilter, completedItemFilter } = require('../actions/filter')
+const ToDoListContainer = require('../components/ToDoListContainer/ToDoListContainer');
+const { store } = require('../store');
 
 // __________________________________________
 
@@ -53,13 +54,34 @@ var handleDeleteItem = function(dispatch) {
     }
 }
 
+const handleAllItemFilter = (dispatch) => {
+    return () => {
+        dispatch(allItemFilter())
+    }
+}
+
+const handleActiveItemFilter = (dispatch) => {
+    return () => {
+        dispatch(activeItemFilter())
+    }
+}
+
+const handleCompletedItemFilter = (dispatch) => {
+    return () => {
+        dispatch(completedItemFilter())
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchItems: handleFetchItems(dispatch),
         clearList: handleClearItems(dispatch),
         addItem: handleAddItem(dispatch),
         markComplete: handleCompleteItem(dispatch),
-        deleteItem: handleDeleteItem(dispatch)
+        deleteItem: handleDeleteItem(dispatch),
+        allItemFilter: handleAllItemFilter(dispatch),
+        activeItemFilter: handleActiveItemFilter(dispatch),
+        completedItemFilter: handleCompletedItemFilter(dispatch)
     }
 }
 
@@ -73,7 +95,7 @@ const mapStateToProps = (state) => {
 const App = ReactRedux.connect(
     mapStateToProps,
     mapDispatchToProps
-)(ToDoList)
+)(ToDoListContainer)
 
 // _____________________________________________
 

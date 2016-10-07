@@ -1,9 +1,8 @@
-import {FETCH_ITEMS, CLEAR_ITEMS, ADD_ITEM, COMPLETE_ITEM, DELETE_ITEM} from '../actions/'
+import {FETCH_ITEMS, CLEAR_ITEMS, ADD_ITEM, COMPLETE_ITEM, DELETE_ITEM} from '../actions/items'
 
 // _____________________________________________
 
 var itemReducer = function(state = [], action) {
-    console.log('itemReducer was called with state', state, 'and action', action);
 
     switch(action.type) {
         case FETCH_ITEMS:
@@ -48,6 +47,3 @@ var itemReducer = function(state = [], action) {
 // _____________________________________________
 
 module.exports = {itemReducer};
-
-
-// create counter, use map and filter for remove and complete

@@ -22,7 +22,16 @@ var ControlBar = React.createClass({
 
         return (
             <div className="control-bar-container">
-              {itemsLeftText}
+                <div>{itemsLeftText}</div>
+              <div onClick={this.props.allItemFilter} className="filter-button">
+                  All
+                </div>
+                <div onClick={this.props.activeItemFilter} className="filter-button">
+                  Active
+                </div>
+                <div onClick={this.props.completedItemFilter} className="filter-button">
+                  Completed
+                </div>
             </div>
         )
     }

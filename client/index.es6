@@ -15,3 +15,9 @@ ReactDOM.render(
 );
 
 // _____________________________________________
+
+// add 'all', active, and completed filter options
+// add clear completed button
+// fix db on heroku
+// add user auth
+// toggle complete

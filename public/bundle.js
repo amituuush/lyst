@@ -71,6 +71,12 @@
 
 	// _____________________________________________
 
+	// add 'all', active, and completed filter options
+	// add clear completed button
+	// fix db on heroku
+	// add user auth
+	// toggle complete
+
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
@@ -21483,7 +21489,7 @@
 
 	var ReactRedux = __webpack_require__(163);
 
-	var _require = __webpack_require__(185);
+	var _require = __webpack_require__(212);
 
 	var fetchItems = _require.fetchItems;
 	var clearItems = _require.clearItems;
@@ -21491,11 +21497,17 @@
 	var completeItem = _require.completeItem;
 	var deleteItem = _require.deleteItem;
 
-	var ToDoList = __webpack_require__(186);
+	var _require2 = __webpack_require__(211);
 
-	var _require2 = __webpack_require__(195);
+	var allItemFilter = _require2.allItemFilter;
+	var activeItemFilter = _require2.activeItemFilter;
+	var completedItemFilter = _require2.completedItemFilter;
 
-	var store = _require2.store;
+	var ToDoListContainer = __webpack_require__(186);
+
+	var _require3 = __webpack_require__(195);
+
+	var store = _require3.store;
 
 	// __________________________________________
 
@@ -21547,13 +21559,34 @@
 	    };
 	};
 
+	var handleAllItemFilter = function handleAllItemFilter(dispatch) {
+	    return function () {
+	        dispatch(allItemFilter());
+	    };
+	};
+
+	var handleActiveItemFilter = function handleActiveItemFilter(dispatch) {
+	    return function () {
+	        dispatch(activeItemFilter());
+	    };
+	};
+
+	var handleCompletedItemFilter = function handleCompletedItemFilter(dispatch) {
+	    return function () {
+	        dispatch(completedItemFilter());
+	    };
+	};
+
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	    return {
 	        fetchItems: handleFetchItems(dispatch),
 	        clearList: handleClearItems(dispatch),
 	        addItem: handleAddItem(dispatch),
 	        markComplete: handleCompleteItem(dispatch),
-	        deleteItem: handleDeleteItem(dispatch)
+	        deleteItem: handleDeleteItem(dispatch),
+	        allItemFilter: handleAllItemFilter(dispatch),
+	        activeItemFilter: handleActiveItemFilter(dispatch),
+	        completedItemFilter: handleCompletedItemFilter(dispatch)
 	    };
 	};
 
@@ -21564,7 +21597,7 @@
 	// App component is created by the function returned from redux-react’s `connect`
 	// It holds the state from the store and passes those as `props` to the `ToDoList` component
 
-	var App = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ToDoList);
+	var App = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ToDoListContainer);
 
 	// _____________________________________________
 
@@ -21583,86 +21616,7 @@
 	// the action that goes into dispatch function gets passed as the second argument to the reducer. See example below:
 
 /***/ },
-/* 185 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _superagent = __webpack_require__(199);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var FETCH_ITEMS = 'FETCH_ITEMS';
-	var CLEAR_ITEMS = 'CLEAR_ITEMS';
-	var ADD_ITEM = 'ADD_ITEM';
-	var COMPLETE_ITEM = 'COMPLETE_ITEM';
-	var DELETE_ITEM = 'DELETE_ITEM';
-
-	// ________________________________________
-
-	var fetchItems = function fetchItems() {
-	  return function (dispatch) {
-	    _superagent2.default.get('/api/items').end(function (err, res) {
-	      dispatch({
-	        type: FETCH_ITEMS,
-	        items: res.body
-	      });
-	    });
-	  };
-	};
-
-	var addItem = function addItem(newItemName) {
-	  return function (dispatch) {
-	    _superagent2.default.post('/api/items').set('Content-Type', 'application/json').send({
-	      name: newItemName
-	    }).end(function (err, res) {
-	      dispatch({
-	        type: ADD_ITEM,
-	        newItem: res.body
-	      });
-	    });
-	  };
-	};
-
-	var clearItems = function clearItems() {
-	  return function (dispatch) {
-	    _superagent2.default.delete('/api/items').end(function (err, res) {
-	      dispatch({
-	        type: CLEAR_ITEMS
-	      });
-	    });
-	  };
-	};
-
-	var completeItem = function completeItem(itemId) {
-	  return function (dispatch) {
-	    _superagent2.default.put('/api/items/' + itemId).set('Content-Type', 'application/json').end(function (err, res) {
-	      dispatch({
-	        type: COMPLETE_ITEM,
-	        item: res.body
-	      });
-	    });
-	  };
-	};
-
-	var deleteItem = function deleteItem(itemId) {
-	  return function (dispatch) {
-	    _superagent2.default.delete('/api/items/' + itemId).set('Content-Type', 'application/json').end(function (err, res) {
-	      dispatch({
-	        type: DELETE_ITEM,
-	        item: res.body
-	      });
-	    });
-	  };
-	};
-
-	// _____________________________________________
-
-	module.exports = { FETCH_ITEMS: FETCH_ITEMS, fetchItems: fetchItems, CLEAR_ITEMS: CLEAR_ITEMS, clearItems: clearItems, ADD_ITEM: ADD_ITEM, addItem: addItem, COMPLETE_ITEM: COMPLETE_ITEM, completeItem: completeItem, DELETE_ITEM: DELETE_ITEM, deleteItem: deleteItem };
-
-/***/ },
+/* 185 */,
 /* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -21697,10 +21651,15 @@
 	        React.createElement(UserForm, {
 	          addItem: this.props.addItem, clearList: this.props.clearList }),
 	        React.createElement(ControlBar, {
-	          items: this.props.items }),
+	          items: this.props.items,
+	          allItemFilter: this.props.allItemFilter,
+	          activeItemFilter: this.props.activeItemFilter,
+	          completedItemFilter: this.props.completedItemFilter }),
 	        React.createElement(ListItemContainer, {
 	          items: this.props.items,
-	          deleteItem: this.props.deleteItem, markComplete: this.props.markComplete })
+	          deleteItem: this.props.deleteItem,
+	          markComplete: this.props.markComplete,
+	          filter: this.props.filter })
 	      )
 	    );
 	  }
@@ -21724,13 +21683,44 @@
 	    displayName: 'ListItemContainer',
 
 	    render: function render() {
-	        var items = this.props.items.map(function (arrayItem) {
-	            return React.createElement(ListItem, {
-	                deleteItem: this.props.deleteItem,
-	                key: arrayItem._id,
-	                item: arrayItem,
-	                markComplete: this.props.markComplete });
-	        }, this);
+
+	        switch (this.props.filter) {
+	            case 'all':
+	                var items = this.props.items.map(function (arrayItem) {
+	                    return React.createElement(ListItem, {
+	                        deleteItem: this.props.deleteItem,
+	                        key: arrayItem._id,
+	                        item: arrayItem,
+	                        markComplete: this.props.markComplete });
+	                }, this);
+	                break;
+
+	            case 'active':
+	                var filteredItems = this.props.items.filter(function (item) {
+	                    return item.completed === false;
+	                });
+	                var items = filteredItems.map(function (arrayItem) {
+	                    return React.createElement(ListItem, {
+	                        deleteItem: this.props.deleteItem,
+	                        key: arrayItem._id,
+	                        item: arrayItem,
+	                        markComplete: this.props.markComplete });
+	                }, this);
+	                break;
+
+	            case 'completed':
+	                var filteredItems = this.props.items.filter(function (item) {
+	                    return item.completed === true;
+	                });
+	                var items = filteredItems.map(function (arrayItem) {
+	                    return React.createElement(ListItem, {
+	                        deleteItem: this.props.deleteItem,
+	                        key: arrayItem._id,
+	                        item: arrayItem,
+	                        markComplete: this.props.markComplete });
+	                }, this);
+	                break;
+	        }
 
 	        return React.createElement(
 	            'ul',
@@ -21992,10 +21982,15 @@
 
 	var itemReducer = _require2.itemReducer;
 
+	var _require3 = __webpack_require__(210);
+
+	var filterReducer = _require3.filterReducer;
+
 	// __________________________________________
 
 	var appReducer = combineReducers({
-	    items: itemReducer
+	    items: itemReducer,
+	    filter: filterReducer
 	});
 
 	// __________________________________________
@@ -22026,7 +22021,7 @@
 
 	'use strict';
 
-	var _actions = __webpack_require__(185);
+	var _items = __webpack_require__(212);
 
 	// _____________________________________________
 
@@ -22034,16 +22029,15 @@
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 	    var action = arguments[1];
 
-	    console.log('itemReducer was called with state', state, 'and action', action);
 
 	    switch (action.type) {
-	        case _actions.FETCH_ITEMS:
+	        case _items.FETCH_ITEMS:
 	            return action.items;
-	        case _actions.ADD_ITEM:
+	        case _items.ADD_ITEM:
 	            return state.concat(action.newItem);
-	        case _actions.CLEAR_ITEMS:
+	        case _items.CLEAR_ITEMS:
 	            return [];
-	        case _actions.COMPLETE_ITEM:
+	        case _items.COMPLETE_ITEM:
 	            var newState = state.map(function (item) {
 	                if (item._id === action.item._id) {
 	                    item.completed = true;
@@ -22051,7 +22045,7 @@
 	                return item;
 	            });
 	            return newState;
-	        case _actions.DELETE_ITEM:
+	        case _items.DELETE_ITEM:
 	            var newState = state.filter(function (item) {
 	                return item._id !== action.item._id;
 	            });
@@ -22079,8 +22073,6 @@
 	// _____________________________________________
 
 	module.exports = { itemReducer: itemReducer };
-
-	// create counter, use map and filter for remove and complete
 
 /***/ },
 /* 198 */
@@ -23816,7 +23808,26 @@
 	    return React.createElement(
 	      'div',
 	      { className: 'control-bar-container' },
-	      itemsLeftText
+	      React.createElement(
+	        'div',
+	        null,
+	        itemsLeftText
+	      ),
+	      React.createElement(
+	        'div',
+	        { onClick: this.props.allItemFilter, className: 'filter-button' },
+	        'All'
+	      ),
+	      React.createElement(
+	        'div',
+	        { onClick: this.props.activeItemFilter, className: 'filter-button' },
+	        'Active'
+	      ),
+	      React.createElement(
+	        'div',
+	        { onClick: this.props.completedItemFilter, className: 'filter-button' },
+	        'Completed'
+	      )
 	    );
 	  }
 	});
@@ -23860,10 +23871,163 @@
 
 
 	// module
-	exports.push([module.id, ".control-bar-container {\n  width: 90%;\n  margin: 0 auto;\n  border: 1px solid #4F6373;\n  border-radius: 3px;\n  margin-top: 1em;\n  color: #9BA1A3;\n  padding: 0.4em;\n}\n", ""]);
+	exports.push([module.id, ".control-bar-container {\n  width: 90%;\n  margin: 0 auto;\n  border-radius: 3px;\n  margin-top: 1em;\n  color: #9BA1A3;\n  padding: 0.4em;\n}\n.control-bar-container .filter-button {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.25em;\n  border: 1px solid #293844;\n}\n.control-bar-container .filter-button:hover {\n  cursor: pointer;\n  border: 1px solid #4F6373;\n  border-radius: 3px;\n}\n", ""]);
 
 	// exports
 
+
+/***/ },
+/* 210 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _filter = __webpack_require__(211);
+
+	// _____________________________________________
+
+	var filterReducer = function filterReducer() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? 'all' : arguments[0];
+	    var action = arguments[1];
+
+
+	    switch (action.type) {
+	        case _filter.ALL_ITEM_FILTER:
+	            console.log('filter is set to: ' + action.filter);
+	            return action.filter;
+	        case _filter.ACTIVE_ITEM_FILTER:
+	            console.log('filter is set to: ' + action.filter);
+	            return action.filter;
+	        case _filter.COMPLETED_ITEM_FILTER:
+	            console.log('filter is set to: ' + action.filter);
+	            return action.filter;
+	        default:
+	            return state;
+	    }
+	};
+
+	// _____________________________________________
+
+	module.exports = { filterReducer: filterReducer };
+
+	// create counter, use map and filter for remove and complete
+
+/***/ },
+/* 211 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var ALL_ITEM_FILTER = 'ALL_ITEM_FILTER';
+	var ACTIVE_ITEM_FILTER = 'ACTIVE_ITEM_FILTER';
+	var COMPLETED_ITEM_FILTER = 'COMPLETED_ITEM_FILTER';
+
+	// ________________________________________
+
+	var allItemFilter = function allItemFilter() {
+	  return {
+	    type: ALL_ITEM_FILTER,
+	    filter: 'all'
+	  };
+	};
+
+	var activeItemFilter = function activeItemFilter() {
+	  return {
+	    type: ACTIVE_ITEM_FILTER,
+	    filter: 'active'
+	  };
+	};
+
+	var completedItemFilter = function completedItemFilter() {
+	  return {
+	    type: COMPLETED_ITEM_FILTER,
+	    filter: 'completed'
+	  };
+	};
+
+	// _____________________________________________
+
+	module.exports = { ALL_ITEM_FILTER: ALL_ITEM_FILTER, allItemFilter: allItemFilter, ACTIVE_ITEM_FILTER: ACTIVE_ITEM_FILTER, activeItemFilter: activeItemFilter, COMPLETED_ITEM_FILTER: COMPLETED_ITEM_FILTER, completedItemFilter: completedItemFilter };
+
+/***/ },
+/* 212 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _superagent = __webpack_require__(199);
+
+	var _superagent2 = _interopRequireDefault(_superagent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var FETCH_ITEMS = 'FETCH_ITEMS';
+	var CLEAR_ITEMS = 'CLEAR_ITEMS';
+	var ADD_ITEM = 'ADD_ITEM';
+	var COMPLETE_ITEM = 'COMPLETE_ITEM';
+	var DELETE_ITEM = 'DELETE_ITEM';
+
+	// ________________________________________
+
+	var fetchItems = function fetchItems() {
+	  return function (dispatch) {
+	    _superagent2.default.get('/api/items').end(function (err, res) {
+	      dispatch({
+	        type: FETCH_ITEMS,
+	        items: res.body
+	      });
+	    });
+	  };
+	};
+
+	var addItem = function addItem(newItemName) {
+	  return function (dispatch) {
+	    _superagent2.default.post('/api/items').set('Content-Type', 'application/json').send({
+	      name: newItemName
+	    }).end(function (err, res) {
+	      dispatch({
+	        type: ADD_ITEM,
+	        newItem: res.body
+	      });
+	    });
+	  };
+	};
+
+	var clearItems = function clearItems() {
+	  return function (dispatch) {
+	    _superagent2.default.delete('/api/items').end(function (err, res) {
+	      dispatch({
+	        type: CLEAR_ITEMS
+	      });
+	    });
+	  };
+	};
+
+	var completeItem = function completeItem(itemId) {
+	  return function (dispatch) {
+	    _superagent2.default.put('/api/items/' + itemId).set('Content-Type', 'application/json').end(function (err, res) {
+	      dispatch({
+	        type: COMPLETE_ITEM,
+	        item: res.body
+	      });
+	    });
+	  };
+	};
+
+	var deleteItem = function deleteItem(itemId) {
+	  return function (dispatch) {
+	    _superagent2.default.delete('/api/items/' + itemId).set('Content-Type', 'application/json').end(function (err, res) {
+	      dispatch({
+	        type: DELETE_ITEM,
+	        item: res.body
+	      });
+	    });
+	  };
+	};
+
+	// _____________________________________________
+
+	module.exports = { FETCH_ITEMS: FETCH_ITEMS, fetchItems: fetchItems, CLEAR_ITEMS: CLEAR_ITEMS, clearItems: clearItems, ADD_ITEM: ADD_ITEM, addItem: addItem, COMPLETE_ITEM: COMPLETE_ITEM, completeItem: completeItem, DELETE_ITEM: DELETE_ITEM, deleteItem: deleteItem };
 
 /***/ }
 /******/ ]);

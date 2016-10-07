@@ -18,10 +18,15 @@ var ToDoList = React.createClass({
               <UserForm
                   addItem={this.props.addItem} clearList={this.props.clearList} />
               <ControlBar
-                items={this.props.items} />
+                items={this.props.items}
+                allItemFilter={this.props.allItemFilter}
+                activeItemFilter={this.props.activeItemFilter}
+                completedItemFilter={this.props.completedItemFilter} />
               <ListItemContainer
                   items={this.props.items}
-                  deleteItem={this.props.deleteItem} markComplete={this.props.markComplete} />
+                  deleteItem={this.props.deleteItem}
+                  markComplete={this.props.markComplete}
+                  filter={this.props.filter} />
             </div>
           </div>
       )
