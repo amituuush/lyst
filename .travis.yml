@@ -11,6 +11,6 @@ deploy:
   provider: heroku
   api_key:
     secure: kIdDWs94qReDPYbREXS6r5kEvxSSeXjA17anUA6WCJQ2Atmkpw6J101Lq7LF4cQksdZsPIYEuynu8S9SSyCJhpPsL7z0eFt38FajwaDte7bsMXwH9Ea90Tso2qcGhverhnnRESV3p8LLAdgWCLlXqvMvNsKmM/Q8B6aikPnNKFoBavTUqodBNubPX6KXrYYM9MF+bMZRsFnbR4yIivwfkYQErS3UkPIT3qfNH9Qf4PaIDh3e7Eb24nsbxGI5xLNThjc7eXYD7J7TZKOa/MxzeQNY67wsXxwvzZkvXZewb9ZZd8sWNm5SVpWl+qaWaIaVSKSfEwaYCSozpRNfh1/J4IrHr81BIrXsFoXt8LZCqNUwyPnoMTIzuVk0QMmLXGqrJhOpJS535nvTpygCk3Bq6ux0tKG32I8bt/v5mVGXKbmf4Q7aYlrIB/tOLaOzJA1iMG9PltUriJgx7zGLe9I6bVO9jR0frfw53HDwqVrgeTj416pgt7F4fmCh85zYsTVGaCFEKQ9aD+h6TxB47S7z+x7CPi1OaAA/0RMK4QYOMVA8dk2ijPHTiLvZ+qd+1TZQyjviSqRfO20PWUSw0v5Z0UVqMpBJ/6N3Pe1Feg3XJneUnVmBFu9nDApI3BjZy5uGETuik7zHvYRU4bqGrL6m+2P0Cr4xDtDKVq7Ggp/TtW0=
-  app: salty-shelf-54801
+  app: lyst-app
   on:
-    repo: amituuush/todo-list
+    repo: amituuush/lyst
