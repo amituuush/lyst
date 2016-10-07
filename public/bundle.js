@@ -71,7 +71,6 @@
 
 	// _____________________________________________
 
-	// add 'all', active, and completed filter options
 	// add clear completed button
 	// fix db on heroku
 	// add user auth
@@ -19713,7 +19712,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\n  font-family: 'Proxima Nova Soft', Helvetica, 'open-sans';\n  background: #293844;\n  -webkit-font-smoothing: antialiased;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: 'Proxima Nova Soft', Helvetica, 'open-sans';\n  background: #293844;\n  -webkit-font-smoothing: antialiased;\n  font-weight: 300;\n}\n", ""]);
 
 	// exports
 
@@ -21627,6 +21626,7 @@
 	var UserForm = __webpack_require__(190);
 	__webpack_require__(193);
 	var ControlBar = __webpack_require__(207);
+	var ItemsLeft = __webpack_require__(213);
 
 	var ToDoList = React.createClass({
 	  displayName: 'ToDoList',
@@ -21652,6 +21652,7 @@
 	          addItem: this.props.addItem, clearList: this.props.clearList }),
 	        React.createElement(ControlBar, {
 	          items: this.props.items,
+	          filter: this.props.filter,
 	          allItemFilter: this.props.allItemFilter,
 	          activeItemFilter: this.props.activeItemFilter,
 	          completedItemFilter: this.props.completedItemFilter }),
@@ -21659,7 +21660,9 @@
 	          items: this.props.items,
 	          deleteItem: this.props.deleteItem,
 	          markComplete: this.props.markComplete,
-	          filter: this.props.filter })
+	          filter: this.props.filter }),
+	        React.createElement(ItemsLeft, {
+	          items: this.props.items })
 	      )
 	    );
 	  }
@@ -21908,7 +21911,7 @@
 
 
 	// module
-	exports.push([module.id, "#container {\n  width: 100%;\n  text-align: center;\n}\n#container #content {\n  width: 95%;\n  margin: 2em auto 0 auto;\n  padding: 0.5em 0.5em 1em 0.5em;\n  box-shadow: 0px 0px 1px #000;\n}\nheader {\n  text-align: center;\n  color: #fff;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n@media only screen and (min-width: 500px) {\n  #container #content {\n    width: 28em;\n    margin: 2em auto 0 auto;\n    padding: 1.3em;\n  }\n}\n", ""]);
+	exports.push([module.id, "#container {\n  width: 100%;\n  text-align: center;\n}\n#container #content {\n  width: 95%;\n  margin: 2em auto 0 auto;\n  padding: 0.5em 0.5em 1em 0.5em;\n  box-shadow: 0px 0px 2px #000;\n  background: #314251;\n  border-radius: 15px;\n}\nheader {\n  text-align: center;\n  color: #fff;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n@media only screen and (min-width: 500px) {\n  #container #content {\n    width: 28em;\n    margin: 2em auto 0 auto;\n    padding: 1.3em;\n  }\n}\n", ""]);
 
 	// exports
 
@@ -23786,50 +23789,31 @@
 	__webpack_require__(208);
 
 	var ControlBar = React.createClass({
-	  displayName: 'ControlBar',
+	    displayName: 'ControlBar',
 
 
-	  render: function render() {
+	    render: function render() {
 
-	    var itemsLeft = this.props.items.filter(function (item) {
-	      return item.completed === false;
-	    });
-
-	    var itemsLeftText;
-
-	    if (itemsLeft.length > 1) {
-	      itemsLeftText = itemsLeft.length + ' items left';
-	    } else if (itemsLeft.length === 1) {
-	      itemsLeftText = itemsLeft.length + ' item left';
-	    } else {
-	      itemsLeftText = 'Woohoo! Time to relax!';
+	        return React.createElement(
+	            'div',
+	            { className: 'control-bar-container' },
+	            React.createElement(
+	                'div',
+	                { onClick: this.props.allItemFilter, className: this.props.filter === 'all' ? 'filter-button active-filter' : 'filter-button' },
+	                'All'
+	            ),
+	            React.createElement(
+	                'div',
+	                { onClick: this.props.activeItemFilter, className: this.props.filter === 'active' ? 'filter-button active-filter' : 'filter-button' },
+	                'Active'
+	            ),
+	            React.createElement(
+	                'div',
+	                { onClick: this.props.completedItemFilter, className: this.props.filter === 'completed' ? 'filter-button active-filter' : 'filter-button' },
+	                'Completed'
+	            )
+	        );
 	    }
-
-	    return React.createElement(
-	      'div',
-	      { className: 'control-bar-container' },
-	      React.createElement(
-	        'div',
-	        null,
-	        itemsLeftText
-	      ),
-	      React.createElement(
-	        'div',
-	        { onClick: this.props.allItemFilter, className: 'filter-button' },
-	        'All'
-	      ),
-	      React.createElement(
-	        'div',
-	        { onClick: this.props.activeItemFilter, className: 'filter-button' },
-	        'Active'
-	      ),
-	      React.createElement(
-	        'div',
-	        { onClick: this.props.completedItemFilter, className: 'filter-button' },
-	        'Completed'
-	      )
-	    );
-	  }
 	});
 
 	// _____________________________________________
@@ -23871,7 +23855,7 @@
 
 
 	// module
-	exports.push([module.id, ".control-bar-container {\n  width: 90%;\n  margin: 0 auto;\n  border-radius: 3px;\n  margin-top: 1em;\n  color: #9BA1A3;\n  padding: 0.4em;\n}\n.control-bar-container .filter-button {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.25em;\n  border: 1px solid #293844;\n}\n.control-bar-container .filter-button:hover {\n  cursor: pointer;\n  border: 1px solid #4F6373;\n  border-radius: 3px;\n}\n", ""]);
+	exports.push([module.id, ".control-bar-container {\n  width: 100%;\n  margin: 0 auto;\n  border-radius: 3px;\n  margin-top: 1em;\n  color: #9BA1A3;\n  padding: 0.4em;\n}\n.control-bar-container #items-left {\n  display: inline-block;\n  text-align: left;\n}\n.control-bar-container .filter-button {\n  display: inline-block;\n  margin-left: 1.5em;\n  padding: 0.25em;\n  border: 1px solid #314251;\n  position: relative;\n  left: -23px;\n}\n.control-bar-container .filter-button:hover {\n  cursor: pointer;\n  border: 1px solid #4F6373;\n  border-radius: 3px;\n}\n.control-bar-container .active-filter {\n  border: 1px solid #9BA1A3;\n  border-radius: 3px;\n}\n.control-bar-container .active-filter:hover {\n  border: 1px solid #9BA1A3;\n}\n", ""]);
 
 	// exports
 
@@ -24028,6 +24012,91 @@
 	// _____________________________________________
 
 	module.exports = { FETCH_ITEMS: FETCH_ITEMS, fetchItems: fetchItems, CLEAR_ITEMS: CLEAR_ITEMS, clearItems: clearItems, ADD_ITEM: ADD_ITEM, addItem: addItem, COMPLETE_ITEM: COMPLETE_ITEM, completeItem: completeItem, DELETE_ITEM: DELETE_ITEM, deleteItem: deleteItem };
+
+/***/ },
+/* 213 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	__webpack_require__(214);
+
+	var ItemsLeft = React.createClass({
+	  displayName: 'ItemsLeft',
+
+
+	  render: function render() {
+
+	    var itemsLeft = this.props.items.filter(function (item) {
+	      return item.completed === false;
+	    });
+
+	    var itemsLeftText;
+
+	    if (itemsLeft.length > 1) {
+	      itemsLeftText = itemsLeft.length + ' items left';
+	    } else if (itemsLeft.length === 1) {
+	      itemsLeftText = itemsLeft.length + ' item left';
+	    } else {
+	      itemsLeftText = 'Woohoo! Time to relax!';
+	    }
+
+	    return React.createElement(
+	      'div',
+	      { className: 'items-left-container' },
+	      React.createElement(
+	        'div',
+	        { id: 'items-left' },
+	        itemsLeftText
+	      )
+	    );
+	  }
+	});
+
+	// _____________________________________________
+
+	module.exports = ItemsLeft;
+
+/***/ },
+/* 214 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(215);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(162)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./items-left.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./items-left.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(161)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".items-left-container {\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 1em;\n  padding: 0.4em;\n}\n.items-left-container #items-left {\n  color: #9BA1A3;\n}\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);

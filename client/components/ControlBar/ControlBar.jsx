@@ -5,32 +5,16 @@ var ControlBar = React.createClass({
 
     render: function() {
 
-        var itemsLeft = this.props.items.filter(function(item) {
-          return item.completed === false;
-        })
-
-        var itemsLeftText;
-
-        if (itemsLeft.length > 1) {
-          itemsLeftText = itemsLeft.length + ' items left';
-        } else if (itemsLeft.length === 1) {
-          itemsLeftText = itemsLeft.length + ' item left';
-        } else {
-          itemsLeftText = 'Woohoo! Time to relax!';
-        }
-
-
         return (
             <div className="control-bar-container">
-                <div>{itemsLeftText}</div>
-              <div onClick={this.props.allItemFilter} className="filter-button">
-                  All
+                <div onClick={this.props.allItemFilter} className={this.props.filter === 'all' ? 'filter-button active-filter' : 'filter-button'}>
+                    All
                 </div>
-                <div onClick={this.props.activeItemFilter} className="filter-button">
-                  Active
+                <div onClick={this.props.activeItemFilter} className={this.props.filter === 'active' ? 'filter-button active-filter' : 'filter-button'}>
+                    Active
                 </div>
-                <div onClick={this.props.completedItemFilter} className="filter-button">
-                  Completed
+                <div onClick={this.props.completedItemFilter} className={this.props.filter === 'completed' ? 'filter-button active-filter' : 'filter-button'}>
+                   Completed
                 </div>
             </div>
         )

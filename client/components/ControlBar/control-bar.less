@@ -1,21 +1,37 @@
 .control-bar-container {
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   border-radius: 3px;
   margin-top: 1em;
   color: #9BA1A3;
   padding: 0.4em;
 
+  #items-left {
+      display: inline-block;
+      text-align: left;
+  }
+
   .filter-button {
     display: inline-block;
-    margin-left: 2em;
+    margin-left: 1.5em;
     padding: 0.25em;
-    border: 1px solid #293844;
+    border: 1px solid #314251;
+    position: relative;
+    left: -23px;
 
     &:hover {
       cursor: pointer;
       border: 1px solid #4F6373;
       border-radius: 3px;
     }
+  }
+
+  .active-filter {
+      border: 1px solid #9BA1A3;
+      border-radius: 3px;
+
+      &:hover {
+          border: 1px solid #9BA1A3;
+      }
   }
 }
