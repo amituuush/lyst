@@ -22,7 +22,7 @@ var ListItem = React.createClass({
                     </button>
 
                     <button onClick={this._handleCompleteItem} className='check-button'>
-                        <i className="fa fa-check-circle fa-4x"></i>
+                        <i className="fa fa-check-square fa-3x"></i>
                     </button>
 
                 </li>
