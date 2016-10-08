@@ -108,9 +108,6 @@ router.route('/items/:item_id')
     });
   });
 
-// -----------------------------------------------
-// -----------------------------------------------
-
 
 // REGISTER OUR ROUTES ----------------------
 // all of our routes will be prefixed with /api
