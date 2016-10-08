@@ -13,6 +13,8 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "mongoose": "^4.6.3",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth": "^1.0.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
