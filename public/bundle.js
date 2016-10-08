@@ -58,7 +58,7 @@
 
 	var App = _require2.App;
 
-	var _require3 = __webpack_require__(195);
+	var _require3 = __webpack_require__(210);
 
 	var store = _require3.store;
 	// _____________________________________________
@@ -21488,7 +21488,7 @@
 
 	var ReactRedux = __webpack_require__(163);
 
-	var _require = __webpack_require__(212);
+	var _require = __webpack_require__(185);
 
 	var fetchItems = _require.fetchItems;
 	var clearItems = _require.clearItems;
@@ -21497,15 +21497,15 @@
 	var deleteItem = _require.deleteItem;
 	var deleteCompletedItems = _require.deleteCompletedItems;
 
-	var _require2 = __webpack_require__(211);
+	var _require2 = __webpack_require__(191);
 
 	var allItemFilter = _require2.allItemFilter;
 	var activeItemFilter = _require2.activeItemFilter;
 	var completedItemFilter = _require2.completedItemFilter;
 
-	var ToDoListContainer = __webpack_require__(186);
+	var ToDoListContainer = __webpack_require__(192);
 
-	var _require3 = __webpack_require__(195);
+	var _require3 = __webpack_require__(210);
 
 	var store = _require3.store;
 
@@ -21623,477 +21623,99 @@
 	// the action that goes into dispatch function gets passed as the second argument to the reducer. See example below:
 
 /***/ },
-/* 185 */,
-/* 186 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var ListItemContainer = __webpack_require__(187);
-	var UserForm = __webpack_require__(190);
-	__webpack_require__(193);
-	var ControlBar = __webpack_require__(207);
-	var ItemsLeft = __webpack_require__(213);
+	var _superagent = __webpack_require__(186);
 
-	var ToDoList = React.createClass({
-	    displayName: 'ToDoList',
-
-
-	    componentWillMount: function componentWillMount() {
-	        this.props.fetchItems();
-	    },
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            { id: 'container' },
-	            React.createElement(
-	                'header',
-	                null,
-	                'Lyst'
-	            ),
-	            React.createElement(
-	                'div',
-	                { id: 'content' },
-	                React.createElement(UserForm, {
-	                    addItem: this.props.addItem, clearList: this.props.clearList }),
-	                React.createElement(ControlBar, {
-	                    items: this.props.items,
-	                    filter: this.props.filter,
-	                    allItemFilter: this.props.allItemFilter,
-	                    activeItemFilter: this.props.activeItemFilter,
-	                    completedItemFilter: this.props.completedItemFilter }),
-	                React.createElement(ListItemContainer, {
-	                    items: this.props.items,
-	                    deleteItem: this.props.deleteItem,
-	                    markComplete: this.props.markComplete,
-	                    filter: this.props.filter }),
-	                React.createElement(ItemsLeft, {
-	                    items: this.props.items,
-	                    deleteCompletedItems: this.props.deleteCompletedItems })
-	            )
-	        );
-	    }
-	});
-
-	module.exports = ToDoList;
-
-/***/ },
-/* 187 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var ListItem = __webpack_require__(204);
-	__webpack_require__(188);
-
-	// __________________________________________
-
-	var ListItemContainer = React.createClass({
-	    displayName: 'ListItemContainer',
-
-	    render: function render() {
-
-	        switch (this.props.filter) {
-	            case 'all':
-	                var items = this.props.items.map(function (arrayItem) {
-	                    return React.createElement(ListItem, {
-	                        deleteItem: this.props.deleteItem,
-	                        key: arrayItem._id,
-	                        item: arrayItem,
-	                        markComplete: this.props.markComplete });
-	                }, this);
-	                break;
-
-	            case 'active':
-	                var filteredItems = this.props.items.filter(function (item) {
-	                    return item.completed === false;
-	                });
-	                var items = filteredItems.map(function (arrayItem) {
-	                    return React.createElement(ListItem, {
-	                        deleteItem: this.props.deleteItem,
-	                        key: arrayItem._id,
-	                        item: arrayItem,
-	                        markComplete: this.props.markComplete });
-	                }, this);
-	                break;
-
-	            case 'completed':
-	                var filteredItems = this.props.items.filter(function (item) {
-	                    return item.completed === true;
-	                });
-	                var items = filteredItems.map(function (arrayItem) {
-	                    return React.createElement(ListItem, {
-	                        deleteItem: this.props.deleteItem,
-	                        key: arrayItem._id,
-	                        item: arrayItem,
-	                        markComplete: this.props.markComplete });
-	                }, this);
-	                break;
-	        }
-
-	        return React.createElement(
-	            'ul',
-	            { className: 'list-ul' },
-	            items
-	        );
-	    }
-	});
-
-	// _____________________________________________
-
-	module.exports = ListItemContainer;
-
-/***/ },
-/* 188 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(189);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(162)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-item-container.less", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-item-container.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 189 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(161)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".list-ul {\n  padding: 0;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 190 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-	__webpack_require__(191);
-
-	// _________________________________________
-
-	var UserForm = React.createClass({
-	    displayName: 'UserForm',
-
-	    getInitialState: function getInitialState() {
-	        return { item: '' };
-	    },
-
-	    _handleSubmit: function _handleSubmit(event) {
-	        event.preventDefault();
-	        if (this.state.item) {
-	            this.props.addItem(this.state.item);
-	        }
-	        this.setState({
-	            item: ''
-	        });
-	    },
-
-	    _handleNumberChange: function _handleNumberChange(event) {
-	        this.setState({ item: event.target.value });
-	    },
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(
-	                'form',
-	                { onSubmit: this._handleSubmit },
-	                React.createElement(
-	                    'div',
-	                    { onClick: this.props.clearList, className: 'reset-list' },
-	                    React.createElement('i', { className: 'fa fa-trash-o fa-lg' })
-	                ),
-	                React.createElement('input', { type: 'text', onChange: this._handleNumberChange, value: this.state.item, className: 'item-input', placeholder: 'What needs to get done?' }),
-	                React.createElement(
-	                    'button',
-	                    { type: 'submit', value: 'Add item', className: 'add-item' },
-	                    React.createElement('i', { className: 'fa fa-plus fa-3x' })
-	                )
-	            )
-	        );
-	    }
-	});
-
-	// _____________________________________________
-
-	module.exports = UserForm;
-
-/***/ },
-/* 191 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(192);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(162)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./user-form.less", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./user-form.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 192 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(161)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\nbutton.add-item {\n  background: transparent;\n  border: none;\n  outline: none;\n  width: 40px;\n  height: 40px;\n  position: relative;\n  top: 13px;\n  left: 10px;\n}\nbutton.add-item:hover {\n  cursor: pointer;\n}\nbutton.add-item .fa-plus {\n  color: #3FB083;\n  position: relative;\n  bottom: 6px;\n  right: 7px;\n}\nbutton.add-item .fa-plus:hover {\n  color: #52c195;\n}\n.reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.reset-list:hover {\n  cursor: pointer;\n}\n.reset-list .fa-trash-o {\n  color: #962D2D;\n}\n.reset-list .fa-trash-o:hover {\n  color: #b13535;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 193 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(194);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(162)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./to-do-list-container.less", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./to-do-list-container.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 194 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(161)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "#container {\n  width: 100%;\n  text-align: center;\n}\n#container #content {\n  width: 95%;\n  margin: 2em auto 0 auto;\n  padding: 0.5em 0.5em 1em 0.5em;\n  box-shadow: 0px 0px 2px #000;\n  background: #314251;\n  border-radius: 15px;\n}\nheader {\n  text-align: center;\n  color: #fff;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n@media only screen and (min-width: 500px) {\n  #container #content {\n    width: 28em;\n    margin: 2em auto 0 auto;\n    padding: 1.3em;\n  }\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 195 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _redux = __webpack_require__(169);
-
-	var _reduxThunk = __webpack_require__(198);
-
-	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-	var _reducers = __webpack_require__(196);
+	var _superagent2 = _interopRequireDefault(_superagent);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var redux = __webpack_require__(169);
-	// var createStore = redux.createStore;
-	// import { createStore } from 'redux';
+	var FETCH_ITEMS = 'FETCH_ITEMS';
+	var CLEAR_ITEMS = 'CLEAR_ITEMS';
+	var ADD_ITEM = 'ADD_ITEM';
+	var COMPLETE_ITEM = 'COMPLETE_ITEM';
+	var DELETE_ITEM = 'DELETE_ITEM';
+	var DELETE_COMPLETED_ITEMS = 'DELETE_COMPLETED_ITEMS';
 
-	// _____________________________________________
+	// ________________________________________
 
-	// const finalCreateStore = compose(
-	//   window.devToolsExtension ? window.devToolsExtension() : f => f
-	// )(createStore);
-
-	var logger = function logger(store) {
-	  return function (next) {
-	    return function (action) {
-	      console.log('action fired', action);
-	      next(action);
-	    };
+	var fetchItems = function fetchItems() {
+	  return function (dispatch) {
+	    _superagent2.default.get('/api/items').end(function (err, res) {
+	      dispatch({
+	        type: FETCH_ITEMS,
+	        items: res.body
+	      });
+	    });
 	  };
 	};
 
-	var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, logger);
-
-	// const store = finalCreateStore(appReducer, middleware);
-
-	var store = (0, _redux.createStore)(_reducers.appReducer, (0, _redux.compose)(middleware, window.devToolsExtension ? window.devToolsExtension() : function (f) {
-	  return f;
-	}));
-
-	var unsubscribe = store.subscribe(function () {
-	  console.log('store has been updated. Latest store state:', store.getState());
-	});
-
-	// _____________________________________________
-
-	module.exports = { store: store };
-
-	// _____________________________________________
-
-	// Redux is an attempt to consolidate the “inputs” to that function in one place (the store), so that you can guarantee what the app’s view should look like (the output) at any time, given the state (the input) and the react components (the function)
-
-/***/ },
-/* 196 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _require = __webpack_require__(169);
-
-	var combineReducers = _require.combineReducers;
-
-	var _require2 = __webpack_require__(197);
-
-	var itemReducer = _require2.itemReducer;
-
-	var _require3 = __webpack_require__(210);
-
-	var filterReducer = _require3.filterReducer;
-
-
-	var appReducer = combineReducers({
-	    items: itemReducer,
-	    filter: filterReducer
-	});
-
-	module.exports = { appReducer: appReducer };
-
-	// store = {
-	//   dispatch: function(action) {
-	//     this.state = appReducer(this.state, action)
-	//   }
-	// }
-
-	// This is a reducer, a pure function with (state, action) => state signature.
-	// It describes how an action transforms the state into the next state.
-	//
-	// The shape of the state is up to you: it can be a primitive, an array, an object,
-	// or even an Immutable.js data structure. The only important part is that you should
-	// not mutate the state object, but return a new object if the state changes.
-
-	// making sure bundle is actually being included when deploying to bundle
-
-	// dont commit bundle on local version, but have it on heroku, let CI server create bundle and push to heroku
-	// dont push bundle to heroku, let CI server do that, just push to github
-
-/***/ },
-/* 197 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _items = __webpack_require__(212);
-
-	var itemReducer = function itemReducer() {
-	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-	    var action = arguments[1];
-
-
-	    switch (action.type) {
-	        case _items.FETCH_ITEMS:
-	            return action.items;
-	        case _items.ADD_ITEM:
-	            return state.concat(action.newItem);
-	        case _items.CLEAR_ITEMS:
-	            return [];
-	        case _items.COMPLETE_ITEM:
-	            var newState = state.map(function (item) {
-	                if (item._id === action.item._id) {
-	                    item.completed = true;
-	                }
-	                return item;
-	            });
-	            return newState;
-	        case _items.DELETE_ITEM:
-	            var newState = state.filter(function (item) {
-	                return item._id !== action.item._id;
-	            });
-	            return newState;
-	        default:
-	            return state;
-	    }
+	var addItem = function addItem(newItemName) {
+	  return function (dispatch) {
+	    _superagent2.default.post('/api/items').set('Content-Type', 'application/json').send({
+	      name: newItemName
+	    }).end(function (err, res) {
+	      dispatch({
+	        type: ADD_ITEM,
+	        newItem: res.body
+	      });
+	    });
+	  };
 	};
 
-	module.exports = { itemReducer: itemReducer };
-
-/***/ },
-/* 198 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	exports.__esModule = true;
-	function createThunkMiddleware(extraArgument) {
-	  return function (_ref) {
-	    var dispatch = _ref.dispatch;
-	    var getState = _ref.getState;
-	    return function (next) {
-	      return function (action) {
-	        if (typeof action === 'function') {
-	          return action(dispatch, getState, extraArgument);
-	        }
-
-	        return next(action);
-	      };
-	    };
+	var clearItems = function clearItems() {
+	  return function (dispatch) {
+	    _superagent2.default.delete('/api/items').end(function (err, res) {
+	      dispatch({
+	        type: CLEAR_ITEMS
+	      });
+	    });
 	  };
-	}
+	};
 
-	var thunk = createThunkMiddleware();
-	thunk.withExtraArgument = createThunkMiddleware;
+	var completeItem = function completeItem(itemId) {
+	  return function (dispatch) {
+	    _superagent2.default.put('/api/items/' + itemId).set('Content-Type', 'application/json').end(function (err, res) {
+	      dispatch({
+	        type: COMPLETE_ITEM,
+	        item: res.body
+	      });
+	    });
+	  };
+	};
 
-	exports['default'] = thunk;
+	var deleteItem = function deleteItem(itemId) {
+	  return function (dispatch) {
+	    _superagent2.default.delete('/api/items/' + itemId).set('Content-Type', 'application/json').end(function (err, res) {
+	      dispatch({
+	        type: DELETE_ITEM,
+	        item: res.body
+	      });
+	    });
+	  };
+	};
+
+	var deleteCompletedItems = function deleteCompletedItems() {
+	  return function (dispatch) {
+	    _superagent2.default.delete('/api/items/completed').end(function (err, res) {
+	      dispatch({
+	        type: DELETE_COMPLETED_ITEMS,
+	        items: res.body
+	      });
+	    });
+	  };
+	};
+
+	// _____________________________________________
+
+	module.exports = { FETCH_ITEMS: FETCH_ITEMS, fetchItems: fetchItems, CLEAR_ITEMS: CLEAR_ITEMS, clearItems: clearItems, ADD_ITEM: ADD_ITEM, addItem: addItem, COMPLETE_ITEM: COMPLETE_ITEM, completeItem: completeItem, DELETE_ITEM: DELETE_ITEM, deleteItem: deleteItem, DELETE_COMPLETED_ITEMS: DELETE_COMPLETED_ITEMS, deleteCompletedItems: deleteCompletedItems };
 
 /***/ },
-/* 199 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -22110,9 +21732,9 @@
 	  root = this;
 	}
 
-	var Emitter = __webpack_require__(200);
-	var requestBase = __webpack_require__(201);
-	var isObject = __webpack_require__(202);
+	var Emitter = __webpack_require__(187);
+	var requestBase = __webpack_require__(188);
+	var isObject = __webpack_require__(189);
 
 	/**
 	 * Noop.
@@ -22124,7 +21746,7 @@
 	 * Expose `request`.
 	 */
 
-	var request = module.exports = __webpack_require__(203).bind(null, Request);
+	var request = module.exports = __webpack_require__(190).bind(null, Request);
 
 	/**
 	 * Determine XHR.
@@ -23075,7 +22697,7 @@
 
 
 /***/ },
-/* 200 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -23244,13 +22866,13 @@
 
 
 /***/ },
-/* 201 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(202);
+	var isObject = __webpack_require__(189);
 
 	/**
 	 * Clear previous timeout.
@@ -23622,7 +23244,7 @@
 
 
 /***/ },
-/* 202 */
+/* 189 */
 /***/ function(module, exports) {
 
 	/**
@@ -23641,7 +23263,7 @@
 
 
 /***/ },
-/* 203 */
+/* 190 */
 /***/ function(module, exports) {
 
 	// The node and browser modules expose versions of this with the
@@ -23679,13 +23301,173 @@
 
 
 /***/ },
-/* 204 */
+/* 191 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var ALL_ITEM_FILTER = 'ALL_ITEM_FILTER';
+	var ACTIVE_ITEM_FILTER = 'ACTIVE_ITEM_FILTER';
+	var COMPLETED_ITEM_FILTER = 'COMPLETED_ITEM_FILTER';
+
+	// ________________________________________
+
+	var allItemFilter = function allItemFilter() {
+	  return {
+	    type: ALL_ITEM_FILTER,
+	    filter: 'all'
+	  };
+	};
+
+	var activeItemFilter = function activeItemFilter() {
+	  return {
+	    type: ACTIVE_ITEM_FILTER,
+	    filter: 'active'
+	  };
+	};
+
+	var completedItemFilter = function completedItemFilter() {
+	  return {
+	    type: COMPLETED_ITEM_FILTER,
+	    filter: 'completed'
+	  };
+	};
+
+	// _____________________________________________
+
+	module.exports = { ALL_ITEM_FILTER: ALL_ITEM_FILTER, allItemFilter: allItemFilter, ACTIVE_ITEM_FILTER: ACTIVE_ITEM_FILTER, activeItemFilter: activeItemFilter, COMPLETED_ITEM_FILTER: COMPLETED_ITEM_FILTER, completedItemFilter: completedItemFilter };
+
+/***/ },
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	__webpack_require__(205);
+	var ListItemContainer = __webpack_require__(193);
+	var UserForm = __webpack_require__(199);
+	__webpack_require__(202);
+	var ControlBar = __webpack_require__(204);
+	var ItemsLeft = __webpack_require__(207);
+
+	var ToDoList = React.createClass({
+	    displayName: 'ToDoList',
+
+
+	    componentWillMount: function componentWillMount() {
+	        this.props.fetchItems();
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { id: 'container' },
+	            React.createElement(
+	                'header',
+	                null,
+	                'Lyst'
+	            ),
+	            React.createElement(
+	                'div',
+	                { id: 'content' },
+	                React.createElement(UserForm, {
+	                    addItem: this.props.addItem, clearList: this.props.clearList }),
+	                React.createElement(ControlBar, {
+	                    items: this.props.items,
+	                    filter: this.props.filter,
+	                    allItemFilter: this.props.allItemFilter,
+	                    activeItemFilter: this.props.activeItemFilter,
+	                    completedItemFilter: this.props.completedItemFilter }),
+	                React.createElement(ListItemContainer, {
+	                    items: this.props.items,
+	                    deleteItem: this.props.deleteItem,
+	                    markComplete: this.props.markComplete,
+	                    filter: this.props.filter }),
+	                React.createElement(ItemsLeft, {
+	                    items: this.props.items,
+	                    deleteCompletedItems: this.props.deleteCompletedItems })
+	            )
+	        );
+	    }
+	});
+
+	module.exports = ToDoList;
+
+/***/ },
+/* 193 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var ListItem = __webpack_require__(194);
+	__webpack_require__(197);
+
+	// __________________________________________
+
+	var ListItemContainer = React.createClass({
+	    displayName: 'ListItemContainer',
+
+	    render: function render() {
+
+	        switch (this.props.filter) {
+	            case 'all':
+	                var items = this.props.items.map(function (arrayItem) {
+	                    return React.createElement(ListItem, {
+	                        deleteItem: this.props.deleteItem,
+	                        key: arrayItem._id,
+	                        item: arrayItem,
+	                        markComplete: this.props.markComplete });
+	                }, this);
+	                break;
+
+	            case 'active':
+	                var filteredItems = this.props.items.filter(function (item) {
+	                    return item.completed === false;
+	                });
+	                var items = filteredItems.map(function (arrayItem) {
+	                    return React.createElement(ListItem, {
+	                        deleteItem: this.props.deleteItem,
+	                        key: arrayItem._id,
+	                        item: arrayItem,
+	                        markComplete: this.props.markComplete });
+	                }, this);
+	                break;
+
+	            case 'completed':
+	                var filteredItems = this.props.items.filter(function (item) {
+	                    return item.completed === true;
+	                });
+	                var items = filteredItems.map(function (arrayItem) {
+	                    return React.createElement(ListItem, {
+	                        deleteItem: this.props.deleteItem,
+	                        key: arrayItem._id,
+	                        item: arrayItem,
+	                        markComplete: this.props.markComplete });
+	                }, this);
+	                break;
+	        }
+
+	        return React.createElement(
+	            'ul',
+	            { className: 'list-ul' },
+	            items
+	        );
+	    }
+	});
+
+	// _____________________________________________
+
+	module.exports = ListItemContainer;
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	__webpack_require__(195);
 
 	var ListItem = React.createClass({
 	    displayName: 'ListItem',
@@ -23727,13 +23509,13 @@
 	module.exports = ListItem;
 
 /***/ },
-/* 205 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(206);
+	var content = __webpack_require__(196);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(162)(content, {});
@@ -23753,7 +23535,7 @@
 	}
 
 /***/ },
-/* 206 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(161)();
@@ -23767,13 +23549,192 @@
 
 
 /***/ },
-/* 207 */
+/* 197 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(198);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(162)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-item-container.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-item-container.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 198 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(161)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".list-ul {\n  padding: 0;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	__webpack_require__(208);
+	__webpack_require__(200);
+
+	// _________________________________________
+
+	var UserForm = React.createClass({
+	    displayName: 'UserForm',
+
+	    getInitialState: function getInitialState() {
+	        return { item: '' };
+	    },
+
+	    _handleSubmit: function _handleSubmit(event) {
+	        event.preventDefault();
+	        if (this.state.item) {
+	            this.props.addItem(this.state.item);
+	        }
+	        this.setState({
+	            item: ''
+	        });
+	    },
+
+	    _handleNumberChange: function _handleNumberChange(event) {
+	        this.setState({ item: event.target.value });
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'form',
+	                { onSubmit: this._handleSubmit },
+	                React.createElement(
+	                    'div',
+	                    { onClick: this.props.clearList, className: 'reset-list' },
+	                    React.createElement('i', { className: 'fa fa-trash-o fa-lg' })
+	                ),
+	                React.createElement('input', { type: 'text', onChange: this._handleNumberChange, value: this.state.item, className: 'item-input', placeholder: 'What needs to get done?' }),
+	                React.createElement(
+	                    'button',
+	                    { type: 'submit', value: 'Add item', className: 'add-item' },
+	                    React.createElement('i', { className: 'fa fa-plus fa-3x' })
+	                )
+	            )
+	        );
+	    }
+	});
+
+	// _____________________________________________
+
+	module.exports = UserForm;
+
+/***/ },
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(201);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(162)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./user-form.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./user-form.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(161)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\nbutton.add-item {\n  background: transparent;\n  border: none;\n  outline: none;\n  width: 40px;\n  height: 40px;\n  position: relative;\n  top: 13px;\n  left: 10px;\n}\nbutton.add-item:hover {\n  cursor: pointer;\n}\nbutton.add-item .fa-plus {\n  color: #3FB083;\n  position: relative;\n  bottom: 6px;\n  right: 7px;\n}\nbutton.add-item .fa-plus:hover {\n  color: #52c195;\n}\n.reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.reset-list:hover {\n  cursor: pointer;\n}\n.reset-list .fa-trash-o {\n  color: #962D2D;\n}\n.reset-list .fa-trash-o:hover {\n  color: #b13535;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(203);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(162)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./to-do-list-container.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./to-do-list-container.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 203 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(161)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "#container {\n  width: 100%;\n  text-align: center;\n}\n#container #content {\n  width: 95%;\n  margin: 2em auto 0 auto;\n  padding: 0.5em 0.5em 1em 0.5em;\n  box-shadow: 0px 0px 2px #000;\n  background: #314251;\n  border-radius: 15px;\n}\nheader {\n  text-align: center;\n  color: #fff;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n@media only screen and (min-width: 500px) {\n  #container #content {\n    width: 28em;\n    margin: 2em auto 0 auto;\n    padding: 1.3em;\n  }\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 204 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	__webpack_require__(205);
 
 	var ControlBar = React.createClass({
 	    displayName: 'ControlBar',
@@ -23808,13 +23769,13 @@
 	module.exports = ControlBar;
 
 /***/ },
-/* 208 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(209);
+	var content = __webpack_require__(206);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(162)(content, {});
@@ -23834,7 +23795,7 @@
 	}
 
 /***/ },
-/* 209 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(161)();
@@ -23848,12 +23809,271 @@
 
 
 /***/ },
+/* 207 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	__webpack_require__(208);
+
+	var ItemsLeft = React.createClass({
+	    displayName: 'ItemsLeft',
+
+
+	    render: function render() {
+
+	        var itemsLeft = this.props.items.filter(function (item) {
+	            return item.completed === false;
+	        });
+
+	        var itemsLeftText;
+
+	        if (itemsLeft.length > 1) {
+	            itemsLeftText = itemsLeft.length + ' items left';
+	        } else if (itemsLeft.length === 1) {
+	            itemsLeftText = itemsLeft.length + ' item left';
+	        } else {
+	            itemsLeftText = 'Woohoo! Time to relax!';
+	        }
+
+	        return React.createElement(
+	            'div',
+	            { className: 'items-left-container' },
+	            React.createElement(
+	                'div',
+	                { id: 'items-left' },
+	                itemsLeftText
+	            ),
+	            React.createElement(
+	                'div',
+	                { id: 'clear-completed', onClick: this.props.deleteCompletedItems },
+	                'Clear completed'
+	            )
+	        );
+	    }
+	});
+
+	// _____________________________________________
+
+	module.exports = ItemsLeft;
+
+/***/ },
+/* 208 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(209);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(162)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./items-left.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./items-left.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 209 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(161)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".items-left-container {\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 1em;\n  padding: 0.5em 0.5em 1em 0em;\n}\n.items-left-container #items-left {\n  color: #9BA1A3;\n  display: inline-block;\n  float: left;\n}\n.items-left-container #clear-completed {\n  display: inline-block;\n  color: #9BA1A3;\n  float: right;\n}\n.items-left-container #clear-completed:hover {\n  cursor: pointer;\n  text-decoration: underline;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
 /* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _filter = __webpack_require__(211);
+	var _redux = __webpack_require__(169);
+
+	var _reduxThunk = __webpack_require__(211);
+
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+	var _reducers = __webpack_require__(212);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var redux = __webpack_require__(169);
+	// var createStore = redux.createStore;
+	// import { createStore } from 'redux';
+
+	// _____________________________________________
+
+	// const finalCreateStore = compose(
+	//   window.devToolsExtension ? window.devToolsExtension() : f => f
+	// )(createStore);
+
+	var logger = function logger(store) {
+	  return function (next) {
+	    return function (action) {
+	      console.log('action fired', action);
+	      next(action);
+	    };
+	  };
+	};
+
+	var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, logger);
+
+	// const store = finalCreateStore(appReducer, middleware);
+
+	var store = (0, _redux.createStore)(_reducers.appReducer, (0, _redux.compose)(middleware, window.devToolsExtension ? window.devToolsExtension() : function (f) {
+	  return f;
+	}));
+
+	var unsubscribe = store.subscribe(function () {
+	  console.log('store has been updated. Latest store state:', store.getState());
+	});
+
+	// _____________________________________________
+
+	module.exports = { store: store };
+
+	// _____________________________________________
+
+	// Redux is an attempt to consolidate the “inputs” to that function in one place (the store), so that you can guarantee what the app’s view should look like (the output) at any time, given the state (the input) and the react components (the function)
+
+/***/ },
+/* 211 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	function createThunkMiddleware(extraArgument) {
+	  return function (_ref) {
+	    var dispatch = _ref.dispatch;
+	    var getState = _ref.getState;
+	    return function (next) {
+	      return function (action) {
+	        if (typeof action === 'function') {
+	          return action(dispatch, getState, extraArgument);
+	        }
+
+	        return next(action);
+	      };
+	    };
+	  };
+	}
+
+	var thunk = createThunkMiddleware();
+	thunk.withExtraArgument = createThunkMiddleware;
+
+	exports['default'] = thunk;
+
+/***/ },
+/* 212 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _require = __webpack_require__(169);
+
+	var combineReducers = _require.combineReducers;
+
+	var _require2 = __webpack_require__(213);
+
+	var itemReducer = _require2.itemReducer;
+
+	var _require3 = __webpack_require__(214);
+
+	var filterReducer = _require3.filterReducer;
+
+
+	var appReducer = combineReducers({
+	    items: itemReducer,
+	    filter: filterReducer
+	});
+
+	module.exports = { appReducer: appReducer };
+
+	// store = {
+	//   dispatch: function(action) {
+	//     this.state = appReducer(this.state, action)
+	//   }
+	// }
+
+	// This is a reducer, a pure function with (state, action) => state signature.
+	// It describes how an action transforms the state into the next state.
+	//
+	// The shape of the state is up to you: it can be a primitive, an array, an object,
+	// or even an Immutable.js data structure. The only important part is that you should
+	// not mutate the state object, but return a new object if the state changes.
+
+	// making sure bundle is actually being included when deploying to bundle
+
+	// dont commit bundle on local version, but have it on heroku, let CI server create bundle and push to heroku
+	// dont push bundle to heroku, let CI server do that, just push to github
+
+/***/ },
+/* 213 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _items = __webpack_require__(185);
+
+	var itemReducer = function itemReducer() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	    var action = arguments[1];
+
+
+	    switch (action.type) {
+	        case _items.FETCH_ITEMS:
+	            return action.items;
+	        case _items.ADD_ITEM:
+	            return state.concat(action.newItem);
+	        case _items.CLEAR_ITEMS:
+	            return [];
+	        case _items.COMPLETE_ITEM:
+	            var newState = state.map(function (item) {
+	                if (item._id === action.item._id) {
+	                    item.completed = true;
+	                }
+	                return item;
+	            });
+	            return newState;
+	        case _items.DELETE_ITEM:
+	            var newState = state.filter(function (item) {
+	                return item._id !== action.item._id;
+	            });
+	            return newState;
+	        case _items.DELETE_COMPLETED_ITEMS:
+	            return action.items;
+	        default:
+	            return state;
+	    }
+	};
+
+	module.exports = { itemReducer: itemReducer };
+
+/***/ },
+/* 214 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _filter = __webpack_require__(191);
 
 	var filterReducer = function filterReducer() {
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? 'all' : arguments[0];
@@ -23876,225 +24096,6 @@
 	};
 
 	module.exports = { filterReducer: filterReducer };
-
-/***/ },
-/* 211 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	var ALL_ITEM_FILTER = 'ALL_ITEM_FILTER';
-	var ACTIVE_ITEM_FILTER = 'ACTIVE_ITEM_FILTER';
-	var COMPLETED_ITEM_FILTER = 'COMPLETED_ITEM_FILTER';
-
-	// ________________________________________
-
-	var allItemFilter = function allItemFilter() {
-	  return {
-	    type: ALL_ITEM_FILTER,
-	    filter: 'all'
-	  };
-	};
-
-	var activeItemFilter = function activeItemFilter() {
-	  return {
-	    type: ACTIVE_ITEM_FILTER,
-	    filter: 'active'
-	  };
-	};
-
-	var completedItemFilter = function completedItemFilter() {
-	  return {
-	    type: COMPLETED_ITEM_FILTER,
-	    filter: 'completed'
-	  };
-	};
-
-	// _____________________________________________
-
-	module.exports = { ALL_ITEM_FILTER: ALL_ITEM_FILTER, allItemFilter: allItemFilter, ACTIVE_ITEM_FILTER: ACTIVE_ITEM_FILTER, activeItemFilter: activeItemFilter, COMPLETED_ITEM_FILTER: COMPLETED_ITEM_FILTER, completedItemFilter: completedItemFilter };
-
-/***/ },
-/* 212 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _superagent = __webpack_require__(199);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var FETCH_ITEMS = 'FETCH_ITEMS';
-	var CLEAR_ITEMS = 'CLEAR_ITEMS';
-	var ADD_ITEM = 'ADD_ITEM';
-	var COMPLETE_ITEM = 'COMPLETE_ITEM';
-	var DELETE_ITEM = 'DELETE_ITEM';
-	var DELETE_COMPLETED_ITEMS = 'DELETE_COMPLETED_ITEMS';
-
-	// ________________________________________
-
-	var fetchItems = function fetchItems() {
-	  return function (dispatch) {
-	    _superagent2.default.get('/api/items').end(function (err, res) {
-	      dispatch({
-	        type: FETCH_ITEMS,
-	        items: res.body
-	      });
-	    });
-	  };
-	};
-
-	var addItem = function addItem(newItemName) {
-	  return function (dispatch) {
-	    _superagent2.default.post('/api/items').set('Content-Type', 'application/json').send({
-	      name: newItemName
-	    }).end(function (err, res) {
-	      dispatch({
-	        type: ADD_ITEM,
-	        newItem: res.body
-	      });
-	    });
-	  };
-	};
-
-	var clearItems = function clearItems() {
-	  return function (dispatch) {
-	    _superagent2.default.delete('/api/items').end(function (err, res) {
-	      dispatch({
-	        type: CLEAR_ITEMS
-	      });
-	    });
-	  };
-	};
-
-	var completeItem = function completeItem(itemId) {
-	  return function (dispatch) {
-	    _superagent2.default.put('/api/items/' + itemId).set('Content-Type', 'application/json').end(function (err, res) {
-	      dispatch({
-	        type: COMPLETE_ITEM,
-	        item: res.body
-	      });
-	    });
-	  };
-	};
-
-	var deleteItem = function deleteItem(itemId) {
-	  return function (dispatch) {
-	    _superagent2.default.delete('/api/items/' + itemId).set('Content-Type', 'application/json').end(function (err, res) {
-	      dispatch({
-	        type: DELETE_ITEM,
-	        item: res.body
-	      });
-	    });
-	  };
-	};
-
-	var deleteCompletedItems = function deleteCompletedItems() {
-	  console.log('deleting completed items!');
-	  return function (dispatch) {
-	    _superagent2.default.delete('/api/items').end(function (err, res) {
-	      dispatch({
-	        type: DELETE_COMPLETED_ITEMS
-	      });
-	    });
-	  };
-	};
-
-	// _____________________________________________
-
-	module.exports = { FETCH_ITEMS: FETCH_ITEMS, fetchItems: fetchItems, CLEAR_ITEMS: CLEAR_ITEMS, clearItems: clearItems, ADD_ITEM: ADD_ITEM, addItem: addItem, COMPLETE_ITEM: COMPLETE_ITEM, completeItem: completeItem, DELETE_ITEM: DELETE_ITEM, deleteItem: deleteItem, DELETE_COMPLETED_ITEMS: DELETE_COMPLETED_ITEMS, deleteCompletedItems: deleteCompletedItems };
-
-/***/ },
-/* 213 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-	__webpack_require__(214);
-
-	var ItemsLeft = React.createClass({
-	  displayName: 'ItemsLeft',
-
-
-	  render: function render() {
-
-	    var itemsLeft = this.props.items.filter(function (item) {
-	      return item.completed === false;
-	    });
-
-	    var itemsLeftText;
-
-	    if (itemsLeft.length > 1) {
-	      itemsLeftText = itemsLeft.length + ' items left';
-	    } else if (itemsLeft.length === 1) {
-	      itemsLeftText = itemsLeft.length + ' item left';
-	    } else {
-	      itemsLeftText = 'Woohoo! Time to relax!';
-	    }
-
-	    return React.createElement(
-	      'div',
-	      { className: 'items-left-container' },
-	      React.createElement(
-	        'div',
-	        { id: 'items-left' },
-	        itemsLeftText
-	      ),
-	      React.createElement(
-	        'div',
-	        { id: 'clear-completed', onClick: this.props.deleteCompletedItems },
-	        'Clear completed'
-	      )
-	    );
-	  }
-	});
-
-	// _____________________________________________
-
-	module.exports = ItemsLeft;
-
-/***/ },
-/* 214 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(215);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(162)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./items-left.less", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./items-left.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 215 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(161)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".items-left-container {\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 1em;\n  padding: 0.4em;\n}\n.items-left-container #items-left {\n  color: #9BA1A3;\n}\n.items-left-container #clear-completed:hover {\n  cursor: pointer;\n}\n", ""]);
-
-	// exports
-
 
 /***/ }
 /******/ ]);

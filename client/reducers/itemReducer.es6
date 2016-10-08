@@ -1,4 +1,4 @@
-import {FETCH_ITEMS, CLEAR_ITEMS, ADD_ITEM, COMPLETE_ITEM, DELETE_ITEM} from '../actions/items'
+import {FETCH_ITEMS, CLEAR_ITEMS, ADD_ITEM, COMPLETE_ITEM, DELETE_ITEM, DELETE_COMPLETED_ITEMS} from '../actions/items'
 
 var itemReducer = function(state = [], action) {
 
@@ -22,6 +22,8 @@ var itemReducer = function(state = [], action) {
                 return item._id !== action.item._id;
             })
             return newState;
+        case DELETE_COMPLETED_ITEMS:
+            return action.items;
         default:
             return state;
     }

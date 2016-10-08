@@ -75,14 +75,14 @@ var deleteItem = function(itemId) {
 }
 
 var deleteCompletedItems = function() {
-    console.log('deleting completed items!');
   return function(dispatch) {
-      request.delete('/api/items')
-        .end((err, res) => {
-            dispatch({
-              type: DELETE_COMPLETED_ITEMS
-            })
-        });
+    request.delete('/api/items/completed')
+    .end((err, res) => {
+        dispatch({
+          type: DELETE_COMPLETED_ITEMS,
+          items: res.body
+        })
+    });
   }
 }
 

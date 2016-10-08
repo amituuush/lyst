@@ -13,7 +13,7 @@ mongoose.connect(MongoURI);
 // creates special route for handling static files (.js, .html, .css). These will automatically be served from public directory when something is requested
 app.use(express.static(__dirname + '/public'));
 
-var port = process.env.PORT || 8088;
+var port = process.env.PORT || 7007;
 var router = express.Router();
 
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -61,6 +61,17 @@ router.route('/items')
         res.json(items);
       })
   });
+
+router.route('/items/completed')
+    .delete(function(req, res) {
+        Item.remove({completed: true}, function(err, items) {
+          if (err) {
+            res.send(err);
+          }
+          res.json(items);
+        })
+    });
+
 
 
 router.route('/items/:item_id')
