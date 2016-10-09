@@ -22,5 +22,6 @@ ReactDOM.render(
 // add due date feature
 // add priority feature
 // ability to sort by priority or due date
+// add PropTypes to components
 // add "experience points"
 // send email before due date

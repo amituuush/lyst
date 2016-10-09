@@ -77,6 +77,7 @@
 	// add due date feature
 	// add priority feature
 	// ability to sort by priority or due date
+	// add PropTypes to components
 	// add "experience points"
 	// send email before due date
 
@@ -21546,8 +21547,8 @@
 	};
 
 	var handleAddItem = function handleAddItem(dispatch) {
-	    return function (newItem) {
-	        dispatch(addItem(newItem));
+	    return function (itemName, itemPriority) {
+	        dispatch(addItem(itemName, itemPriority));
 	    };
 	};
 
@@ -21658,10 +21659,12 @@
 	  };
 	};
 
-	var addItem = function addItem(newItemName) {
+	var addItem = function addItem(itemName, itemPriority) {
+	  console.log(itemName, itemPriority);
 	  return function (dispatch) {
 	    _superagent2.default.post('/api/items').set('Content-Type', 'application/json').send({
-	      name: newItemName
+	      name: itemName,
+	      priority: itemPriority
 	    }).end(function (err, res) {
 	      dispatch({
 	        type: ADD_ITEM,
@@ -23493,6 +23496,8 @@
 	                'li',
 	                { className: this.props.item.completed ? 'style-complete list-item' : 'style-incomplete list-item' },
 	                this.props.item.name,
+	                ' --',
+	                this.props.item.priority,
 	                React.createElement(
 	                    'button',
 	                    { onClick: this._handleDeleteItem, className: 'delete-button' },
@@ -23601,27 +23606,33 @@
 	var React = __webpack_require__(1);
 	__webpack_require__(200);
 
-	// _________________________________________
-
 	var UserForm = React.createClass({
 	    displayName: 'UserForm',
 
 	    getInitialState: function getInitialState() {
-	        return { item: '' };
+	        return {
+	            name: '',
+	            priority: ''
+	        };
 	    },
 
 	    _handleSubmit: function _handleSubmit(event) {
 	        event.preventDefault();
-	        if (this.state.item) {
-	            this.props.addItem(this.state.item);
+	        if (this.state.name && this.state.priority) {
+	            this.props.addItem(this.state.name, this.state.priority);
 	        }
 	        this.setState({
-	            item: ''
+	            name: '',
+	            priority: ''
 	        });
 	    },
 
-	    _handleNumberChange: function _handleNumberChange(event) {
-	        this.setState({ item: event.target.value });
+	    _handleNameChange: function _handleNameChange(event) {
+	        this.setState({ name: event.target.value });
+	    },
+
+	    _handlePriorityChange: function _handlePriorityChange(event) {
+	        this.setState({ priority: event.target.value });
 	    },
 
 	    render: function render() {
@@ -23636,18 +23647,44 @@
 	                    { onClick: this.props.clearList, className: 'reset-list' },
 	                    React.createElement('i', { className: 'fa fa-trash-o fa-lg' })
 	                ),
-	                React.createElement('input', { type: 'text', onChange: this._handleNumberChange, value: this.state.item, className: 'item-input', placeholder: 'What needs to get done?' }),
+	                React.createElement('input', { type: 'text', onChange: this._handleNameChange, value: this.state.name, className: 'item-input', placeholder: 'What needs to get done?' }),
 	                React.createElement(
 	                    'button',
 	                    { type: 'submit', value: 'Add item', className: 'add-item' },
 	                    React.createElement('i', { className: 'fa fa-plus fa-3x' })
+	                ),
+	                React.createElement(
+	                    'select',
+	                    { name: 'priority', onChange: this._handlePriorityChange, value: this.state.priority },
+	                    React.createElement(
+	                        'option',
+	                        { value: 'default', disabled: true },
+	                        'Priority'
+	                    ),
+	                    React.createElement(
+	                        'option',
+	                        { value: 'low' },
+	                        'Low'
+	                    ),
+	                    React.createElement(
+	                        'option',
+	                        { value: 'medium' },
+	                        'Medium'
+	                    ),
+	                    React.createElement(
+	                        'option',
+	                        { value: 'high' },
+	                        'High'
+	                    )
 	                )
 	            )
-	        );
+	        )
+	        //
+	        // <select className="milk-type" name="milk-type" value={this.props.value} onChange={this.props.handleChange}>
+	        //         <option value="default" disabled>Milk Type</option>
+	        ;
 	    }
 	});
-
-	// _____________________________________________
 
 	module.exports = UserForm;
 

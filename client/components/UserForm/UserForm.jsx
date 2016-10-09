@@ -1,25 +1,32 @@
 const React = require('react');
 require('./user-form.less');
 
-// _________________________________________
 
 var UserForm = React.createClass({
     getInitialState: function() {
-        return {item: ''}
+        return {
+            name: '',
+            priority: ''
+        }
     },
 
     _handleSubmit: function(event) {
         event.preventDefault();
-        if(this.state.item) {
-            this.props.addItem(this.state.item);
+        if(this.state.name && this.state.priority) {
+            this.props.addItem(this.state.name, this.state.priority);
         }
         this.setState({
-            item: ''
+            name: '',
+            priority: ''
         })
     },
 
-    _handleNumberChange: function(event) {
-        this.setState({item: event.target.value});
+    _handleNameChange: function(event) {
+        this.setState({name: event.target.value});
+    },
+
+    _handlePriorityChange: function(event) {
+        this.setState({priority: event.target.value});
     },
 
     render: function(){
@@ -30,17 +37,24 @@ var UserForm = React.createClass({
                     <i className="fa fa-trash-o fa-lg"></i>
                 </div>
 
-                <input type="text" onChange={this._handleNumberChange} value={this.state.item} className='item-input' placeholder='What needs to get done?'/>
+                <input type="text" onChange={this._handleNameChange} value={this.state.name} className='item-input' placeholder='What needs to get done?'/>
 
                 <button type="submit" value="Add item" className='add-item'>
                     <i className="fa fa-plus fa-3x"></i>
                 </button>
+                <select name="priority" onChange={this._handlePriorityChange} value={this.state.priority}>
+                    <option value="default" disabled>Priority</option>
+                    <option value="low" >Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
             </form>
         </div>
+        //
+        // <select className="milk-type" name="milk-type" value={this.props.value} onChange={this.props.handleChange}>
+        //         <option value="default" disabled>Milk Type</option>
         )
     }
 });
-
-// _____________________________________________
 
 module.exports = UserForm;

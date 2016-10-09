@@ -43,6 +43,7 @@ router.route('/items')
   .post(function(req, res) {
     var item = new Item();
     item.name = req.body.name;
+    item.priority = req.body.priority;
     item.completed = false;
 
     item.save(function(err, result) {

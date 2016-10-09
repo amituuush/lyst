@@ -21,12 +21,14 @@ const fetchItems = () => {
     }
 }
 
-const addItem = (newItemName) => {
+const addItem = (itemName, itemPriority) => {
+    console.log(itemName, itemPriority);
   return function(dispatch) {
     request.post('/api/items')
       .set('Content-Type', 'application/json')
       .send({
-          name: newItemName
+          name: itemName,
+          priority: itemPriority
       })
       .end((err, res) => {
           dispatch({
