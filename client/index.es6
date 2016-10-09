@@ -17,6 +17,10 @@ ReactDOM.render(
 // _____________________________________________
 
 // add clear completed button
-// fix db on heroku
 // add user auth
 // toggle complete
+// add due date feature
+// add priority feature
+// ability to sort by priority or due date
+// add "experience points"
+// send email before due date

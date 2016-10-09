@@ -72,9 +72,13 @@
 	// _____________________________________________
 
 	// add clear completed button
-	// fix db on heroku
 	// add user auth
 	// toggle complete
+	// add due date feature
+	// add priority feature
+	// ability to sort by priority or due date
+	// add "experience points"
+	// send email before due date
 
 /***/ },
 /* 1 */
@@ -23543,7 +23547,7 @@
 
 
 	// module
-	exports.push([module.id, "div li.style-complete {\n  text-decoration: line-through;\n  color: #222F3B !important;\n  transition: color 0.25s ease-in-out;\n  -moz-transition: color 0.25s ease-in-out;\n  -webkit-transition: color 0.25s ease-in-out;\n}\ndiv.list-item-parent:nth-child(odd) li {\n  color: #9ba1a3;\n}\ndiv.list-item-parent:nth-child(even) li {\n  color: #646e71;\n}\nli.list-item {\n  font-size: 2em;\n  padding-top: 0.6em;\n  border-bottom: 2px solid #1C272E;\n  list-style: none;\n  text-align: left;\n  color: #9ba1a3;\n}\nli.list-item .fa-times {\n  color: #962D2D;\n  position: relative;\n  right: 6px;\n  bottom: 4px;\n}\nli.list-item .fa-times:hover {\n  color: #b13535;\n}\nli.list-item .fa-check-square {\n  color: #3FB083;\n  position: relative;\n  right: 5px;\n  bottom: 5px;\n}\nli.list-item .fa-check-square:hover {\n  color: #52c195;\n}\nli.list-item button {\n  background: transparent;\n  border: none;\n  outline: none;\n}\nli.list-item button:hover {\n  cursor: pointer;\n}\nli.list-item button.delete-button {\n  width: 20px;\n  height: 20px;\n  margin-left: 10px;\n}\nli.list-item button.check-button {\n  width: 40px;\n  height: 40px;\n  float: right;\n  position: relative;\n  bottom: 3px;\n}\n", ""]);
+	exports.push([module.id, "div li.style-complete {\n  text-decoration: line-through;\n  color: #222F3B !important;\n  transition: color 0.25s ease-in-out;\n  -moz-transition: color 0.25s ease-in-out;\n  -webkit-transition: color 0.25s ease-in-out;\n}\ndiv.list-item-parent:nth-child(odd) li {\n  color: #9ba1a3;\n}\ndiv.list-item-parent:nth-child(even) li {\n  color: #646e71;\n}\nli.list-item {\n  font-size: 1.5em;\n  padding-top: 0.6em;\n  border-bottom: 2px solid #1C272E;\n  list-style: none;\n  text-align: left;\n  color: #9ba1a3;\n}\nli.list-item .fa-times {\n  color: #962D2D;\n  position: relative;\n  right: 6px;\n  bottom: 4px;\n}\nli.list-item .fa-times:hover {\n  color: #b13535;\n}\nli.list-item .fa-check-square {\n  color: #3FB083;\n  position: relative;\n  right: 5px;\n  bottom: 5px;\n}\nli.list-item .fa-check-square:hover {\n  color: #52c195;\n}\nli.list-item button {\n  background: transparent;\n  border: none;\n  outline: none;\n}\nli.list-item button:hover {\n  cursor: pointer;\n}\nli.list-item button.delete-button {\n  width: 20px;\n  height: 20px;\n  margin-left: 10px;\n}\nli.list-item button.check-button {\n  width: 40px;\n  float: right;\n  position: relative;\n  bottom: 5px;\n}\n", ""]);
 
 	// exports
 
