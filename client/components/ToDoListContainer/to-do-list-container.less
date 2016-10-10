@@ -1,14 +1,28 @@
 #container {
     width: 100%;
-    text-align: center;
+    height: 100%;
 
-    #content {
-        width: 95%;
-        margin: 2em auto 0 auto;
-        padding: 0.5em 0.5em 1em 0.5em;
+    #left-panel {
+        display: inline-block;
+        width: 30%;
+        height: 100%;
+        background: #962D2D;
+        vertical-align: top;
+    }
+
+    #middle-panel {
+        display: inline-block;
+        width: 70%;
+        height: 100%;
+        margin: 0 auto 0 auto;
         box-shadow: 0px 0px 2px #000;
         background: #314251;
-        border-radius: 15px;
+        vertical-align: top;
+        overflow-x: hidden;
+
+        .middle-panel-content {
+            padding: 0 2em 0 2em;
+        }
     }
 }
 

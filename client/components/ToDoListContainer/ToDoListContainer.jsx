@@ -28,25 +28,28 @@ var ToDoList = React.createClass({
   render: function () {
       return (
           <div id="container">
-          <header>Lyst</header>
-            <div id="content">
-              <UserForm
-                  addItem={this.props.addItem} clearList={this.props.clearList} />
-              <ControlBar
-                items={this.props.items}
-                filter={this.props.filter}
-                allItemFilter={this.props.allItemFilter}
-                activeItemFilter={this.props.activeItemFilter}
-                completedItemFilter={this.props.completedItemFilter} />
-              <ListItemContainer
-                  items={this.props.items}
-                  deleteItem={this.props.deleteItem}
-                  markComplete={this.props.markComplete}
-                  filter={this.props.filter} />
-              <ItemsLeft
-                  items={this.props.items}
-                  deleteCompletedItems={this.props.deleteCompletedItems} />
-            </div>
+                <div id="left-panel"></div>
+                <div id="middle-panel">
+                    <div className="middle-panel-content">
+                      <header>Lyst</header>
+                      <UserForm
+                          addItem={this.props.addItem} clearList={this.props.clearList} />
+                      <ControlBar
+                        items={this.props.items}
+                        filter={this.props.filter}
+                        allItemFilter={this.props.allItemFilter}
+                        activeItemFilter={this.props.activeItemFilter}
+                        completedItemFilter={this.props.completedItemFilter} />
+                      <ListItemContainer
+                          items={this.props.items}
+                          deleteItem={this.props.deleteItem}
+                          markComplete={this.props.markComplete}
+                          filter={this.props.filter} />
+                      <ItemsLeft
+                          items={this.props.items}
+                          deleteCompletedItems={this.props.deleteCompletedItems} />
+                      </div>
+              </div>
           </div>
       )
   }

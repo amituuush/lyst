@@ -18,7 +18,8 @@ ReactDOM.render(
 
 
 // ability to sort by priority or due date
-// add PropTypes to components
+// ability to star an item, see all starred items
+// show image of empty bin and text when list is empty
 
 
 // add clear completed button, component doesn't render, but it works on refresh
@@ -26,5 +27,6 @@ ReactDOM.render(
 
 
 // add "experience points"
-// send email before due date
+// send email an hour before task is due, 1 day before task is due, etc
 // create multiple lists
+// share list on facebook

@@ -66,27 +66,31 @@ var UserForm = React.createClass({
         return (
         <div className="user-form-container">
             <form onSubmit={this._handleSubmit}>
-                <div onClick={this.props.clearList} className='reset-list'>
-                    <i className="fa fa-trash-o fa-lg"></i>
+                <div className="user-form-top">
+                    <div onClick={this.props.clearList} className='reset-list'>
+                        <i className="fa fa-trash fa-lg"></i>
+                    </div>
+
+                    <input type="text" onChange={this._handleNameChange} value={this.state.name} className='item-input' placeholder='What needs to get done?'/>
+
+                    <button type="submit" value="Add item" className='add-item'>
+                        Add
+                    </button>
                 </div>
-
-                <input type="text" onChange={this._handleNameChange} value={this.state.name} className='item-input' placeholder='What needs to get done?'/>
-
-                <button type="submit" value="Add item" className='add-item'>
-                    <i className="fa fa-plus fa-3x"></i>
-                </button>
-                <select className="priority-select" name="priority" onChange={this._handlePriorityChange} value={this.state.priority}>
-                    <option value="default" disabled>Priority</option>
-                    <option value="low" >Low</option>
-                <option value="med">Med</option>
-                    <option value="high">High</option>
-                </select>
-                <DatePicker
-                    className="date-picker"
-                    todayButton={'Today'}
-                    selected={this.state.dueDatePlaceholder}
-                    placeholderText="Due date (optional)"
-                    onChange={this._handleDateChange} />
+                <div className="user-form-bottom">
+                    <select className="priority-select" name="priority" onChange={this._handlePriorityChange} value={this.state.priority}>
+                        <option value="default" disabled>Priority</option>
+                        <option value="low" >Low</option>
+                    <option value="med">Med</option>
+                        <option value="high">High</option>
+                    </select>
+                    <DatePicker
+                        className="date-picker"
+                        todayButton={'Today'}
+                        selected={this.state.dueDatePlaceholder}
+                        placeholderText="Due date (optional)"
+                        onChange={this._handleDateChange} />
+                </div>
             </form>
         </div>
         )

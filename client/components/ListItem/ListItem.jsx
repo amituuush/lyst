@@ -42,7 +42,11 @@ var ListItem = React.createClass({
                     </div>
 
                     <button onClick={this._handleDeleteItem} className='delete-button'>
-                        <i className="fa fa-times fa-2x"></i>
+                        <i className="fa fa-times fa-lg"></i>
+                    </button>
+
+                    <button onClick={this._handleCompleteItem} className='check-button'>
+                        <i className="fa fa-check-square fa-3x"></i>
                     </button>
 
                     <div className={this.props.item.completed ? 'list-item-text style-complete' : 'list-item-text'}>
@@ -51,10 +55,6 @@ var ListItem = React.createClass({
                     <span className='list-item-priority'>Priority: {this.props.item.priority ? this.props.item.priority : 'none'}</span>
                         </div>
                     </div>
-
-                    <button onClick={this._handleCompleteItem} className='check-button'>
-                        <i className="fa fa-check-square fa-3x"></i>
-                    </button>
 
                 </li>
             </div>

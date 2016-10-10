@@ -72,14 +72,16 @@
 	// _____________________________________________
 
 	// ability to sort by priority or due date
-	// add PropTypes to components
+	// ability to star an item, see all starred items
+	// show image of empty bin and text when list is empty
 
 	// add clear completed button, component doesn't render, but it works on refresh
 	// add user auth
 
 	// add "experience points"
-	// send email before due date
+	// send email an hour before task is due, 1 day before task is due, etc
 	// create multiple lists
+	// share list on facebook
 
 /***/ },
 /* 1 */
@@ -21394,7 +21396,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\n  font-family: 'Proxima Nova Soft', Helvetica, 'open-sans';\n  background: #293844;\n  -webkit-font-smoothing: antialiased;\n  font-weight: 300;\n}\n", ""]);
+	exports.push([module.id, "/*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */\n/**\n * 1. Change the default font family in all browsers (opinionated).\n * 2. Correct the line height in all browsers.\n * 3. Prevent adjustments of font size after orientation changes in\n *    IE on Windows Phone and in iOS.\n */\n/* Document\n   ========================================================================== */\nhtml {\n  font-family: 'Proxima Nova Soft', Helvetica, 'open-sans';\n  /* 1 */\n  line-height: 1.15;\n  /* 2 */\n  -ms-text-size-adjust: 100%;\n  /* 3 */\n  -webkit-text-size-adjust: 100%;\n  /* 3 */\n  height: 100%;\n}\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers (opinionated).\n */\nbody {\n  -webkit-font-smoothing: antialiased;\n  font-weight: 300;\n  margin: 0;\n  height: 100%;\n}\n#content {\n  height: 100%;\n  width: 100%;\n}\n/**\n * Add the correct display in IE 9-.\n */\narticle,\naside,\nfooter,\nheader,\nnav,\nsection {\n  display: block;\n}\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n/* Grouping content\n   ========================================================================== */\n/**\n * Add the correct display in IE 9-.\n * 1. Add the correct display in IE.\n */\nfigcaption,\nfigure,\nmain {\n  /* 1 */\n  display: block;\n}\n/**\n * Add the correct margin in IE 8.\n */\nfigure {\n  margin: 1em 40px;\n}\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace, monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/* Text-level semantics\n   ========================================================================== */\n/**\n * 1. Remove the gray background on active links in IE 10.\n * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.\n */\na {\n  background-color: transparent;\n  /* 1 */\n  -webkit-text-decoration-skip: objects;\n  /* 2 */\n}\n/**\n * Remove the outline on focused links when they are also active or hovered\n * in all browsers (opinionated).\n */\na:active,\na:hover {\n  outline-width: 0;\n}\n/**\n * 1. Remove the bottom border in Firefox 39-.\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline dotted;\n  /* 2 */\n}\n/**\n * Prevent the duplicate application of `bolder` by the next rule in Safari 6.\n */\nb,\nstrong {\n  font-weight: inherit;\n}\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace, monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/**\n * Add the correct font style in Android 4.3-.\n */\ndfn {\n  font-style: italic;\n}\n/**\n * Add the correct background and color in IE 9-.\n */\nmark {\n  background-color: #ff0;\n  color: #000;\n}\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsub {\n  bottom: -0.25em;\n}\nsup {\n  top: -0.5em;\n}\n/* Embedded content\n   ========================================================================== */\n/**\n * Add the correct display in IE 9-.\n */\naudio,\nvideo {\n  display: inline-block;\n}\n/**\n * Add the correct display in iOS 4-7.\n */\naudio:not([controls]) {\n  display: none;\n  height: 0;\n}\n/**\n * Remove the border on images inside links in IE 10-.\n */\nimg {\n  border-style: none;\n}\n/**\n * Hide the overflow in IE.\n */\nsvg:not(:root) {\n  overflow: hidden;\n}\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers (opinionated).\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: sans-serif;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n/**\n * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`\n *    controls in Android 4.\n * 2. Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\nhtml [type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n  /* 2 */\n}\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n/**\n * Change the border, margin, and padding in all browsers (opinionated).\n */\nfieldset {\n  border: 1px solid #c0c0c0;\n  margin: 0 2px;\n  padding: 0.35em 0.625em 0.75em;\n}\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n/**\n * 1. Add the correct display in IE 9-.\n * 2. Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  display: inline-block;\n  /* 1 */\n  vertical-align: baseline;\n  /* 2 */\n}\n/**\n * Remove the default vertical scrollbar in IE.\n */\ntextarea {\n  overflow: auto;\n}\n/**\n * 1. Add the correct box sizing in IE 10-.\n * 2. Remove the padding in IE 10-.\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n/**\n * Remove the inner padding and cancel buttons in Chrome and Safari on macOS.\n */\n[type=\"search\"]::-webkit-search-cancel-button,\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in IE 9-.\n * 1. Add the correct display in Edge, IE, and Firefox.\n */\ndetails,\nmenu {\n  display: block;\n}\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n/* Scripting\n   ========================================================================== */\n/**\n * Add the correct display in IE 9-.\n */\ncanvas {\n  display: inline-block;\n}\n/**\n * Add the correct display in IE.\n */\ntemplate {\n  display: none;\n}\n/* Hidden\n   ========================================================================== */\n/**\n * Add the correct display in IE 10-.\n */\n[hidden] {\n  display: none;\n}\n", ""]);
 
 	// exports
 
@@ -25061,30 +25063,35 @@
 	        return React.createElement(
 	            'div',
 	            { id: 'container' },
-	            React.createElement(
-	                'header',
-	                null,
-	                'Lyst'
-	            ),
+	            React.createElement('div', { id: 'left-panel' }),
 	            React.createElement(
 	                'div',
-	                { id: 'content' },
-	                React.createElement(UserForm, {
-	                    addItem: this.props.addItem, clearList: this.props.clearList }),
-	                React.createElement(ControlBar, {
-	                    items: this.props.items,
-	                    filter: this.props.filter,
-	                    allItemFilter: this.props.allItemFilter,
-	                    activeItemFilter: this.props.activeItemFilter,
-	                    completedItemFilter: this.props.completedItemFilter }),
-	                React.createElement(ListItemContainer, {
-	                    items: this.props.items,
-	                    deleteItem: this.props.deleteItem,
-	                    markComplete: this.props.markComplete,
-	                    filter: this.props.filter }),
-	                React.createElement(ItemsLeft, {
-	                    items: this.props.items,
-	                    deleteCompletedItems: this.props.deleteCompletedItems })
+	                { id: 'middle-panel' },
+	                React.createElement(
+	                    'div',
+	                    { className: 'middle-panel-content' },
+	                    React.createElement(
+	                        'header',
+	                        null,
+	                        'Lyst'
+	                    ),
+	                    React.createElement(UserForm, {
+	                        addItem: this.props.addItem, clearList: this.props.clearList }),
+	                    React.createElement(ControlBar, {
+	                        items: this.props.items,
+	                        filter: this.props.filter,
+	                        allItemFilter: this.props.allItemFilter,
+	                        activeItemFilter: this.props.activeItemFilter,
+	                        completedItemFilter: this.props.completedItemFilter }),
+	                    React.createElement(ListItemContainer, {
+	                        items: this.props.items,
+	                        deleteItem: this.props.deleteItem,
+	                        markComplete: this.props.markComplete,
+	                        filter: this.props.filter }),
+	                    React.createElement(ItemsLeft, {
+	                        items: this.props.items,
+	                        deleteCompletedItems: this.props.deleteCompletedItems })
+	                )
 	            )
 	        );
 	    }
@@ -25224,7 +25231,12 @@
 	                React.createElement(
 	                    'button',
 	                    { onClick: this._handleDeleteItem, className: 'delete-button' },
-	                    React.createElement('i', { className: 'fa fa-times fa-2x' })
+	                    React.createElement('i', { className: 'fa fa-times fa-lg' })
+	                ),
+	                React.createElement(
+	                    'button',
+	                    { onClick: this._handleCompleteItem, className: 'check-button' },
+	                    React.createElement('i', { className: 'fa fa-check-square fa-3x' })
 	                ),
 	                React.createElement(
 	                    'div',
@@ -25245,11 +25257,6 @@
 	                            this.props.item.priority ? this.props.item.priority : 'none'
 	                        )
 	                    )
-	                ),
-	                React.createElement(
-	                    'button',
-	                    { onClick: this._handleCompleteItem, className: 'check-button' },
-	                    React.createElement('i', { className: 'fa fa-check-square fa-3x' })
 	                )
 	            )
 	        );
@@ -25295,7 +25302,7 @@
 
 
 	// module
-	exports.push([module.id, ".style-complete {\n  text-decoration: line-through;\n  color: #222F3B !important;\n  transition: color 0.25s ease-in-out;\n  -moz-transition: color 0.25s ease-in-out;\n  -webkit-transition: color 0.25s ease-in-out;\n}\n.list-item-parent li {\n  list-style: none;\n  border-bottom: 2px solid #1C272E;\n  text-align: left;\n  padding-top: 0.6em;\n  padding-bottom: 0.25em;\n}\n.list-item-parent li .list-item {\n  display: inline-block;\n  font-size: 1.5em;\n  color: #e5e5e5;\n}\n.list-item-parent li .list-item-text {\n  font-size: 1.25em;\n  color: #9ba1a3;\n}\n.list-item-parent li .list-item-text .list-item-other {\n  line-height: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .list-item-priority {\n  font-size: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-low {\n  color: blue;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-med {\n  color: yellow;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-high {\n  color: #962D2D;\n}\n.list-item-parent li .list-item-text .list-item-other #list-item-due-date {\n  font-size: 0.6em;\n  margin-right: 1em;\n}\n.list-item-parent li button {\n  background: transparent;\n  border: none;\n  outline: none;\n}\n.list-item-parent li button:hover {\n  cursor: pointer;\n}\n.list-item-parent li button.delete-button {\n  width: 20px;\n  height: 20px;\n  margin-left: 10px;\n}\n.list-item-parent li button.delete-button .fa-times {\n  color: #962D2D;\n  right: 6px;\n}\n.list-item-parent li button.delete-button .fa-times:hover {\n  color: #b13535;\n}\n.list-item-parent li button.check-button {\n  float: right;\n  position: relative;\n}\n.list-item-parent li button.check-button .fa-check-square {\n  color: #3FB083;\n  position: relative;\n  right: 5px;\n  bottom: 35px;\n}\n.list-item-parent li button.check-button .fa-check-square:hover {\n  color: #52c195;\n}\n", ""]);
+	exports.push([module.id, ".style-complete {\n  text-decoration: line-through;\n  color: #222F3B !important;\n  transition: color 0.25s ease-in-out;\n  -moz-transition: color 0.25s ease-in-out;\n  -webkit-transition: color 0.25s ease-in-out;\n}\n.list-item-parent li {\n  list-style: none;\n  border-bottom: 2px solid #1C272E;\n  text-align: left;\n  padding-top: 0.6em;\n  padding-bottom: 0.25em;\n}\n.list-item-parent li .list-item {\n  display: inline-block;\n  font-size: 1.5em;\n  color: #e5e5e5;\n}\n.list-item-parent li .list-item-text {\n  font-size: 1.25em;\n  color: #9ba1a3;\n}\n.list-item-parent li .list-item-text .list-item-other {\n  line-height: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .list-item-priority {\n  font-size: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-low {\n  color: blue;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-med {\n  color: yellow;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-high {\n  color: #962D2D;\n}\n.list-item-parent li .list-item-text .list-item-other #list-item-due-date {\n  font-size: 0.6em;\n  margin-right: 1em;\n}\n.list-item-parent li button {\n  background: transparent;\n  border: none;\n  outline: none;\n}\n.list-item-parent li button:hover {\n  cursor: pointer;\n}\n.list-item-parent li button.delete-button {\n  width: 20px;\n  height: 20px;\n  margin-left: 10px;\n}\n.list-item-parent li button.delete-button .fa-times {\n  color: #962D2D;\n  right: 6px;\n}\n.list-item-parent li button.delete-button .fa-times:hover {\n  color: #b13535;\n}\n.list-item-parent li button.check-button {\n  float: right;\n  position: relative;\n  bottom: 5px;\n}\n.list-item-parent li button.check-button .fa-check-square {\n  color: #3FB083;\n}\n.list-item-parent li button.check-button .fa-check-square:hover {\n  color: #52c195;\n}\n", ""]);
 
 	// exports
 
@@ -25419,45 +25426,53 @@
 	                { onSubmit: this._handleSubmit },
 	                React.createElement(
 	                    'div',
-	                    { onClick: this.props.clearList, className: 'reset-list' },
-	                    React.createElement('i', { className: 'fa fa-trash-o fa-lg' })
-	                ),
-	                React.createElement('input', { type: 'text', onChange: this._handleNameChange, value: this.state.name, className: 'item-input', placeholder: 'What needs to get done?' }),
-	                React.createElement(
-	                    'button',
-	                    { type: 'submit', value: 'Add item', className: 'add-item' },
-	                    React.createElement('i', { className: 'fa fa-plus fa-3x' })
-	                ),
-	                React.createElement(
-	                    'select',
-	                    { className: 'priority-select', name: 'priority', onChange: this._handlePriorityChange, value: this.state.priority },
+	                    { className: 'user-form-top' },
 	                    React.createElement(
-	                        'option',
-	                        { value: 'default', disabled: true },
-	                        'Priority'
+	                        'div',
+	                        { onClick: this.props.clearList, className: 'reset-list' },
+	                        React.createElement('i', { className: 'fa fa-trash fa-lg' })
 	                    ),
+	                    React.createElement('input', { type: 'text', onChange: this._handleNameChange, value: this.state.name, className: 'item-input', placeholder: 'What needs to get done?' }),
 	                    React.createElement(
-	                        'option',
-	                        { value: 'low' },
-	                        'Low'
-	                    ),
-	                    React.createElement(
-	                        'option',
-	                        { value: 'med' },
-	                        'Med'
-	                    ),
-	                    React.createElement(
-	                        'option',
-	                        { value: 'high' },
-	                        'High'
+	                        'button',
+	                        { type: 'submit', value: 'Add item', className: 'add-item' },
+	                        'Add'
 	                    )
 	                ),
-	                React.createElement(DatePicker, {
-	                    className: 'date-picker',
-	                    todayButton: 'Today',
-	                    selected: this.state.dueDatePlaceholder,
-	                    placeholderText: 'Due date (optional)',
-	                    onChange: this._handleDateChange })
+	                React.createElement(
+	                    'div',
+	                    { className: 'user-form-bottom' },
+	                    React.createElement(
+	                        'select',
+	                        { className: 'priority-select', name: 'priority', onChange: this._handlePriorityChange, value: this.state.priority },
+	                        React.createElement(
+	                            'option',
+	                            { value: 'default', disabled: true },
+	                            'Priority'
+	                        ),
+	                        React.createElement(
+	                            'option',
+	                            { value: 'low' },
+	                            'Low'
+	                        ),
+	                        React.createElement(
+	                            'option',
+	                            { value: 'med' },
+	                            'Med'
+	                        ),
+	                        React.createElement(
+	                            'option',
+	                            { value: 'high' },
+	                            'High'
+	                        )
+	                    ),
+	                    React.createElement(DatePicker, {
+	                        className: 'date-picker',
+	                        todayButton: 'Today',
+	                        selected: this.state.dueDatePlaceholder,
+	                        placeholderText: 'Due date (optional)',
+	                        onChange: this._handleDateChange })
+	                )
 	            )
 	        );
 	    }
@@ -25500,7 +25515,7 @@
 
 
 	// module
-	exports.push([module.id, ".user-form-container {\n  border-bottom: 1px solid #1A232B;\n}\n.item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  margin-bottom: 0.25em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\nbutton.add-item {\n  background: transparent;\n  border: none;\n  outline: none;\n  width: 40px;\n  height: 40px;\n  position: relative;\n  top: 13px;\n  left: 10px;\n}\nbutton.add-item:hover {\n  cursor: pointer;\n}\nbutton.add-item .fa-plus {\n  color: #3FB083;\n  position: relative;\n  bottom: 6px;\n  right: 7px;\n}\nbutton.add-item .fa-plus:hover {\n  color: #52c195;\n}\n.reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.reset-list:hover {\n  cursor: pointer;\n}\n.reset-list .fa-trash-o {\n  color: #962D2D;\n}\n.reset-list .fa-trash-o:hover {\n  color: #b13535;\n}\n.priority-select {\n  background: #4F6373;\n  font-size: 1em;\n  color: #A9A9A9;\n  position: relative;\n  right: 10px;\n  height: 31px;\n  border: none;\n}\n.priority-select:hover {\n  cursor: pointer;\n}\n.priority-select:focus {\n  outline: none;\n}\n.date-cover {\n  width: 5em;\n  height: 20px;\n  margin: 0 auto;\n  background: #4F6373;\n  z-index: 999;\n  color: #A9A9A9;\n  font-size: 1em;\n  font-weight: 400;\n  padding: 0.2em;\n  position: relative;\n  bottom: 27px;\n  display: none;\n}\n.date-picker {\n  background: #4F6373;\n  position: relative;\n  right: 5px;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n  margin-top: 0.5em;\n  color: #A9A9A9;\n  padding: 0.4em 0.5em 0.4em 0.5em;\n  margin-left: 1em;\n  margin-bottom: 1em;\n}\n.date-picker:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n", ""]);
+	exports.push([module.id, ".user-form-container {\n  border-bottom: 1px solid #1A232B;\n}\n.user-form-container .user-form-top {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-top .item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  margin-bottom: 0.25em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #fff;\n}\n.user-form-container .user-form-top .item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n.user-form-container .user-form-top button.add-item {\n  background: #3FB083;\n  border: none;\n  outline: none;\n  padding: 0.7em 1em 0.7em 1em;\n  border-radius: 5px;\n  color: #1A232B;\n}\n.user-form-container .user-form-top button.add-item:hover {\n  cursor: pointer;\n  background: #52c195;\n}\n.user-form-container .user-form-top .reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.user-form-container .user-form-top .reset-list:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-top .reset-list .fa-trash {\n  color: #B13535;\n}\n.user-form-container .user-form-top .reset-list .fa-trash:hover {\n  color: #c43b3b;\n}\n.user-form-container .user-form-bottom {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-bottom .priority-select {\n  background: #4F6373;\n  font-size: 1em;\n  color: #A9A9A9;\n  position: relative;\n  right: 10px;\n  height: 31px;\n  border: none;\n}\n.user-form-container .user-form-bottom .priority-select:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .priority-select:focus {\n  outline: none;\n}\n.user-form-container .user-form-bottom .date-picker {\n  background: #4F6373;\n  position: relative;\n  right: 5px;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n  margin-top: 0.5em;\n  color: #A9A9A9;\n  padding: 0.4em 0.5em 0.4em 0.5em;\n  margin-left: 1em;\n  margin-bottom: 1em;\n}\n.user-form-container .user-form-bottom .date-picker:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n", ""]);
 
 	// exports
 
@@ -54541,7 +54556,7 @@
 
 
 	// module
-	exports.push([module.id, "#container {\n  width: 100%;\n  text-align: center;\n}\n#container #content {\n  width: 95%;\n  margin: 2em auto 0 auto;\n  padding: 0.5em 0.5em 1em 0.5em;\n  box-shadow: 0px 0px 2px #000;\n  background: #314251;\n  border-radius: 15px;\n}\nheader {\n  text-align: center;\n  color: #fff;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n@media only screen and (min-width: 500px) {\n  #container #content {\n    width: 28em;\n    margin: 2em auto 0 auto;\n    padding: 1.3em;\n  }\n}\n", ""]);
+	exports.push([module.id, "#container {\n  width: 100%;\n  height: 100%;\n}\n#container #left-panel {\n  display: inline-block;\n  width: 30%;\n  height: 100%;\n  background: #962D2D;\n  vertical-align: top;\n}\n#container #middle-panel {\n  display: inline-block;\n  width: 70%;\n  height: 100%;\n  margin: 0 auto 0 auto;\n  box-shadow: 0px 0px 2px #000;\n  background: #314251;\n  vertical-align: top;\n  overflow-x: hidden;\n}\n#container #middle-panel .middle-panel-content {\n  padding: 0 2em 0 2em;\n}\nheader {\n  text-align: center;\n  color: #fff;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n@media only screen and (min-width: 500px) {\n  #container #content {\n    width: 28em;\n    margin: 2em auto 0 auto;\n    padding: 1.3em;\n  }\n}\n", ""]);
 
 	// exports
 

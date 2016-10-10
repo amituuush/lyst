@@ -1,124 +1,112 @@
 .user-form-container {
     border-bottom: 1px solid #1A232B;
-}
 
-.item-input {
-    margin-top: 2em;
-    margin-right: 0.7em;
-    margin-bottom: 0.25em;
-    border: none;
-    padding: .25em .25em;
-    border-radius: 25px;
-    width: 67%;
-    height: 2rem;
-    background: #4F6373;
-    font-size: 1.1em;
-    font-weight: 400;
-    text-align: center;
-    color: #fff;
+    .user-form-top {
+        width: 100%;
+        text-align: center;
 
-    &:focus {
-        outline: none;
-        box-shadow: 0px 0px 1px #5DAEF2;
-    }
-}
+        .item-input {
+            margin-top: 2em;
+            margin-right: 0.7em;
+            margin-bottom: 0.25em;
+            border: none;
+            padding: .25em .25em;
+            border-radius: 25px;
+            width: 67%;
+            height: 2rem;
+            background: #4F6373;
+            font-size: 1.1em;
+            font-weight: 400;
+            text-align: center;
+            color: #fff;
 
-button.add-item {
-    background: transparent;
-    border: none;
-    outline: none;
-    width: 40px;
-    height: 40px;
-    position: relative;
-    top: 13px;
-    left: 10px;
+            &:focus {
+                outline: none;
+                box-shadow: 0px 0px 1px #5DAEF2;
+            }
+        }
 
-    &:hover {
-        cursor: pointer;
-    }
+        button.add-item {
+            background: #3FB083;
+            border: none;
+            outline: none;
+            padding: 0.7em 1em 0.7em 1em;
+            border-radius: 5px;
+            color: #1A232B;
+            // position: relative;
+            // top: 13px;
+            // left: 10px;
 
-    .fa-plus{
-        color: #3FB083;
-        position: relative;
-        bottom: 6px;
-        right: 7px;
+            &:hover {
+                cursor: pointer;
+                background: lighten(#3FB083, 7%);
+            }
 
-        &:hover {
-            color: lighten(#3FB083, 7%);
+        }
+
+        .reset-list {
+            background: transparent;
+            border: none;
+            outline: none;
+            margin-right: 15px;
+            position: relative;
+            bottom: 3px;
+            display: inline-block;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            .fa-trash {
+                color: #B13535;
+
+                &:hover {
+                  color: lighten(#B13535, 5%);
+                }
+            }
         }
     }
-}
 
-.reset-list {
-    background: transparent;
-    border: none;
-    outline: none;
-    margin-right: 15px;
-    position: relative;
-    bottom: 3px;
-    display: inline-block;
+    .user-form-bottom {
+        width: 100%;
+        text-align: center;
 
-    &:hover {
-        cursor: pointer;
-    }
+        .priority-select {
+            background: #4F6373;
+            font-size: 1em;
+            color: #A9A9A9;
+            position: relative;
+            right: 10px;
+            height: 31px;
+            border: none;
 
-    .fa-trash-o {
-        color: #962D2D;
+            &:hover {
+                cursor: pointer;
+            }
 
-        &:hover {
-          color: lighten(#962D2D, 7%);
+            &:focus {
+                outline: none;
+            }
         }
-    }
-}
 
-.priority-select {
-    background: #4F6373;
-    font-size: 1em;
-    color: #A9A9A9;
-    position: relative;
-    right: 10px;
-    height: 31px;
-    border: none;
+        .date-picker {
+            background: #4F6373;
+            position: relative;
+            right: 5px;
+            border: none;
+            font-size: 1em;
+            border-radius: 5px;
+            margin-top: 0.5em;
+            color: #A9A9A9;
+            padding: 0.4em 0.5em 0.4em 0.5em;
+            margin-left: 1em;
+            margin-bottom: 1em;
 
-    &:hover {
-        cursor: pointer;
-    }
+            &:focus {
+                outline: none;
+                box-shadow: 0px 0px 1px #5DAEF2;
+            }
+        }
 
-    &:focus {
-        outline: none;
-    }
-}
-
-.date-cover {
-    width: 5em;
-    height: 20px;
-    margin: 0 auto;
-    background: #4F6373;
-    z-index: 999;
-    color: #A9A9A9;
-    font-size: 1em;
-    font-weight: 400;
-    padding: 0.2em;
-    position: relative;
-    bottom: 27px;
-    display: none;
-}
-
-.date-picker {
-    background: #4F6373;
-    position: relative;
-    right: 5px;
-    border: none;
-    font-size: 1em;
-    border-radius: 5px;
-    margin-top: 0.5em;
-    color: #A9A9A9;
-    padding: 0.4em 0.5em 0.4em 0.5em;
-    margin-left: 1em;
-    margin-bottom: 1em;
-
-    &:focus {
-        outline: none;
-        box-shadow: 0px 0px 1px #5DAEF2;
     }
 }
