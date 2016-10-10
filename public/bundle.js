@@ -23492,39 +23492,57 @@
 	    },
 
 	    render: function render() {
+
+	        // var priorityClass;
+	        // if (this.props.item.priority) {
+	        //     switch(this.props.item.priority) {
+	        //         case 'low':
+	        //             priorityClass = 'list-item-priority priority-low'
+	        //             break;
+	        //         case 'med':
+	        //             priorityClass = 'list-item-priority priority-med'
+	        //             break;
+	        //         case 'high':
+	        //             priorityClass = 'list-item-priority priority-high'
+	        //             break;
+	        //     }
+	        // }
+
 	        return React.createElement(
 	            'div',
 	            { className: 'list-item-parent' },
 	            React.createElement(
 	                'li',
-	                { className: this.props.item.completed ? 'style-complete list-item' : 'style-incomplete list-item' },
+	                null,
 	                React.createElement(
 	                    'div',
-	                    { className: 'list-item-text' },
-	                    React.createElement(
-	                        'div',
-	                        { className: 'list-item-name' },
-	                        this.props.item.name
-	                    ),
+	                    { className: this.props.item.completed ? 'style-complete list-item' : 'style-incomplete list-item' },
+	                    this.props.item.name
+	                ),
+	                React.createElement(
+	                    'button',
+	                    { onClick: this._handleDeleteItem, className: 'delete-button' },
+	                    React.createElement('i', { className: 'fa fa-times fa-2x' })
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: this.props.item.completed ? 'list-item-text style-complete' : 'list-item-text' },
 	                    React.createElement(
 	                        'div',
 	                        { className: 'list-item-other' },
 	                        React.createElement(
 	                            'span',
 	                            { id: 'list-item-due-date' },
-	                            this.props.item.dueDate
+	                            'Due: ',
+	                            this.props.item.dueDate ? this.props.item.dueDate : 'never!'
 	                        ),
 	                        React.createElement(
 	                            'span',
-	                            { id: 'list-item-priority' },
-	                            this.props.item.priority
+	                            { className: 'list-item-priority' },
+	                            'Priority: ',
+	                            this.props.item.priority ? this.props.item.priority : 'none'
 	                        )
 	                    )
-	                ),
-	                React.createElement(
-	                    'button',
-	                    { onClick: this._handleDeleteItem, className: 'delete-button' },
-	                    React.createElement('i', { className: 'fa fa-times fa-2x' })
 	                ),
 	                React.createElement(
 	                    'button',
@@ -23575,7 +23593,7 @@
 
 
 	// module
-	exports.push([module.id, "div li.style-complete {\n  text-decoration: line-through;\n  color: #222F3B !important;\n  transition: color 0.25s ease-in-out;\n  -moz-transition: color 0.25s ease-in-out;\n  -webkit-transition: color 0.25s ease-in-out;\n}\n.list-item-parent .list-item {\n  font-size: 1.5em;\n  padding-top: 0.6em;\n  border-bottom: 2px solid #1C272E;\n  list-style: none;\n  text-align: left;\n  color: #e5e5e5;\n}\n.list-item-parent .list-item .list-item-text {\n  display: inline-block;\n}\n.list-item-parent .list-item .list-item-text .list-item-other {\n  line-height: 0.6em;\n}\n.list-item-parent .list-item .list-item-text .list-item-other #list-item-priority {\n  font-size: 0.6em;\n  color: #9ba1a3;\n}\n.list-item-parent .list-item .list-item-text .list-item-other #list-item-due-date {\n  font-size: 0.6em;\n  color: #9ba1a3;\n  margin-right: 1em;\n}\n.list-item-parent .list-item .fa-times {\n  color: #962D2D;\n  position: relative;\n  right: 6px;\n  bottom: 4px;\n}\n.list-item-parent .list-item .fa-times:hover {\n  color: #b13535;\n}\n.list-item-parent .list-item .fa-check-square {\n  color: #3FB083;\n  position: relative;\n  right: 5px;\n}\n.list-item-parent .list-item .fa-check-square:hover {\n  color: #52c195;\n}\n.list-item-parent .list-item button {\n  background: transparent;\n  border: none;\n  outline: none;\n}\n.list-item-parent .list-item button:hover {\n  cursor: pointer;\n}\n.list-item-parent .list-item button.delete-button {\n  width: 20px;\n  height: 20px;\n  margin-left: 10px;\n  position: relative;\n  bottom: 10px;\n}\n.list-item-parent .list-item button.check-button {\n  float: right;\n  position: relative;\n}\n", ""]);
+	exports.push([module.id, ".style-complete {\n  text-decoration: line-through;\n  color: #222F3B !important;\n  transition: color 0.25s ease-in-out;\n  -moz-transition: color 0.25s ease-in-out;\n  -webkit-transition: color 0.25s ease-in-out;\n}\n.list-item-parent li {\n  list-style: none;\n  border-bottom: 2px solid #1C272E;\n  text-align: left;\n  padding-top: 0.6em;\n  padding-bottom: 0.25em;\n}\n.list-item-parent li .list-item {\n  display: inline-block;\n  font-size: 1.5em;\n  color: #e5e5e5;\n}\n.list-item-parent li .list-item-text {\n  font-size: 1.25em;\n  color: #9ba1a3;\n}\n.list-item-parent li .list-item-text .list-item-other {\n  line-height: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .list-item-priority {\n  font-size: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-low {\n  color: blue;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-med {\n  color: yellow;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-high {\n  color: #962D2D;\n}\n.list-item-parent li .list-item-text .list-item-other #list-item-due-date {\n  font-size: 0.6em;\n  margin-right: 1em;\n}\n.list-item-parent li button {\n  background: transparent;\n  border: none;\n  outline: none;\n}\n.list-item-parent li button:hover {\n  cursor: pointer;\n}\n.list-item-parent li button.delete-button {\n  width: 20px;\n  height: 20px;\n  margin-left: 10px;\n}\n.list-item-parent li button.delete-button .fa-times {\n  color: #962D2D;\n  right: 6px;\n}\n.list-item-parent li button.delete-button .fa-times:hover {\n  color: #b13535;\n}\n.list-item-parent li button.check-button {\n  float: right;\n  position: relative;\n}\n.list-item-parent li button.check-button .fa-check-square {\n  color: #3FB083;\n  position: relative;\n  right: 5px;\n  bottom: 35px;\n}\n.list-item-parent li button.check-button .fa-check-square:hover {\n  color: #52c195;\n}\n", ""]);
 
 	// exports
 
@@ -23721,7 +23739,8 @@
 	                    selected: this.state.dueDatePlaceholder,
 	                    dateFormatCalendar: 'string',
 	                    placeholderText: 'Due date (optional)',
-	                    onChange: this._handleDateChange })
+	                    onChange: this._handleDateChange }),
+	                React.createElement('div', { className: 'date-cover' })
 	            )
 	        );
 	    }
@@ -23764,7 +23783,7 @@
 
 
 	// module
-	exports.push([module.id, ".item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\nbutton.add-item {\n  background: transparent;\n  border: none;\n  outline: none;\n  width: 40px;\n  height: 40px;\n  position: relative;\n  top: 13px;\n  left: 10px;\n}\nbutton.add-item:hover {\n  cursor: pointer;\n}\nbutton.add-item .fa-plus {\n  color: #3FB083;\n  position: relative;\n  bottom: 6px;\n  right: 7px;\n}\nbutton.add-item .fa-plus:hover {\n  color: #52c195;\n}\n.reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.reset-list:hover {\n  cursor: pointer;\n}\n.reset-list .fa-trash-o {\n  color: #962D2D;\n}\n.reset-list .fa-trash-o:hover {\n  color: #b13535;\n}\n", ""]);
+	exports.push([module.id, ".item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\nbutton.add-item {\n  background: transparent;\n  border: none;\n  outline: none;\n  width: 40px;\n  height: 40px;\n  position: relative;\n  top: 13px;\n  left: 10px;\n}\nbutton.add-item:hover {\n  cursor: pointer;\n}\nbutton.add-item .fa-plus {\n  color: #3FB083;\n  position: relative;\n  bottom: 6px;\n  right: 7px;\n}\nbutton.add-item .fa-plus:hover {\n  color: #52c195;\n}\n.reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.reset-list:hover {\n  cursor: pointer;\n}\n.reset-list .fa-trash-o {\n  color: #962D2D;\n}\n.reset-list .fa-trash-o:hover {\n  color: #b13535;\n}\n.date-cover {\n  display: inline-block;\n  height: 20px;\n  background: blue;\n  width: 4em;\n  z-index: 999;\n}\n", ""]);
 
 	// exports
 

@@ -12,20 +12,40 @@ var ListItem = React.createClass({
     },
 
     render: function() {
+
+        // var priorityClass;
+        // if (this.props.item.priority) {
+        //     switch(this.props.item.priority) {
+        //         case 'low':
+        //             priorityClass = 'list-item-priority priority-low'
+        //             break;
+        //         case 'med':
+        //             priorityClass = 'list-item-priority priority-med'
+        //             break;
+        //         case 'high':
+        //             priorityClass = 'list-item-priority priority-high'
+        //             break;
+        //     }
+        // }
+
+
         return (
             <div className='list-item-parent'>
-                <li className={this.props.item.completed ? 'style-complete list-item' : 'style-incomplete list-item'}>
-                    <div className="list-item-text">
-                        <div className="list-item-name">{this.props.item.name}</div>
-                        <div className="list-item-other">
-                        <span id="list-item-due-date">{this.props.item.dueDate}</span>
-                        <span id="list-item-priority">{this.props.item.priority}</span>
-                        </div>
+                <li>
+                    <div className={this.props.item.completed ? 'style-complete list-item' : 'style-incomplete list-item'}>
+                        {this.props.item.name}
                     </div>
 
                     <button onClick={this._handleDeleteItem} className='delete-button'>
                         <i className="fa fa-times fa-2x"></i>
                     </button>
+
+                    <div className={this.props.item.completed ? 'list-item-text style-complete' : 'list-item-text'}>
+                        <div className="list-item-other">
+                        <span id="list-item-due-date">Due: {this.props.item.dueDate ? this.props.item.dueDate : 'never!'}</span>
+                    <span className='list-item-priority'>Priority: {this.props.item.priority ? this.props.item.priority : 'none'}</span>
+                        </div>
+                    </div>
 
                     <button onClick={this._handleCompleteItem} className='check-button'>
                         <i className="fa fa-check-square fa-3x"></i>

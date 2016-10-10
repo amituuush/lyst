@@ -69,6 +69,7 @@ var UserForm = React.createClass({
                     dateFormatCalendar="string"
                     placeholderText="Due date (optional)"
                     onChange={this._handleDateChange} />
+                <div className="date-cover"></div>
             </form>
         </div>
         )
