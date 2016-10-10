@@ -71,17 +71,15 @@
 
 	// _____________________________________________
 
-	// add due date feature
-	// add priority feature
 	// ability to sort by priority or due date
 	// add PropTypes to components
 
-	// add clear completed button
+	// add clear completed button, component doesn't render, but it works on refresh
 	// add user auth
-	// UserForm state doesn't capture initial date that is loaded into input
 
 	// add "experience points"
 	// send email before due date
+	// create multiple lists
 
 /***/ },
 /* 1 */
@@ -25041,6 +25039,20 @@
 	    displayName: 'ToDoList',
 
 
+	    propTypes: {
+	        items: React.PropTypes.array,
+	        addItem: React.PropTypes.func,
+	        deleteItem: React.PropTypes.func,
+	        clearList: React.PropTypes.func,
+	        markComplete: React.PropTypes.func,
+	        filter: React.PropTypes.string,
+	        allItemFilter: React.PropTypes.func,
+	        activeItemFilter: React.PropTypes.func,
+	        completedItemFilter: React.PropTypes.func,
+	        deleteCompletedItems: React.PropTypes.func,
+	        fetchItems: React.PropTypes.func
+	    },
+
 	    componentWillMount: function componentWillMount() {
 	        this.props.fetchItems();
 	    },
@@ -25094,6 +25106,14 @@
 
 	var ListItemContainer = React.createClass({
 	    displayName: 'ListItemContainer',
+
+
+	    propTypes: {
+	        items: React.PropTypes.array,
+	        deleteItem: React.PropTypes.func,
+	        markComplete: React.PropTypes.func,
+	        filter: React.PropTypes.string
+	    },
 
 	    render: function render() {
 
@@ -25159,6 +25179,11 @@
 	var ListItem = React.createClass({
 	    displayName: 'ListItem',
 
+
+	    propTypes: {
+	        deleteItem: React.PropTypes.func,
+	        markComplete: React.PropTypes.func
+	    },
 
 	    _handleCompleteItem: function _handleCompleteItem() {
 	        this.props.markComplete(this.props.item._id);
@@ -25330,6 +25355,11 @@
 	var UserForm = React.createClass({
 	    displayName: 'UserForm',
 
+
+	    propTypes: {
+	        addItem: React.PropTypes.func,
+	        clearList: React.PropTypes.func
+	    },
 
 	    componentWillMount: function componentWillMount() {
 	        var todaysDate = moment().format('L');
@@ -54529,6 +54559,14 @@
 	    displayName: 'ControlBar',
 
 
+	    propTypes: {
+	        items: React.PropTypes.array,
+	        filter: React.PropTypes.string,
+	        allItemFilter: React.PropTypes.func,
+	        activeItemFilter: React.PropTypes.func,
+	        completedItemFilter: React.PropTypes.func
+	    },
+
 	    render: function render() {
 
 	        return React.createElement(
@@ -54609,6 +54647,11 @@
 	var ItemsLeft = React.createClass({
 	    displayName: 'ItemsLeft',
 
+
+	    propTypes: {
+	        items: React.PropTypes.array,
+	        deleteCompletedItems: React.PropTypes.func
+	    },
 
 	    render: function render() {
 

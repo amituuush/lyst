@@ -3,6 +3,11 @@ require('./list-item.less');
 
 var ListItem = React.createClass({
 
+    propTypes: {
+          deleteItem: React.PropTypes.func,
+          markComplete: React.PropTypes.func
+      },
+
     _handleCompleteItem: function() {
         this.props.markComplete(this.props.item._id);
     },

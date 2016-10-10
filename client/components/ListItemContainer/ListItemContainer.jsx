@@ -5,6 +5,14 @@ require('./list-item-container.less');
 // __________________________________________
 
 var ListItemContainer = React.createClass({
+
+    propTypes: {
+          items: React.PropTypes.array,
+          deleteItem: React.PropTypes.func,
+          markComplete: React.PropTypes.func,
+          filter: React.PropTypes.string
+      },
+
     render: function() {
 
         switch(this.props.filter) {

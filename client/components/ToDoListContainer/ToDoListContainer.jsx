@@ -7,6 +7,20 @@ const ItemsLeft = require('../ItemsLeft/ItemsLeft');
 
 var ToDoList = React.createClass({
 
+    propTypes: {
+          items: React.PropTypes.array,
+          addItem: React.PropTypes.func,
+          deleteItem: React.PropTypes.func,
+          clearList: React.PropTypes.func,
+          markComplete: React.PropTypes.func,
+          filter: React.PropTypes.string,
+          allItemFilter: React.PropTypes.func,
+          activeItemFilter: React.PropTypes.func,
+          completedItemFilter: React.PropTypes.func,
+          deleteCompletedItems: React.PropTypes.func,
+          fetchItems: React.PropTypes.func
+      },
+
   componentWillMount: function() {
     this.props.fetchItems();
   },

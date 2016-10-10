@@ -6,6 +6,11 @@ require('react-datepicker/dist/react-datepicker.css');
 
 var UserForm = React.createClass({
 
+    propTypes: {
+          addItem: React.PropTypes.func,
+          clearList: React.PropTypes.func
+    },
+
     componentWillMount: function() {
         var todaysDate = moment().format('L');
         this.setState({
