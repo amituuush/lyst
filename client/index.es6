@@ -19,7 +19,7 @@ ReactDOM.render(
 
 // ability to sort by priority or due date
 // ability to star an item, see all starred items
-// show image of empty bin and text when list is empty
+
 
 
 // add clear completed button, component doesn't render, but it works on refresh
