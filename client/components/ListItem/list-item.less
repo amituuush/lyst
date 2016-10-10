@@ -1,47 +1,61 @@
-div li.style-complete {
+.style-complete {
     text-decoration: line-through;
     color: #222F3B !important;
     transition: color .25s ease-in-out;
-  -moz-transition: color .25s ease-in-out;
-  -webkit-transition: color .25s ease-in-out;
+    -moz-transition: color .25s ease-in-out;
+    -webkit-transition: color .25s ease-in-out;
 }
 
-div.list-item-parent:nth-child(odd) li {
-    color: #9ba1a3;
-}
-div.list-item-parent:nth-child(even) li {
-    color: #646e71;
-}
+// div.list-item-parent:nth-child(odd) li {
+//     color: #9ba1a3;
+// }
+// div.list-item-parent:nth-child(even) li {
+//     color: #646e71;
+// }
 
-li.list-item {
-    font-size: 1.5em;
-    padding-top: 0.6em;
-    border-bottom: 2px solid #1C272E;
-    list-style: none;
-    text-align: left;
-    color: #9ba1a3;
+.list-item-parent {
 
+  li {
+      list-style: none;
+      border-bottom: 2px solid #1C272E;
+      text-align: left;
+      padding-top: 0.6em;
+      padding-bottom: 0.25em;
 
-
-    .fa-times {
-        color: #962D2D;
-        position: relative;
-        right: 6px;
-        bottom: 4px;
-
-        &:hover {
-            color: lighten(#962D2D, 7%);
-        }
+    .list-item {
+        display: inline-block;
+        font-size: 1.5em;
+        color: #e5e5e5;
     }
 
-    .fa-check-square {
-        color: #3FB083;
-        position: relative;
-        right: 5px;
-        bottom: 5px;
+    .list-item-text {
+        font-size: 1.25em;
+        color: #9ba1a3;
 
-        &:hover {
-            color: lighten(#3FB083, 7%);
+        .list-item-other {
+            line-height: 0.6em;
+
+            .list-item-priority {
+                font-size: 0.6em;
+
+            }
+
+            .priority-low {
+                color: blue;
+            }
+
+            .priority-med {
+                color: yellow;
+            }
+
+            .priority-high {
+                color: #962D2D;
+            }
+
+            #list-item-due-date {
+                font-size: 0.6em;
+                margin-right: 1em;
+            }
         }
     }
 
@@ -60,12 +74,33 @@ li.list-item {
         width: 20px;
         height: 20px;
         margin-left: 10px;
+
+        .fa-times {
+            color: #962D2D;
+            right: 6px;
+
+            &:hover {
+                color: lighten(#962D2D, 7%);
+            }
+        }
+
     }
 
     button.check-button {
-        width: 40px;
         float: right;
         position: relative;
-        bottom: 5px;
+
+
+        .fa-check-square {
+            color: #3FB083;
+            position: relative;
+            right: 5px;
+            bottom: 35px;
+
+            &:hover {
+                color: lighten(#3FB083, 7%);
+            }
+        }
     }
+  }
 }

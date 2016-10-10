@@ -11,7 +11,7 @@ import {appReducer} from './reducers'
 // )(createStore);
 
 const logger = (store) => (next) => (action) => {
-  console.log('action fired', action);
+  // console.log('action fired', action);
   next(action);
 }
 
@@ -25,7 +25,7 @@ const store = createStore(
 );
 
 let unsubscribe = store.subscribe(function() {
-    console.log('store has been updated. Latest store state:', store.getState())
+    // console.log('store has been updated. Latest store state:', store.getState())
 })
 
 // _____________________________________________

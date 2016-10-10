@@ -21,12 +21,15 @@ const fetchItems = () => {
     }
 }
 
-const addItem = (newItemName) => {
+const addItem = (itemName, itemPriority, dueDate) => {
+    // console.log(itemName, itemPriority, dueDate);
   return function(dispatch) {
     request.post('/api/items')
       .set('Content-Type', 'application/json')
       .send({
-          name: newItemName
+          name: itemName,
+          priority: itemPriority,
+          dueDate: dueDate
       })
       .end((err, res) => {
           dispatch({
