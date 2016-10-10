@@ -16,12 +16,17 @@ ReactDOM.render(
 
 // _____________________________________________
 
-// add clear completed button
-// add user auth
-// toggle complete
+
 // add due date feature
 // add priority feature
 // ability to sort by priority or due date
 // add PropTypes to components
+
+
+// add clear completed button
+// add user auth
+// UserForm state doesn't capture initial date that is loaded into input
+
+
 // add "experience points"
 // send email before due date

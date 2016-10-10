@@ -37,8 +37,8 @@ const handleClearItems = (dispatch) => {
 }
 
 const handleAddItem = (dispatch) => {
-    return (itemName, itemPriority) => {
-        dispatch(addItem(itemName, itemPriority))
+    return (itemName, itemPriority, dueDate) => {
+        dispatch(addItem(itemName, itemPriority, dueDate))
     }
 }
 

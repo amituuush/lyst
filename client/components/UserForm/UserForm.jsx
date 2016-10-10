@@ -1,23 +1,31 @@
 const React = require('react');
 require('./user-form.less');
-
+var DatePicker = require('react-datepicker');
+var moment = require('moment');
+require('react-datepicker/dist/react-datepicker.css');
 
 var UserForm = React.createClass({
     getInitialState: function() {
         return {
             name: '',
-            priority: ''
+            priority: '',
+            dueDatePlaceholder: moment(),
+            dueDate: moment()
         }
     },
 
     _handleSubmit: function(event) {
         event.preventDefault();
-        if(this.state.name && this.state.priority) {
-            this.props.addItem(this.state.name, this.state.priority);
+        if(this.state.name) {
+            this.props.addItem(this.state.name, this.state.priority, this.state.dueDate);
+        } else {
+            alert('You must enter in a task name and priority!');
         }
         this.setState({
             name: '',
-            priority: ''
+            priority: '',
+            dueDatePlaceholder: moment(),
+            dueDate: ''
         })
     },
 
@@ -29,7 +37,15 @@ var UserForm = React.createClass({
         this.setState({priority: event.target.value});
     },
 
+    _handleDateChange: function(date, callback) {
+        this.setState({
+            dueDatePlaceholder: date,
+            dueDate: date.format('L')
+        });
+    },
+
     render: function(){
+
         return (
         <div>
             <form onSubmit={this._handleSubmit}>
@@ -45,14 +61,16 @@ var UserForm = React.createClass({
                 <select name="priority" onChange={this._handlePriorityChange} value={this.state.priority}>
                     <option value="default" disabled>Priority</option>
                     <option value="low" >Low</option>
-                    <option value="medium">Medium</option>
+                <option value="med">Med</option>
                     <option value="high">High</option>
                 </select>
+                <DatePicker
+                    selected={this.state.dueDatePlaceholder}
+                    dateFormatCalendar="string"
+                    placeholderText="Due date (optional)"
+                    onChange={this._handleDateChange} />
             </form>
         </div>
-        //
-        // <select className="milk-type" name="milk-type" value={this.props.value} onChange={this.props.handleChange}>
-        //         <option value="default" disabled>Milk Type</option>
         )
     }
 });
