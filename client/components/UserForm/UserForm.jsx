@@ -44,10 +44,14 @@ var UserForm = React.createClass({
         });
     },
 
+    _handleDatePickerClick: function() {
+
+    },
+
     render: function(){
 
         return (
-        <div>
+        <div className="user-form-container">
             <form onSubmit={this._handleSubmit}>
                 <div onClick={this.props.clearList} className='reset-list'>
                     <i className="fa fa-trash-o fa-lg"></i>
@@ -58,18 +62,19 @@ var UserForm = React.createClass({
                 <button type="submit" value="Add item" className='add-item'>
                     <i className="fa fa-plus fa-3x"></i>
                 </button>
-                <select name="priority" onChange={this._handlePriorityChange} value={this.state.priority}>
+                <select className="priority-select" name="priority" onChange={this._handlePriorityChange} value={this.state.priority}>
                     <option value="default" disabled>Priority</option>
                     <option value="low" >Low</option>
                 <option value="med">Med</option>
                     <option value="high">High</option>
                 </select>
                 <DatePicker
+                    className="date-picker"
+                    todayButton={'Today'}
                     selected={this.state.dueDatePlaceholder}
-                    dateFormatCalendar="string"
                     placeholderText="Due date (optional)"
                     onChange={this._handleDateChange} />
-                <div className="date-cover"></div>
+                <div className="date-cover">Due date</div>
             </form>
         </div>
         )

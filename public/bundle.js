@@ -25369,11 +25369,13 @@
 	        });
 	    },
 
+	    _handleDatePickerClick: function _handleDatePickerClick() {},
+
 	    render: function render() {
 
 	        return React.createElement(
 	            'div',
-	            null,
+	            { className: 'user-form-container' },
 	            React.createElement(
 	                'form',
 	                { onSubmit: this._handleSubmit },
@@ -25390,7 +25392,7 @@
 	                ),
 	                React.createElement(
 	                    'select',
-	                    { name: 'priority', onChange: this._handlePriorityChange, value: this.state.priority },
+	                    { className: 'priority-select', name: 'priority', onChange: this._handlePriorityChange, value: this.state.priority },
 	                    React.createElement(
 	                        'option',
 	                        { value: 'default', disabled: true },
@@ -25413,11 +25415,16 @@
 	                    )
 	                ),
 	                React.createElement(DatePicker, {
+	                    className: 'date-picker',
+	                    todayButton: 'Today',
 	                    selected: this.state.dueDatePlaceholder,
-	                    dateFormatCalendar: 'string',
 	                    placeholderText: 'Due date (optional)',
 	                    onChange: this._handleDateChange }),
-	                React.createElement('div', { className: 'date-cover' })
+	                React.createElement(
+	                    'div',
+	                    { className: 'date-cover' },
+	                    'Due date'
+	                )
 	            )
 	        );
 	    }
@@ -25460,7 +25467,7 @@
 
 
 	// module
-	exports.push([module.id, ".item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\nbutton.add-item {\n  background: transparent;\n  border: none;\n  outline: none;\n  width: 40px;\n  height: 40px;\n  position: relative;\n  top: 13px;\n  left: 10px;\n}\nbutton.add-item:hover {\n  cursor: pointer;\n}\nbutton.add-item .fa-plus {\n  color: #3FB083;\n  position: relative;\n  bottom: 6px;\n  right: 7px;\n}\nbutton.add-item .fa-plus:hover {\n  color: #52c195;\n}\n.reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.reset-list:hover {\n  cursor: pointer;\n}\n.reset-list .fa-trash-o {\n  color: #962D2D;\n}\n.reset-list .fa-trash-o:hover {\n  color: #b13535;\n}\n.date-cover {\n  display: inline-block;\n  height: 20px;\n  background: blue;\n  width: 4em;\n  z-index: 999;\n}\n", ""]);
+	exports.push([module.id, ".user-form-container {\n  border-bottom: 1px solid #1A232B;\n}\n.item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  margin-bottom: 0.25em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #fff;\n}\n.item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\nbutton.add-item {\n  background: transparent;\n  border: none;\n  outline: none;\n  width: 40px;\n  height: 40px;\n  position: relative;\n  top: 13px;\n  left: 10px;\n}\nbutton.add-item:hover {\n  cursor: pointer;\n}\nbutton.add-item .fa-plus {\n  color: #3FB083;\n  position: relative;\n  bottom: 6px;\n  right: 7px;\n}\nbutton.add-item .fa-plus:hover {\n  color: #52c195;\n}\n.reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.reset-list:hover {\n  cursor: pointer;\n}\n.reset-list .fa-trash-o {\n  color: #962D2D;\n}\n.reset-list .fa-trash-o:hover {\n  color: #b13535;\n}\n.priority-select {\n  background: #4F6373;\n  font-size: 1em;\n  color: #A9A9A9;\n  position: relative;\n  right: 10px;\n}\n.priority-select:hover {\n  cursor: pointer;\n}\n.priority-select:focus {\n  outline: none;\n}\n.date-cover {\n  width: 5em;\n  height: 20px;\n  margin: 0 auto;\n  background: #4F6373;\n  z-index: 999;\n  color: #A9A9A9;\n  font-size: 1em;\n  font-weight: 400;\n  padding: 0.2em;\n  position: relative;\n  bottom: 27px;\n}\n.date-picker {\n  background: #4F6373;\n  position: relative;\n  right: 5px;\n  border: none;\n  font-size: 1em;\n  border-radius: 3px;\n  margin-top: 0.5em;\n  color: #A9A9A9;\n  padding: 0.4em 0.5em 0.4em 0.5em;\n  margin-left: 1em;\n}\n.date-picker:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n", ""]);
 
 	// exports
 
