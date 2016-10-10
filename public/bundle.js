@@ -25124,43 +25124,62 @@
 
 	    render: function render() {
 
-	        switch (this.props.filter) {
-	            case 'all':
-	                var items = this.props.items.map(function (arrayItem) {
-	                    return React.createElement(ListItem, {
-	                        deleteItem: this.props.deleteItem,
-	                        key: arrayItem._id,
-	                        item: arrayItem,
-	                        markComplete: this.props.markComplete });
-	                }, this);
-	                break;
+	        if (this.props.items.length) {
+	            switch (this.props.filter) {
+	                case 'all':
+	                    var items = this.props.items.map(function (arrayItem) {
+	                        return React.createElement(ListItem, {
+	                            deleteItem: this.props.deleteItem,
+	                            key: arrayItem._id,
+	                            item: arrayItem,
+	                            markComplete: this.props.markComplete });
+	                    }, this);
+	                    break;
 
-	            case 'active':
-	                var filteredItems = this.props.items.filter(function (item) {
-	                    return item.completed === false;
-	                });
-	                var items = filteredItems.map(function (arrayItem) {
-	                    return React.createElement(ListItem, {
-	                        deleteItem: this.props.deleteItem,
-	                        key: arrayItem._id,
-	                        item: arrayItem,
-	                        markComplete: this.props.markComplete });
-	                }, this);
-	                break;
+	                case 'active':
+	                    var filteredItems = this.props.items.filter(function (item) {
+	                        return item.completed === false;
+	                    });
+	                    var items = filteredItems.map(function (arrayItem) {
+	                        return React.createElement(ListItem, {
+	                            deleteItem: this.props.deleteItem,
+	                            key: arrayItem._id,
+	                            item: arrayItem,
+	                            markComplete: this.props.markComplete });
+	                    }, this);
+	                    break;
 
-	            case 'completed':
-	                var filteredItems = this.props.items.filter(function (item) {
-	                    return item.completed === true;
-	                });
-	                var items = filteredItems.map(function (arrayItem) {
-	                    return React.createElement(ListItem, {
-	                        deleteItem: this.props.deleteItem,
-	                        key: arrayItem._id,
-	                        item: arrayItem,
-	                        markComplete: this.props.markComplete });
-	                }, this);
-	                break;
+	                case 'completed':
+	                    var filteredItems = this.props.items.filter(function (item) {
+	                        return item.completed === true;
+	                    });
+	                    var items = filteredItems.map(function (arrayItem) {
+	                        return React.createElement(ListItem, {
+	                            deleteItem: this.props.deleteItem,
+	                            key: arrayItem._id,
+	                            item: arrayItem,
+	                            markComplete: this.props.markComplete });
+	                    }, this);
+	                    break;
+	            }
+	        } else {
+	            var items = React.createElement(
+	                'div',
+	                { className: 'inbox-container' },
+	                React.createElement('i', { className: 'fa fa-inbox fa-5x', 'aria-hidden': 'true' }),
+	                React.createElement(
+	                    'div',
+	                    { className: 'inbox-greeting' },
+	                    'Woohoo! Time to relax!'
+	                )
+	            );
 	        }
+
+	        var test = React.createElement(
+	            'div',
+	            null,
+	            'Hello'
+	        );
 
 	        return React.createElement(
 	            'ul',
@@ -25302,7 +25321,7 @@
 
 
 	// module
-	exports.push([module.id, ".style-complete {\n  text-decoration: line-through;\n  color: #222F3B !important;\n  transition: color 0.25s ease-in-out;\n  -moz-transition: color 0.25s ease-in-out;\n  -webkit-transition: color 0.25s ease-in-out;\n}\n.list-item-parent li {\n  list-style: none;\n  border-bottom: 2px solid #1C272E;\n  text-align: left;\n  padding-top: 0.6em;\n  padding-bottom: 0.25em;\n}\n.list-item-parent li .list-item {\n  display: inline-block;\n  font-size: 1.5em;\n  color: #e5e5e5;\n}\n.list-item-parent li .list-item-text {\n  font-size: 1.25em;\n  color: #9ba1a3;\n}\n.list-item-parent li .list-item-text .list-item-other {\n  line-height: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .list-item-priority {\n  font-size: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-low {\n  color: blue;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-med {\n  color: yellow;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-high {\n  color: #962D2D;\n}\n.list-item-parent li .list-item-text .list-item-other #list-item-due-date {\n  font-size: 0.6em;\n  margin-right: 1em;\n}\n.list-item-parent li button {\n  background: transparent;\n  border: none;\n  outline: none;\n}\n.list-item-parent li button:hover {\n  cursor: pointer;\n}\n.list-item-parent li button.delete-button {\n  width: 20px;\n  height: 20px;\n  margin-left: 10px;\n}\n.list-item-parent li button.delete-button .fa-times {\n  color: #962D2D;\n  right: 6px;\n}\n.list-item-parent li button.delete-button .fa-times:hover {\n  color: #b13535;\n}\n.list-item-parent li button.check-button {\n  float: right;\n  position: relative;\n  bottom: 5px;\n}\n.list-item-parent li button.check-button .fa-check-square {\n  color: #3FB083;\n}\n.list-item-parent li button.check-button .fa-check-square:hover {\n  color: #52c195;\n}\n", ""]);
+	exports.push([module.id, ".style-complete {\n  text-decoration: line-through;\n  color: #222F3B !important;\n  transition: color 0.25s ease-in-out;\n  -moz-transition: color 0.25s ease-in-out;\n  -webkit-transition: color 0.25s ease-in-out;\n}\n.list-item-parent li {\n  list-style: none;\n  border-bottom: 2px solid #1C272E;\n  text-align: left;\n  padding-top: 0.6em;\n  padding-bottom: 0.25em;\n}\n.list-item-parent li .list-item {\n  display: inline-block;\n  font-size: 1.5em;\n  color: #e5e5e5;\n}\n.list-item-parent li .list-item-text {\n  font-size: 1.25em;\n  color: #9ba1a3;\n}\n.list-item-parent li .list-item-text .list-item-other {\n  line-height: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .list-item-priority {\n  font-size: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-low {\n  color: blue;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-med {\n  color: yellow;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-high {\n  color: #962D2D;\n}\n.list-item-parent li .list-item-text .list-item-other #list-item-due-date {\n  font-size: 0.6em;\n  margin-right: 1em;\n}\n.list-item-parent li button {\n  background: transparent;\n  border: none;\n  outline: none;\n}\n.list-item-parent li button:hover {\n  cursor: pointer;\n}\n.list-item-parent li button.delete-button {\n  margin-left: 10px;\n  position: relative;\n  bottom: 3px;\n}\n.list-item-parent li button.delete-button .fa-times {\n  color: #9d2f2f;\n  right: 6px;\n}\n.list-item-parent li button.delete-button .fa-times:hover {\n  color: #B13535;\n}\n.list-item-parent li button.check-button {\n  float: right;\n  position: relative;\n  bottom: 5px;\n}\n.list-item-parent li button.check-button .fa-check-square {\n  color: #3FB083;\n}\n.list-item-parent li button.check-button .fa-check-square:hover {\n  color: #52c195;\n}\n", ""]);
 
 	// exports
 
@@ -25342,7 +25361,7 @@
 
 
 	// module
-	exports.push([module.id, ".list-ul {\n  padding: 0;\n}\n", ""]);
+	exports.push([module.id, ".list-ul {\n  padding: 0;\n}\n.inbox-container {\n  color: #9BA1A3;\n  text-align: center;\n}\n.inbox-container .inbox-greeting {\n  font-size: 1.5em;\n}\n", ""]);
 
 	// exports
 
@@ -25515,7 +25534,7 @@
 
 
 	// module
-	exports.push([module.id, ".user-form-container {\n  border-bottom: 1px solid #1A232B;\n}\n.user-form-container .user-form-top {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-top .item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  margin-bottom: 0.25em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #fff;\n}\n.user-form-container .user-form-top .item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n.user-form-container .user-form-top button.add-item {\n  background: #3FB083;\n  border: none;\n  outline: none;\n  padding: 0.7em 1em 0.7em 1em;\n  border-radius: 5px;\n  color: #1A232B;\n}\n.user-form-container .user-form-top button.add-item:hover {\n  cursor: pointer;\n  background: #52c195;\n}\n.user-form-container .user-form-top .reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.user-form-container .user-form-top .reset-list:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-top .reset-list .fa-trash {\n  color: #B13535;\n}\n.user-form-container .user-form-top .reset-list .fa-trash:hover {\n  color: #c43b3b;\n}\n.user-form-container .user-form-bottom {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-bottom .priority-select {\n  background: #4F6373;\n  font-size: 1em;\n  color: #A9A9A9;\n  position: relative;\n  right: 10px;\n  height: 31px;\n  border: none;\n}\n.user-form-container .user-form-bottom .priority-select:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .priority-select:focus {\n  outline: none;\n}\n.user-form-container .user-form-bottom .date-picker {\n  background: #4F6373;\n  position: relative;\n  right: 5px;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n  margin-top: 0.5em;\n  color: #A9A9A9;\n  padding: 0.4em 0.5em 0.4em 0.5em;\n  margin-left: 1em;\n  margin-bottom: 1em;\n}\n.user-form-container .user-form-bottom .date-picker:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n", ""]);
+	exports.push([module.id, ".user-form-container {\n  border-bottom: 1px solid #1A232B;\n}\n.user-form-container .user-form-top {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-top .item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  margin-bottom: 0.25em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #fff;\n}\n.user-form-container .user-form-top .item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n.user-form-container .user-form-top button.add-item {\n  background: #3FB083;\n  border: none;\n  outline: none;\n  padding: 0.7em 1em 0.7em 1em;\n  border-radius: 5px;\n  color: #1A232B;\n}\n.user-form-container .user-form-top button.add-item:hover {\n  cursor: pointer;\n  background: #52c195;\n}\n.user-form-container .user-form-top .reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.user-form-container .user-form-top .reset-list:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-top .reset-list .fa-trash {\n  color: #B13535;\n}\n.user-form-container .user-form-top .reset-list .fa-trash:hover {\n  color: #c43b3b;\n}\n.user-form-container .user-form-bottom {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-bottom .priority-select {\n  background: #4F6373;\n  font-size: 1em;\n  color: #A9A9A9;\n  position: relative;\n  right: 10px;\n  height: 31px;\n  border: none;\n}\n.user-form-container .user-form-bottom .priority-select:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .priority-select:focus {\n  outline: none;\n}\n.user-form-container .user-form-bottom .date-picker {\n  background: #4F6373;\n  position: relative;\n  right: 5px;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n  margin-top: 0.5em;\n  color: #A9A9A9;\n  padding: 0.4em 0.5em 0.4em 0.5em;\n  margin-left: 1em;\n  margin-bottom: 1em;\n}\n.user-form-container .user-form-bottom .date-picker:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n@media only screen and (min-width: 900px) {\n  .user-form-container .user-form-top .item-input {\n    max-width: 20em;\n  }\n}\n", ""]);
 
 	// exports
 
@@ -54681,7 +54700,7 @@
 	        } else if (itemsLeft.length === 1) {
 	            itemsLeftText = itemsLeft.length + ' item left';
 	        } else {
-	            itemsLeftText = 'Woohoo! Time to relax!';
+	            itemsLeftText = '0 items left';
 	        }
 
 	        return React.createElement(

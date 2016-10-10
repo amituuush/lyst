@@ -21,7 +21,7 @@ var ItemsLeft = React.createClass({
         } else if (itemsLeft.length === 1) {
           itemsLeftText = itemsLeft.length + ' item left';
         } else {
-          itemsLeftText = 'Woohoo! Time to relax!';
+          itemsLeftText = '0 items left';
         }
 
         return (
