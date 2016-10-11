@@ -1,4 +1,5 @@
 const React = require('react');
+const ListContainer = require('../ListContainer/ListContainer');
 const ListItemContainer = require('../ListItemContainer/ListItemContainer');
 const UserForm = require('../UserForm/UserForm');
 require('./to-do-list-container.less');
@@ -28,7 +29,9 @@ var ToDoList = React.createClass({
   render: function () {
       return (
           <div id="container">
-                <div id="left-panel"></div>
+                <div id="left-panel">
+                    <ListContainer />
+                </div>
                 <div id="middle-panel">
                     <div className="middle-panel-content">
                       <header>Lyst</header>

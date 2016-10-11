@@ -25030,6 +25030,7 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
+	var ListContainer = __webpack_require__(445);
 	var ListItemContainer = __webpack_require__(206);
 	var UserForm = __webpack_require__(212);
 	__webpack_require__(432);
@@ -25062,7 +25063,11 @@
 	        return React.createElement(
 	            'div',
 	            { id: 'container' },
-	            React.createElement('div', { id: 'left-panel' }),
+	            React.createElement(
+	                'div',
+	                { id: 'left-panel' },
+	                React.createElement(ListContainer, null)
+	            ),
 	            React.createElement(
 	                'div',
 	                { id: 'middle-panel' },
@@ -54961,6 +54966,152 @@
 	};
 
 	module.exports = { filterReducer: filterReducer };
+
+/***/ },
+/* 445 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var List = __webpack_require__(448);
+	__webpack_require__(446);
+
+	var ListContainer = React.createClass({
+	    displayName: 'ListContainer',
+
+
+	    propTypes: {},
+
+	    render: function render() {
+
+	        return React.createElement(
+	            'div',
+	            { className: 'list-container-container' },
+	            React.createElement(
+	                'h2',
+	                null,
+	                'My Lysts'
+	            ),
+	            React.createElement(List, { listName: 'Grocery' }),
+	            React.createElement(List, { listName: 'Shopping' }),
+	            React.createElement(List, { listName: 'Vacation' }),
+	            React.createElement(List, { listName: 'Work' })
+	        );
+	    }
+	});
+
+	module.exports = ListContainer;
+
+/***/ },
+/* 446 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(447);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(175)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-container.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-container.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 447 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(174)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".list-container-container {\n  width: 100%;\n  text-align: center;\n  margin-top: 6em;\n}\n.list-container-container h2 {\n  font-size: 2em;\n  color: #191919;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 448 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	// const ListItem = require('../ListItem/ListItem');
+	__webpack_require__(449);
+
+	var List = React.createClass({
+	    displayName: 'List',
+
+
+	    propTypes: {
+	        listName: React.PropTypes.string
+	    },
+
+	    render: function render() {
+
+	        return React.createElement(
+	            'div',
+	            { className: 'list' },
+	            this.props.listName
+	        );
+	    }
+	});
+
+	module.exports = List;
+
+/***/ },
+/* 449 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(450);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(175)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 450 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(174)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".list {\n  font-size: 1.5em;\n  color: #191919;\n}\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);
