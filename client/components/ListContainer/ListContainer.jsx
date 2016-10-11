@@ -17,6 +17,10 @@ var ListContainer = React.createClass({
                 <List listName="Shopping" />
                 <List listName="Vacation" />
                 <List listName="Work" />
+            <div className="list-input-container">
+                <input className="list-input" type="text" />
+                <i className="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+            </div>
             </div>
         )
     }

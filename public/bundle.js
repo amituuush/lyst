@@ -25325,7 +25325,7 @@
 
 
 	// module
-	exports.push([module.id, ".style-complete {\n  text-decoration: line-through;\n  color: #222F3B !important;\n  transition: color 0.25s ease-in-out;\n  -moz-transition: color 0.25s ease-in-out;\n  -webkit-transition: color 0.25s ease-in-out;\n}\n.list-item-parent li {\n  list-style: none;\n  border-bottom: 2px solid #1C272E;\n  text-align: left;\n  padding-top: 0.6em;\n  padding-bottom: 0.25em;\n}\n.list-item-parent li .list-item {\n  display: inline-block;\n  font-size: 1.5em;\n  color: #e5e5e5;\n}\n.list-item-parent li .list-item-text {\n  font-size: 1.25em;\n  color: #9ba1a3;\n}\n.list-item-parent li .list-item-text .list-item-other {\n  line-height: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .list-item-priority {\n  font-size: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-low {\n  color: blue;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-med {\n  color: yellow;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-high {\n  color: #962D2D;\n}\n.list-item-parent li .list-item-text .list-item-other #list-item-due-date {\n  font-size: 0.6em;\n  margin-right: 1em;\n}\n.list-item-parent li button {\n  background: transparent;\n  border: none;\n  outline: none;\n}\n.list-item-parent li button:hover {\n  cursor: pointer;\n}\n.list-item-parent li button.delete-button {\n  margin-left: 10px;\n  position: relative;\n  bottom: 3px;\n}\n.list-item-parent li button.delete-button .fa-times {\n  color: #9d2f2f;\n  right: 6px;\n}\n.list-item-parent li button.delete-button .fa-times:hover {\n  color: #B13535;\n}\n.list-item-parent li button.check-button {\n  float: right;\n  position: relative;\n  bottom: 5px;\n}\n.list-item-parent li button.check-button .fa-check-square {\n  color: #3FB083;\n}\n.list-item-parent li button.check-button .fa-check-square:hover {\n  color: #52c195;\n}\n", ""]);
+	exports.push([module.id, ".style-complete {\n  text-decoration: line-through;\n  color: #e5e5e5 !important;\n  transition: color 0.25s ease-in-out;\n  -moz-transition: color 0.25s ease-in-out;\n  -webkit-transition: color 0.25s ease-in-out;\n}\n.list-item-parent li {\n  list-style: none;\n  border-bottom: 2px solid #1C272E;\n  text-align: left;\n  padding-top: 0.6em;\n  padding-bottom: 0.25em;\n}\n.list-item-parent li .list-item {\n  display: inline-block;\n  font-size: 1.5em;\n  color: #1C272E;\n}\n.list-item-parent li .list-item-text {\n  font-size: 1.25em;\n  color: #747B7E;\n}\n.list-item-parent li .list-item-text .list-item-other {\n  line-height: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .list-item-priority {\n  font-size: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-low {\n  color: blue;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-med {\n  color: yellow;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-high {\n  color: #962D2D;\n}\n.list-item-parent li .list-item-text .list-item-other #list-item-due-date {\n  font-size: 0.6em;\n  margin-right: 1em;\n}\n.list-item-parent li button {\n  background: transparent;\n  border: none;\n  outline: none;\n}\n.list-item-parent li button:hover {\n  cursor: pointer;\n}\n.list-item-parent li button.delete-button {\n  margin-left: 10px;\n  position: relative;\n  bottom: 3px;\n}\n.list-item-parent li button.delete-button .fa-times {\n  color: #9d2f2f;\n  right: 6px;\n}\n.list-item-parent li button.delete-button .fa-times:hover {\n  color: #B13535;\n}\n.list-item-parent li button.check-button {\n  float: right;\n  position: relative;\n  bottom: 5px;\n}\n.list-item-parent li button.check-button .fa-check-square {\n  color: #3FB083;\n}\n.list-item-parent li button.check-button .fa-check-square:hover {\n  color: #52c195;\n}\n", ""]);
 
 	// exports
 
@@ -25538,7 +25538,7 @@
 
 
 	// module
-	exports.push([module.id, ".user-form-container {\n  border-bottom: 1px solid #1A232B;\n}\n.user-form-container .user-form-top {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-top .item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  margin-bottom: 0.25em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #fff;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top .item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n.user-form-container .user-form-top button.add-item {\n  background: #3FB083;\n  border: none;\n  outline: none;\n  padding: 0.7em 1em 0.7em 1em;\n  border-radius: 5px;\n  color: #1A232B;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top button.add-item:hover {\n  cursor: pointer;\n  background: #52c195;\n}\n.user-form-container .user-form-top .reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.user-form-container .user-form-top .reset-list:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-top .reset-list .fa-trash {\n  color: #B13535;\n}\n.user-form-container .user-form-top .reset-list .fa-trash:hover {\n  color: #c43b3b;\n}\n.user-form-container .user-form-bottom {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-bottom .priority-select {\n  background: #4F6373;\n  font-size: 1em;\n  color: #A9A9A9;\n  position: relative;\n  right: 10px;\n  height: 31px;\n  border: none;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .priority-select:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .priority-select:focus {\n  outline: none;\n}\n.user-form-container .user-form-bottom .date-picker {\n  background: #4F6373;\n  position: relative;\n  right: 5px;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n  margin-top: 0.5em;\n  color: #A9A9A9;\n  padding: 0.4em 0.5em 0.4em 0.5em;\n  margin-left: 1em;\n  margin-bottom: 1em;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .date-picker:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n@media only screen and (min-width: 900px) {\n  .user-form-container .user-form-top .item-input {\n    max-width: 20em;\n  }\n}\n", ""]);
+	exports.push([module.id, ".user-form-container {\n  border-bottom: 1px solid #1A232B;\n}\n.user-form-container .user-form-top {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-top .item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  margin-bottom: 0.25em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #fff;\n  border: 1px solid #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #1C272E;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top .item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 2px #5DAEF2;\n}\n.user-form-container .user-form-top button.add-item {\n  background: #3FB083;\n  border: none;\n  outline: none;\n  padding: 0.7em 1em 0.7em 1em;\n  border-radius: 5px;\n  color: #fff;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top button.add-item:hover {\n  cursor: pointer;\n  background: #52c195;\n}\n.user-form-container .user-form-top .reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.user-form-container .user-form-top .reset-list:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-top .reset-list .fa-trash {\n  color: #B13535;\n}\n.user-form-container .user-form-top .reset-list .fa-trash:hover {\n  color: #c43b3b;\n}\n.user-form-container .user-form-bottom {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-bottom .priority-select {\n  background: #fff;\n  font-size: 1em;\n  color: #4F6373;\n  border: 1px solid #4F6373 !important;\n  position: relative;\n  right: 10px;\n  height: 31px;\n  border: none;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .priority-select:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .priority-select:focus {\n  outline: none;\n}\n.user-form-container .user-form-bottom .date-picker {\n  background: #fff;\n  position: relative;\n  right: 5px;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n  margin-top: 0.5em;\n  color: #4F6373;\n  border: 1px solid #4F6373;\n  padding: 0.4em 0.5em 0.4em 0.5em;\n  margin-left: 1em;\n  margin-bottom: 1em;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .date-picker:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .date-picker:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n@media only screen and (min-width: 900px) {\n  .user-form-container .user-form-top .item-input {\n    max-width: 20em;\n  }\n}\n", ""]);
 
 	// exports
 
@@ -54579,7 +54579,7 @@
 
 
 	// module
-	exports.push([module.id, "#container {\n  width: 100%;\n  height: 100%;\n}\n#container #left-panel {\n  display: inline-block;\n  width: 30%;\n  height: 100%;\n  background: #962D2D;\n  vertical-align: top;\n}\n#container #middle-panel {\n  display: inline-block;\n  width: 70%;\n  height: 100%;\n  margin: 0 auto 0 auto;\n  box-shadow: 0px 0px 2px #000;\n  background: #314251;\n  vertical-align: top;\n  overflow-x: hidden;\n}\n#container #middle-panel .middle-panel-content {\n  padding: 0 2em 0 2em;\n}\nheader {\n  text-align: center;\n  color: #fff;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n@media only screen and (min-width: 500px) {\n  #container #content {\n    width: 28em;\n    margin: 2em auto 0 auto;\n    padding: 1.3em;\n  }\n}\n", ""]);
+	exports.push([module.id, "#container {\n  width: 100%;\n  height: 100%;\n}\n#container #left-panel {\n  display: inline-block;\n  width: 30%;\n  height: 100%;\n  background: #C13331;\n  vertical-align: top;\n}\n#container #middle-panel {\n  display: inline-block;\n  width: 70%;\n  height: 100%;\n  margin: 0 auto 0 auto;\n  box-shadow: 0px 0px 2px #000;\n  background: #fff;\n  vertical-align: top;\n  overflow-x: hidden;\n}\n#container #middle-panel .middle-panel-content {\n  padding: 0 2em 0 2em;\n}\nheader {\n  text-align: center;\n  color: #1C272E;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n@media only screen and (min-width: 500px) {\n  #container #content {\n    width: 28em;\n    margin: 2em auto 0 auto;\n    padding: 1.3em;\n  }\n}\n", ""]);
 
 	// exports
 
@@ -54668,7 +54668,7 @@
 
 
 	// module
-	exports.push([module.id, ".control-bar-container {\n  width: 100%;\n  margin: 0 auto;\n  border-radius: 3px;\n  margin-top: 1em;\n  color: #9BA1A3;\n  padding: 0.4em;\n}\n.control-bar-container #items-left {\n  display: inline-block;\n  text-align: left;\n}\n.control-bar-container .filter-button {\n  display: inline-block;\n  margin-left: 1.5em;\n  padding: 0.25em;\n  border: 1px solid #314251;\n  position: relative;\n  left: -23px;\n}\n.control-bar-container .filter-button:hover {\n  cursor: pointer;\n  border: 1px solid #4F6373;\n  border-radius: 3px;\n}\n.control-bar-container .active-filter {\n  border: 1px solid #9BA1A3;\n  border-radius: 3px;\n}\n.control-bar-container .active-filter:hover {\n  border: 1px solid #9BA1A3;\n}\n", ""]);
+	exports.push([module.id, ".control-bar-container {\n  width: 100%;\n  margin: 0 auto;\n  border-radius: 3px;\n  margin-top: 1em;\n  color: #4F6373;\n  padding: 0.4em;\n}\n.control-bar-container #items-left {\n  display: inline-block;\n  text-align: left;\n}\n.control-bar-container .filter-button {\n  display: inline-block;\n  margin-left: 1.5em;\n  padding: 0.25em;\n  border: 1px solid #fff;\n  position: relative;\n  left: -23px;\n}\n.control-bar-container .filter-button:hover {\n  cursor: pointer;\n  border: 1px solid #9BA1A3;\n  border-radius: 3px;\n}\n.control-bar-container .active-filter {\n  border: 1px solid #4F6373;\n  border-radius: 3px;\n}\n.control-bar-container .active-filter:hover {\n  border: 1px solid #4F6373;\n}\n", ""]);
 
 	// exports
 
@@ -54763,7 +54763,7 @@
 
 
 	// module
-	exports.push([module.id, ".items-left-container {\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 1em;\n  padding: 0.5em 0.5em 1em 0em;\n}\n.items-left-container #items-left {\n  color: #9BA1A3;\n  display: inline-block;\n  float: left;\n}\n.items-left-container #clear-completed {\n  display: inline-block;\n  color: #9BA1A3;\n  float: right;\n}\n.items-left-container #clear-completed:hover {\n  cursor: pointer;\n  text-decoration: underline;\n}\n", ""]);
+	exports.push([module.id, ".items-left-container {\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 1em;\n  padding: 0.5em 0.5em 1em 0em;\n}\n.items-left-container #items-left {\n  color: #4F6373;\n  display: inline-block;\n  float: left;\n}\n.items-left-container #clear-completed {\n  display: inline-block;\n  color: #4F6373;\n  float: right;\n}\n.items-left-container #clear-completed:hover {\n  cursor: pointer;\n  text-decoration: underline;\n}\n", ""]);
 
 	// exports
 
@@ -54996,7 +54996,13 @@
 	            React.createElement(List, { listName: 'Grocery' }),
 	            React.createElement(List, { listName: 'Shopping' }),
 	            React.createElement(List, { listName: 'Vacation' }),
-	            React.createElement(List, { listName: 'Work' })
+	            React.createElement(List, { listName: 'Work' }),
+	            React.createElement(
+	                'div',
+	                { className: 'list-input-container' },
+	                React.createElement('input', { className: 'list-input', type: 'text' }),
+	                React.createElement('i', { className: 'fa fa-plus-circle fa-3x', 'aria-hidden': 'true' })
+	            )
 	        );
 	    }
 	});
@@ -55038,7 +55044,7 @@
 
 
 	// module
-	exports.push([module.id, ".list-container-container {\n  width: 100%;\n  text-align: center;\n  margin-top: 6em;\n}\n.list-container-container h2 {\n  font-size: 2em;\n  color: #191919;\n}\n", ""]);
+	exports.push([module.id, ".list-container-container {\n  margin-top: 6em;\n  padding: 0 1em 0 1em;\n}\n.list-container-container h2 {\n  font-size: 2em;\n  text-align: center;\n  color: #E5E5E5;\n  border-bottom: 1px solid #E5E5E5;\n}\n.list-container-container .list-input-container {\n  width: 100%;\n  text-align: left;\n}\n.list-container-container .list-input-container .list-input {\n  margin-top: 1em;\n  padding: 0.5em;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n}\n.list-container-container .list-input-container .list-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n.list-container-container .list-input-container .fa-plus-circle {\n  color: #3FB083;\n  vertical-align: middle;\n  margin-left: 0.3em;\n}\n.list-container-container .list-input-container .fa-plus-circle:hover {\n  color: #52c195;\n  cursor: pointer;\n}\n", ""]);
 
 	// exports
 
@@ -55066,7 +55072,12 @@
 	        return React.createElement(
 	            'div',
 	            { className: 'list' },
-	            this.props.listName
+	            React.createElement(
+	                'div',
+	                { className: 'list-name' },
+	                this.props.listName
+	            ),
+	            React.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' })
 	        );
 	    }
 	});
@@ -55108,7 +55119,7 @@
 
 
 	// module
-	exports.push([module.id, ".list {\n  font-size: 1.5em;\n  color: #191919;\n}\n", ""]);
+	exports.push([module.id, ".list .list-name {\n  font-size: 1.5em;\n  color: #E5E5E5;\n  padding-bottom: 0.5em;\n  display: inline-block;\n}\n.list .list-name:hover {\n  text-decoration: underline;\n  cursor: pointer;\n}\n.list .fa-times {\n  float: right;\n  color: #E5E5E5;\n}\n.list .fa-times:hover {\n  cursor: pointer;\n}\n", ""]);
 
 	// exports
 

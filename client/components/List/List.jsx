@@ -12,7 +12,8 @@ var List = React.createClass({
 
         return (
             <div className="list">
-                {this.props.listName}
+                <div className="list-name">{this.props.listName}</div>
+                <i className="fa fa-times" aria-hidden="true"></i>
             </div>
         )
     }
