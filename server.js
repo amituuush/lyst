@@ -20,7 +20,41 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 // --------------------------------------------
+// --------------------------------------------
+// --------------------------------------------
 
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var passport = require('passport');
+
+// mongoose.connect(configDB.url);
+require('./config/passport')(passport);
+
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(session({secret: 'anystringoftext',
+				 saveUninitialized: true,
+				 resave: true}));
+
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
+
+
+
+// app.use('/', function(req, res){
+// 	res.send('Our First Express program!');
+// 	console.log(req.cookies);
+// 	console.log('================');
+// 	console.log(req.session);
+// });
+
+require('./app/routes.js')(app, passport);
+
+
+// --------------------------------------------
+// --------------------------------------------
+// --------------------------------------------
 router.use(function(req, res, next) { // every api call will run through this
   console.log('Something is happening.');
   next(); // make sure we go to the next routes and don't stop here
@@ -32,6 +66,7 @@ router.get('/', function(req, res) {
 
 router.route('/items')
   .get(function(req, res) {
+	  console.log(req.user);
     Item.find(function(err, items) {
       if (err) {
         res.send(err);
