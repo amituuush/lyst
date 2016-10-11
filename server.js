@@ -3,34 +3,16 @@ var app = express();
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 var mongoose = require('mongoose');
-var Item = require('./app/models/items');
-
-MongoURI = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://amituuush:lyst123!@ds025409.mlab.com:25409/lyst'
-
-// connect to our database
-mongoose.connect(MongoURI);
-
-// creates special route for handling static files (.js, .html, .css). These will automatically be served from public directory when something is requested
-app.use(express.static(__dirname + '/public'));
-
-var port = process.env.PORT || 7007;
-var router = express.Router();
-
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json());
-
-// --------------------------------------------
-// --------------------------------------------
-// --------------------------------------------
-
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
+var router = require('./routers/api')
 
-// mongoose.connect(configDB.url);
+const MongoURI = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://amituuush:lyst123!@ds025409.mlab.com:25409/lyst'
+mongoose.connect(MongoURI);
+
 require('./config/passport')(passport);
 
-app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(session({secret: 'anystringoftext',
 				 saveUninitialized: true,
@@ -39,113 +21,13 @@ app.use(session({secret: 'anystringoftext',
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
-
-
-
-// app.use('/', function(req, res){
-// 	res.send('Our First Express program!');
-// 	console.log(req.cookies);
-// 	console.log('================');
-// 	console.log(req.session);
-// });
-
 require('./app/routes.js')(app, passport);
 
 
-// --------------------------------------------
-// --------------------------------------------
-// --------------------------------------------
-router.use(function(req, res, next) { // every api call will run through this
-  console.log('Something is happening.');
-  next(); // make sure we go to the next routes and don't stop here
-});
+// creates special route for handling static files (.js, .html, .css). These will automatically be served from public directory when something is requested
+app.use(express.static(__dirname + '/public'));
 
-router.get('/', function(req, res) {
-  res.json({message: 'welcome to our api!'});
-});
-
-router.route('/items')
-  .get(function(req, res) {
-	  console.log(req.user);
-    Item.find(function(err, items) {
-      if (err) {
-        res.send(err);
-      }
-      res.json(items);
-    })
-  })
-
-  .post(function(req, res) {
-    var item = new Item();
-    item.name = req.body.name;
-    item.priority = req.body.priority;
-    item.dueDate = req.body.dueDate
-    item.completed = false;
-    console.log(item);
-    item.save(function(err, result) {
-      if (err) {
-        res.send(err);
-      }
-      res.json(result);
-    });
-  })
-
-  .delete(function(req, res) {
-      Item.remove({}, function(err, items) {
-        if (err) {
-          res.send(err);
-        }
-        res.json(items);
-      })
-  });
-
-router.route('/items/completed')
-    .delete(function(req, res) {
-        Item.remove({completed: true}, function(err, items) {
-          if (err) {
-            res.send(err);
-          }
-          res.json(items);
-        })
-    });
-
-
-
-router.route('/items/:item_id')
-  .get(function(req, res) {
-    Item.findById(req.params.item_id, function(err, item) {
-      if (err) {
-        res.send(err);
-      }
-      res.json(item);
-    })
-  })
-
-  .put(function(req, res) {
-    Item.findById(req.params.item_id, function(err, item) {
-      if (err) {
-        res.send(err);
-      }
-      item.completed = true;
-      item.save(function(err, result) {
-        if (err) {
-          res.send(err);
-        }
-        res.json(result);
-      });
-    });
-  })
-
-  .delete(function(req, res) {
-    Item.findByIdAndRemove(req.params.item_id, function(err, item) {
-      if (err) {
-        res.send(err);
-      }
-      res.json(item);
-    });
-  });
-
-
+var port = process.env.PORT || 7007;
 // REGISTER OUR ROUTES ----------------------
 // all of our routes will be prefixed with /api
 
