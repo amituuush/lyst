@@ -75,6 +75,7 @@ router.get('/', function(req, res) {
 
 router.route('/items')
   .get(function(req, res) {
+	  console.log(req.user);
     Item.find(function(err, items) {
       if (err) {
         res.send(err);

@@ -20,3 +20,6 @@ ReactDOM.render(
 // fix db on heroku
 // add user auth
 // toggle complete
+
+// FACEBOOK_CLIENT_ID AND FACEBOOK_CLIENT_SECRET env variables locally and on heroku
+// logout (see Tom's message)
