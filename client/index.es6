@@ -19,12 +19,12 @@ ReactDOM.render(
 
 // ability to sort by priority or due date
 // ability to star an item, see all starred items
-
+// move trash can to name of lyst
 
 
 // add clear completed button, component doesn't render, but it works on refresh
 // add user auth
-
+// make it mobile friendly
 
 // add "experience points"
 // send email an hour before task is due, 1 day before task is due, etc
