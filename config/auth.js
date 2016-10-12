@@ -5,6 +5,3 @@ module.exports = {
         'callbackURL': '/auth/facebook/callback'
     }
 }
-
-// var facebookID = process.env.FACEBOOK_CLIENT_ID
-// var FacebookSecret = process.env.FACEBOOK_CLIENT_SECRET;
