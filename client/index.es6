@@ -22,7 +22,7 @@ ReactDOM.render(
 // move trash can to name of lyst, change wording of clear list
 // toggle complete
 
-
+// if no date is entered on second item submit, due date gets set to nothing
 // add clear completed button, component doesn't render, but it works on refresh
 // make it mobile friendly
 
@@ -34,4 +34,3 @@ ReactDOM.render(
 // toggle complete
 
 // FACEBOOK_CLIENT_ID AND FACEBOOK_CLIENT_SECRET env variables locally and on heroku
-// logout (see Tom's message)

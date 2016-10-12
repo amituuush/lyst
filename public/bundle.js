@@ -73,10 +73,11 @@
 
 	// ability to sort by priority or due date
 	// ability to star an item, see all starred items
-	// move trash can to name of lyst
+	// move trash can to name of lyst, change wording of clear list
+	// toggle complete
 
+	// if no date is entered on second item submit, due date gets set to nothing
 	// add clear completed button, component doesn't render, but it works on refresh
-	// add user auth
 	// make it mobile friendly
 
 	// add "experience points"
@@ -87,7 +88,6 @@
 	// toggle complete
 
 	// FACEBOOK_CLIENT_ID AND FACEBOOK_CLIENT_SECRET env variables locally and on heroku
-	// logout (see Tom's message)
 
 /***/ },
 /* 1 */
@@ -25081,6 +25081,11 @@
 	                React.createElement(
 	                    'div',
 	                    { className: 'middle-panel-content' },
+	                    React.createElement(
+	                        'a',
+	                        { href: '/logout' },
+	                        React.createElement('i', { className: 'fa fa-sign-out fa-2x', 'aria-hidden': 'true' })
+	                    ),
 	                    React.createElement(
 	                        'header',
 	                        null,
@@ -54743,7 +54748,7 @@
 
 
 	// module
-	exports.push([module.id, "#container {\n  width: 100%;\n  height: 100%;\n}\n#container #left-panel {\n  display: inline-block;\n  width: 30%;\n  height: 100%;\n  background: #C13331;\n  vertical-align: top;\n}\n#container #middle-panel {\n  display: inline-block;\n  width: 70%;\n  height: 100%;\n  margin: 0 auto 0 auto;\n  background: #fff;\n  vertical-align: top;\n  overflow-x: hidden;\n}\n#container #middle-panel .middle-panel-content {\n  padding: 0 2em 0 2em;\n}\nheader {\n  text-align: center;\n  color: #1C272E;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n@media only screen and (min-width: 500px) {\n  #container #content {\n    width: 28em;\n    margin: 2em auto 0 auto;\n    padding: 1.3em;\n  }\n}\n", ""]);
+	exports.push([module.id, "#container {\n  width: 100%;\n  height: 100%;\n}\n#container #left-panel {\n  display: inline-block;\n  width: 30%;\n  height: 100%;\n  background: #C13331;\n  vertical-align: top;\n}\n#container #middle-panel {\n  display: inline-block;\n  width: 70%;\n  height: 100%;\n  margin: 0 auto 0 auto;\n  background: #fff;\n  vertical-align: top;\n  overflow-x: hidden;\n}\n#container #middle-panel .middle-panel-content {\n  padding: 0 2em 0 2em;\n}\n#container #middle-panel .middle-panel-content .fa-sign-out {\n  position: absolute;\n  right: 1em;\n  top: 1em;\n  color: #4F6373;\n}\n#container #middle-panel .middle-panel-content .fa-sign-out:hover {\n  color: #1C272E;\n}\nheader {\n  text-align: center;\n  color: #1C272E;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n@media only screen and (min-width: 500px) {\n  #container #content {\n    width: 28em;\n    margin: 2em auto 0 auto;\n    padding: 1.3em;\n  }\n}\n", ""]);
 
 	// exports
 

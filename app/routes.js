@@ -15,4 +15,9 @@ module.exports = function(app, passport){
 	  passport.authenticate('facebook', { successRedirect: '/',
 	                                      failureRedirect: '/' }));
 
+	app.get('/logout', function(req, res){
+		req.logout();
+		res.redirect('/');
+	});
+
 };

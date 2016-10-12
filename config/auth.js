@@ -1,10 +1,10 @@
 module.exports = {
     'facebookAuth': {
-        'clientID': '1615983338700382',
-        'clientSecret': 'bf469db832934137aa4dea2ba15f2bba',
+        'clientID': process.env.FACEBOOK_CLIENT_ID,
+        'clientSecret': process.env.FACEBOOK_CLIENT_SECRET,
         'callbackURL': '/auth/facebook/callback'
     }
 }
 
-// process.env.FACEBOOK_CLIENT_ID
-// process.env.FACEBOOK_CLIENT_SECRET
+// var facebookID = process.env.FACEBOOK_CLIENT_ID
+// var FacebookSecret = process.env.FACEBOOK_CLIENT_SECRET;
