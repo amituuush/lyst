@@ -18,7 +18,6 @@ module.exports = function(passport) {
 	    callbackURL: configAuth.facebookAuth.callbackURL
 	  },
 	  function(accessToken, refreshToken, profile, done) {
-		  console.log(profile);
 		  done(null, profile);
 	    }
 	));
