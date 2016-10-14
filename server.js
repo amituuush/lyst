@@ -5,7 +5,7 @@ var jsonParser = bodyParser.json();
 var mongoose = require('mongoose');
 var session = require('express-session');
 var passport = require('passport');
-var router = require('./routers/api')
+var router = require('./routers/api');
 
 const MongoURI = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://amituuush:lyst123!@ds025409.mlab.com:25409/lyst'
 mongoose.connect(MongoURI);
