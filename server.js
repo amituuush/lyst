@@ -3,7 +3,6 @@ var app = express();
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 var mongoose = require('mongoose');
-var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
 var router = require('./routers/api')
