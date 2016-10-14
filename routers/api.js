@@ -20,11 +20,7 @@ router.route('/items')
     item.priority = req.body.priority;
     item.dueDate = req.body.dueDate;
     item.completed = false;
-<<<<<<< HEAD
-    console.log(item.name);
-=======
     console.log(req.body);
->>>>>>> amit
     item.save(function(err, result) {
       if (err) {
         res.send(err);
