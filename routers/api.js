@@ -3,6 +3,7 @@ var router = express.Router();
 var Item = require('../app/models/items');
 
 
+
 router.route('/items')
   .get(function(req, res) {
     Item.find(function(err, items) {
@@ -19,7 +20,11 @@ router.route('/items')
     item.priority = req.body.priority;
     item.dueDate = req.body.dueDate;
     item.completed = false;
+<<<<<<< HEAD
     console.log(item.name);
+=======
+    console.log(req.body);
+>>>>>>> amit
     item.save(function(err, result) {
       if (err) {
         res.send(err);

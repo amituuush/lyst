@@ -12,18 +12,15 @@ mongoose.Promise = global.Promise;
 mongoose.connect(MongoURI);
 
 require('./config/passport')(passport);
-
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(session({secret: 'anystringoftext',
 				 saveUninitialized: true,
 				 resave: true}));
-
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-
 require('./app/routes.js')(app, passport);
 
-
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json())
 // creates special route for handling static files (.js, .html, .css). These will automatically be served from public directory when something is requested
 app.use(express.static(__dirname + '/public'));
 
