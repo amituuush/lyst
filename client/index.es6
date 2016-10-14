@@ -23,9 +23,10 @@ ReactDOM.render(
 // toggle complete
 
 // if no date is entered on second item submit, due date gets set to nothing
-// add clear completed button, component doesn't render, but it works on refresh
+// on clear completed button, component doesn't render, but it works on refresh
 // make it mobile friendly
 // edit item name
+// no way to set no due date
 
 // add "experience points"
 // send email an hour before task is due, 1 day before task is due, etc

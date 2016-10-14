@@ -79,9 +79,10 @@
 	// toggle complete
 
 	// if no date is entered on second item submit, due date gets set to nothing
-	// add clear completed button, component doesn't render, but it works on refresh
+	// on clear completed button, component doesn't render, but it works on refresh
 	// make it mobile friendly
 	// edit item name
+	// no way to set no due date
 
 	// add "experience points"
 	// send email an hour before task is due, 1 day before task is due, etc
@@ -24262,12 +24263,12 @@
 	        clearList: React.PropTypes.func
 	    },
 
-	    componentWillMount: function componentWillMount() {
-	        var todaysDate = moment().format('L');
-	        this.setState({
-	            dueDate: todaysDate
-	        });
-	    },
+	    // componentWillMount: function() {
+	    //     var todaysDate = moment().format('L');
+	    //     this.setState({
+	    //         dueDate: todaysDate
+	    //     })
+	    // },
 
 	    getInitialState: function getInitialState() {
 	        return {
@@ -24283,7 +24284,7 @@
 	        if (this.state.name) {
 	            this.props.addItem(this.state.name, this.state.priority, this.state.dueDate);
 	        } else {
-	            alert('You must enter in a task name!');
+	            alert('You forgot to enter in a task!');
 	        }
 	        this.setState({
 	            name: '',
@@ -24311,6 +24312,20 @@
 	    _handleDatePickerClick: function _handleDatePickerClick() {},
 
 	    render: function render() {
+
+	        if (this.state.dueDate) {
+	            var datePickerComponent = React.createElement(DatePicker, {
+	                className: 'date-picker',
+	                todayButton: 'Today',
+	                selected: this.state.dueDatePlaceholder,
+	                onChange: this._handleDateChange });
+	        } else {
+	            var datePickerComponent = React.createElement(DatePicker, {
+	                className: 'date-picker',
+	                todayButton: 'Today',
+	                placeholderText: 'Due date',
+	                onChange: this._handleDateChange });
+	        }
 
 	        return React.createElement(
 	            'div',
@@ -24360,12 +24375,7 @@
 	                            'High'
 	                        )
 	                    ),
-	                    React.createElement(DatePicker, {
-	                        className: 'date-picker',
-	                        todayButton: 'Today',
-	                        selected: this.state.dueDatePlaceholder,
-	                        placeholderText: 'Due date (optional)',
-	                        onChange: this._handleDateChange })
+	                    datePickerComponent
 	                )
 	            )
 	        );
@@ -24409,7 +24419,7 @@
 
 
 	// module
-	exports.push([module.id, ".user-form-container {\n  border-bottom: 1px solid #1A232B;\n}\n.user-form-container .user-form-top {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-top .item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  margin-bottom: 0.25em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #fff;\n  border: 1px solid #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #1C272E;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top .item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 2px #5DAEF2;\n}\n.user-form-container .user-form-top button.add-item {\n  background: #3FB083;\n  border: none;\n  outline: none;\n  padding: 0.7em 1em 0.7em 1em;\n  border-radius: 5px;\n  color: #fff;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top button.add-item:hover {\n  cursor: pointer;\n  background: #52c195;\n}\n.user-form-container .user-form-top .reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.user-form-container .user-form-top .reset-list:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-top .reset-list .fa-trash {\n  color: #CC4E4C;\n}\n.user-form-container .user-form-top .reset-list .fa-trash:hover {\n  color: #B13535;\n}\n.user-form-container .user-form-bottom {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-bottom .priority-select {\n  background: #fff;\n  font-size: 1em;\n  color: #4F6373;\n  border: 1px solid #4F6373 !important;\n  position: relative;\n  right: 10px;\n  height: 33px;\n  border: none;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .priority-select:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .priority-select:focus {\n  outline: none;\n}\n.user-form-container .user-form-bottom .date-picker {\n  background: #fff;\n  position: relative;\n  right: 5px;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n  margin-top: 0.5em;\n  color: #4F6373;\n  border: 1px solid #4F6373;\n  padding: 0.4em 0.5em 0.4em 0.5em;\n  margin-left: 1em;\n  margin-bottom: 1em;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .date-picker:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .date-picker:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n@media only screen and (min-width: 900px) {\n  .user-form-container .user-form-top .item-input {\n    max-width: 20em;\n  }\n}\n", ""]);
+	exports.push([module.id, ".user-form-container {\n  border-bottom: 1px solid #1A232B;\n}\n.user-form-container .user-form-top {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-top .item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  margin-bottom: 0.25em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #fff;\n  border: 1px solid #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #1C272E;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top .item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 2px #5DAEF2;\n}\n.user-form-container .user-form-top button.add-item {\n  background: #3FB083;\n  border: none;\n  outline: none;\n  padding: 0.7em 1em 0.7em 1em;\n  border-radius: 5px;\n  color: #fff;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top button.add-item:hover {\n  cursor: pointer;\n  background: #52c195;\n}\n.user-form-container .user-form-top .reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.user-form-container .user-form-top .reset-list:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-top .reset-list .fa-trash {\n  color: #CC4E4C;\n}\n.user-form-container .user-form-top .reset-list .fa-trash:hover {\n  color: #B13535;\n}\n.user-form-container .user-form-bottom {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-bottom .priority-select {\n  background: #fff;\n  font-size: 1em;\n  color: #4F6373;\n  border: 1px solid #4F6373 !important;\n  position: relative;\n  right: 10px;\n  height: 33px;\n  border: none;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .priority-select:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .priority-select:focus {\n  outline: none;\n}\n.user-form-container .user-form-bottom .date-picker {\n  background: #fff;\n  position: relative;\n  right: 5px;\n  text-align: center;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n  margin-top: 0.5em;\n  color: #4F6373;\n  border: 1px solid #4F6373;\n  padding: 0.4em 0.5em 0.4em 0.5em;\n  margin-left: 1em;\n  margin-bottom: 1em;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .date-picker:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .date-picker:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n@media only screen and (min-width: 900px) {\n  .user-form-container .user-form-top .item-input {\n    max-width: 20em;\n  }\n}\n", ""]);
 
 	// exports
 

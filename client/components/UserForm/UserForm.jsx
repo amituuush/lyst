@@ -11,12 +11,12 @@ var UserForm = React.createClass({
           clearList: React.PropTypes.func
     },
 
-    componentWillMount: function() {
-        var todaysDate = moment().format('L');
-        this.setState({
-            dueDate: todaysDate
-        })
-    },
+    // componentWillMount: function() {
+    //     var todaysDate = moment().format('L');
+    //     this.setState({
+    //         dueDate: todaysDate
+    //     })
+    // },
 
     getInitialState: function() {
         return {
@@ -32,7 +32,7 @@ var UserForm = React.createClass({
         if(this.state.name) {
             this.props.addItem(this.state.name, this.state.priority, this.state.dueDate);
         } else {
-            alert('You must enter in a task name!');
+            alert('You forgot to enter in a task!');
         }
         this.setState({
             name: '',
@@ -63,6 +63,20 @@ var UserForm = React.createClass({
 
     render: function(){
 
+        if (this.state.dueDate) {
+            var datePickerComponent = <DatePicker
+                className="date-picker"
+                todayButton={'Today'}
+                selected={this.state.dueDatePlaceholder}
+                onChange={this._handleDateChange} />
+        } else {
+            var datePickerComponent = <DatePicker
+                className="date-picker"
+                todayButton={'Today'}
+                placeholderText="Due date"
+                onChange={this._handleDateChange} />
+        }
+
         return (
         <div className="user-form-container">
             <form onSubmit={this._handleSubmit}>
@@ -84,12 +98,7 @@ var UserForm = React.createClass({
                     <option value="med">Med</option>
                         <option value="high">High</option>
                     </select>
-                    <DatePicker
-                        className="date-picker"
-                        todayButton={'Today'}
-                        selected={this.state.dueDatePlaceholder}
-                        placeholderText="Due date (optional)"
-                        onChange={this._handleDateChange} />
+                    {datePickerComponent}
                 </div>
             </form>
         </div>
