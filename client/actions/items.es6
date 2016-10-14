@@ -22,7 +22,7 @@ const fetchItems = () => {
 }
 
 const addItem = (itemName, itemPriority, dueDate) => {
-    // console.log(itemName, itemPriority, dueDate);
+    console.log(itemName, itemPriority, dueDate);
   return function(dispatch) {
     request.post('/api/items')
       .set('Content-Type', 'application/json')

@@ -8,21 +8,19 @@ var passport = require('passport');
 var router = require('./routers/api')
 
 const MongoURI = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://amituuush:lyst123!@ds025409.mlab.com:25409/lyst'
+mongoose.Promise = global.Promise;
 mongoose.connect(MongoURI);
 
 require('./config/passport')(passport);
-
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(session({secret: 'anystringoftext',
 				 saveUninitialized: true,
 				 resave: true}));
-
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-
 require('./app/routes.js')(app, passport);
 
-
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json())
 // creates special route for handling static files (.js, .html, .css). These will automatically be served from public directory when something is requested
 app.use(express.static(__dirname + '/public'));
 
@@ -34,7 +32,3 @@ app.use('/api', router);
 
 app.listen(port);
 console.log('Magic happens on port ' + port);
-
-// how would I create another parent URI like /api?
-// could we further modularize this by route?
-// tell Thomas about submitting multiple report typos on Thinkful
