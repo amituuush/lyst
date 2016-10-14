@@ -5,7 +5,9 @@ var jsonParser = bodyParser.json();
 var mongoose = require('mongoose');
 var session = require('express-session');
 var passport = require('passport');
-var router = require('./routers/api');
+var items = require('./routers/items');
+var itemsCompleted = require('./routers/itemsCompleted');
+var itemsItemId = require('./routers/itemsItemId');
 
 const MongoURI = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://amituuush:lyst123!@ds025409.mlab.com:25409/lyst'
 mongoose.Promise = global.Promise;
@@ -28,7 +30,9 @@ var port = process.env.PORT || 7007;
 // REGISTER OUR ROUTES ----------------------
 // all of our routes will be prefixed with /api
 
-app.use('/api', router);
+app.use('/api', items);
+app.use('/api', itemsCompleted);
+app.use('/api', itemsItemId);
 
 app.listen(port);
 console.log('Magic happens on port ' + port);

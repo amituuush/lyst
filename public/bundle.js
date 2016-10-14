@@ -81,6 +81,7 @@
 	// if no date is entered on second item submit, due date gets set to nothing
 	// add clear completed button, component doesn't render, but it works on refresh
 	// make it mobile friendly
+	// edit item name
 
 	// add "experience points"
 	// send email an hour before task is due, 1 day before task is due, etc
@@ -22046,7 +22047,6 @@
 	};
 
 	var addItem = function addItem(itemName, itemPriority, dueDate) {
-	  console.log(itemName, itemPriority, dueDate);
 	  return function (dispatch) {
 	    _superagent2.default.post('/api/items').set('Content-Type', 'application/json').send({
 	      name: itemName,
