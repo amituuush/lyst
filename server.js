@@ -8,6 +8,7 @@ var passport = require('passport');
 var router = require('./routers/api');
 
 const MongoURI = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://amituuush:lyst123!@ds025409.mlab.com:25409/lyst'
+mongoose.Promise = global.Promise;
 mongoose.connect(MongoURI);
 
 require('./config/passport')(passport);
