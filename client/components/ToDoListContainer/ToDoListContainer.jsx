@@ -35,7 +35,7 @@ var ToDoList = React.createClass({
                 <div id="middle-panel">
                     <div className="middle-panel-content">
                       <a href="/logout"><i className="fa fa-sign-out fa-2x" aria-hidden="true"></i></a>
-                      <header>Lyst</header>
+                  <header>Lyst</header>
                       <UserForm
                           addItem={this.props.addItem} clearList={this.props.clearList} />
                       <ControlBar
