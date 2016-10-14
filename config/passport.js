@@ -1,4 +1,3 @@
-var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var configAuth = require('./auth');
 
@@ -19,7 +18,6 @@ module.exports = function(passport) {
 	    callbackURL: configAuth.facebookAuth.callbackURL
 	  },
 	  function(accessToken, refreshToken, profile, done) {
-		  console.log(profile);
 		  done(null, profile);
 	    }
 	));

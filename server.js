@@ -3,7 +3,6 @@ var app = express();
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 var mongoose = require('mongoose');
-var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
 var router = require('./routers/api')
@@ -35,7 +34,3 @@ app.use('/api', router);
 
 app.listen(port);
 console.log('Magic happens on port ' + port);
-
-// how would I create another parent URI like /api?
-// could we further modularize this by route?
-// tell Thomas about submitting multiple report typos on Thinkful
