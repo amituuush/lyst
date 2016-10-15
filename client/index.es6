@@ -17,22 +17,18 @@ ReactDOM.render(
 // _____________________________________________
 
 
-// ability to sort by priority or due date
-// ability to star an item, see all starred items
+// create multiple lists
+// make it mobile friendly
 // move trash can to name of lyst, change wording of clear list
 // toggle complete
 
-// if no date is entered on second item submit, due date gets set to nothing
 // on clear completed button, component doesn't render, but it works on refresh
-// make it mobile friendly
-// edit item name
-// no way to set no due date
 
+
+// edit item name
+// ability to star an item, see all starred items
+// share list on facebook
 // add "experience points"
 // send email an hour before task is due, 1 day before task is due, etc
-// create multiple lists
-// share list on facebook
-
-// toggle complete
-
-// FACEBOOK_CLIENT_ID AND FACEBOOK_CLIENT_SECRET env variables locally and on heroku
+// ability to sort by priority or due date
+// can't make due date none when deleting already selected due date

@@ -73,25 +73,21 @@
 	// _____________________________________________
 
 
-	// ability to sort by priority or due date
-	// ability to star an item, see all starred items
+	// create multiple lists
+	// make it mobile friendly
 	// move trash can to name of lyst, change wording of clear list
 	// toggle complete
 
-	// if no date is entered on second item submit, due date gets set to nothing
 	// on clear completed button, component doesn't render, but it works on refresh
-	// make it mobile friendly
-	// edit item name
-	// no way to set no due date
 
+
+	// edit item name
+	// ability to star an item, see all starred items
+	// share list on facebook
 	// add "experience points"
 	// send email an hour before task is due, 1 day before task is due, etc
-	// create multiple lists
-	// share list on facebook
-
-	// toggle complete
-
-	// FACEBOOK_CLIENT_ID AND FACEBOOK_CLIENT_SECRET env variables locally and on heroku
+	// ability to sort by priority or due date
+	// can't make due date none when deleting already selected due date
 
 /***/ },
 /* 1 */
@@ -23745,6 +23741,7 @@
 	__webpack_require__(325);
 	var ControlBar = __webpack_require__(327);
 	var ItemsLeft = __webpack_require__(330);
+	var ListNavigation = __webpack_require__(338);
 
 	var ToDoList = React.createClass({
 	    displayName: 'ToDoList',
@@ -23772,6 +23769,11 @@
 	        return React.createElement(
 	            'div',
 	            { id: 'container' },
+	            React.createElement(
+	                'div',
+	                { id: 'navigation' },
+	                React.createElement(ListNavigation, null)
+	            ),
 	            React.createElement(
 	                'div',
 	                { id: 'left-panel' },
@@ -24419,7 +24421,7 @@
 
 
 	// module
-	exports.push([module.id, ".user-form-container {\n  border-bottom: 1px solid #1A232B;\n}\n.user-form-container .user-form-top {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-top .item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  margin-bottom: 0.25em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #fff;\n  border: 1px solid #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #1C272E;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top .item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 2px #5DAEF2;\n}\n.user-form-container .user-form-top button.add-item {\n  background: #3FB083;\n  border: none;\n  outline: none;\n  padding: 0.7em 1em 0.7em 1em;\n  border-radius: 5px;\n  color: #fff;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top button.add-item:hover {\n  cursor: pointer;\n  background: #52c195;\n}\n.user-form-container .user-form-top .reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.user-form-container .user-form-top .reset-list:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-top .reset-list .fa-trash {\n  color: #CC4E4C;\n}\n.user-form-container .user-form-top .reset-list .fa-trash:hover {\n  color: #B13535;\n}\n.user-form-container .user-form-bottom {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-bottom .priority-select {\n  background: #fff;\n  font-size: 1em;\n  color: #4F6373;\n  border: 1px solid #4F6373 !important;\n  position: relative;\n  right: 10px;\n  height: 33px;\n  border: none;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .priority-select:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .priority-select:focus {\n  outline: none;\n}\n.user-form-container .user-form-bottom .date-picker {\n  background: #fff;\n  position: relative;\n  right: 5px;\n  text-align: center;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n  margin-top: 0.5em;\n  color: #4F6373;\n  border: 1px solid #4F6373;\n  padding: 0.4em 0.5em 0.4em 0.5em;\n  margin-left: 1em;\n  margin-bottom: 1em;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .date-picker:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .date-picker:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n@media only screen and (min-width: 900px) {\n  .user-form-container .user-form-top .item-input {\n    max-width: 20em;\n  }\n}\n", ""]);
+	exports.push([module.id, ".user-form-container {\n  border-bottom: 1px solid #1A232B;\n}\n.user-form-container .user-form-top {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-top .item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  margin-bottom: 0.25em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #fff;\n  border: 1px solid #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #1C272E;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top .item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 2px #5DAEF2;\n}\n.user-form-container .user-form-top button.add-item {\n  background: #3FB083;\n  border: none;\n  outline: none;\n  padding: 0.7em 1em 0.7em 1em;\n  border-radius: 5px;\n  color: #fff;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top button.add-item:hover {\n  cursor: pointer;\n  background: #52c195;\n}\n.user-form-container .user-form-top .reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.user-form-container .user-form-top .reset-list:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-top .reset-list .fa-trash {\n  color: #CC4E4C;\n}\n.user-form-container .user-form-top .reset-list .fa-trash:hover {\n  color: #B13535;\n}\n.user-form-container .user-form-bottom {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-bottom .priority-select {\n  background: #fff;\n  font-size: 1em;\n  color: #A9A9A9;\n  border: 1px solid #4F6373 !important;\n  position: relative;\n  right: 10px;\n  height: 33px;\n  border: none;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .priority-select:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .priority-select:focus {\n  outline: none;\n}\n.user-form-container .user-form-bottom .date-picker {\n  background: #fff;\n  width: 7em;\n  position: relative;\n  right: 5px;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n  margin-top: 0.5em;\n  color: #4F6373;\n  border: 1px solid #4F6373;\n  padding: 0.4em 0.5em 0.4em 0.5em;\n  margin-left: 1em;\n  margin-bottom: 1em;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .date-picker:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .date-picker:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n@media only screen and (min-width: 900px) {\n  .user-form-container .user-form-top .item-input {\n    max-width: 20em;\n  }\n}\n", ""]);
 
 	// exports
 
@@ -39047,7 +39049,7 @@
 
 
 	// module
-	exports.push([module.id, "#container {\n  width: 100%;\n  height: 100%;\n}\n#container #left-panel {\n  display: inline-block;\n  width: 30%;\n  height: 100%;\n  background: #C13331;\n  vertical-align: top;\n}\n#container #middle-panel {\n  display: inline-block;\n  width: 70%;\n  height: 100%;\n  margin: 0 auto 0 auto;\n  background: #fff;\n  vertical-align: top;\n  overflow-x: hidden;\n}\n#container #middle-panel .middle-panel-content {\n  padding: 0 2em 0 2em;\n}\n#container #middle-panel .middle-panel-content .fa-sign-out {\n  position: absolute;\n  right: 1em;\n  top: 1em;\n  color: #4F6373;\n}\n#container #middle-panel .middle-panel-content .fa-sign-out:hover {\n  color: #1C272E;\n}\nheader {\n  text-align: center;\n  color: #1C272E;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n@media only screen and (min-width: 500px) {\n  #container #content {\n    width: 28em;\n    margin: 2em auto 0 auto;\n    padding: 1.3em;\n  }\n}\n", ""]);
+	exports.push([module.id, "#container {\n  width: 100%;\n  height: 100%;\n}\n#container #navigation {\n  display: block;\n  width: 100%;\n  padding: 1em 0em;\n  background: #C13331;\n}\n#container #left-panel {\n  display: none;\n  width: 30%;\n  height: 100%;\n  background: #C13331;\n  vertical-align: top;\n}\n#container #middle-panel {\n  display: inline-block;\n  width: 100%;\n  height: 100%;\n  margin: 0 auto 0 auto;\n  background: #fff;\n  vertical-align: top;\n  overflow-x: hidden;\n}\n#container #middle-panel .middle-panel-content {\n  padding: 0 2em 0 2em;\n}\n#container #middle-panel .middle-panel-content .fa-sign-out {\n  position: absolute;\n  right: 0.5em;\n  top: 0.5em;\n  color: #fff;\n}\n#container #middle-panel .middle-panel-content .fa-sign-out:hover {\n  color: #ededed;\n}\nheader {\n  text-align: center;\n  color: #1C272E;\n  font-weight: 400;\n  font-size: 3.5em;\n  margin-top: 80px;\n}\n@media only screen and (min-width: 500px) {\n  #container #content {\n    width: 28em;\n    margin: 2em auto 0 auto;\n    padding: 1.3em;\n  }\n}\n@media only screen and (min-width: 550px) {\n  #container #navigation {\n    display: none;\n  }\n  #container #left-panel {\n    display: inline-block;\n  }\n  #container #middle-panel {\n    width: 70%;\n  }\n  #container #middle-panel .middle-panel-content .fa-sign-out {\n    color: #4F6373;\n  }\n  #container #middle-panel .middle-panel-content .fa-sign-out:hover {\n    color: #1C272E;\n  }\n}\n", ""]);
 
 	// exports
 
@@ -39436,6 +39438,183 @@
 	};
 
 	module.exports = { filterReducer: filterReducer };
+
+/***/ },
+/* 338 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var NavList = __webpack_require__(341);
+	__webpack_require__(339);
+
+	var ListNavigation = React.createClass({
+	    displayName: 'ListNavigation',
+
+
+	    propTypes: {},
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            navShow: false
+	        };
+	    },
+
+	    _handleNavShow: function _handleNavShow() {
+	        this.setState({
+	            navShow: !this.state.navShow
+	        });
+	    },
+
+	    render: function render() {
+
+	        return React.createElement(
+	            'div',
+	            { className: 'list-navigation-container' },
+	            React.createElement(
+	                'div',
+	                { className: 'nav-top' },
+	                React.createElement('i', { onClick: this._handleNavShow, className: 'fa fa-bars fa-2x', 'aria-hidden': 'true' })
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: this.state.navShow ? 'nav-bottom' : 'nav-bottom nav-hide' },
+	                React.createElement(
+	                    'h2',
+	                    null,
+	                    'Navigation List'
+	                ),
+	                React.createElement(NavList, { listName: 'Grocery' }),
+	                React.createElement(NavList, { listName: 'Shopping' }),
+	                React.createElement(NavList, { listName: 'Vacation' }),
+	                React.createElement(NavList, { listName: 'Work' }),
+	                React.createElement(
+	                    'div',
+	                    { className: 'list-input-container' },
+	                    React.createElement('input', { className: 'list-input', type: 'text' }),
+	                    React.createElement('i', { className: 'fa fa-plus-circle fa-3x', 'aria-hidden': 'true' })
+	                )
+	            )
+	        );
+	    }
+	});
+
+	module.exports = ListNavigation;
+
+/***/ },
+/* 339 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(340);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(162)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-navigation.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-navigation.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 340 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(161)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".list-navigation-container {\n  padding: 0 1em 0 1em;\n}\n.list-navigation-container .nav-top .fa-bars {\n  color: #fff;\n}\n.list-navigation-container .nav-hide {\n  display: none;\n}\n.list-navigation-container h2 {\n  font-size: 2em;\n  text-align: center;\n  color: #E5E5E5;\n  border-bottom: 1px solid #E5E5E5;\n}\n.list-navigation-container .list-input-container {\n  width: 100%;\n  text-align: left;\n}\n.list-navigation-container .list-input-container .list-input {\n  margin-top: 1em;\n  padding: 0.5em;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n}\n.list-navigation-container .list-input-container .list-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n.list-navigation-container .list-input-container .fa-plus-circle {\n  color: #3FB083;\n  vertical-align: middle;\n  margin-left: 0.3em;\n}\n.list-navigation-container .list-input-container .fa-plus-circle:hover {\n  color: #52c195;\n  cursor: pointer;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 341 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	__webpack_require__(342);
+
+	var NavList = React.createClass({
+	    displayName: 'NavList',
+
+
+	    propTypes: {
+	        listName: React.PropTypes.string
+	    },
+
+	    render: function render() {
+
+	        return React.createElement(
+	            'div',
+	            { className: 'list' },
+	            React.createElement(
+	                'div',
+	                { className: 'list-name' },
+	                this.props.listName
+	            ),
+	            React.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' })
+	        );
+	    }
+	});
+
+	module.exports = NavList;
+
+/***/ },
+/* 342 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(343);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(162)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./nav-list.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./nav-list.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 343 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(161)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".list .list-name {\n  font-size: 1.5em;\n  color: #E5E5E5;\n  padding-bottom: 0.5em;\n  display: inline-block;\n}\n.list .list-name:hover {\n  text-decoration: underline;\n  cursor: pointer;\n}\n.list .fa-times {\n  float: right;\n  color: #E5E5E5;\n}\n.list .fa-times:hover {\n  cursor: pointer;\n}\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);

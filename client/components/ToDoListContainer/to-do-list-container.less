@@ -2,8 +2,15 @@
     width: 100%;
     height: 100%;
 
+    #navigation {
+        display: block;
+        width: 100%;
+        padding: 1em 0em;
+        background: #C13331;
+    }
+
     #left-panel {
-        display: inline-block;
+        display: none;
         width: 30%;
         height: 100%;
         background: #C13331;
@@ -12,7 +19,7 @@
 
     #middle-panel {
         display: inline-block;
-        width: 70%;
+        width: 100%;
         height: 100%;
         margin: 0 auto 0 auto;
         background: #fff;
@@ -24,12 +31,12 @@
 
             .fa-sign-out {
                 position: absolute;
-                right: 1em;
-                top: 1em;
-                color: #4F6373;
+                right: 0.5em;
+                top: 0.5em;
+                color: #fff;
 
                 &:hover {
-                    color: #1C272E;
+                    color: darken(#fff, 7%);
                 }
             }
         }
@@ -51,6 +58,36 @@ header {
       width: 28em;
       margin: 2em auto 0 auto;
       padding: 1.3em;
+    }
+  }
+}
+
+@media only screen and (min-width: 550px) {
+
+  #container {
+
+    #navigation {
+        display: none;
+    }
+
+    #left-panel {
+      display: inline-block;
+    }
+
+    #middle-panel {
+        width: 70%;
+
+        .middle-panel-content {
+
+            .fa-sign-out {
+                color: #4F6373;
+
+                &:hover {
+                    color: #1C272E;
+                }
+            }
+        }
+
     }
   }
 }

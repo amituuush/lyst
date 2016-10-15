@@ -5,6 +5,7 @@ const UserForm = require('../UserForm/UserForm');
 require('./to-do-list-container.less');
 const ControlBar = require('../ControlBar/ControlBar');
 const ItemsLeft = require('../ItemsLeft/ItemsLeft');
+const ListNavigation = require ('../ListNavigation/ListNavigation');
 
 var ToDoList = React.createClass({
 
@@ -23,19 +24,22 @@ var ToDoList = React.createClass({
       },
 
   componentWillMount: function() {
-    this.props.fetchItems();
+      this.props.fetchItems();
   },
 
   render: function () {
       return (
           <div id="container">
+                <div id="navigation">
+                  <ListNavigation />
+                </div>
                 <div id="left-panel">
                     <ListContainer />
                 </div>
                 <div id="middle-panel">
                     <div className="middle-panel-content">
                       <a href="/logout"><i className="fa fa-sign-out fa-2x" aria-hidden="true"></i></a>
-                  <header>Lyst</header>
+                    <header>Lyst</header>
                       <UserForm
                           addItem={this.props.addItem} clearList={this.props.clearList} />
                       <ControlBar
