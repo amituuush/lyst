@@ -58,7 +58,7 @@
 
 	var App = _require2.App;
 
-	var _require3 = __webpack_require__(333);
+	var _require3 = __webpack_require__(339);
 
 	var store = _require3.store;
 	// _____________________________________________
@@ -77,7 +77,7 @@
 	// move trash can to name of lyst, change wording to clear list
 
 	// on clear completed button, component doesn't render, but it works on refresh
-
+	// responsiveness
 	// add arrows to priority and due date inputs
 
 	// edit item name
@@ -21893,7 +21893,7 @@
 
 	var ToDoListContainer = __webpack_require__(199);
 
-	var _require3 = __webpack_require__(333);
+	var _require3 = __webpack_require__(339);
 
 	var store = _require3.store;
 
@@ -23740,7 +23740,7 @@
 	__webpack_require__(325);
 	var ControlBar = __webpack_require__(327);
 	var ItemsLeft = __webpack_require__(330);
-	var ListNavigation = __webpack_require__(338);
+	var ListNavigation = __webpack_require__(333);
 
 	var ToDoList = React.createClass({
 	    displayName: 'ToDoList',
@@ -39227,210 +39227,9 @@
 
 	'use strict';
 
-	var _redux = __webpack_require__(170);
-
-	var _reduxThunk = __webpack_require__(334);
-
-	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-	var _reducers = __webpack_require__(335);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var redux = __webpack_require__(170);
-	// var createStore = redux.createStore;
-	// import { createStore } from 'redux';
-
-	// _____________________________________________
-
-	// const finalCreateStore = compose(
-	//   window.devToolsExtension ? window.devToolsExtension() : f => f
-	// )(createStore);
-
-	var logger = function logger(store) {
-	  return function (next) {
-	    return function (action) {
-	      // console.log('action fired', action);
-	      next(action);
-	    };
-	  };
-	};
-
-	var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, logger);
-
-	// const store = finalCreateStore(appReducer, middleware);
-
-	var store = (0, _redux.createStore)(_reducers.appReducer, (0, _redux.compose)(middleware, window.devToolsExtension ? window.devToolsExtension() : function (f) {
-	  return f;
-	}));
-
-	var unsubscribe = store.subscribe(function () {
-	  // console.log('store has been updated. Latest store state:', store.getState())
-	});
-
-	// _____________________________________________
-
-	module.exports = { store: store };
-
-	// _____________________________________________
-
-
-	// Redux is an attempt to consolidate the “inputs” to that function in one place (the store), so that you can guarantee what the app’s view should look like (the output) at any time, given the state (the input) and the react components (the function)
-
-/***/ },
-/* 334 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	exports.__esModule = true;
-	function createThunkMiddleware(extraArgument) {
-	  return function (_ref) {
-	    var dispatch = _ref.dispatch;
-	    var getState = _ref.getState;
-	    return function (next) {
-	      return function (action) {
-	        if (typeof action === 'function') {
-	          return action(dispatch, getState, extraArgument);
-	        }
-
-	        return next(action);
-	      };
-	    };
-	  };
-	}
-
-	var thunk = createThunkMiddleware();
-	thunk.withExtraArgument = createThunkMiddleware;
-
-	exports['default'] = thunk;
-
-/***/ },
-/* 335 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _require = __webpack_require__(170);
-
-	var combineReducers = _require.combineReducers;
-
-	var _require2 = __webpack_require__(336);
-
-	var itemReducer = _require2.itemReducer;
-
-	var _require3 = __webpack_require__(337);
-
-	var filterReducer = _require3.filterReducer;
-
-
-	var appReducer = combineReducers({
-	    items: itemReducer,
-	    filter: filterReducer
-	});
-
-	module.exports = { appReducer: appReducer };
-
-	// store = {
-	//   dispatch: function(action) {
-	//     this.state = appReducer(this.state, action)
-	//   }
-	// }
-
-	// This is a reducer, a pure function with (state, action) => state signature.
-	// It describes how an action transforms the state into the next state.
-	//
-	// The shape of the state is up to you: it can be a primitive, an array, an object,
-	// or even an Immutable.js data structure. The only important part is that you should
-	// not mutate the state object, but return a new object if the state changes.
-
-
-	// making sure bundle is actually being included when deploying to bundle
-
-	// dont commit bundle on local version, but have it on heroku, let CI server create bundle and push to heroku
-	// dont push bundle to heroku, let CI server do that, just push to github
-
-/***/ },
-/* 336 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _items = __webpack_require__(192);
-
-	var itemReducer = function itemReducer() {
-	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	    var action = arguments[1];
-
-
-	    switch (action.type) {
-	        case _items.FETCH_ITEMS:
-	            return action.items;
-	        case _items.ADD_ITEM:
-	            return state.concat(action.newItem);
-	        case _items.CLEAR_ITEMS:
-	            return [];
-	        case _items.COMPLETE_ITEM:
-	            var newState = state.map(function (item) {
-	                if (item._id === action.item._id) {
-	                    item.completed = !item.completed;
-	                }
-	                return item;
-	            });
-	            return newState;
-	        case _items.DELETE_ITEM:
-	            var newState = state.filter(function (item) {
-	                return item._id !== action.item._id;
-	            });
-	            return newState;
-	        case _items.DELETE_COMPLETED_ITEMS:
-	            return action.items;
-	        default:
-	            return state;
-	    }
-	};
-
-	module.exports = { itemReducer: itemReducer };
-
-/***/ },
-/* 337 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _filter = __webpack_require__(198);
-
-	var filterReducer = function filterReducer() {
-	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'all';
-	    var action = arguments[1];
-
-
-	    switch (action.type) {
-	        case _filter.ALL_ITEM_FILTER:
-	            console.log('filter is set to: ' + action.filter);
-	            return action.filter;
-	        case _filter.ACTIVE_ITEM_FILTER:
-	            console.log('filter is set to: ' + action.filter);
-	            return action.filter;
-	        case _filter.COMPLETED_ITEM_FILTER:
-	            console.log('filter is set to: ' + action.filter);
-	            return action.filter;
-	        default:
-	            return state;
-	    }
-	};
-
-	module.exports = { filterReducer: filterReducer };
-
-/***/ },
-/* 338 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
 	var React = __webpack_require__(1);
-	var NavList = __webpack_require__(341);
-	__webpack_require__(339);
+	var NavList = __webpack_require__(334);
+	__webpack_require__(337);
 
 	var ListNavigation = React.createClass({
 	    displayName: 'ListNavigation',
@@ -39486,53 +39285,13 @@
 	module.exports = ListNavigation;
 
 /***/ },
-/* 339 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(340);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(162)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-navigation.less", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-navigation.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 340 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(161)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".list-navigation-container {\n  padding: 0 1em 0 1em;\n}\n.list-navigation-container .nav-top .fa-bars {\n  color: #fff;\n}\n.list-navigation-container .nav-hide {\n  display: none;\n}\n.list-navigation-container h2 {\n  font-size: 2em;\n  text-align: center;\n  color: #E5E5E5;\n  border-bottom: 1px solid #E5E5E5;\n}\n.list-navigation-container .list-input-container {\n  width: 100%;\n  text-align: left;\n}\n.list-navigation-container .list-input-container .list-input {\n  margin-top: 1em;\n  padding: 0.5em;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n}\n.list-navigation-container .list-input-container .list-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n.list-navigation-container .list-input-container .fa-plus-circle {\n  color: #3FB083;\n  vertical-align: middle;\n  margin-left: 0.3em;\n}\n.list-navigation-container .list-input-container .fa-plus-circle:hover {\n  color: #52c195;\n  cursor: pointer;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 341 */
+/* 334 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	__webpack_require__(342);
+	__webpack_require__(335);
 
 	var NavList = React.createClass({
 	    displayName: 'NavList',
@@ -39560,13 +39319,13 @@
 	module.exports = NavList;
 
 /***/ },
-/* 342 */
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(343);
+	var content = __webpack_require__(336);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(162)(content, {});
@@ -39586,7 +39345,7 @@
 	}
 
 /***/ },
-/* 343 */
+/* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(161)();
@@ -39598,6 +39357,247 @@
 
 	// exports
 
+
+/***/ },
+/* 337 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(338);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(162)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-navigation.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-navigation.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 338 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(161)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".list-navigation-container {\n  padding: 0 1em 0 1em;\n}\n.list-navigation-container .nav-top .fa-bars {\n  color: #fff;\n}\n.list-navigation-container .nav-hide {\n  display: none;\n}\n.list-navigation-container h2 {\n  font-size: 2em;\n  text-align: center;\n  color: #E5E5E5;\n  border-bottom: 1px solid #E5E5E5;\n}\n.list-navigation-container .list-input-container {\n  width: 100%;\n  text-align: left;\n}\n.list-navigation-container .list-input-container .list-input {\n  margin-top: 1em;\n  padding: 0.5em;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n}\n.list-navigation-container .list-input-container .list-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n.list-navigation-container .list-input-container .fa-plus-circle {\n  color: #3FB083;\n  vertical-align: middle;\n  margin-left: 0.3em;\n}\n.list-navigation-container .list-input-container .fa-plus-circle:hover {\n  color: #52c195;\n  cursor: pointer;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 339 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _redux = __webpack_require__(170);
+
+	var _reduxThunk = __webpack_require__(340);
+
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+	var _reducers = __webpack_require__(341);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var redux = __webpack_require__(170);
+	// var createStore = redux.createStore;
+	// import { createStore } from 'redux';
+
+	// _____________________________________________
+
+	// const finalCreateStore = compose(
+	//   window.devToolsExtension ? window.devToolsExtension() : f => f
+	// )(createStore);
+
+	var logger = function logger(store) {
+	  return function (next) {
+	    return function (action) {
+	      // console.log('action fired', action);
+	      next(action);
+	    };
+	  };
+	};
+
+	var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, logger);
+
+	// const store = finalCreateStore(appReducer, middleware);
+
+	var store = (0, _redux.createStore)(_reducers.appReducer, (0, _redux.compose)(middleware, window.devToolsExtension ? window.devToolsExtension() : function (f) {
+	  return f;
+	}));
+
+	var unsubscribe = store.subscribe(function () {
+	  // console.log('store has been updated. Latest store state:', store.getState())
+	});
+
+	// _____________________________________________
+
+	module.exports = { store: store };
+
+	// _____________________________________________
+
+
+	// Redux is an attempt to consolidate the “inputs” to that function in one place (the store), so that you can guarantee what the app’s view should look like (the output) at any time, given the state (the input) and the react components (the function)
+
+/***/ },
+/* 340 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	function createThunkMiddleware(extraArgument) {
+	  return function (_ref) {
+	    var dispatch = _ref.dispatch;
+	    var getState = _ref.getState;
+	    return function (next) {
+	      return function (action) {
+	        if (typeof action === 'function') {
+	          return action(dispatch, getState, extraArgument);
+	        }
+
+	        return next(action);
+	      };
+	    };
+	  };
+	}
+
+	var thunk = createThunkMiddleware();
+	thunk.withExtraArgument = createThunkMiddleware;
+
+	exports['default'] = thunk;
+
+/***/ },
+/* 341 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _require = __webpack_require__(170);
+
+	var combineReducers = _require.combineReducers;
+
+	var _require2 = __webpack_require__(342);
+
+	var itemReducer = _require2.itemReducer;
+
+	var _require3 = __webpack_require__(343);
+
+	var filterReducer = _require3.filterReducer;
+
+
+	var appReducer = combineReducers({
+	    items: itemReducer,
+	    filter: filterReducer
+	});
+
+	module.exports = { appReducer: appReducer };
+
+	// store = {
+	//   dispatch: function(action) {
+	//     this.state = appReducer(this.state, action)
+	//   }
+	// }
+
+	// This is a reducer, a pure function with (state, action) => state signature.
+	// It describes how an action transforms the state into the next state.
+	//
+	// The shape of the state is up to you: it can be a primitive, an array, an object,
+	// or even an Immutable.js data structure. The only important part is that you should
+	// not mutate the state object, but return a new object if the state changes.
+
+
+	// making sure bundle is actually being included when deploying to bundle
+
+	// dont commit bundle on local version, but have it on heroku, let CI server create bundle and push to heroku
+	// dont push bundle to heroku, let CI server do that, just push to github
+
+/***/ },
+/* 342 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _items = __webpack_require__(192);
+
+	var itemReducer = function itemReducer() {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	    var action = arguments[1];
+
+
+	    switch (action.type) {
+	        case _items.FETCH_ITEMS:
+	            return action.items;
+	        case _items.ADD_ITEM:
+	            return state.concat(action.newItem);
+	        case _items.CLEAR_ITEMS:
+	            return [];
+	        case _items.COMPLETE_ITEM:
+	            var newState = state.map(function (item) {
+	                if (item._id === action.item._id) {
+	                    item.completed = !item.completed;
+	                }
+	                return item;
+	            });
+	            return newState;
+	        case _items.DELETE_ITEM:
+	            var newState = state.filter(function (item) {
+	                return item._id !== action.item._id;
+	            });
+	            return newState;
+	        case _items.DELETE_COMPLETED_ITEMS:
+	            return action.items;
+	        default:
+	            return state;
+	    }
+	};
+
+	module.exports = { itemReducer: itemReducer };
+
+/***/ },
+/* 343 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _filter = __webpack_require__(198);
+
+	var filterReducer = function filterReducer() {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'all';
+	    var action = arguments[1];
+
+
+	    switch (action.type) {
+	        case _filter.ALL_ITEM_FILTER:
+	            console.log('filter is set to: ' + action.filter);
+	            return action.filter;
+	        case _filter.ACTIVE_ITEM_FILTER:
+	            console.log('filter is set to: ' + action.filter);
+	            return action.filter;
+	        case _filter.COMPLETED_ITEM_FILTER:
+	            console.log('filter is set to: ' + action.filter);
+	            return action.filter;
+	        default:
+	            return state;
+	    }
+	};
+
+	module.exports = { filterReducer: filterReducer };
 
 /***/ }
 /******/ ]);

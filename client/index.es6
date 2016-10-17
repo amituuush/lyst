@@ -21,7 +21,7 @@ ReactDOM.render(
 // move trash can to name of lyst, change wording to clear list
 
 // on clear completed button, component doesn't render, but it works on refresh
-
+// responsiveness
 // add arrows to priority and due date inputs
 
 // edit item name
