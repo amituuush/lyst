@@ -12,7 +12,7 @@ var itemReducer = function(state = [], action) {
         case COMPLETE_ITEM:
             var newState = state.map(function(item) {
                 if (item._id === action.item._id) {
-                    item.completed = true;
+                    item.completed = !item.completed;
                 }
                 return item;
             });

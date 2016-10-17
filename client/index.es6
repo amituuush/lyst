@@ -18,17 +18,16 @@ ReactDOM.render(
 
 
 // create multiple lists
-// make it mobile friendly
-// move trash can to name of lyst, change wording of clear list
-// toggle complete
+// move trash can to name of lyst, change wording to clear list
 
 // on clear completed button, component doesn't render, but it works on refresh
 
+// add arrows to priority and due date inputs
 
 // edit item name
 // ability to star an item, see all starred items
 // share list on facebook
 // add "experience points"
-// send email an hour before task is due, 1 day before task is due, etc
+// send email/text reminders
 // ability to sort by priority or due date
 // can't make due date none when deleting already selected due date

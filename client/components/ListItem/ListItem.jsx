@@ -18,22 +18,6 @@ var ListItem = React.createClass({
 
     render: function() {
 
-        // var priorityClass;
-        // if (this.props.item.priority) {
-        //     switch(this.props.item.priority) {
-        //         case 'low':
-        //             priorityClass = 'list-item-priority priority-low'
-        //             break;
-        //         case 'med':
-        //             priorityClass = 'list-item-priority priority-med'
-        //             break;
-        //         case 'high':
-        //             priorityClass = 'list-item-priority priority-high'
-        //             break;
-        //     }
-        // }
-
-
         return (
             <div className='list-item-parent'>
                 <li>

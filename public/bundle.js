@@ -74,18 +74,17 @@
 
 
 	// create multiple lists
-	// make it mobile friendly
-	// move trash can to name of lyst, change wording of clear list
-	// toggle complete
+	// move trash can to name of lyst, change wording to clear list
 
 	// on clear completed button, component doesn't render, but it works on refresh
 
+	// add arrows to priority and due date inputs
 
 	// edit item name
 	// ability to star an item, see all starred items
 	// share list on facebook
 	// add "experience points"
-	// send email an hour before task is due, 1 day before task is due, etc
+	// send email/text reminders
 	// ability to sort by priority or due date
 	// can't make due date none when deleting already selected due date
 
@@ -24098,22 +24097,6 @@
 
 	    render: function render() {
 
-	        // var priorityClass;
-	        // if (this.props.item.priority) {
-	        //     switch(this.props.item.priority) {
-	        //         case 'low':
-	        //             priorityClass = 'list-item-priority priority-low'
-	        //             break;
-	        //         case 'med':
-	        //             priorityClass = 'list-item-priority priority-med'
-	        //             break;
-	        //         case 'high':
-	        //             priorityClass = 'list-item-priority priority-high'
-	        //             break;
-	        //     }
-	        // }
-
-
 	        return React.createElement(
 	            'div',
 	            { className: 'list-item-parent' },
@@ -39390,7 +39373,7 @@
 	        case _items.COMPLETE_ITEM:
 	            var newState = state.map(function (item) {
 	                if (item._id === action.item._id) {
-	                    item.completed = true;
+	                    item.completed = !item.completed;
 	                }
 	                return item;
 	            });

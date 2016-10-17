@@ -17,7 +17,7 @@ router.route('/items/:item_id')
       if (err) {
         res.send(err);
       }
-      item.completed = true;
+      item.completed = !item.completed;
       item.save(function(err, result) {
         if (err) {
           res.send(err);
