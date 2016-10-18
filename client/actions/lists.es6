@@ -2,6 +2,7 @@ import request from 'superagent'
 
 const FETCH_LISTS = 'FETCH_LISTS';
 const ADD_LIST = 'ADD_LIST';
+const DELETE_LIST = 'DELETE_LIST';
 
 const fetchLists = () => {
     return function(dispatch) {
@@ -31,4 +32,16 @@ const addList = (listName) => {
     }
 }
 
-module.exports = {fetchLists, FETCH_LISTS, addList, ADD_LIST};
+const deleteList = (listId) => {
+    return function(dispatch) {
+        request.delete('/api/lists/' + listId)
+          .end((err, res) => {
+              dispatch({
+                type: DELETE_LIST,
+                list: res.body
+              })
+          });
+    }
+}
+
+module.exports = {fetchLists, FETCH_LISTS, addList, ADD_LIST, deleteList, DELETE_LIST};

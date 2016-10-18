@@ -6,7 +6,8 @@ var ListContainer = React.createClass({
 
     propTypes: {
         lists: React.PropTypes.array,
-        addList: React.PropTypes.func
+        addList: React.PropTypes.func,
+        deleteList: React.PropTypes.func,
     },
 
     getInitialState: function() {
@@ -36,7 +37,9 @@ var ListContainer = React.createClass({
             function(list) {
                 return <List
                           key={list._id}
-                          name={list.name} />
+                          id={list._id}
+                          name={list.name}
+                          deleteList={this.props.deleteList} />
         }, this);
 
         return (

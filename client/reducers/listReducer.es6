@@ -7,6 +7,13 @@ var listReducer = (state = [], action) => {
             return action.lists;
         case 'ADD_LIST':
             return state.concat(action.newList);
+        case 'DELETE_LIST':
+            var newState = state.filter(
+                function(list) {
+                    return list._id !== action.list._id;
+                }
+            )
+            return newState;
         default:
             return state;
     }

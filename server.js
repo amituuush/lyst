@@ -1,14 +1,15 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
-var mongoose = require('mongoose');
-var session = require('express-session');
-var passport = require('passport');
-var lists = require('./routers/lists');
-var items = require('./routers/items');
-var itemsCompleted = require('./routers/itemsCompleted');
-var itemsItemId = require('./routers/itemsItemId');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
+const mongoose = require('mongoose');
+const session = require('express-session');
+const passport = require('passport');
+const lists = require('./routers/lists');
+const listsListId = require('./routers/listsListId');
+const items = require('./routers/items');
+const itemsCompleted = require('./routers/itemsCompleted');
+const itemsItemId = require('./routers/itemsItemId');
 
 const MongoURI = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://amituuush:lyst123!@ds025409.mlab.com:25409/lyst'
 mongoose.Promise = global.Promise;
@@ -32,6 +33,7 @@ var port = process.env.PORT || 7007;
 // all of our routes will be prefixed with /api
 
 app.use('/api', lists);
+app.use('/api', listsListId);
 // app.use('/api', items);
 // app.use('/api', itemsCompleted);
 // app.use('/api', itemsItemId);

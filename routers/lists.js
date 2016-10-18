@@ -9,7 +9,6 @@ router.route('/lists')
       if (err) {
         res.send(err);
       }
-      console.log(items);
       res.json(items);
     })
   })
@@ -18,7 +17,6 @@ router.route('/lists')
     var list = new List();
     list.name = req.body.name;
     list.items = [];
-    console.log(req.body);
     list.save(function(err, result) {
       if (err) {
         res.send(err);

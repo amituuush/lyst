@@ -14,6 +14,7 @@ var ToDoList = React.createClass({
           items: React.PropTypes.array,
           fetchLists: React.PropTypes.func,
           addList: React.PropTypes.func,
+          deleteList: React.PropTypes.func,
           addItem: React.PropTypes.func,
           deleteItem: React.PropTypes.func,
           clearList: React.PropTypes.func,
@@ -40,7 +41,8 @@ var ToDoList = React.createClass({
                 <div id="left-panel">
                     <ListContainer
                         lists={this.props.lists}
-                        addList={this.props.addList} />
+                        addList={this.props.addList}
+                        deleteList={this.props.deleteList} />
                 </div>
                 <div id="middle-panel">
                     <div className="middle-panel-content">

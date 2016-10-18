@@ -21884,6 +21884,7 @@
 
 	var fetchLists = _require.fetchLists;
 	var addList = _require.addList;
+	var deleteList = _require.deleteList;
 
 	var _require2 = __webpack_require__(198);
 
@@ -21929,6 +21930,12 @@
 	var handleAddList = function handleAddList(dispatch) {
 	    return function (listName) {
 	        dispatch(addList(listName));
+	    };
+	};
+
+	var handleDeleteList = function handleDeleteList(dispatch) {
+	    return function (listId) {
+	        dispatch(deleteList(listId));
 	    };
 	};
 
@@ -21996,6 +22003,7 @@
 	    return {
 	        fetchLists: handleFetchLists(dispatch),
 	        addList: handleAddList(dispatch),
+	        deleteList: handleDeleteList(dispatch),
 	        fetchItems: handleFetchItems(dispatch),
 	        clearList: handleClearItems(dispatch),
 	        addItem: handleAddItem(dispatch),
@@ -22047,6 +22055,7 @@
 
 	var FETCH_LISTS = 'FETCH_LISTS';
 	var ADD_LIST = 'ADD_LIST';
+	var DELETE_LIST = 'DELETE_LIST';
 
 	var fetchLists = function fetchLists() {
 	    return function (dispatch) {
@@ -22072,7 +22081,18 @@
 	    };
 	};
 
-	module.exports = { fetchLists: fetchLists, FETCH_LISTS: FETCH_LISTS, addList: addList, ADD_LIST: ADD_LIST };
+	var deleteList = function deleteList(listId) {
+	    return function (dispatch) {
+	        _superagent2.default.delete('/api/lists/' + listId).end(function (err, res) {
+	            dispatch({
+	                type: DELETE_LIST,
+	                list: res.body
+	            });
+	        });
+	    };
+	};
+
+	module.exports = { fetchLists: fetchLists, FETCH_LISTS: FETCH_LISTS, addList: addList, ADD_LIST: ADD_LIST, deleteList: deleteList, DELETE_LIST: DELETE_LIST };
 
 /***/ },
 /* 193 */
@@ -23815,6 +23835,7 @@
 	        items: React.PropTypes.array,
 	        fetchLists: React.PropTypes.func,
 	        addList: React.PropTypes.func,
+	        deleteList: React.PropTypes.func,
 	        addItem: React.PropTypes.func,
 	        deleteItem: React.PropTypes.func,
 	        clearList: React.PropTypes.func,
@@ -23846,7 +23867,8 @@
 	                { id: 'left-panel' },
 	                React.createElement(ListContainer, {
 	                    lists: this.props.lists,
-	                    addList: this.props.addList })
+	                    addList: this.props.addList,
+	                    deleteList: this.props.deleteList })
 	            ),
 	            React.createElement(
 	                'div',
@@ -23904,7 +23926,8 @@
 
 	    propTypes: {
 	        lists: React.PropTypes.array,
-	        addList: React.PropTypes.func
+	        addList: React.PropTypes.func,
+	        deleteList: React.PropTypes.func
 	    },
 
 	    getInitialState: function getInitialState() {
@@ -23933,7 +23956,9 @@
 	        var lists = this.props.lists.map(function (list) {
 	            return React.createElement(List, {
 	                key: list._id,
-	                name: list.name });
+	                id: list._id,
+	                name: list.name,
+	                deleteList: this.props.deleteList });
 	        }, this);
 
 	        return React.createElement(
@@ -39465,6 +39490,11 @@
 	            return action.lists;
 	        case 'ADD_LIST':
 	            return state.concat(action.newList);
+	        case 'DELETE_LIST':
+	            var newState = state.filter(function (list) {
+	                return list._id !== action.list._id;
+	            });
+	            return newState;
 	        default:
 	            return state;
 	    }
@@ -39562,6 +39592,11 @@
 	        name: React.PropTypes.string
 	    },
 
+	    _handleDeleteList: function _handleDeleteList() {
+	        console.log('deleting list!');
+	        this.props.deleteList(this.props.id);
+	    },
+
 	    render: function render() {
 
 	        return React.createElement(
@@ -39572,7 +39607,7 @@
 	                { className: 'list-name' },
 	                this.props.name
 	            ),
-	            React.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' })
+	            React.createElement('i', { onClick: this._handleDeleteList, className: 'fa fa-times', 'aria-hidden': 'true' })
 	        );
 	    }
 	});
