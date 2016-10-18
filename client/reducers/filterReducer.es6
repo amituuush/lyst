@@ -1,4 +1,4 @@
-import {ALL_ITEM_FILTER, ACTIVE_ITEM_FILTER, COMPLETED_ITEM_FILTER} from '../actions/filter'
+import { ALL_ITEM_FILTER, ACTIVE_ITEM_FILTER, COMPLETED_ITEM_FILTER } from '../actions/filter'
 
 
 var filterReducer = function(state = 'all', action) {
@@ -19,4 +19,4 @@ var filterReducer = function(state = 'all', action) {
 }
 
 
-module.exports = {filterReducer};
+module.exports = { filterReducer };

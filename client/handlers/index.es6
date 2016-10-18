@@ -1,9 +1,10 @@
-const ReactRedux = require('react-redux');
-const { fetchLists, addList, deleteList } = require('../actions/lists');
-const { fetchItems, clearItems, addItem, completeItem, deleteItem, deleteCompletedItems } = require('../actions/items');
-const { allItemFilter, activeItemFilter, completedItemFilter } = require('../actions/filter')
-const ToDoListContainer = require('../components/ToDoListContainer/ToDoListContainer');
-const { store } = require('../store');
+var ReactRedux = require('react-redux');
+var { fetchLists, addList, deleteList } = require('../actions/lists');
+var { fetchItems, clearItems, addItem, completeItem, deleteItem, deleteCompletedItems } = require('../actions/items');
+var { allItemFilter, activeItemFilter, completedItemFilter } = require('../actions/filter');
+var { setCurrentList } = require('../actions/currentList');
+var ToDoListContainer = require('../components/ToDoListContainer/ToDoListContainer');
+var { store } = require('../store');
 
 // __________________________________________
 
@@ -34,6 +35,18 @@ const handleAddList = (dispatch) => {
 const handleDeleteList = (dispatch) => {
     return (listId) => {
         dispatch(deleteList(listId))
+    }
+}
+
+const handleAddItemToList = (dispatch) => {
+    return (listId, item) => {
+        dispatch(addItemToList(listId, item))
+    }
+}
+
+const handleSetCurrentList = function(dispatch) {
+    return (listId) => {
+        dispatch(setCurrentList(listId))
     }
 }
 
@@ -102,6 +115,8 @@ const mapDispatchToProps = (dispatch) => {
         fetchLists: handleFetchLists(dispatch),
         addList: handleAddList(dispatch),
         deleteList: handleDeleteList(dispatch),
+        addItemToList: handleAddItemToList(dispatch),
+        setCurrentList: handleSetCurrentList(dispatch),
         fetchItems: handleFetchItems(dispatch),
         clearList: handleClearItems(dispatch),
         addItem: handleAddItem(dispatch),

@@ -29,11 +29,13 @@ var UserForm = React.createClass({
 
     _handleSubmit: function(event) {
         event.preventDefault();
-        if(this.state.name) {
-            this.props.addItem(this.state.name, this.state.priority, this.state.dueDate);
-        } else {
-            alert('You forgot to enter in a task!');
-        }
+        // if (this.state.name) {
+        //     this.props.addItem(this.state.name, this.state.priority, this.state.dueDate);
+        // } else {
+        //     alert('You forgot to enter in a task!');
+        // }
+        // this.state.name ? this.props.addItemToList(, this.state)
+
         this.setState({
             name: '',
             priority: '',

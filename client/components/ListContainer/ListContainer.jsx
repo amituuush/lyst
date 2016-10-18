@@ -8,6 +8,7 @@ var ListContainer = React.createClass({
         lists: React.PropTypes.array,
         addList: React.PropTypes.func,
         deleteList: React.PropTypes.func,
+        setCurrentList: React.PropTypes.func
     },
 
     getInitialState: function() {
@@ -39,7 +40,8 @@ var ListContainer = React.createClass({
                           key={list._id}
                           id={list._id}
                           name={list.name}
-                          deleteList={this.props.deleteList} />
+                          deleteList={this.props.deleteList}
+                          setCurrentList={this.props.setCurrentList} />
         }, this);
 
         return (
@@ -48,7 +50,7 @@ var ListContainer = React.createClass({
                 <div>{lists}</div>
             <div className="list-input-container">
                 <form onSubmit={this._handleSubmit}>
-                    <input onChange={this._handleAddListChange} className="list-input" type="text" placeholder="Create a list" />
+                    <input onChange={this._handleAddListChange} className="list-input" type="text" value={this.state.name} placeholder="Create a list" />
                     <button type="submit"><i className="fa fa-plus-circle fa-3x" aria-hidden="true"></i></button>
                 </form>
             </div>

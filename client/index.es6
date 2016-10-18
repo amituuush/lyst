@@ -20,11 +20,12 @@ ReactDOM.render(
 // create multiple lists
 // move trash can to name of lyst, change wording to clear list
 
-
+// show an icon of a person relaxing, or something playful when no items are in a list. Maybe show something else upon first creation?
 // create ability to move/show the side panel
 // on clear completed button, component doesn't render, but it works on refresh
 // responsiveness
 // add arrows to priority and due date inputs
+// add walk through guide of app
 
 // modularize handlers
 // edit item name

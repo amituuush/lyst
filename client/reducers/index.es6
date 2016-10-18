@@ -2,11 +2,13 @@ const { combineReducers } = require('redux');
 const { listReducer } = require('./listReducer');
 const { itemReducer } = require('./itemReducer');
 const { filterReducer } = require('./filterReducer');
+const { currentListReducer } = require('./currentList');
 
 const appReducer = combineReducers({
     lists: listReducer,
     items: itemReducer,
-    filter: filterReducer
+    filter: filterReducer,
+    currentList: currentListReducer
 })
 
 module.exports = {appReducer};

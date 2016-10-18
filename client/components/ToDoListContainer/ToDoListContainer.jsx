@@ -15,6 +15,7 @@ var ToDoList = React.createClass({
           fetchLists: React.PropTypes.func,
           addList: React.PropTypes.func,
           deleteList: React.PropTypes.func,
+          addItemToList: React.PropTypes.func,
           addItem: React.PropTypes.func,
           deleteItem: React.PropTypes.func,
           clearList: React.PropTypes.func,
@@ -24,7 +25,8 @@ var ToDoList = React.createClass({
           activeItemFilter: React.PropTypes.func,
           completedItemFilter: React.PropTypes.func,
           deleteCompletedItems: React.PropTypes.func,
-          fetchItems: React.PropTypes.func
+          fetchItems: React.PropTypes.func,
+          setCurrentList: React.PropTypes.func
       },
 
   componentWillMount: function() {
@@ -42,14 +44,17 @@ var ToDoList = React.createClass({
                     <ListContainer
                         lists={this.props.lists}
                         addList={this.props.addList}
-                        deleteList={this.props.deleteList} />
+                        deleteList={this.props.deleteList}
+                        setCurrentList={this.props.setCurrentList} />
                 </div>
                 <div id="middle-panel">
                     <div className="middle-panel-content">
                       <a href="/logout"><i className="fa fa-sign-out fa-2x" aria-hidden="true"></i></a>
                     <header>Lyst</header>
                       <UserForm
-                          addItem={this.props.addItem} clearList={this.props.clearList} />
+                          addItem={this.props.addItem}
+                          addItemToList={this.props.addItemToList}
+                          clearList={this.props.clearList} />
                       <ControlBar
                           items={this.props.items}
                           filter={this.props.filter}
