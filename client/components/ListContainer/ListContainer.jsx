@@ -42,11 +42,7 @@ var ListContainer = React.createClass({
         return (
             <div className="list-container-container">
                 <h2>My Lysts</h2>
-                {lists}
-                {/* <List listName="Grocery" />
-                <List listName="Shopping" />
-                <List listName="Vacation" />
-                <List listName="Work" /> */}
+                <div>{lists}</div>
             <div className="list-input-container">
                 <form onSubmit={this._handleSubmit}>
                     <input onChange={this._handleAddListChange} className="list-input" type="text" placeholder="Create a list" />

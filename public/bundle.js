@@ -90,6 +90,7 @@
 	// send email/text reminders
 	// ability to sort by priority or due date
 	// can't make due date none when deleting already selected due date
+	// integrate task dates into gmail or iCal
 
 /***/ },
 /* 1 */
@@ -23943,7 +23944,11 @@
 	                null,
 	                'My Lysts'
 	            ),
-	            lists,
+	            React.createElement(
+	                'div',
+	                null,
+	                lists
+	            ),
 	            React.createElement(
 	                'div',
 	                { className: 'list-input-container' },
@@ -23989,68 +23994,7 @@
 
 	    render: function render() {
 
-	        if (this.props.items.length) {
-	            switch (this.props.filter) {
-	                case 'all':
-	                    var items = this.props.items.map(function (arrayItem) {
-	                        return React.createElement(ListItem, {
-	                            deleteItem: this.props.deleteItem,
-	                            key: arrayItem._id,
-	                            item: arrayItem,
-	                            markComplete: this.props.markComplete });
-	                    }, this);
-	                    break;
-
-	                case 'active':
-	                    var filteredItems = this.props.items.filter(function (item) {
-	                        return item.completed === false;
-	                    });
-	                    var items = filteredItems.map(function (arrayItem) {
-	                        return React.createElement(ListItem, {
-	                            deleteItem: this.props.deleteItem,
-	                            key: arrayItem._id,
-	                            item: arrayItem,
-	                            markComplete: this.props.markComplete });
-	                    }, this);
-	                    break;
-
-	                case 'completed':
-	                    var filteredItems = this.props.items.filter(function (item) {
-	                        return item.completed === true;
-	                    });
-	                    var items = filteredItems.map(function (arrayItem) {
-	                        return React.createElement(ListItem, {
-	                            deleteItem: this.props.deleteItem,
-	                            key: arrayItem._id,
-	                            item: arrayItem,
-	                            markComplete: this.props.markComplete });
-	                    }, this);
-	                    break;
-	            }
-	        } else {
-	            var items = React.createElement(
-	                'div',
-	                { className: 'inbox-container' },
-	                React.createElement('i', { className: 'fa fa-inbox fa-5x', 'aria-hidden': 'true' }),
-	                React.createElement(
-	                    'div',
-	                    { className: 'inbox-greeting' },
-	                    'Woohoo! Time to relax!'
-	                )
-	            );
-	        }
-
-	        var test = React.createElement(
-	            'div',
-	            null,
-	            'Hello'
-	        );
-
-	        return React.createElement(
-	            'ul',
-	            { className: 'list-ul' },
-	            items
-	        );
+	        return React.createElement('ul', { className: 'list-ul' });
 	    }
 	});
 
@@ -39136,28 +39080,9 @@
 
 	    render: function render() {
 
-	        var itemsLeft = this.props.items.filter(function (item) {
-	            return item.completed === false;
-	        });
-
-	        var itemsLeftText;
-
-	        if (itemsLeft.length > 1) {
-	            itemsLeftText = itemsLeft.length + ' items left';
-	        } else if (itemsLeft.length === 1) {
-	            itemsLeftText = itemsLeft.length + ' item left';
-	        } else {
-	            itemsLeftText = '0 items left';
-	        }
-
 	        return React.createElement(
 	            'div',
 	            { className: 'items-left-container' },
-	            React.createElement(
-	                'div',
-	                { id: 'items-left' },
-	                itemsLeftText
-	            ),
 	            React.createElement(
 	                'div',
 	                { id: 'clear-completed', onClick: this.props.deleteCompletedItems },

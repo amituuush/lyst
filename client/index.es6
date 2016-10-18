@@ -34,3 +34,4 @@ ReactDOM.render(
 // send email/text reminders
 // ability to sort by priority or due date
 // can't make due date none when deleting already selected due date
+// integrate task dates into gmail or iCal
