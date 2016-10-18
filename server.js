@@ -5,6 +5,7 @@ var jsonParser = bodyParser.json();
 var mongoose = require('mongoose');
 var session = require('express-session');
 var passport = require('passport');
+var lists = require('./routers/lists');
 var items = require('./routers/items');
 var itemsCompleted = require('./routers/itemsCompleted');
 var itemsItemId = require('./routers/itemsItemId');
@@ -30,9 +31,10 @@ var port = process.env.PORT || 7007;
 // REGISTER OUR ROUTES ----------------------
 // all of our routes will be prefixed with /api
 
-app.use('/api', items);
-app.use('/api', itemsCompleted);
-app.use('/api', itemsItemId);
+app.use('/api', lists);
+// app.use('/api', items);
+// app.use('/api', itemsCompleted);
+// app.use('/api', itemsItemId);
 
 app.listen(port);
 console.log('Magic happens on port ' + port);

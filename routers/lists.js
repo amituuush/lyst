@@ -1,26 +1,25 @@
 var express = require('express');
 var router = express.Router();
-// var Item = require('../app/models/items');
+var List = require('../app/models/lists');
 
 
-router.route('/items')
+router.route('/lists')
   .get(function(req, res) {
-    Item.find(function(err, items) {
+    List.find(function(err, items) {
       if (err) {
         res.send(err);
       }
+      console.log(items);
       res.json(items);
     })
   })
 
   .post(function(req, res) {
-    var item = new Item();
-    item.name = req.body.name;
-    item.priority = req.body.priority;
-    item.dueDate = req.body.dueDate;
-    item.completed = false;
+    var list = new List();
+    list.name = req.body.name;
+    list.items = [];
     console.log(req.body);
-    item.save(function(err, result) {
+    list.save(function(err, result) {
       if (err) {
         res.send(err);
       }
@@ -29,7 +28,7 @@ router.route('/items')
   })
 
   .delete(function(req, res) {
-      Item.remove({}, function(err, items) {
+      List.remove({}, function(err, items) {
         if (err) {
           res.send(err);
         }

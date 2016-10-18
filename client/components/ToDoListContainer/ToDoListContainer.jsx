@@ -10,7 +10,10 @@ const ListNavigation = require ('../ListNavigation/ListNavigation');
 var ToDoList = React.createClass({
 
     propTypes: {
+          lists: React.PropTypes.array,
           items: React.PropTypes.array,
+          fetchLists: React.PropTypes.func,
+          addList: React.PropTypes.func,
           addItem: React.PropTypes.func,
           deleteItem: React.PropTypes.func,
           clearList: React.PropTypes.func,
@@ -25,6 +28,7 @@ var ToDoList = React.createClass({
 
   componentWillMount: function() {
       this.props.fetchItems();
+      this.props.fetchLists();
   },
 
   render: function () {
@@ -34,7 +38,9 @@ var ToDoList = React.createClass({
                   <ListNavigation />
                 </div>
                 <div id="left-panel">
-                    <ListContainer />
+                    <ListContainer
+                        lists={this.props.lists}
+                        addList={this.props.addList} />
                 </div>
                 <div id="middle-panel">
                     <div className="middle-panel-content">
@@ -43,11 +49,11 @@ var ToDoList = React.createClass({
                       <UserForm
                           addItem={this.props.addItem} clearList={this.props.clearList} />
                       <ControlBar
-                        items={this.props.items}
-                        filter={this.props.filter}
-                        allItemFilter={this.props.allItemFilter}
-                        activeItemFilter={this.props.activeItemFilter}
-                        completedItemFilter={this.props.completedItemFilter} />
+                          items={this.props.items}
+                          filter={this.props.filter}
+                          allItemFilter={this.props.allItemFilter}
+                          activeItemFilter={this.props.activeItemFilter}
+                          completedItemFilter={this.props.completedItemFilter} />
                       <ListItemContainer
                           items={this.props.items}
                           deleteItem={this.props.deleteItem}
