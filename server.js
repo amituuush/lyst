@@ -35,7 +35,7 @@ var port = process.env.PORT || 7007;
 
 app.use('/api', lists);
 app.use('/api', listsListId);
-app.use('/api', listsListIdItems)
+app.use('/api', listsListIdItems);
 // app.use('/api', items);
 // app.use('/api', itemsCompleted);
 // app.use('/api', itemsItemId);

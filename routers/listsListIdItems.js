@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var List = require('../app/models/lists');
 
-router.route('/list/:list_id/items')
+router.route('/lists/:list_id/items')
     .get(function(req, res) {
         List.findById(req.params.list_id, function(err, list) {
           if (err) {
@@ -18,14 +18,14 @@ router.route('/list/:list_id/items')
             name: req.body.name,
             priority: req.body.priority,
             dueDate: req.body.dueDate,
-            completed: req.body.completed
+            completed: false
         }}},
         {safe: true, new : true},
         function(err, model) {
             err ? res.send(err) : res.json(model)
         }
     );
-    })
+});
 
 
 module.exports = router;

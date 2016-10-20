@@ -21956,65 +21956,65 @@
 	    };
 	};
 
-	var handleFetchItems = function handleFetchItems(dispatch) {
-	    return function () {
-	        dispatch(fetchItems());
-	    };
-	};
+	// const handleFetchItems = (dispatch) => {
+	//     return () => {
+	//         dispatch(fetchItems())
+	//     }
+	// }
 
-	var handleClearItems = function handleClearItems(dispatch) {
-	    return function () {
-	        if (store.getState().items.length > 0) {
-	            if (confirm('Are you sure you want to completely delete this list?')) {
-	                dispatch(clearItems());
-	            }
-	        } else {
-	            alert('There are no items in your list to delete!');
-	        }
-	    };
-	};
-
-	var handleAddItem = function handleAddItem(dispatch) {
-	    return function (itemName, itemPriority, dueDate) {
-	        dispatch(addItem(itemName, itemPriority, dueDate));
-	    };
-	};
-
-	var handleCompleteItem = function handleCompleteItem(dispatch) {
-	    return function (itemId) {
-	        dispatch(completeItem(itemId));
-	    };
-	};
-
-	var handleDeleteItem = function handleDeleteItem(dispatch) {
-	    return function (itemId) {
-	        dispatch(deleteItem(itemId));
-	    };
-	};
-
-	var handleDeleteCompletedItems = function handleDeleteCompletedItems(dispatch) {
-	    return function () {
-	        dispatch(deleteCompletedItems());
-	    };
-	};
-
-	var handleAllItemFilter = function handleAllItemFilter(dispatch) {
-	    return function () {
-	        dispatch(allItemFilter());
-	    };
-	};
-
-	var handleActiveItemFilter = function handleActiveItemFilter(dispatch) {
-	    return function () {
-	        dispatch(activeItemFilter());
-	    };
-	};
-
-	var handleCompletedItemFilter = function handleCompletedItemFilter(dispatch) {
-	    return function () {
-	        dispatch(completedItemFilter());
-	    };
-	};
+	// const handleClearItems = (dispatch) => {
+	//     return () => {
+	//         if (store.getState().items.length > 0) {
+	//             if (confirm('Are you sure you want to completely delete this list?')) {
+	//                 dispatch(clearItems())
+	//             }
+	//         } else {
+	//             alert('There are no items in your list to delete!');
+	//         }
+	//     }
+	// }
+	//
+	// const handleAddItem = (dispatch) => {
+	//     return (itemName, itemPriority, dueDate) => {
+	//         dispatch(addItem(itemName, itemPriority, dueDate))
+	//     }
+	// }
+	//
+	// const handleCompleteItem = (dispatch) => {
+	//     return (itemId) => {
+	//         dispatch(completeItem(itemId))
+	//     }
+	// }
+	//
+	// const handleDeleteItem = function(dispatch) {
+	//     return (itemId) => {
+	//         dispatch(deleteItem(itemId))
+	//     }
+	// }
+	//
+	// var handleDeleteCompletedItems = function(dispatch) {
+	//     return () => {
+	//         dispatch(deleteCompletedItems())
+	//     }
+	// }
+	//
+	// const handleAllItemFilter = (dispatch) => {
+	//     return () => {
+	//         dispatch(allItemFilter())
+	//     }
+	// }
+	//
+	// const handleActiveItemFilter = (dispatch) => {
+	//     return () => {
+	//         dispatch(activeItemFilter())
+	//     }
+	// }
+	//
+	// const handleCompletedItemFilter = (dispatch) => {
+	//     return () => {
+	//         dispatch(completedItemFilter())
+	//     }
+	// }
 
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	    return {
@@ -22022,16 +22022,7 @@
 	        addList: handleAddList(dispatch),
 	        deleteList: handleDeleteList(dispatch),
 	        addItemToList: handleAddItemToList(dispatch),
-	        setCurrentList: handleSetCurrentList(dispatch),
-	        fetchItems: handleFetchItems(dispatch),
-	        clearList: handleClearItems(dispatch),
-	        addItem: handleAddItem(dispatch),
-	        markComplete: handleCompleteItem(dispatch),
-	        deleteItem: handleDeleteItem(dispatch),
-	        allItemFilter: handleAllItemFilter(dispatch),
-	        activeItemFilter: handleActiveItemFilter(dispatch),
-	        completedItemFilter: handleCompletedItemFilter(dispatch),
-	        deleteCompletedItems: handleDeleteCompletedItems(dispatch)
+	        setCurrentList: handleSetCurrentList(dispatch)
 	    };
 	};
 
@@ -23701,97 +23692,103 @@
 
 /***/ },
 /* 198 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict';
-
-	var _superagent = __webpack_require__(193);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var FETCH_ITEMS = 'FETCH_ITEMS';
-	var CLEAR_ITEMS = 'CLEAR_ITEMS';
-	var ADD_ITEM = 'ADD_ITEM';
-	var COMPLETE_ITEM = 'COMPLETE_ITEM';
-	var DELETE_ITEM = 'DELETE_ITEM';
-	var DELETE_COMPLETED_ITEMS = 'DELETE_COMPLETED_ITEMS';
-
-	// ________________________________________
-
-	var fetchItems = function fetchItems() {
-	  return function (dispatch) {
-	    _superagent2.default.get('/api/items').end(function (err, res) {
-	      dispatch({
-	        type: FETCH_ITEMS,
-	        items: res.body
-	      });
-	    });
-	  };
-	};
-
-	var addItem = function addItem(itemName, itemPriority, dueDate) {
-	  return function (dispatch) {
-	    _superagent2.default.post('/api/items').set('Content-Type', 'application/json').send({
-	      name: itemName,
-	      priority: itemPriority,
-	      dueDate: dueDate
-	    }).end(function (err, res) {
-	      dispatch({
-	        type: ADD_ITEM,
-	        newItem: res.body
-	      });
-	    });
-	  };
-	};
-
-	var clearItems = function clearItems() {
-	  return function (dispatch) {
-	    _superagent2.default.delete('/api/items').end(function (err, res) {
-	      dispatch({
-	        type: CLEAR_ITEMS
-	      });
-	    });
-	  };
-	};
-
-	var completeItem = function completeItem(itemId) {
-	  return function (dispatch) {
-	    _superagent2.default.put('/api/items/' + itemId).set('Content-Type', 'application/json').end(function (err, res) {
-	      dispatch({
-	        type: COMPLETE_ITEM,
-	        item: res.body
-	      });
-	    });
-	  };
-	};
-
-	var deleteItem = function deleteItem(itemId) {
-	  return function (dispatch) {
-	    _superagent2.default.delete('/api/items/' + itemId).set('Content-Type', 'application/json').end(function (err, res) {
-	      dispatch({
-	        type: DELETE_ITEM,
-	        item: res.body
-	      });
-	    });
-	  };
-	};
-
-	var deleteCompletedItems = function deleteCompletedItems() {
-	  return function (dispatch) {
-	    _superagent2.default.delete('/api/items/completed').end(function (err, res) {
-	      dispatch({
-	        type: DELETE_COMPLETED_ITEMS,
-	        items: res.body
-	      });
-	    });
-	  };
-	};
-
-	// _____________________________________________
-
-	module.exports = { FETCH_ITEMS: FETCH_ITEMS, fetchItems: fetchItems, CLEAR_ITEMS: CLEAR_ITEMS, clearItems: clearItems, ADD_ITEM: ADD_ITEM, addItem: addItem, COMPLETE_ITEM: COMPLETE_ITEM, completeItem: completeItem, DELETE_ITEM: DELETE_ITEM, deleteItem: deleteItem, DELETE_COMPLETED_ITEMS: DELETE_COMPLETED_ITEMS, deleteCompletedItems: deleteCompletedItems };
+	// import request from 'superagent'
+	//
+	// const FETCH_ITEMS = 'FETCH_ITEMS';
+	// const CLEAR_ITEMS = 'CLEAR_ITEMS';
+	// const ADD_ITEM = 'ADD_ITEM';
+	// const COMPLETE_ITEM = 'COMPLETE_ITEM';
+	// const DELETE_ITEM = 'DELETE_ITEM';
+	// const DELETE_COMPLETED_ITEMS = 'DELETE_COMPLETED_ITEMS';
+	//
+	// // ________________________________________
+	//
+	// const fetchItems = () => {
+	//     return function(dispatch) {
+	//         request.get('/api/items')
+	//           .end((err, res) => {
+	//               dispatch({
+	//                 type: FETCH_ITEMS,
+	//                 items: res.body
+	//               })
+	//           });
+	//     }
+	// }
+	//
+	// const addItem = (itemName, itemPriority, dueDate) => {
+	//   return function(dispatch) {
+	//     request.post('/api/items')
+	//       .set('Content-Type', 'application/json')
+	//       .send({
+	//           name: itemName,
+	//           priority: itemPriority,
+	//           dueDate: dueDate
+	//       })
+	//       .end((err, res) => {
+	//           dispatch({
+	//             type: ADD_ITEM,
+	//             newItem: res.body,
+	//           })
+	//       });
+	//   }
+	// }
+	//
+	// const clearItems = () => {
+	//   return function(dispatch) {
+	//     request.delete('/api/items')
+	//       .end((err, res) => {
+	//           dispatch({
+	//             type: CLEAR_ITEMS
+	//           })
+	//       });
+	//   }
+	// }
+	//
+	// const completeItem = (itemId) => {
+	//   return function(dispatch) {
+	//     request.put('/api/items/' + itemId)
+	//       .set('Content-Type', 'application/json')
+	//       .end((err, res) => {
+	//           dispatch({
+	//             type: COMPLETE_ITEM,
+	//             item: res.body,
+	//           })
+	//       });
+	//   }
+	// }
+	//
+	// var deleteItem = function(itemId) {
+	//   return function(dispatch) {
+	//     request.delete('/api/items/' + itemId)
+	//       .set('Content-Type', 'application/json')
+	//       .end((err, res) => {
+	//           dispatch({
+	//             type: DELETE_ITEM,
+	//             item: res.body,
+	//           })
+	//       });
+	//   }
+	// }
+	//
+	// var deleteCompletedItems = function() {
+	//   return function(dispatch) {
+	//     request.delete('/api/items/completed')
+	//     .end((err, res) => {
+	//         dispatch({
+	//           type: DELETE_COMPLETED_ITEMS,
+	//           items: res.body
+	//         })
+	//     });
+	//   }
+	// }
+	//
+	//
+	// // _____________________________________________
+	//
+	// module.exports = {FETCH_ITEMS, fetchItems, CLEAR_ITEMS, clearItems, ADD_ITEM, addItem, COMPLETE_ITEM, completeItem, DELETE_ITEM, deleteItem, DELETE_COMPLETED_ITEMS, deleteCompletedItems};
+	"use strict";
 
 /***/ },
 /* 199 */
@@ -23849,9 +23846,16 @@
 
 	'use strict';
 
+	var _ListItemContainer = __webpack_require__(208);
+
+	var _ListItemContainer2 = _interopRequireDefault(_ListItemContainer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	var React = __webpack_require__(1);
 	var ListContainer = __webpack_require__(202);
-	var ListItemContainer = __webpack_require__(208);
+	// const ListItemContainer = require('../ListItemContainer/ListItemContainer');
+
 	var UserForm = __webpack_require__(214);
 	__webpack_require__(327);
 	var ControlBar = __webpack_require__(329);
@@ -23879,15 +23883,26 @@
 	        completedItemFilter: React.PropTypes.func,
 	        deleteCompletedItems: React.PropTypes.func,
 	        fetchItems: React.PropTypes.func,
+	        currentList: React.PropTypes.string,
 	        setCurrentList: React.PropTypes.func
 	    },
 
 	    componentWillMount: function componentWillMount() {
-	        this.props.fetchItems();
+	        //   this.props.fetchItems();
 	        this.props.fetchLists();
+	        //   console.log(this.props.lists);
 	    },
-
 	    render: function render() {
+	        var _this = this;
+
+	        if (!this.props.lists) return React.createElement(
+	            'h1',
+	            null,
+	            'Loading...'
+	        );
+	        var currentListItems = this.props.lists.filter(function (list) {
+	            return list._id === _this.props.currentList;
+	        });
 	        return React.createElement(
 	            'div',
 	            { id: 'container' },
@@ -23931,7 +23946,9 @@
 	                        allItemFilter: this.props.allItemFilter,
 	                        activeItemFilter: this.props.activeItemFilter,
 	                        completedItemFilter: this.props.completedItemFilter }),
-	                    React.createElement(ListItemContainer, {
+	                    React.createElement(_ListItemContainer2.default, {
+	                        lists: currentListItems,
+	                        currentList: this.props.currentList,
 	                        items: this.props.items,
 	                        deleteItem: this.props.deleteItem,
 	                        markComplete: this.props.markComplete,
@@ -23976,7 +23993,6 @@
 
 	    _handleSubmit: function _handleSubmit(event) {
 	        event.preventDefault();
-	        console.log('creating a list');
 	        this.state.name ? this.props.addList(this.state.name) : alert('Enter in a list name!');
 	        this.setState({
 	            name: ''
@@ -24166,32 +24182,152 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	var React = __webpack_require__(1);
 	var ListItem = __webpack_require__(209);
 	__webpack_require__(212);
 
-	// __________________________________________
+	var ListItemContainer = function ListItemContainer(_ref) {
+	    var _ref$lists = _ref.lists;
+	    var lists = _ref$lists === undefined ? [] : _ref$lists;
 
-	var ListItemContainer = React.createClass({
-	    displayName: 'ListItemContainer',
-
-
-	    propTypes: {
-	        items: React.PropTypes.array,
-	        deleteItem: React.PropTypes.func,
-	        markComplete: React.PropTypes.func,
-	        filter: React.PropTypes.string
-	    },
-
-	    render: function render() {
-
-	        return React.createElement('ul', { className: 'list-ul' });
+	    var listItems = lists.map(function (list) {
+	        return list.items;
+	    });
+	    console.log(listItems);
+	    if (!listItems) {
+	        return React.createElement(
+	            'h1',
+	            null,
+	            'Loading'
+	        );
 	    }
-	});
+	    return React.createElement(
+	        'ul',
+	        { className: 'list-ul' },
+	        listItems.map(function (item, i) {
+	            return React.createElement(
+	                'li',
+	                { key: i },
+	                item.name
+	            );
+	        })
+	    );
+	};
 
-	// _____________________________________________
+	exports.default = ListItemContainer;
 
-	module.exports = ListItemContainer;
+	// var ListItemContainer = React.createClass({
+	//
+	//     propTypes: {
+	//         lists: React.PropTypes.array,
+	//         currentList: React.PropTypes.string,
+	//         items: React.PropTypes.array,
+	//         deleteItem: React.PropTypes.func,
+	//         markComplete: React.PropTypes.func,
+	//         filter: React.PropTypes.string
+	//       },
+	//
+	//     render: function() {
+	//         //
+	//         // if (this.props.items.length) {
+	//         //     switch(this.props.filter) {
+	//         //       case 'all':
+	//         //           var items = this.props.items.map(
+	//         //               function(arrayItem) {
+	//         //                   return <ListItem
+	//         //                       deleteItem={this.props.deleteItem}
+	//         //                       key={arrayItem._id}
+	//         //                       item={arrayItem}
+	//         //                       markComplete={this.props.markComplete} />
+	//         //               }, this);
+	//         //           break;
+	//         //
+	//         //       case 'active':
+	//         //           var filteredItems = this.props.items.filter(
+	//         //               function(item) {
+	//         //                 return item.completed === false;
+	//         //               }
+	//         //           )
+	//         //           var items = filteredItems.map(
+	//         //               function(arrayItem) {
+	//         //                   return <ListItem
+	//         //                       deleteItem={this.props.deleteItem}
+	//         //                       key={arrayItem._id}
+	//         //                       item={arrayItem}
+	//         //                       markComplete={this.props.markComplete} />
+	//         //               }, this);
+	//         //           break;
+	//         //
+	//         //       case 'completed':
+	//         //           var filteredItems = this.props.items.filter(
+	//         //               function(item) {
+	//         //                 return item.completed === true;
+	//         //               }
+	//         //           )
+	//         //           var items = filteredItems.map(
+	//         //               function(arrayItem) {
+	//         //                   return <ListItem
+	//         //                       deleteItem={this.props.deleteItem}
+	//         //                       key={arrayItem._id}
+	//         //                       item={arrayItem}
+	//         //                       markComplete={this.props.markComplete} />
+	//         //               }, this);
+	//         //           break;
+	//         //     }
+	//         // } else {
+	//         //     var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;
+	//         // }
+	//
+	//         // var currentList = this.props.lists.filter(
+	//         //     function(list) {
+	//         //         return list._id === this.props.currentList
+	//         //     })
+	//
+	//
+	//         if (!this.props.lists) {
+	//             return <h1>Loading...</h1>;
+	//         }
+	//         const listItems = this.props.lists.map(list => list.items);
+	//         console.log(listItems);
+	//         return (
+	//             <ul className="list-ul">
+	//                 {listItems.map((item, i) => (
+	//                     <li key={i}>{item.name}</li>
+	//                 ))}
+	//             </ul>
+	//         )
+	//     }
+	// });
+
+	// module.exports = ListItemContainer;
+
+
+	// const reqList = () => {
+	//     // return dispatch => {
+	//     //     axio.get(url)
+	//     //         .then(res => dispatch(recList(res)))
+	//     //         .catch(err => dispatch(recListError))
+	//     // }
+	//     return dispatch => {
+	//         const promise = new Promise(resolve, reject) => {
+	//             request().end(resolve(data))
+	//         }
+	//
+	//         dispatch({
+	//             type: igniwngi,
+	//             promise
+	//         })
+	//     }
+	//
+	// }
+	//
+	// const recList = res => ({
+	//     type: RECEIVED_LIST,
+	//     payload: res.body
+	// })
 
 /***/ },
 /* 209 */
@@ -39756,14 +39892,13 @@
 	var _currentList = __webpack_require__(200);
 
 	var currentListReducer = function currentListReducer() {
-	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '5806b7be2fdcc4044f563785';
 	    var action = arguments[1];
 
 
 	    switch (action.type) {
 	        case _currentList.SET_CURRENT_LIST:
-	            var newState = action.listId;
-	            return newState;
+	            return action.listId;
 	        default:
 	            return state;
 	    }

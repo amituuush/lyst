@@ -19,7 +19,6 @@ var ListContainer = React.createClass({
 
     _handleSubmit: function(event) {
         event.preventDefault();
-        console.log('creating a list');
         this.state.name ? this.props.addList(this.state.name) : alert('Enter in a list name!');
         this.setState({
             name: ''

@@ -50,65 +50,65 @@ const handleSetCurrentList = function(dispatch) {
     }
 }
 
-const handleFetchItems = (dispatch) => {
-    return () => {
-        dispatch(fetchItems())
-    }
-}
+// const handleFetchItems = (dispatch) => {
+//     return () => {
+//         dispatch(fetchItems())
+//     }
+// }
 
-const handleClearItems = (dispatch) => {
-    return () => {
-        if (store.getState().items.length > 0) {
-            if (confirm('Are you sure you want to completely delete this list?')) {
-                dispatch(clearItems())
-            }
-        } else {
-            alert('There are no items in your list to delete!');
-        }
-    }
-}
-
-const handleAddItem = (dispatch) => {
-    return (itemName, itemPriority, dueDate) => {
-        dispatch(addItem(itemName, itemPriority, dueDate))
-    }
-}
-
-const handleCompleteItem = (dispatch) => {
-    return (itemId) => {
-        dispatch(completeItem(itemId))
-    }
-}
-
-const handleDeleteItem = function(dispatch) {
-    return (itemId) => {
-        dispatch(deleteItem(itemId))
-    }
-}
-
-var handleDeleteCompletedItems = function(dispatch) {
-    return () => {
-        dispatch(deleteCompletedItems())
-    }
-}
-
-const handleAllItemFilter = (dispatch) => {
-    return () => {
-        dispatch(allItemFilter())
-    }
-}
-
-const handleActiveItemFilter = (dispatch) => {
-    return () => {
-        dispatch(activeItemFilter())
-    }
-}
-
-const handleCompletedItemFilter = (dispatch) => {
-    return () => {
-        dispatch(completedItemFilter())
-    }
-}
+// const handleClearItems = (dispatch) => {
+//     return () => {
+//         if (store.getState().items.length > 0) {
+//             if (confirm('Are you sure you want to completely delete this list?')) {
+//                 dispatch(clearItems())
+//             }
+//         } else {
+//             alert('There are no items in your list to delete!');
+//         }
+//     }
+// }
+//
+// const handleAddItem = (dispatch) => {
+//     return (itemName, itemPriority, dueDate) => {
+//         dispatch(addItem(itemName, itemPriority, dueDate))
+//     }
+// }
+//
+// const handleCompleteItem = (dispatch) => {
+//     return (itemId) => {
+//         dispatch(completeItem(itemId))
+//     }
+// }
+//
+// const handleDeleteItem = function(dispatch) {
+//     return (itemId) => {
+//         dispatch(deleteItem(itemId))
+//     }
+// }
+//
+// var handleDeleteCompletedItems = function(dispatch) {
+//     return () => {
+//         dispatch(deleteCompletedItems())
+//     }
+// }
+//
+// const handleAllItemFilter = (dispatch) => {
+//     return () => {
+//         dispatch(allItemFilter())
+//     }
+// }
+//
+// const handleActiveItemFilter = (dispatch) => {
+//     return () => {
+//         dispatch(activeItemFilter())
+//     }
+// }
+//
+// const handleCompletedItemFilter = (dispatch) => {
+//     return () => {
+//         dispatch(completedItemFilter())
+//     }
+// }
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -117,15 +117,15 @@ const mapDispatchToProps = (dispatch) => {
         deleteList: handleDeleteList(dispatch),
         addItemToList: handleAddItemToList(dispatch),
         setCurrentList: handleSetCurrentList(dispatch),
-        fetchItems: handleFetchItems(dispatch),
-        clearList: handleClearItems(dispatch),
-        addItem: handleAddItem(dispatch),
-        markComplete: handleCompleteItem(dispatch),
-        deleteItem: handleDeleteItem(dispatch),
-        allItemFilter: handleAllItemFilter(dispatch),
-        activeItemFilter: handleActiveItemFilter(dispatch),
-        completedItemFilter: handleCompletedItemFilter(dispatch),
-        deleteCompletedItems: handleDeleteCompletedItems(dispatch)
+        // fetchItems: handleFetchItems(dispatch),
+        // clearList: handleClearItems(dispatch),
+        // addItem: handleAddItem(dispatch),
+        // markComplete: handleCompleteItem(dispatch),
+        // deleteItem: handleDeleteItem(dispatch),
+        // allItemFilter: handleAllItemFilter(dispatch),
+        // activeItemFilter: handleActiveItemFilter(dispatch),
+        // completedItemFilter: handleCompletedItemFilter(dispatch),
+        // deleteCompletedItems: handleDeleteCompletedItems(dispatch)
     }
 }
 
