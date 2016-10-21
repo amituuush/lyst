@@ -34,11 +34,20 @@ var ToDoList = React.createClass({
   componentWillMount: function() {
     //   this.props.fetchItems();
       this.props.fetchLists();
-    //   console.log(this.props.lists);
   },
+
   render: function () {
-      if (!this.props.lists) return <h1>Loading...</h1>;
-      const currentListItems = this.props.lists.filter(list => list._id === this.props.currentList);
+
+    //   if (!this.props.lists) return <h1>Loading...</h1>;
+      //
+    //   const currentList = this.props.lists.filter(
+    //       function(list) {
+    //           return list._id === this.props.currentList;
+    //       }
+    //   );
+
+    //   console.log('currentList', this.props.lists);
+
       return (
           <div id="container">
                 <div id="navigation">
@@ -66,8 +75,8 @@ var ToDoList = React.createClass({
                           activeItemFilter={this.props.activeItemFilter}
                           completedItemFilter={this.props.completedItemFilter} />
                       <ListItemContainer
-                          lists={currentListItems}
                           currentList={this.props.currentList}
+                          lists={this.props.lists}
                           items={this.props.items}
                           deleteItem={this.props.deleteItem}
                           markComplete={this.props.markComplete}

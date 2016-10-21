@@ -2,35 +2,35 @@ const React = require('react');
 const ListItem = require('../ListItem/ListItem')
 require('./list-item-container.less');
 
-const ListItemContainer = ({ lists = [] }) => {
-    const listItems = lists.map(list => list.items);
-    console.log(listItems);
-    if (!listItems) {
-        return <h1>Loading</h1>
-    }
-    return (
-        <ul className="list-ul">
-            {listItems.map((item, i) => (
-                <li key={i}>{item.name}</li>
-            ))}
-        </ul>
-    )
-}
-
-export default ListItemContainer;
-
-// var ListItemContainer = React.createClass({
+// const ListItemContainer = ({ lists = [] }) => {
+//     const listItems = lists.map(list => list.items);
+//     console.log(listItems);
+//     if (!listItems) {
+//         return <h1>Loading</h1>
+//     }
+//     return (
+//         <ul className="list-ul">
+//             {listItems.map((item, i) => (
+//                 <li key={i}>{item.name}</li>
+//             ))}
+//         </ul>
+//     )
+// }
 //
-//     propTypes: {
-//         lists: React.PropTypes.array,
-//         currentList: React.PropTypes.string,
-//         items: React.PropTypes.array,
-//         deleteItem: React.PropTypes.func,
-//         markComplete: React.PropTypes.func,
-//         filter: React.PropTypes.string
-//       },
-//
-//     render: function() {
+// export default ListItemContainer;
+
+var ListItemContainer = React.createClass({
+
+    propTypes: {
+        lists: React.PropTypes.array,
+        currentList: React.PropTypes.string,
+        items: React.PropTypes.array,
+        deleteItem: React.PropTypes.func,
+        markComplete: React.PropTypes.func,
+        filter: React.PropTypes.string
+      },
+
+    render: function() {
 //         //
 //         // if (this.props.items.length) {
 //         //     switch(this.props.filter) {
@@ -81,28 +81,40 @@ export default ListItemContainer;
 //         //     var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;
 //         // }
 //
-//         // var currentList = this.props.lists.filter(
-//         //     function(list) {
-//         //         return list._id === this.props.currentList
-//         //     })
-//
-//
-//         if (!this.props.lists) {
-//             return <h1>Loading...</h1>;
-//         }
-//         const listItems = this.props.lists.map(list => list.items);
-//         console.log(listItems);
-//         return (
-//             <ul className="list-ul">
-//                 {listItems.map((item, i) => (
-//                     <li key={i}>{item.name}</li>
-//                 ))}
-//             </ul>
-//         )
-//     }
-// });
+        //
+        //
+        //
+        // if (!this.props.lists) {
+        //     return <h1>Loading...</h1>;
+        // }
+        // const listItems = this.props.currentList.map(
+        //     function(list) {
+        //         return list[0].items;
+        //     }
+        // );
 
-// module.exports = ListItemContainer;
+        // var currentList = this.props.lists.filter(
+        //    function(list) {
+        //        return list._id == this.props.currentList
+        //    }
+        // );
+        var currentList = this.props.lists.find(
+            function(list) {
+                return list._id === this.props.currentlist;
+            })
+
+        // console.log('lists', this.props.lists);
+        console.log('currentList', currentList);
+
+        return (
+            <ul className="list-ul">
+                {/* <li>{listItems.name}</li> */}
+            </ul>
+        )
+    }
+});
+
+module.exports = ListItemContainer;
 
 
 
