@@ -11,9 +11,9 @@ const ListNavigation = require ('../ListNavigation/ListNavigation');
 var ToDoList = React.createClass({
 
     propTypes: {
-          lists: React.PropTypes.array,
+          lists: React.PropTypes.array.isRequired,
           items: React.PropTypes.array,
-          fetchLists: React.PropTypes.func,
+          fetchLists: React.PropTypes.func.isRequired,
           addList: React.PropTypes.func,
           deleteList: React.PropTypes.func,
           addItemToList: React.PropTypes.func,
@@ -37,16 +37,6 @@ var ToDoList = React.createClass({
   },
 
   render: function () {
-
-    //   if (!this.props.lists) return <h1>Loading...</h1>;
-      //
-    //   const currentList = this.props.lists.filter(
-    //       function(list) {
-    //           return list._id === this.props.currentList;
-    //       }
-    //   );
-
-    //   console.log('currentList', this.props.lists);
 
       return (
           <div id="container">

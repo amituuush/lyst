@@ -22,8 +22,8 @@ require('./list-item-container.less');
 var ListItemContainer = React.createClass({
 
     propTypes: {
-        lists: React.PropTypes.array,
-        currentList: React.PropTypes.string,
+        lists: React.PropTypes.array.isRequired,
+        currentList: React.PropTypes.string.isRequired,
         items: React.PropTypes.array,
         deleteItem: React.PropTypes.func,
         markComplete: React.PropTypes.func,
@@ -81,34 +81,26 @@ var ListItemContainer = React.createClass({
 //         //     var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;
 //         // }
 //
-        //
-        //
-        //
-        // if (!this.props.lists) {
-        //     return <h1>Loading...</h1>;
-        // }
-        // const listItems = this.props.currentList.map(
-        //     function(list) {
-        //         return list[0].items;
-        //     }
-        // );
 
-        // var currentList = this.props.lists.filter(
-        //    function(list) {
-        //        return list._id == this.props.currentList
-        //    }
-        // );
         var currentList = this.props.lists.find(
-            function(list) {
-                return list._id === this.props.currentlist;
+            (list) => {
+                return list._id === this.props.currentList;
             })
 
-        // console.log('lists', this.props.lists);
-        console.log('currentList', currentList);
+        var listItems = currentList ?
+            currentList.items.map(function(item) {
+                return <ListItem
+                            key={item._id}
+                            item={item} />
+                // return <li>{item.name}</li>
+            }, this)
+        :   <li>No list found</li>
+
+        console.log(currentList);
 
         return (
             <ul className="list-ul">
-                {/* <li>{listItems.name}</li> */}
+                {listItems}
             </ul>
         )
     }

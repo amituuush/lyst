@@ -22282,9 +22282,9 @@
 
 
 	    propTypes: {
-	        lists: React.PropTypes.array,
+	        lists: React.PropTypes.array.isRequired,
 	        items: React.PropTypes.array,
-	        fetchLists: React.PropTypes.func,
+	        fetchLists: React.PropTypes.func.isRequired,
 	        addList: React.PropTypes.func,
 	        deleteList: React.PropTypes.func,
 	        addItemToList: React.PropTypes.func,
@@ -22308,16 +22308,6 @@
 	    },
 
 	    render: function render() {
-
-	        //   if (!this.props.lists) return <h1>Loading...</h1>;
-	        //
-	        //   const currentList = this.props.lists.filter(
-	        //       function(list) {
-	        //           return list._id === this.props.currentList;
-	        //       }
-	        //   );
-
-	        //   console.log('currentList', this.props.lists);
 
 	        return React.createElement(
 	            'div',
@@ -22412,8 +22402,8 @@
 
 
 	    propTypes: {
-	        lists: React.PropTypes.array,
-	        currentList: React.PropTypes.string,
+	        lists: React.PropTypes.array.isRequired,
+	        currentList: React.PropTypes.string.isRequired,
 	        items: React.PropTypes.array,
 	        deleteItem: React.PropTypes.func,
 	        markComplete: React.PropTypes.func,
@@ -22421,6 +22411,8 @@
 	    },
 
 	    render: function render() {
+	        var _this = this;
+
 	        //         //
 	        //         // if (this.props.items.length) {
 	        //         //     switch(this.props.filter) {
@@ -22471,31 +22463,29 @@
 	        //         //     var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;
 	        //         // }
 	        //
-	        //
-	        //
-	        //
-	        // if (!this.props.lists) {
-	        //     return <h1>Loading...</h1>;
-	        // }
-	        // const listItems = this.props.currentList.map(
-	        //     function(list) {
-	        //         return list[0].items;
-	        //     }
-	        // );
 
-	        // var currentList = this.props.lists.filter(
-	        //    function(list) {
-	        //        return list._id == this.props.currentList
-	        //    }
-	        // );
 	        var currentList = this.props.lists.find(function (list) {
-	            return list._id === this.props.currentlist;
+	            return list._id === _this.props.currentList;
 	        });
 
-	        // console.log('lists', this.props.lists);
-	        console.log('currentList', currentList);
+	        var listItems = currentList ? currentList.items.map(function (item) {
+	            return React.createElement(ListItem, {
+	                key: item._id,
+	                item: item });
+	            // return <li>{item.name}</li>
+	        }, this) : React.createElement(
+	            'li',
+	            null,
+	            'No list found'
+	        );
 
-	        return React.createElement('ul', { className: 'list-ul' });
+	        console.log(currentList);
+
+	        return React.createElement(
+	            'ul',
+	            { className: 'list-ul' },
+	            listItems
+	        );
 	    }
 	});
 
@@ -38072,7 +38062,6 @@
 
 	var redux = __webpack_require__(170);
 	// var createStore = redux.createStore;
-	// import { createStore } from 'redux';
 
 
 	var logger = (0, _reduxLogger2.default)();

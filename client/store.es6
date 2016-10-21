@@ -1,9 +1,8 @@
 const redux = require('redux')
-import {createStore, compose, applyMiddleware} from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 // var createStore = redux.createStore;
-// import { createStore } from 'redux';
-import {appReducer} from './reducers'
+import { appReducer } from './reducers'
 import createLogger from 'redux-logger'
 
 
