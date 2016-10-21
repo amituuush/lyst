@@ -23846,14 +23846,14 @@
 
 	'use strict';
 
-	var _ListItemContainer = __webpack_require__(208);
+	var _ListItemContainer = __webpack_require__(202);
 
 	var _ListItemContainer2 = _interopRequireDefault(_ListItemContainer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var React = __webpack_require__(1);
-	var ListContainer = __webpack_require__(202);
+	var ListContainer = __webpack_require__(208);
 	// const ListItemContainer = require('../ListItemContainer/ListItemContainer');
 
 	var UserForm = __webpack_require__(214);
@@ -23970,224 +23970,12 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var List = __webpack_require__(203);
-	__webpack_require__(206);
-
-	var ListContainer = React.createClass({
-	    displayName: 'ListContainer',
-
-
-	    propTypes: {
-	        lists: React.PropTypes.array,
-	        addList: React.PropTypes.func,
-	        deleteList: React.PropTypes.func,
-	        setCurrentList: React.PropTypes.func
-	    },
-
-	    getInitialState: function getInitialState() {
-	        return {
-	            name: ''
-	        };
-	    },
-
-	    _handleSubmit: function _handleSubmit(event) {
-	        event.preventDefault();
-	        this.state.name ? this.props.addList(this.state.name) : alert('Enter in a list name!');
-	        this.setState({
-	            name: ''
-	        });
-	    },
-
-	    _handleAddListChange: function _handleAddListChange(event) {
-	        this.setState({
-	            name: event.target.value
-	        });
-	    },
-
-	    render: function render() {
-
-	        var lists = this.props.lists.map(function (list) {
-	            return React.createElement(List, {
-	                key: list._id,
-	                id: list._id,
-	                name: list.name,
-	                deleteList: this.props.deleteList,
-	                setCurrentList: this.props.setCurrentList });
-	        }, this);
-
-	        return React.createElement(
-	            'div',
-	            { className: 'list-container-container' },
-	            React.createElement(
-	                'h2',
-	                null,
-	                'My Lysts'
-	            ),
-	            React.createElement(
-	                'div',
-	                null,
-	                lists
-	            ),
-	            React.createElement(
-	                'div',
-	                { className: 'list-input-container' },
-	                React.createElement(
-	                    'form',
-	                    { onSubmit: this._handleSubmit },
-	                    React.createElement('input', { onChange: this._handleAddListChange, className: 'list-input', type: 'text', value: this.state.name, placeholder: 'Create a list' }),
-	                    React.createElement(
-	                        'button',
-	                        { type: 'submit' },
-	                        React.createElement('i', { className: 'fa fa-plus-circle fa-3x', 'aria-hidden': 'true' })
-	                    )
-	                )
-	            )
-	        );
-	    }
-	});
-
-	module.exports = ListContainer;
-
-/***/ },
-/* 203 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-	// const ListItem = require('../ListItem/ListItem');
-	__webpack_require__(204);
-
-	var List = React.createClass({
-	    displayName: 'List',
-
-
-	    propTypes: {
-	        name: React.PropTypes.string,
-	        deleteList: React.PropTypes.func,
-	        setCurrentList: React.PropTypes.func
-	    },
-
-	    _handleSetCurrentList: function _handleSetCurrentList() {
-	        console.log('setting current list to: ' + this.props.id);
-	        this.props.setCurrentList(this.props.id);
-	    },
-
-	    _handleDeleteList: function _handleDeleteList() {
-	        var userConfirmDelete = confirm('Are you sure you want to delete this list?');
-	        userConfirmDelete ? this.props.deleteList(this.props.id) : '';
-	    },
-
-	    render: function render() {
-
-	        return React.createElement(
-	            'div',
-	            { className: 'list' },
-	            React.createElement(
-	                'div',
-	                { onClick: this._handleSetCurrentList, className: 'list-name' },
-	                this.props.name
-	            ),
-	            React.createElement('i', { onClick: this._handleDeleteList, className: 'fa fa-times', 'aria-hidden': 'true' })
-	        );
-	    }
-	});
-
-	module.exports = List;
-
-/***/ },
-/* 204 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(205);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(162)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list.less", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 205 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(161)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".list .list-name {\n  font-size: 1.5em;\n  color: #E5E5E5;\n  padding-bottom: 0.5em;\n  display: inline-block;\n}\n.list .list-name:hover {\n  text-decoration: underline;\n  cursor: pointer;\n}\n.list .fa-times {\n  float: right;\n  color: #E5E5E5;\n}\n.list .fa-times:hover {\n  cursor: pointer;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 206 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(207);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(162)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-container.less", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-container.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 207 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(161)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".list-container-container {\n  margin-top: 6em;\n  padding: 0 1em 0 1em;\n}\n.list-container-container h2 {\n  font-size: 2em;\n  text-align: center;\n  color: #E5E5E5;\n  border-bottom: 1px solid #E5E5E5;\n}\n.list-container-container .list-input-container {\n  width: 100%;\n  text-align: left;\n}\n.list-container-container .list-input-container .list-input {\n  margin-top: 1em;\n  padding: 0.5em;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n}\n.list-container-container .list-input-container .list-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n.list-container-container .list-input-container button {\n  background: transparent;\n  width: 50px;\n  height: 50px;\n  border: none;\n}\n.list-container-container .list-input-container button:focus {\n  outline: none;\n}\n.list-container-container .list-input-container .fa-plus-circle {\n  color: #3FB083;\n  vertical-align: middle;\n  margin-left: 0.3em;\n}\n.list-container-container .list-input-container .fa-plus-circle:hover {\n  color: #52c195;\n  cursor: pointer;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 208 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	var React = __webpack_require__(1);
-	var ListItem = __webpack_require__(209);
-	__webpack_require__(212);
+	var ListItem = __webpack_require__(203);
+	__webpack_require__(206);
 
 	var ListItemContainer = function ListItemContainer(_ref) {
 	    var _ref$lists = _ref.lists;
@@ -24330,13 +24118,13 @@
 	// })
 
 /***/ },
-/* 209 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	__webpack_require__(210);
+	__webpack_require__(204);
 
 	var ListItem = React.createClass({
 	    displayName: 'ListItem',
@@ -24409,13 +24197,13 @@
 	module.exports = ListItem;
 
 /***/ },
-/* 210 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(211);
+	var content = __webpack_require__(205);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(162)(content, {});
@@ -24435,7 +24223,7 @@
 	}
 
 /***/ },
-/* 211 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(161)();
@@ -24444,6 +24232,218 @@
 
 	// module
 	exports.push([module.id, ".style-complete {\n  text-decoration: line-through;\n  color: #e5e5e5 !important;\n  transition: color 0.25s ease-in-out;\n  -moz-transition: color 0.25s ease-in-out;\n  -webkit-transition: color 0.25s ease-in-out;\n}\n.list-item-parent li {\n  list-style: none;\n  border-bottom: 2px solid #9eafbd;\n  text-align: left;\n  padding-top: 0.6em;\n  padding-bottom: 0.25em;\n}\n.list-item-parent li .list-item {\n  display: inline-block;\n  font-size: 1.5em;\n  color: #1C272E;\n}\n.list-item-parent li .list-item-text {\n  font-size: 1.25em;\n  color: #747B7E;\n}\n.list-item-parent li .list-item-text .list-item-other {\n  line-height: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .list-item-priority {\n  font-size: 0.6em;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-low {\n  color: blue;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-med {\n  color: yellow;\n}\n.list-item-parent li .list-item-text .list-item-other .priority-high {\n  color: #962D2D;\n}\n.list-item-parent li .list-item-text .list-item-other #list-item-due-date {\n  font-size: 0.6em;\n  margin-right: 1em;\n}\n.list-item-parent li button {\n  background: transparent;\n  border: none;\n  outline: none;\n}\n.list-item-parent li button:hover {\n  cursor: pointer;\n}\n.list-item-parent li button.delete-button {\n  margin-left: 10px;\n  position: relative;\n  bottom: 3px;\n}\n.list-item-parent li button.delete-button .fa-times {\n  color: #CC4E4C;\n  right: 6px;\n}\n.list-item-parent li button.delete-button .fa-times:hover {\n  color: #B13535;\n}\n.list-item-parent li button.check-button {\n  float: right;\n  position: relative;\n  bottom: 5px;\n}\n.list-item-parent li button.check-button .fa-check-square {\n  color: #3FB083;\n}\n.list-item-parent li button.check-button .fa-check-square:hover {\n  color: #52c195;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 206 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(207);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(162)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-item-container.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-item-container.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 207 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(161)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".list-ul {\n  padding: 0;\n}\n.inbox-container {\n  color: #9BA1A3;\n  text-align: center;\n}\n.inbox-container .inbox-greeting {\n  font-size: 1.5em;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 208 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var List = __webpack_require__(209);
+	__webpack_require__(212);
+
+	var ListContainer = React.createClass({
+	    displayName: 'ListContainer',
+
+
+	    propTypes: {
+	        lists: React.PropTypes.array,
+	        addList: React.PropTypes.func,
+	        deleteList: React.PropTypes.func,
+	        setCurrentList: React.PropTypes.func
+	    },
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            name: ''
+	        };
+	    },
+
+	    _handleSubmit: function _handleSubmit(event) {
+	        event.preventDefault();
+	        this.state.name ? this.props.addList(this.state.name) : alert('Enter in a list name!');
+	        this.setState({
+	            name: ''
+	        });
+	    },
+
+	    _handleAddListChange: function _handleAddListChange(event) {
+	        this.setState({
+	            name: event.target.value
+	        });
+	    },
+
+	    render: function render() {
+
+	        var lists = this.props.lists.map(function (list) {
+	            return React.createElement(List, {
+	                key: list._id,
+	                id: list._id,
+	                name: list.name,
+	                deleteList: this.props.deleteList,
+	                setCurrentList: this.props.setCurrentList });
+	        }, this);
+
+	        return React.createElement(
+	            'div',
+	            { className: 'list-container-container' },
+	            React.createElement(
+	                'h2',
+	                null,
+	                'My Lysts'
+	            ),
+	            React.createElement(
+	                'div',
+	                null,
+	                lists
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: 'list-input-container' },
+	                React.createElement(
+	                    'form',
+	                    { onSubmit: this._handleSubmit },
+	                    React.createElement('input', { onChange: this._handleAddListChange, className: 'list-input', type: 'text', value: this.state.name, placeholder: 'Create a list' }),
+	                    React.createElement(
+	                        'button',
+	                        { type: 'submit' },
+	                        React.createElement('i', { className: 'fa fa-plus-circle fa-3x', 'aria-hidden': 'true' })
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+
+	module.exports = ListContainer;
+
+/***/ },
+/* 209 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	// const ListItem = require('../ListItem/ListItem');
+	__webpack_require__(210);
+
+	var List = React.createClass({
+	    displayName: 'List',
+
+
+	    propTypes: {
+	        name: React.PropTypes.string,
+	        deleteList: React.PropTypes.func,
+	        setCurrentList: React.PropTypes.func
+	    },
+
+	    _handleSetCurrentList: function _handleSetCurrentList() {
+	        console.log('setting current list to: ' + this.props.id);
+	        this.props.setCurrentList(this.props.id);
+	    },
+
+	    _handleDeleteList: function _handleDeleteList() {
+	        var userConfirmDelete = confirm('Are you sure you want to delete this list?');
+	        userConfirmDelete ? this.props.deleteList(this.props.id) : '';
+	    },
+
+	    render: function render() {
+
+	        return React.createElement(
+	            'div',
+	            { className: 'list' },
+	            React.createElement(
+	                'div',
+	                { onClick: this._handleSetCurrentList, className: 'list-name' },
+	                this.props.name
+	            ),
+	            React.createElement('i', { onClick: this._handleDeleteList, className: 'fa fa-times', 'aria-hidden': 'true' })
+	        );
+	    }
+	});
+
+	module.exports = List;
+
+/***/ },
+/* 210 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(211);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(162)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 211 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(161)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".list .list-name {\n  font-size: 1.5em;\n  color: #E5E5E5;\n  padding-bottom: 0.5em;\n  display: inline-block;\n}\n.list .list-name:hover {\n  text-decoration: underline;\n  cursor: pointer;\n}\n.list .fa-times {\n  float: right;\n  color: #E5E5E5;\n}\n.list .fa-times:hover {\n  cursor: pointer;\n}\n", ""]);
 
 	// exports
 
@@ -24464,8 +24464,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-item-container.less", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-item-container.less");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-container.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/less-loader/index.js!./list-container.less");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -24483,7 +24483,7 @@
 
 
 	// module
-	exports.push([module.id, ".list-ul {\n  padding: 0;\n}\n.inbox-container {\n  color: #9BA1A3;\n  text-align: center;\n}\n.inbox-container .inbox-greeting {\n  font-size: 1.5em;\n}\n", ""]);
+	exports.push([module.id, ".list-container-container {\n  margin-top: 6em;\n  padding: 0 1em 0 1em;\n}\n.list-container-container h2 {\n  font-size: 2em;\n  text-align: center;\n  color: #E5E5E5;\n  border-bottom: 1px solid #E5E5E5;\n}\n.list-container-container .list-input-container {\n  width: 100%;\n  text-align: left;\n}\n.list-container-container .list-input-container .list-input {\n  margin-top: 1em;\n  padding: 0.5em;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n}\n.list-container-container .list-input-container .list-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n.list-container-container .list-input-container button {\n  background: transparent;\n  width: 50px;\n  height: 50px;\n  border: none;\n}\n.list-container-container .list-input-container button:focus {\n  outline: none;\n}\n.list-container-container .list-input-container .fa-plus-circle {\n  color: #3FB083;\n  vertical-align: middle;\n  margin-left: 0.3em;\n}\n.list-container-container .list-input-container .fa-plus-circle:hover {\n  color: #52c195;\n  cursor: pointer;\n}\n", ""]);
 
 	// exports
 
