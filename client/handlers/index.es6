@@ -1,10 +1,11 @@
-var ReactRedux = require('react-redux');
-var { fetchLists, addList, deleteList } = require('../actions/lists');
-var { fetchItems, clearItems, addItem, completeItem, deleteItem, deleteCompletedItems } = require('../actions/items');
-var { allItemFilter, activeItemFilter, completedItemFilter } = require('../actions/filter');
-var { setCurrentList } = require('../actions/currentList');
-var ToDoListContainer = require('../components/ToDoListContainer/ToDoListContainer');
-var { store } = require('../store');
+const ReactRedux = require('react-redux');
+const { fetchLists, addList, deleteList } = require('../actions/lists');
+const { fetchItems, clearItems, addItem, completeItem, deleteItem, deleteCompletedItems } = require('../actions/items');
+const { allItemFilter, activeItemFilter, completedItemFilter } = require('../actions/filter');
+const { setCurrentList } = require('../actions/currentList');
+const { addItemToList } = require('../actions/listItems');
+const ToDoListContainer = require('../components/ToDoListContainer/ToDoListContainer');
+const { store } = require('../store');
 
 // __________________________________________
 
@@ -39,8 +40,8 @@ const handleDeleteList = (dispatch) => {
 }
 
 const handleAddItemToList = (dispatch) => {
-    return (listId, item) => {
-        dispatch(addItemToList(listId, item))
+    return (listId, name, priority, dueDate) => {
+        dispatch(addItemToList(listId, name, priority, dueDate))
     }
 }
 

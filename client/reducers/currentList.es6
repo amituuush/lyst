@@ -1,6 +1,6 @@
 import { SET_CURRENT_LIST } from '../actions/currentList'
 
-var currentListReducer = (state = '5806b7be2fdcc4044f563785', action) => {
+var currentListReducer = (state = '', action) => {
 
     switch(action.type) {
         case SET_CURRENT_LIST:

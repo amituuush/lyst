@@ -1,4 +1,6 @@
-import request from 'superagent'
+var Promise = require('promise');
+var request = require('superagent-promise')(require('superagent'), Promise);
+// this.Promise ||
 
 const FETCH_LISTS = 'FETCH_LISTS';
 const ADD_LIST = 'ADD_LIST';
@@ -6,12 +8,15 @@ const DELETE_LIST = 'DELETE_LIST';
 
 const fetchLists = () => {
     return function(dispatch) {
-        request.get('/api/lists')
-          .end((err, res) => {
+        request('GET', '/api/lists')
+          .end()
+          .then(function onResult(res) {
               dispatch({
                 type: FETCH_LISTS,
                 lists: res.body
               })
+          }, function onError(err) {
+              console.log(err);
           });
     }
 }
@@ -34,7 +39,7 @@ const addList = (listName) => {
 
 const deleteList = (listId) => {
     return function(dispatch) {
-        request.delete('/api/lists/' + listId)
+        request('DELETE', '/api/lists/' + listId)
           .end((err, res) => {
               dispatch({
                 type: DELETE_LIST,
