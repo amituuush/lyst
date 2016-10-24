@@ -21906,11 +21906,15 @@
 
 	var setCurrentList = _require4.setCurrentList;
 
+	var _require5 = __webpack_require__(365);
+
+	var addItemToList = _require5.addItemToList;
+
 	var ToDoListContainer = __webpack_require__(196);
 
-	var _require5 = __webpack_require__(336);
+	var _require6 = __webpack_require__(336);
 
-	var store = _require5.store;
+	var store = _require6.store;
 
 	// __________________________________________
 
@@ -21945,8 +21949,8 @@
 	};
 
 	var handleAddItemToList = function handleAddItemToList(dispatch) {
-	    return function (listId, item) {
-	        dispatch(addItemToList(listId, item));
+	    return function (listId, name, priority, dueDate) {
+	        dispatch(addItemToList(listId, name, priority, dueDate));
 	    };
 	};
 
@@ -22059,7 +22063,7 @@
 
 	var Promise = __webpack_require__(355);
 	var request = __webpack_require__(349)(__webpack_require__(350), Promise);
-	// this.Promise || 
+	// this.Promise ||
 
 	var FETCH_LISTS = 'FETCH_LISTS';
 	var ADD_LIST = 'ADD_LIST';
@@ -22068,7 +22072,6 @@
 	var fetchLists = function fetchLists() {
 	    return function (dispatch) {
 	        request('GET', '/api/lists').end().then(function onResult(res) {
-	            console.log(res);
 	            dispatch({
 	                type: FETCH_LISTS,
 	                lists: res.body
@@ -22094,7 +22097,7 @@
 
 	var deleteList = function deleteList(listId) {
 	    return function (dispatch) {
-	        request.delete('/api/lists/' + listId).end(function (err, res) {
+	        request('DELETE', '/api/lists/' + listId).end(function (err, res) {
 	            dispatch({
 	                type: DELETE_LIST,
 	                list: res.body
@@ -22345,6 +22348,7 @@
 	                    React.createElement(UserForm, {
 	                        addItem: this.props.addItem,
 	                        addItemToList: this.props.addItemToList,
+	                        currentList: this.props.currentList,
 	                        clearList: this.props.clearList }),
 	                    React.createElement(ControlBar, {
 	                        items: this.props.items,
@@ -22472,14 +22476,13 @@
 	            return React.createElement(ListItem, {
 	                key: item._id,
 	                item: item });
-	            // return <li>{item.name}</li>
 	        }, this) : React.createElement(
 	            'li',
 	            null,
 	            'No list found'
 	        );
 
-	        console.log(currentList);
+	        // console.log(currentList);
 
 	        return React.createElement(
 	            'ul',
@@ -22930,7 +22933,7 @@
 	        // } else {
 	        //     alert('You forgot to enter in a task!');
 	        // }
-	        // this.state.name ? this.props.addItemToList(, this.state)
+	        this.state.name ? this.props.addItemToList(this.props.currentList, this.state.name, this.state.priority, this.state.dueDate) : alert('You forgot to enter in a task name!');
 
 	        this.setState({
 	            name: '',
@@ -38066,7 +38069,9 @@
 
 	var logger = (0, _reduxLogger2.default)();
 
-	var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, logger);
+	// const middleware = applyMiddleware(thunkMiddleware, logger);
+
+	var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default);
 
 	var store = (0, _redux.createStore)(_reducers.appReducer, (0, _redux.compose)(middleware, window.devToolsExtension ? window.devToolsExtension() : function (f) {
 	  return f;
@@ -38184,6 +38189,14 @@
 	                return list._id !== action.list._id;
 	            });
 	            return newState;
+	        case 'ADD_ITEM_TO_LIST':
+	            var newState = state.map(function (list) {
+	                if (list._id === action.listId) {
+	                    console.log(list);
+	                    return list.items.concat(action.newItem);
+	                }
+	            }, undefined);
+	            return newState;
 	        default:
 	            return state;
 	    }
@@ -38272,7 +38285,7 @@
 	var _currentList = __webpack_require__(195);
 
 	var currentListReducer = function currentListReducer() {
-	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '5806b7be2fdcc4044f563785';
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 	    var action = arguments[1];
 
 
@@ -41752,6 +41765,40 @@
 	  Promise.prototype.getState = undefined;
 	};
 
+
+/***/ },
+/* 365 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var request = __webpack_require__(350);
+
+	var ADD_ITEM_TO_LIST = 'ADD_ITEM_TO_LIST';
+
+	var addItemToList = function addItemToList(listId, itemName, priority, dueDate) {
+	    return function (dispatch) {
+	        request.post('/api/lists/' + listId + '/items').set('Content-Type', 'application/json').send({
+	            name: itemName,
+	            priority: priority,
+	            dueDate: dueDate
+	        }).end(function (err, res) {
+	            dispatch({
+	                type: ADD_ITEM_TO_LIST,
+	                newItem: res.body,
+	                listId: listId
+	            });
+	        });
+	    };
+	};
+
+	var completeItem = function completeItem(itemId) {
+	    return function (dispatch) {
+	        request.put('/');
+	    };
+	};
+
+	module.exports = { addItemToList: addItemToList, ADD_ITEM_TO_LIST: ADD_ITEM_TO_LIST };
 
 /***/ }
 /******/ ]);

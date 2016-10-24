@@ -57,6 +57,7 @@ var ToDoList = React.createClass({
                       <UserForm
                           addItem={this.props.addItem}
                           addItemToList={this.props.addItemToList}
+                          currentList={this.props.currentList}
                           clearList={this.props.clearList} />
                       <ControlBar
                           items={this.props.items}

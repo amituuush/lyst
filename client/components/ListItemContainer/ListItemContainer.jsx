@@ -92,11 +92,10 @@ var ListItemContainer = React.createClass({
                 return <ListItem
                             key={item._id}
                             item={item} />
-                // return <li>{item.name}</li>
             }, this)
         :   <li>No list found</li>
 
-        console.log(currentList);
+        // console.log(currentList);
 
         return (
             <ul className="list-ul">

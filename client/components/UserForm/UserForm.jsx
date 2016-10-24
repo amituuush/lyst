@@ -34,7 +34,8 @@ var UserForm = React.createClass({
         // } else {
         //     alert('You forgot to enter in a task!');
         // }
-        // this.state.name ? this.props.addItemToList(, this.state)
+        this.state.name ? this.props.addItemToList(this.props.currentList, this.state.name, this.state.priority, this.state.dueDate)
+        : alert('You forgot to enter in a task name!')
 
         this.setState({
             name: '',
