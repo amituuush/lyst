@@ -13,7 +13,6 @@ router.route('/lists/:list_id/items')
     })
 
     .post(function(req, res) {
-        console.log(req.body);
         List.findByIdAndUpdate(req.params.list_id,
         {$push: {"items": {
             name: req.body.name,
@@ -23,10 +22,11 @@ router.route('/lists/:list_id/items')
         }}},
         {safe: true, new : true},
         function(err, model) {
-            err ? res.send(err) : res.json(model)
+            err ? res.send(err) : res.json(model.items[model.items.length - 1]);
+            console.log();
         }
     );
-    })
+});
 
 
 router.route('/lists/:list_id/items/:items_id')
@@ -44,7 +44,7 @@ router.route('/lists/:list_id/items/:items_id')
           )
           res.json(updatedItems);
         })
-        // 
+        //
         // List.findByIdAndUpdate(req.params.list_id, {'$set': {
         //     'items.$.name': 'updated item2',
         //     'items.$.value': 'two updated'

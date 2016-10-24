@@ -2,23 +2,6 @@ const React = require('react');
 const ListItem = require('../ListItem/ListItem')
 require('./list-item-container.less');
 
-// const ListItemContainer = ({ lists = [] }) => {
-//     const listItems = lists.map(list => list.items);
-//     console.log(listItems);
-//     if (!listItems) {
-//         return <h1>Loading</h1>
-//     }
-//     return (
-//         <ul className="list-ul">
-//             {listItems.map((item, i) => (
-//                 <li key={i}>{item.name}</li>
-//             ))}
-//         </ul>
-//     )
-// }
-//
-// export default ListItemContainer;
-
 var ListItemContainer = React.createClass({
 
     propTypes: {
