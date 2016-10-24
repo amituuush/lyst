@@ -1,10 +1,11 @@
-var ReactRedux = require('react-redux');
-var { fetchLists, addList, deleteList } = require('../actions/lists');
-var { fetchItems, clearItems, addItem, completeItem, deleteItem, deleteCompletedItems } = require('../actions/items');
-var { allItemFilter, activeItemFilter, completedItemFilter } = require('../actions/filter');
-var { setCurrentList } = require('../actions/currentList');
-var ToDoListContainer = require('../components/ToDoListContainer/ToDoListContainer');
-var { store } = require('../store');
+const ReactRedux = require('react-redux');
+const { fetchLists, addList, deleteList, clearList } = require('../actions/lists');
+const { fetchItems, clearItems, addItem, completeItem, deleteItem, deleteCompletedItems } = require('../actions/items');
+const { allItemFilter, activeItemFilter, completedItemFilter } = require('../actions/filter');
+const { setCurrentList } = require('../actions/currentList');
+const { addItemToList } = require('../actions/listItems');
+const ToDoListContainer = require('../components/ToDoListContainer/ToDoListContainer');
+const { store } = require('../store');
 
 // __________________________________________
 
@@ -39,8 +40,8 @@ const handleDeleteList = (dispatch) => {
 }
 
 const handleAddItemToList = (dispatch) => {
-    return (listId, item) => {
-        dispatch(addItemToList(listId, item))
+    return (listId, name, priority, dueDate) => {
+        dispatch(addItemToList(listId, name, priority, dueDate))
     }
 }
 
@@ -56,18 +57,12 @@ const handleSetCurrentList = function(dispatch) {
 //     }
 // }
 
-// const handleClearItems = (dispatch) => {
-//     return () => {
-//         if (store.getState().items.length > 0) {
-//             if (confirm('Are you sure you want to completely delete this list?')) {
-//                 dispatch(clearItems())
-//             }
-//         } else {
-//             alert('There are no items in your list to delete!');
-//         }
-//     }
-// }
-//
+const handleClearList = (dispatch) => {
+    return (listId) => {
+        dispatch(clearList(listId))
+    }
+}
+
 // const handleAddItem = (dispatch) => {
 //     return (itemName, itemPriority, dueDate) => {
 //         dispatch(addItem(itemName, itemPriority, dueDate))
@@ -118,7 +113,7 @@ const mapDispatchToProps = (dispatch) => {
         addItemToList: handleAddItemToList(dispatch),
         setCurrentList: handleSetCurrentList(dispatch),
         // fetchItems: handleFetchItems(dispatch),
-        // clearList: handleClearItems(dispatch),
+        clearList: handleClearList(dispatch)
         // addItem: handleAddItem(dispatch),
         // markComplete: handleCompleteItem(dispatch),
         // deleteItem: handleDeleteItem(dispatch),

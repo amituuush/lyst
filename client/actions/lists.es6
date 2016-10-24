@@ -1,17 +1,22 @@
-import request from 'superagent'
+var Promise = require('promise');
+var request = require('superagent-promise')(require('superagent'), Promise);
 
 const FETCH_LISTS = 'FETCH_LISTS';
 const ADD_LIST = 'ADD_LIST';
 const DELETE_LIST = 'DELETE_LIST';
+const CLEAR_LIST = 'CLEAR_LIST';
 
 const fetchLists = () => {
     return function(dispatch) {
-        request.get('/api/lists')
-          .end((err, res) => {
+        request('GET', '/api/lists')
+          .end()
+          .then(function onResult(res) {
               dispatch({
                 type: FETCH_LISTS,
                 lists: res.body
               })
+          }, function onError(err) {
+              console.log(err);
           });
     }
 }
@@ -30,11 +35,11 @@ const addList = (listName) => {
               })
           });
     }
-}
+};
 
 const deleteList = (listId) => {
     return function(dispatch) {
-        request.delete('/api/lists/' + listId)
+        request('DELETE', '/api/lists/' + listId)
           .end((err, res) => {
               dispatch({
                 type: DELETE_LIST,
@@ -42,6 +47,19 @@ const deleteList = (listId) => {
               })
           });
     }
-}
+};
 
-module.exports = {fetchLists, FETCH_LISTS, addList, ADD_LIST, deleteList, DELETE_LIST};
+const clearList = (listId) => {
+    console.log('clear list function calling');
+    return function(dispatch) {
+        request('PUT', 'api/lists/' + listId)
+            .end((err, res) => {
+                dispatch({
+                    type: CLEAR_LIST,
+                    listId: listId
+                })
+            })
+    }
+};
+
+module.exports = {fetchLists, FETCH_LISTS, addList, ADD_LIST, deleteList, DELETE_LIST, clearList, CLEAR_LIST};

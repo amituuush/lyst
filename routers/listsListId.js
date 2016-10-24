@@ -19,6 +19,23 @@ router.route('/lists/:list_id')
       }
       res.json(list);
     });
-  });
+  })
+
+  .put(function(req, res) {
+      List.findById(req.params.list_id, function(err, list) {
+          if (err) {
+              res.send(err);
+          }
+          list.items = [];
+          list.save(function(err, result) {
+            if (err) {
+              res.send(err);
+            }
+            console.log(list);
+            res.json(result);
+          });
+
+      });
+  })
 
 module.exports = router;

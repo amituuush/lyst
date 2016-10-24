@@ -11,9 +11,9 @@ const ListNavigation = require ('../ListNavigation/ListNavigation');
 var ToDoList = React.createClass({
 
     propTypes: {
-          lists: React.PropTypes.array,
+          lists: React.PropTypes.array.isRequired,
           items: React.PropTypes.array,
-          fetchLists: React.PropTypes.func,
+          fetchLists: React.PropTypes.func.isRequired,
           addList: React.PropTypes.func,
           deleteList: React.PropTypes.func,
           addItemToList: React.PropTypes.func,
@@ -34,11 +34,10 @@ var ToDoList = React.createClass({
   componentWillMount: function() {
     //   this.props.fetchItems();
       this.props.fetchLists();
-    //   console.log(this.props.lists);
   },
+
   render: function () {
-      if (!this.props.lists) return <h1>Loading...</h1>;
-      const currentListItems = this.props.lists.filter(list => list._id === this.props.currentList);
+
       return (
           <div id="container">
                 <div id="navigation">
@@ -58,6 +57,7 @@ var ToDoList = React.createClass({
                       <UserForm
                           addItem={this.props.addItem}
                           addItemToList={this.props.addItemToList}
+                          currentList={this.props.currentList}
                           clearList={this.props.clearList} />
                       <ControlBar
                           items={this.props.items}
@@ -66,8 +66,8 @@ var ToDoList = React.createClass({
                           activeItemFilter={this.props.activeItemFilter}
                           completedItemFilter={this.props.completedItemFilter} />
                       <ListItemContainer
-                          lists={currentListItems}
                           currentList={this.props.currentList}
+                          lists={this.props.lists}
                           items={this.props.items}
                           deleteItem={this.props.deleteItem}
                           markComplete={this.props.markComplete}
