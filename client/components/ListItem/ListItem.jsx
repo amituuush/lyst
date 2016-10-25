@@ -10,12 +10,12 @@ var ListItem = React.createClass({
       },
 
     _handleCompleteItem: function() {
-        console.log('completing item');
         this.props.completeItem(this.props.currentList, this.props.item._id);
     },
 
     _handleDeleteItem: function() {
-        this.props.deleteItem(this.props.item._id);
+        console.log('deleting item');
+        this.props.deleteItem(this.props.currentList, this.props.item._id);
     },
 
     render: function() {

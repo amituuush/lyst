@@ -21892,6 +21892,7 @@
 
 	var addItemToList = _require2.addItemToList;
 	var completeItem = _require2.completeItem;
+	var deleteItem = _require2.deleteItem;
 
 	var _require3 = __webpack_require__(210);
 
@@ -21980,12 +21981,12 @@
 	        dispatch(completeItem(listId, itemId));
 	    };
 	};
-	//
-	// const handleDeleteItem = function(dispatch) {
-	//     return (itemId) => {
-	//         dispatch(deleteItem(itemId))
-	//     }
-	// }
+
+	var handleDeleteItem = function handleDeleteItem(dispatch) {
+	    return function (listId, itemId) {
+	        dispatch(deleteItem(listId, itemId));
+	    };
+	};
 	//
 	// var handleDeleteCompletedItems = function(dispatch) {
 	//     return () => {
@@ -22021,7 +22022,8 @@
 	        // fetchItems: handleFetchItems(dispatch),
 	        clearList: handleClearList(dispatch),
 	        // addItem: handleAddItem(dispatch),
-	        completeItem: handleCompleteItem(dispatch)
+	        completeItem: handleCompleteItem(dispatch),
+	        deleteItem: handleDeleteItem(dispatch)
 	    };
 	};
 
@@ -24741,6 +24743,7 @@
 
 	var ADD_ITEM_TO_LIST = 'ADD_ITEM_TO_LIST';
 	var COMPLETE_ITEM = 'COMPLETE_ITEM';
+	var DELETE_ITEM = 'DELETE_ITEM';
 
 	var addItemToList = function addItemToList(listId, itemName, priority, dueDate) {
 	    return function (dispatch) {
@@ -24749,6 +24752,7 @@
 	            priority: priority,
 	            dueDate: dueDate
 	        }).end(function (err, res) {
+	            err ? res.send(err) : res.json(res);
 	            dispatch({
 	                type: ADD_ITEM_TO_LIST,
 	                newItem: res.body,
@@ -24760,9 +24764,7 @@
 
 	var completeItem = function completeItem(listId, itemId) {
 	    return function (dispatch) {
-	        request.put('/api/lists/' + listId + '/items/' + itemId).set('Content-Type', 'application/json').send({
-	            itemId: itemId
-	        }).end(function (err, res) {
+	        request.put('/api/lists/' + listId + '/items/' + itemId).set('Content-Type', 'application/json').end(function (err, res) {
 	            dispatch({
 	                type: COMPLETE_ITEM,
 	                listId: listId,
@@ -24772,7 +24774,19 @@
 	    };
 	};
 
-	module.exports = { addItemToList: addItemToList, ADD_ITEM_TO_LIST: ADD_ITEM_TO_LIST, completeItem: completeItem, COMPLETE_ITEM: COMPLETE_ITEM };
+	var deleteItem = function deleteItem(listId, itemId) {
+	    return function (dispatch) {
+	        request.delete('/api/lists/' + listId + '/items/' + itemId).set('Content-Type', 'application/json').end(function (err, res) {
+	            dispatch({
+	                type: DELETE_ITEM,
+	                listId: listId,
+	                itemId: itemId
+	            });
+	        });
+	    };
+	};
+
+	module.exports = { addItemToList: addItemToList, ADD_ITEM_TO_LIST: ADD_ITEM_TO_LIST, completeItem: completeItem, COMPLETE_ITEM: COMPLETE_ITEM, deleteItem: deleteItem, DELETE_ITEM: DELETE_ITEM };
 
 /***/ },
 /* 210 */
@@ -25026,6 +25040,7 @@
 	                key: item._id,
 	                item: item,
 	                completeItem: this.props.completeItem,
+	                deleteItem: this.props.deleteItem,
 	                currentList: this.props.currentList });
 	        }, this) : React.createElement(
 	            'li',
@@ -25089,12 +25104,12 @@
 	    },
 
 	    _handleCompleteItem: function _handleCompleteItem() {
-	        console.log('completing item');
 	        this.props.completeItem(this.props.currentList, this.props.item._id);
 	    },
 
 	    _handleDeleteItem: function _handleDeleteItem() {
-	        this.props.deleteItem(this.props.item._id);
+	        console.log('deleting item');
+	        this.props.deleteItem(this.props.currentList, this.props.item._id);
 	    },
 
 	    render: function render() {
@@ -40717,11 +40732,7 @@
 
 	'use strict';
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 	var _lists = __webpack_require__(192);
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	var listReducer = function listReducer() {
 	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -40759,32 +40770,21 @@
 	            console.log(newState);
 	            return newState;
 	        case 'COMPLETE_ITEM':
-	            var arrOfItemToChange = state.filter(function (list) {
-	                return list._id === action.listId;
+	            var newState = state.map(function (list) {
+	                if (list._id === action.listId) {
+	                    console.log(list);
+	                    list.items.map(function (item) {
+	                        if (item._id === action.itemId) {
+	                            item.completed = !item.completed;
+	                        } else {
+	                            return item;
+	                        }
+	                    });
+	                } else {
+	                    return list;
+	                }
 	            });
-	            var itemListToChange = arrOfItemToChange[0].items.filter(function (item) {
-	                return item._id === action.itemId;
-	            });
-	            // itemListToChange[0].completed = !itemListToChange[0].completed;
-	            // let newState = Object.assign({}, state, )
-	            return _extends({}, state, _defineProperty({}, itemListToChange, {
-	                completed: true
-	            }));
-	        // let arrOfLists = state.map(
-	        //     function(list) {
-	        //         if (list._id === action.listId) {
-	        //             console.log(list);
-	        //             list.items.map(
-	        //                 function(item) {
-	        //                     if (item._id === action.itemId) {
-	        //                         console.log(item);
-	        //                         return Object.assign({}, item, {completed: true})
-	        //                     } else {return item}
-	        //                 })
-	        //         } else {return list}
-	        //     }
-	        // )
-	        // return arrOfLists;
+	            return newState;
 
 	        // const hofFilter = (arr, value, cb) => {
 	        //     const result = arr.filter(item => item._id === value);

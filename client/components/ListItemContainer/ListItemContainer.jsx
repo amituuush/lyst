@@ -76,6 +76,7 @@ var ListItemContainer = React.createClass({
                             key={item._id}
                             item={item}
                             completeItem={this.props.completeItem}
+                            deleteItem={this.props.deleteItem}
                             currentList={this.props.currentList} />
             }, this)
         :   <li>No list found</li>
