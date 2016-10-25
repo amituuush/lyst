@@ -14,7 +14,6 @@ const addItemToList = (listId, itemName, priority, dueDate) => {
                   dueDate: dueDate
                 })
                 .end((err, res) => {
-                  err ? res.send(err) : res.json(res);
                   dispatch({
                     type: ADD_ITEM_TO_LIST,
                     newItem: res.body,

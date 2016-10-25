@@ -1,4 +1,5 @@
-import { FETCH_LISTS, ADD_LIST, DELETE_LIST, ADD_ITEM_TO_LIST, CLEAR_LIST } from '../actions/lists'
+import lodash from 'lodash'
+import { FETCH_LISTS, ADD_LIST, DELETE_LIST, ADD_ITEM_TO_LIST, CLEAR_LIST, COMPLETE_ITEM, DELETE_ITEM } from '../actions/lists'
 
 var listReducer = (state = [], action) => {
 
@@ -39,55 +40,40 @@ var listReducer = (state = [], action) => {
             console.log(newState);
             return newState;
         case 'COMPLETE_ITEM':
-            var newState = state.map(
-                function(list) {
-                    if (list._id === action.listId) {
-                        console.log(list);
-                        list.items.map(
-                            function(item) {
-                                if (item._id === action.itemId) {
-                                    item.completed = !item.completed
-                                } else {return item}
-                            })
-                    } else {return list}
+
+            var newState = _.map(state, function(list) {
+                if (list._id === action.listId) {
+                    var updatedItems = _.forEach(list.items, function(item) {
+                        if (item._id === action.itemId) {
+                            item.completed = !item.completed;
+                        }
+                    })
+                    return Object.assign({}, list, {items: updatedItems})
+
+                } else {
+                    return list;
                 }
-            )
+            })
             return newState;
 
-            // const hofFilter = (arr, value, cb) => {
-            //     const result = arr.filter(item => item._id === value);
-            //     return cb(hofFilter(result, value2, null));
-            // }
-            //
-            // console.log(hofFilter(state, action.listId, hofFilter(null, action.itemId)));
 
-            // return [
-            //     ...state,
-            //     state[arrOfItemToChange].items.filter(item => {
-            //         item._id === action.itemId;
-            //         return {
-            //             completed: true
-            //         }
-            //     })
-            // ]
+            // var newState = state.map(
+            //     function(list) {
+            //         if (list._id === action.listId) {
+            //             console.log(list);
+            //             list.items.map(
+            //                 function(item) {
+            //                     if (item._id === action.itemId) {
+            //                         item.completed = !item.completed
+            //                     } else {return item}
+            //                 })
+            //         } else {return list}
+            //     }
+            // )
+            // return newState;
+        case 'DELETE_ITEM':
 
-        // case 'COMPLETE_ITEM':
-        //     var newState = state.map(
-        //     function(list) {
-        //         if (list._id === action.listId) {
-        //             return list.items.map(
-        //                 function(item) {
-        //                     if (item._id === action.itemId) {
-        //                         return Object.assign({}, item, {completed: true})
-        //                     } else {
-        //                         return item
-        //                     }
-        //                 })
-        //         } else {
-        //             return list
-        //         }
-        //     });
-        //     return newState;
+            return state;
         default:
             return state;
     }
