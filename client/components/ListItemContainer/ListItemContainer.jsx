@@ -9,7 +9,7 @@ var ListItemContainer = React.createClass({
         currentList: React.PropTypes.string.isRequired,
         items: React.PropTypes.array,
         deleteItem: React.PropTypes.func,
-        markComplete: React.PropTypes.func,
+        completeItem: React.PropTypes.func,
         filter: React.PropTypes.string
       },
 
@@ -74,7 +74,9 @@ var ListItemContainer = React.createClass({
             currentList.items.map(function(item) {
                 return <ListItem
                             key={item._id}
-                            item={item} />
+                            item={item}
+                            completeItem={this.props.completeItem}
+                            currentList={this.props.currentList} />
             }, this)
         :   <li>No list found</li>
 

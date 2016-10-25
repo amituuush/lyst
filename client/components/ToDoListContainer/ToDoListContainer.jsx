@@ -20,7 +20,7 @@ var ToDoList = React.createClass({
           addItem: React.PropTypes.func,
           deleteItem: React.PropTypes.func,
           clearList: React.PropTypes.func,
-          markComplete: React.PropTypes.func,
+          completeItem: React.PropTypes.func,
           filter: React.PropTypes.string,
           allItemFilter: React.PropTypes.func,
           activeItemFilter: React.PropTypes.func,
@@ -70,7 +70,7 @@ var ToDoList = React.createClass({
                           lists={this.props.lists}
                           items={this.props.items}
                           deleteItem={this.props.deleteItem}
-                          markComplete={this.props.markComplete}
+                          completeItem={this.props.completeItem}
                           filter={this.props.filter} />
                       <ItemsLeft
                           items={this.props.items}

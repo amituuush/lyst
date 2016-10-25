@@ -1,13 +1,17 @@
 const ReactRedux = require('react-redux');
 const { fetchLists, addList, deleteList, clearList } = require('../actions/lists');
-const { fetchItems, clearItems, addItem, completeItem, deleteItem, deleteCompletedItems } = require('../actions/items');
+const { addItemToList, completeItem } = require('../actions/listItems');
 const { allItemFilter, activeItemFilter, completedItemFilter } = require('../actions/filter');
 const { setCurrentList } = require('../actions/currentList');
-const { addItemToList } = require('../actions/listItems');
+
 const ToDoListContainer = require('../components/ToDoListContainer/ToDoListContainer');
 const { store } = require('../store');
 
-// __________________________________________
+// const { fetchItems, clearItems, addItem, completeItem, deleteItem, deleteCompletedItems } = require('../actions/items');
+
+
+
+// _________________________________________
 
 // In addition to reading the state, container components can dispatch actions.
 
@@ -69,11 +73,11 @@ const handleClearList = (dispatch) => {
 //     }
 // }
 //
-// const handleCompleteItem = (dispatch) => {
-//     return (itemId) => {
-//         dispatch(completeItem(itemId))
-//     }
-// }
+const handleCompleteItem = (dispatch) => {
+    return (listId, itemId) => {
+        dispatch(completeItem(listId, itemId))
+    }
+}
 //
 // const handleDeleteItem = function(dispatch) {
 //     return (itemId) => {
@@ -113,9 +117,9 @@ const mapDispatchToProps = (dispatch) => {
         addItemToList: handleAddItemToList(dispatch),
         setCurrentList: handleSetCurrentList(dispatch),
         // fetchItems: handleFetchItems(dispatch),
-        clearList: handleClearList(dispatch)
+        clearList: handleClearList(dispatch),
         // addItem: handleAddItem(dispatch),
-        // markComplete: handleCompleteItem(dispatch),
+        completeItem: handleCompleteItem(dispatch),
         // deleteItem: handleDeleteItem(dispatch),
         // allItemFilter: handleAllItemFilter(dispatch),
         // activeItemFilter: handleActiveItemFilter(dispatch),

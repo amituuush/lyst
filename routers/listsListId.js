@@ -31,7 +31,6 @@ router.route('/lists/:list_id')
             if (err) {
               res.send(err);
             }
-            console.log(list);
             res.json(result);
           });
 
