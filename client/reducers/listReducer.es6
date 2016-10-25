@@ -9,12 +9,11 @@ var listReducer = (state = [], action) => {
         case 'ADD_LIST':
             return state.concat(action.newList);
         case 'DELETE_LIST':
-            var newState = state.filter(
+            return state.filter(
                 function(list) {
                     return list._id !== action.list._id;
                 }
             )
-            return newState;
         case 'ADD_ITEM_TO_LIST':
             return state.map(
                 function(list) {
@@ -28,7 +27,7 @@ var listReducer = (state = [], action) => {
                 }, this
             );
         case 'CLEAR_LIST':
-            var newState = state.map(
+            return state.map(
                 function(list) {
                     if (list._id === action.listId) {
                         return Object.assign({}, list, {items: []});
@@ -37,11 +36,8 @@ var listReducer = (state = [], action) => {
                     }
                 }, this
             );
-            console.log(newState);
-            return newState;
         case 'COMPLETE_ITEM':
-
-            var newState = _.map(state, function(list) {
+            return _.map(state, function(list) {
                 if (list._id === action.listId) {
                     var updatedItems = _.forEach(list.items, function(item) {
                         if (item._id === action.itemId) {
@@ -54,26 +50,18 @@ var listReducer = (state = [], action) => {
                     return list;
                 }
             })
-            return newState;
-
-
-            // var newState = state.map(
-            //     function(list) {
-            //         if (list._id === action.listId) {
-            //             console.log(list);
-            //             list.items.map(
-            //                 function(item) {
-            //                     if (item._id === action.itemId) {
-            //                         item.completed = !item.completed
-            //                     } else {return item}
-            //                 })
-            //         } else {return list}
-            //     }
-            // )
-            // return newState;
         case 'DELETE_ITEM':
+            return _.map(state, function(list) {
+                if (list._id === action.listId) {
+                    var updatedItems = _.filter(list.items, function(item) {
+                        return item._id !== action.itemId;
+                    })
+                    return Object.assign({}, list, {items: updatedItems})
 
-            return state;
+                } else {
+                    return list;
+                }
+            })
         default:
             return state;
     }

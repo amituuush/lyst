@@ -40750,10 +40750,9 @@
 	        case 'ADD_LIST':
 	            return state.concat(action.newList);
 	        case 'DELETE_LIST':
-	            var newState = state.filter(function (list) {
+	            return state.filter(function (list) {
 	                return list._id !== action.list._id;
 	            });
-	            return newState;
 	        case 'ADD_ITEM_TO_LIST':
 	            return state.map(function (list) {
 	                if (list._id === action.listId) {
@@ -40765,18 +40764,15 @@
 	                }
 	            }, undefined);
 	        case 'CLEAR_LIST':
-	            var newState = state.map(function (list) {
+	            return state.map(function (list) {
 	                if (list._id === action.listId) {
 	                    return Object.assign({}, list, { items: [] });
 	                } else {
 	                    return list;
 	                }
 	            }, undefined);
-	            console.log(newState);
-	            return newState;
 	        case 'COMPLETE_ITEM':
-
-	            var newState = _.map(state, function (list) {
+	            return _.map(state, function (list) {
 	                if (list._id === action.listId) {
 	                    var updatedItems = _.forEach(list.items, function (item) {
 	                        if (item._id === action.itemId) {
@@ -40788,25 +40784,17 @@
 	                    return list;
 	                }
 	            });
-	            return newState;
-
-	        // var newState = state.map(
-	        //     function(list) {
-	        //         if (list._id === action.listId) {
-	        //             console.log(list);
-	        //             list.items.map(
-	        //                 function(item) {
-	        //                     if (item._id === action.itemId) {
-	        //                         item.completed = !item.completed
-	        //                     } else {return item}
-	        //                 })
-	        //         } else {return list}
-	        //     }
-	        // )
-	        // return newState;
 	        case 'DELETE_ITEM':
-
-	            return state;
+	            return _.map(state, function (list) {
+	                if (list._id === action.listId) {
+	                    var updatedItems = _.filter(list.items, function (item) {
+	                        return item._id !== action.itemId;
+	                    });
+	                    return Object.assign({}, list, { items: updatedItems });
+	                } else {
+	                    return list;
+	                }
+	            });
 	        default:
 	            return state;
 	    }
