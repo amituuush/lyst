@@ -21911,9 +21911,6 @@
 
 	var store = _require5.store;
 
-	// const { fetchItems, clearItems, addItem, completeItem, deleteItem, deleteCompletedItems } = require('../actions/items');
-
-
 	// _________________________________________
 
 	// In addition to reading the state, container components can dispatch actions.
@@ -21958,24 +21955,12 @@
 	    };
 	};
 
-	// const handleFetchItems = (dispatch) => {
-	//     return () => {
-	//         dispatch(fetchItems())
-	//     }
-	// }
-
 	var handleClearList = function handleClearList(dispatch) {
 	    return function (listId) {
 	        dispatch(clearList(listId));
 	    };
 	};
 
-	// const handleAddItem = (dispatch) => {
-	//     return (itemName, itemPriority, dueDate) => {
-	//         dispatch(addItem(itemName, itemPriority, dueDate))
-	//     }
-	// }
-	//
 	var handleCompleteItem = function handleCompleteItem(dispatch) {
 	    return function (listId, itemId) {
 	        dispatch(completeItem(listId, itemId));
@@ -21993,24 +21978,24 @@
 	//         dispatch(deleteCompletedItems())
 	//     }
 	// }
-	//
-	// const handleAllItemFilter = (dispatch) => {
-	//     return () => {
-	//         dispatch(allItemFilter())
-	//     }
-	// }
-	//
-	// const handleActiveItemFilter = (dispatch) => {
-	//     return () => {
-	//         dispatch(activeItemFilter())
-	//     }
-	// }
-	//
-	// const handleCompletedItemFilter = (dispatch) => {
-	//     return () => {
-	//         dispatch(completedItemFilter())
-	//     }
-	// }
+
+	var handleAllItemFilter = function handleAllItemFilter(dispatch) {
+	    return function () {
+	        dispatch(allItemFilter());
+	    };
+	};
+
+	var handleActiveItemFilter = function handleActiveItemFilter(dispatch) {
+	    return function () {
+	        dispatch(activeItemFilter());
+	    };
+	};
+
+	var handleCompletedItemFilter = function handleCompletedItemFilter(dispatch) {
+	    return function () {
+	        dispatch(completedItemFilter());
+	    };
+	};
 
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	    return {
@@ -22019,11 +22004,12 @@
 	        deleteList: handleDeleteList(dispatch),
 	        addItemToList: handleAddItemToList(dispatch),
 	        setCurrentList: handleSetCurrentList(dispatch),
-	        // fetchItems: handleFetchItems(dispatch),
 	        clearList: handleClearList(dispatch),
-	        // addItem: handleAddItem(dispatch),
 	        completeItem: handleCompleteItem(dispatch),
-	        deleteItem: handleDeleteItem(dispatch)
+	        deleteItem: handleDeleteItem(dispatch),
+	        allItemFilter: handleAllItemFilter(dispatch),
+	        activeItemFilter: handleActiveItemFilter(dispatch),
+	        completedItemFilter: handleCompletedItemFilter(dispatch)
 	    };
 	};
 
@@ -24865,21 +24851,17 @@
 
 	    propTypes: {
 	        lists: React.PropTypes.array.isRequired,
-	        items: React.PropTypes.array,
 	        fetchLists: React.PropTypes.func.isRequired,
 	        addList: React.PropTypes.func,
 	        deleteList: React.PropTypes.func,
 	        addItemToList: React.PropTypes.func,
-	        addItem: React.PropTypes.func,
 	        deleteItem: React.PropTypes.func,
 	        clearList: React.PropTypes.func,
-	        completeItem: React.PropTypes.func,
 	        filter: React.PropTypes.string,
 	        allItemFilter: React.PropTypes.func,
 	        activeItemFilter: React.PropTypes.func,
 	        completedItemFilter: React.PropTypes.func,
 	        deleteCompletedItems: React.PropTypes.func,
-	        fetchItems: React.PropTypes.func,
 	        currentList: React.PropTypes.string,
 	        setCurrentList: React.PropTypes.func
 	    },
@@ -24925,12 +24907,11 @@
 	                        'Lyst'
 	                    ),
 	                    React.createElement(UserForm, {
-	                        addItem: this.props.addItem,
 	                        addItemToList: this.props.addItemToList,
 	                        currentList: this.props.currentList,
 	                        clearList: this.props.clearList }),
 	                    React.createElement(ControlBar, {
-	                        items: this.props.items,
+	                        lists: this.props.lists,
 	                        filter: this.props.filter,
 	                        allItemFilter: this.props.allItemFilter,
 	                        activeItemFilter: this.props.activeItemFilter,
@@ -24938,12 +24919,11 @@
 	                    React.createElement(_ListItemContainer2.default, {
 	                        currentList: this.props.currentList,
 	                        lists: this.props.lists,
-	                        items: this.props.items,
 	                        deleteItem: this.props.deleteItem,
 	                        completeItem: this.props.completeItem,
 	                        filter: this.props.filter }),
 	                    React.createElement(ItemsLeft, {
-	                        items: this.props.items,
+	                        lists: this.props.lists,
 	                        deleteCompletedItems: this.props.deleteCompletedItems })
 	                )
 	            )
@@ -24970,7 +24950,6 @@
 	    propTypes: {
 	        lists: React.PropTypes.array.isRequired,
 	        currentList: React.PropTypes.string.isRequired,
-	        items: React.PropTypes.array,
 	        deleteItem: React.PropTypes.func,
 	        completeItem: React.PropTypes.func,
 	        filter: React.PropTypes.string
@@ -25472,7 +25451,6 @@
 
 
 	    propTypes: {
-	        addItem: React.PropTypes.func,
 	        clearList: React.PropTypes.func,
 	        currentList: React.PropTypes.string
 	    },
@@ -40274,7 +40252,7 @@
 
 
 	    propTypes: {
-	        items: React.PropTypes.array,
+	        lists: React.PropTypes.array,
 	        filter: React.PropTypes.string,
 	        allItemFilter: React.PropTypes.func,
 	        activeItemFilter: React.PropTypes.func,
@@ -40363,7 +40341,7 @@
 
 
 	    propTypes: {
-	        items: React.PropTypes.array,
+	        lists: React.PropTypes.array,
 	        deleteCompletedItems: React.PropTypes.func
 	    },
 
@@ -40684,46 +40662,22 @@
 
 	var listReducer = _require2.listReducer;
 
-	var _require3 = __webpack_require__(356);
+	var _require3 = __webpack_require__(358);
 
-	var itemReducer = _require3.itemReducer;
+	var filterReducer = _require3.filterReducer;
 
-	var _require4 = __webpack_require__(358);
+	var _require4 = __webpack_require__(359);
 
-	var filterReducer = _require4.filterReducer;
-
-	var _require5 = __webpack_require__(359);
-
-	var currentListReducer = _require5.currentListReducer;
+	var currentListReducer = _require4.currentListReducer;
 
 
 	var appReducer = combineReducers({
 	    lists: listReducer,
-	    items: itemReducer,
 	    filter: filterReducer,
 	    currentList: currentListReducer
 	});
 
 	module.exports = { appReducer: appReducer };
-
-	// store = {
-	//   dispatch: function(action) {
-	//     this.state = appReducer(this.state, action)
-	//   }
-	// }
-
-	// This is a reducer, a pure function with (state, action) => state signature.
-	// It describes how an action transforms the state into the next state.
-	//
-	// The shape of the state is up to you: it can be a primitive, an array, an object,
-	// or even an Immutable.js data structure. The only important part is that you should
-	// not mutate the state object, but return a new object if the state changes.
-
-
-	// making sure bundle is actually being included when deploying to bundle
-
-	// dont commit bundle on local version, but have it on heroku, let CI server create bundle and push to heroku
-	// dont push bundle to heroku, let CI server do that, just push to github
 
 /***/ },
 /* 355 */
@@ -40803,148 +40757,8 @@
 	module.exports = { listReducer: listReducer };
 
 /***/ },
-/* 356 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _items = __webpack_require__(357);
-
-	var itemReducer = function itemReducer() {
-	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	    var action = arguments[1];
-
-
-	    switch (action.type) {
-	        case _items.FETCH_ITEMS:
-	            return action.items;
-	        case _items.ADD_ITEM:
-	            return state.concat(action.newItem);
-	        case _items.CLEAR_ITEMS:
-	            return [];
-	        case _items.COMPLETE_ITEM:
-	            var newState = state.map(function (item) {
-	                if (item._id === action.item._id) {
-	                    item.completed = !item.completed;
-	                }
-	                return item;
-	            });
-	            return newState;
-	        case _items.DELETE_ITEM:
-	            var newState = state.filter(function (item) {
-	                return item._id !== action.item._id;
-	            });
-	            return newState;
-	        case _items.DELETE_COMPLETED_ITEMS:
-	            return action.items;
-	        default:
-	            return state;
-	    }
-	};
-
-	module.exports = { itemReducer: itemReducer };
-
-/***/ },
-/* 357 */
-/***/ function(module, exports) {
-
-	// import request from 'superagent'
-	//
-	// const FETCH_ITEMS = 'FETCH_ITEMS';
-	// const CLEAR_ITEMS = 'CLEAR_ITEMS';
-	// const ADD_ITEM = 'ADD_ITEM';
-	// const COMPLETE_ITEM = 'COMPLETE_ITEM';
-	// const DELETE_ITEM = 'DELETE_ITEM';
-	// const DELETE_COMPLETED_ITEMS = 'DELETE_COMPLETED_ITEMS';
-	//
-	// // ________________________________________
-	//
-	// const fetchItems = () => {
-	//     return function(dispatch) {
-	//         request.get('/api/items')
-	//           .end((err, res) => {
-	//               dispatch({
-	//                 type: FETCH_ITEMS,
-	//                 items: res.body
-	//               })
-	//           });
-	//     }
-	// }
-	//
-	// const addItem = (itemName, itemPriority, dueDate) => {
-	//   return function(dispatch) {
-	//     request.post('/api/items')
-	//       .set('Content-Type', 'application/json')
-	//       .send({
-	//           name: itemName,
-	//           priority: itemPriority,
-	//           dueDate: dueDate
-	//       })
-	//       .end((err, res) => {
-	//           dispatch({
-	//             type: ADD_ITEM,
-	//             newItem: res.body,
-	//           })
-	//       });
-	//   }
-	// }
-	//
-	// const clearItems = () => {
-	//   return function(dispatch) {
-	//     request.delete('/api/items')
-	//       .end((err, res) => {
-	//           dispatch({
-	//             type: CLEAR_ITEMS
-	//           })
-	//       });
-	//   }
-	// }
-	//
-	// const completeItem = (itemId) => {
-	//   return function(dispatch) {
-	//     request.put('/api/items/' + itemId)
-	//       .set('Content-Type', 'application/json')
-	//       .end((err, res) => {
-	//           dispatch({
-	//             type: COMPLETE_ITEM,
-	//             item: res.body,
-	//           })
-	//       });
-	//   }
-	// }
-	//
-	// var deleteItem = function(itemId) {
-	//   return function(dispatch) {
-	//     request.delete('/api/items/' + itemId)
-	//       .set('Content-Type', 'application/json')
-	//       .end((err, res) => {
-	//           dispatch({
-	//             type: DELETE_ITEM,
-	//             item: res.body,
-	//           })
-	//       });
-	//   }
-	// }
-	//
-	// var deleteCompletedItems = function() {
-	//   return function(dispatch) {
-	//     request.delete('/api/items/completed')
-	//     .end((err, res) => {
-	//         dispatch({
-	//           type: DELETE_COMPLETED_ITEMS,
-	//           items: res.body
-	//         })
-	//     });
-	//   }
-	// }
-	//
-	//
-	// // _____________________________________________
-	//
-	// module.exports = {FETCH_ITEMS, fetchItems, CLEAR_ITEMS, clearItems, ADD_ITEM, addItem, COMPLETE_ITEM, completeItem, DELETE_ITEM, deleteItem, DELETE_COMPLETED_ITEMS, deleteCompletedItems};
-	"use strict";
-
-/***/ },
+/* 356 */,
+/* 357 */,
 /* 358 */
 /***/ function(module, exports, __webpack_require__) {
 

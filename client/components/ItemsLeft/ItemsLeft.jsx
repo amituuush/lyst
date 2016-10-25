@@ -4,7 +4,7 @@ require('./items-left.less');
 var ItemsLeft = React.createClass({
 
     propTypes: {
-          items: React.PropTypes.array,
+          lists: React.PropTypes.array,
           deleteCompletedItems: React.PropTypes.func
       },
 

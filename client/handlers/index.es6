@@ -7,8 +7,6 @@ const { setCurrentList } = require('../actions/currentList');
 const ToDoListContainer = require('../components/ToDoListContainer/ToDoListContainer');
 const { store } = require('../store');
 
-// const { fetchItems, clearItems, addItem, completeItem, deleteItem, deleteCompletedItems } = require('../actions/items');
-
 
 
 // _________________________________________
@@ -55,24 +53,12 @@ const handleSetCurrentList = function(dispatch) {
     }
 }
 
-// const handleFetchItems = (dispatch) => {
-//     return () => {
-//         dispatch(fetchItems())
-//     }
-// }
-
 const handleClearList = (dispatch) => {
     return (listId) => {
         dispatch(clearList(listId))
     }
 }
 
-// const handleAddItem = (dispatch) => {
-//     return (itemName, itemPriority, dueDate) => {
-//         dispatch(addItem(itemName, itemPriority, dueDate))
-//     }
-// }
-//
 const handleCompleteItem = (dispatch) => {
     return (listId, itemId) => {
         dispatch(completeItem(listId, itemId))
@@ -90,24 +76,24 @@ const handleDeleteItem = function(dispatch) {
 //         dispatch(deleteCompletedItems())
 //     }
 // }
-//
-// const handleAllItemFilter = (dispatch) => {
-//     return () => {
-//         dispatch(allItemFilter())
-//     }
-// }
-//
-// const handleActiveItemFilter = (dispatch) => {
-//     return () => {
-//         dispatch(activeItemFilter())
-//     }
-// }
-//
-// const handleCompletedItemFilter = (dispatch) => {
-//     return () => {
-//         dispatch(completedItemFilter())
-//     }
-// }
+
+const handleAllItemFilter = (dispatch) => {
+    return () => {
+        dispatch(allItemFilter())
+    }
+}
+
+const handleActiveItemFilter = (dispatch) => {
+    return () => {
+        dispatch(activeItemFilter())
+    }
+}
+
+const handleCompletedItemFilter = (dispatch) => {
+    return () => {
+        dispatch(completedItemFilter())
+    }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -116,14 +102,12 @@ const mapDispatchToProps = (dispatch) => {
         deleteList: handleDeleteList(dispatch),
         addItemToList: handleAddItemToList(dispatch),
         setCurrentList: handleSetCurrentList(dispatch),
-        // fetchItems: handleFetchItems(dispatch),
         clearList: handleClearList(dispatch),
-        // addItem: handleAddItem(dispatch),
         completeItem: handleCompleteItem(dispatch),
         deleteItem: handleDeleteItem(dispatch),
-        // allItemFilter: handleAllItemFilter(dispatch),
-        // activeItemFilter: handleActiveItemFilter(dispatch),
-        // completedItemFilter: handleCompletedItemFilter(dispatch),
+        allItemFilter: handleAllItemFilter(dispatch),
+        activeItemFilter: handleActiveItemFilter(dispatch),
+        completedItemFilter: handleCompletedItemFilter(dispatch),
         // deleteCompletedItems: handleDeleteCompletedItems(dispatch)
     }
 }

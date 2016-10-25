@@ -7,7 +7,6 @@ var ListItemContainer = React.createClass({
     propTypes: {
         lists: React.PropTypes.array.isRequired,
         currentList: React.PropTypes.string.isRequired,
-        items: React.PropTypes.array,
         deleteItem: React.PropTypes.func,
         completeItem: React.PropTypes.func,
         filter: React.PropTypes.string

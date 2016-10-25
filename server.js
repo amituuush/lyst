@@ -9,9 +9,7 @@ var lists = require('./routers/lists');
 var listsListId = require('./routers/listsListId');
 var listsListIdItems = require('./routers/listsListIdItems');
 var listsListIdItemsItemsId = require('./routers/listsListIdItemsItemsId');
-var items = require('./routers/items');
-var itemsCompleted = require('./routers/itemsCompleted');
-var itemsItemId = require('./routers/itemsItemId');
+
 
 var MongoURI = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://amituuush:lyst123!@ds025409.mlab.com:25409/lyst'
 mongoose.Promise = global.Promise;

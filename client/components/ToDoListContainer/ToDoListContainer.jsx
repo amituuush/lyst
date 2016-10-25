@@ -12,21 +12,17 @@ var ToDoList = React.createClass({
 
     propTypes: {
           lists: React.PropTypes.array.isRequired,
-          items: React.PropTypes.array,
           fetchLists: React.PropTypes.func.isRequired,
           addList: React.PropTypes.func,
           deleteList: React.PropTypes.func,
           addItemToList: React.PropTypes.func,
-          addItem: React.PropTypes.func,
           deleteItem: React.PropTypes.func,
           clearList: React.PropTypes.func,
-          completeItem: React.PropTypes.func,
           filter: React.PropTypes.string,
           allItemFilter: React.PropTypes.func,
           activeItemFilter: React.PropTypes.func,
           completedItemFilter: React.PropTypes.func,
           deleteCompletedItems: React.PropTypes.func,
-          fetchItems: React.PropTypes.func,
           currentList: React.PropTypes.string,
           setCurrentList: React.PropTypes.func
       },
@@ -55,12 +51,11 @@ var ToDoList = React.createClass({
                       <a href="/logout"><i className="fa fa-sign-out fa-2x" aria-hidden="true"></i></a>
                     <header>Lyst</header>
                       <UserForm
-                          addItem={this.props.addItem}
                           addItemToList={this.props.addItemToList}
                           currentList={this.props.currentList}
                           clearList={this.props.clearList} />
                       <ControlBar
-                          items={this.props.items}
+                          lists={this.props.lists}
                           filter={this.props.filter}
                           allItemFilter={this.props.allItemFilter}
                           activeItemFilter={this.props.activeItemFilter}
@@ -68,12 +63,11 @@ var ToDoList = React.createClass({
                       <ListItemContainer
                           currentList={this.props.currentList}
                           lists={this.props.lists}
-                          items={this.props.items}
                           deleteItem={this.props.deleteItem}
                           completeItem={this.props.completeItem}
                           filter={this.props.filter} />
                       <ItemsLeft
-                          items={this.props.items}
+                          lists={this.props.lists}
                           deleteCompletedItems={this.props.deleteCompletedItems} />
                       </div>
               </div>
