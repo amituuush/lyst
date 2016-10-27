@@ -24940,6 +24940,7 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
+	var _ = __webpack_require__(366);
 	var ListItem = __webpack_require__(214);
 	__webpack_require__(217);
 
@@ -24948,91 +24949,72 @@
 
 
 	    propTypes: {
-	        lists: React.PropTypes.array.isRequired,
-	        currentList: React.PropTypes.string.isRequired,
+	        lists: React.PropTypes.array,
+	        currentList: React.PropTypes.string,
 	        deleteItem: React.PropTypes.func,
 	        completeItem: React.PropTypes.func,
 	        filter: React.PropTypes.string
 	    },
 
 	    render: function render() {
-	        var _this = this;
 
-	        //         //
-	        //         // if (this.props.items.length) {
-	        //         //     switch(this.props.filter) {
-	        //         //       case 'all':
-	        //         //           var items = this.props.items.map(
-	        //         //               function(arrayItem) {
-	        //         //                   return <ListItem
-	        //         //                       deleteItem={this.props.deleteItem}
-	        //         //                       key={arrayItem._id}
-	        //         //                       item={arrayItem}
-	        //         //                       markComplete={this.props.markComplete} />
-	        //         //               }, this);
-	        //         //           break;
-	        //         //
-	        //         //       case 'active':
-	        //         //           var filteredItems = this.props.items.filter(
-	        //         //               function(item) {
-	        //         //                 return item.completed === false;
-	        //         //               }
-	        //         //           )
-	        //         //           var items = filteredItems.map(
-	        //         //               function(arrayItem) {
-	        //         //                   return <ListItem
-	        //         //                       deleteItem={this.props.deleteItem}
-	        //         //                       key={arrayItem._id}
-	        //         //                       item={arrayItem}
-	        //         //                       markComplete={this.props.markComplete} />
-	        //         //               }, this);
-	        //         //           break;
-	        //         //
-	        //         //       case 'completed':
-	        //         //           var filteredItems = this.props.items.filter(
-	        //         //               function(item) {
-	        //         //                 return item.completed === true;
-	        //         //               }
-	        //         //           )
-	        //         //           var items = filteredItems.map(
-	        //         //               function(arrayItem) {
-	        //         //                   return <ListItem
-	        //         //                       deleteItem={this.props.deleteItem}
-	        //         //                       key={arrayItem._id}
-	        //         //                       item={arrayItem}
-	        //         //                       markComplete={this.props.markComplete} />
-	        //         //               }, this);
-	        //         //           break;
-	        //         //     }
-	        //         // } else {
-	        //         //     var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;
-	        //         // }
+	        var list = this.props.lists;
+	        console.log(list);
+
 	        //
+	        // if (currentList.items.length) {
+	        //     switch(this.props.filter) {
+	        //       case 'all':
+	        //           var items = currentList.items.map(
+	        //               function(item) {
+	        //                   return <ListItem
+	        //                               key={item._id}
+	        //                               item={item}
+	        //                               completeItem={this.props.completeItem}
+	        //                               deleteItem={this.props.deleteItem}
+	        //                               currentList={this.props.currentList} />
+	        //               }, this);
+	        //           break;
+	        //
+	        //       case 'active':
+	        //           var filteredItems = currentList.items.filter(
+	        //               function(item) {
+	        //                 return item.completed === false;
+	        //               }
+	        //           )
+	        //           var items = filteredItems.map(
+	        //               function(item) {
+	        //                   return <ListItem
+	        //                               key={item._id}
+	        //                               item={item}
+	        //                               completeItem={this.props.completeItem}
+	        //                               deleteItem={this.props.deleteItem}
+	        //                               currentList={this.props.currentList} />
+	        //               }, this);
+	        //           break;
+	        //
+	        //       case 'completed':
+	        //           var filteredItems = currentListitems.filter(
+	        //               function(item) {
+	        //                 return item.completed === true;
+	        //               }
+	        //           )
+	        //           var items = filteredItems.map(
+	        //               function(item) {
+	        //                   return <ListItem
+	        //                               key={item._id}
+	        //                               item={item}
+	        //                               completeItem={this.props.completeItem}
+	        //                               deleteItem={this.props.deleteItem}
+	        //                               currentList={this.props.currentList} />
+	        //               }, this);
+	        //           break;
+	        //     }
+	        // } else {
+	        //     var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;
+	        // }
 
-	        var currentList = this.props.lists.find(function (list) {
-	            return list._id === _this.props.currentList;
-	        });
-
-	        var listItems = currentList ? currentList.items.map(function (item) {
-	            return React.createElement(ListItem, {
-	                key: item._id,
-	                item: item,
-	                completeItem: this.props.completeItem,
-	                deleteItem: this.props.deleteItem,
-	                currentList: this.props.currentList });
-	        }, this) : React.createElement(
-	            'li',
-	            null,
-	            'No list found'
-	        );
-
-	        // console.log(currentList);
-
-	        return React.createElement(
-	            'ul',
-	            { className: 'list-ul' },
-	            listItems
-	        );
+	        return React.createElement('ul', { className: 'list-ul' });
 	    }
 	});
 

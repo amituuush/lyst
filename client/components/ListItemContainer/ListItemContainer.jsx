@@ -1,90 +1,80 @@
 const React = require('react');
+const _ = require('lodash');
 const ListItem = require('../ListItem/ListItem')
 require('./list-item-container.less');
 
 var ListItemContainer = React.createClass({
 
     propTypes: {
-        lists: React.PropTypes.array.isRequired,
-        currentList: React.PropTypes.string.isRequired,
+        lists: React.PropTypes.array,
+        currentList: React.PropTypes.string,
         deleteItem: React.PropTypes.func,
         completeItem: React.PropTypes.func,
         filter: React.PropTypes.string
       },
 
     render: function() {
-//         //
-//         // if (this.props.items.length) {
-//         //     switch(this.props.filter) {
-//         //       case 'all':
-//         //           var items = this.props.items.map(
-//         //               function(arrayItem) {
-//         //                   return <ListItem
-//         //                       deleteItem={this.props.deleteItem}
-//         //                       key={arrayItem._id}
-//         //                       item={arrayItem}
-//         //                       markComplete={this.props.markComplete} />
-//         //               }, this);
-//         //           break;
-//         //
-//         //       case 'active':
-//         //           var filteredItems = this.props.items.filter(
-//         //               function(item) {
-//         //                 return item.completed === false;
-//         //               }
-//         //           )
-//         //           var items = filteredItems.map(
-//         //               function(arrayItem) {
-//         //                   return <ListItem
-//         //                       deleteItem={this.props.deleteItem}
-//         //                       key={arrayItem._id}
-//         //                       item={arrayItem}
-//         //                       markComplete={this.props.markComplete} />
-//         //               }, this);
-//         //           break;
-//         //
-//         //       case 'completed':
-//         //           var filteredItems = this.props.items.filter(
-//         //               function(item) {
-//         //                 return item.completed === true;
-//         //               }
-//         //           )
-//         //           var items = filteredItems.map(
-//         //               function(arrayItem) {
-//         //                   return <ListItem
-//         //                       deleteItem={this.props.deleteItem}
-//         //                       key={arrayItem._id}
-//         //                       item={arrayItem}
-//         //                       markComplete={this.props.markComplete} />
-//         //               }, this);
-//         //           break;
-//         //     }
-//         // } else {
-//         //     var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;
-//         // }
-//
 
-        var currentList = this.props.lists.find(
-            (list) => {
-                return list._id === this.props.currentList;
-            })
 
-        var listItems = currentList ?
-            currentList.items.map(function(item) {
-                return <ListItem
-                            key={item._id}
-                            item={item}
-                            completeItem={this.props.completeItem}
-                            deleteItem={this.props.deleteItem}
-                            currentList={this.props.currentList} />
-            }, this)
-        :   <li>No list found</li>
+        var list = this.props.lists;
+        console.log(list);
 
-        // console.log(currentList);
+        //
+        // if (currentList.items.length) {
+        //     switch(this.props.filter) {
+        //       case 'all':
+        //           var items = currentList.items.map(
+        //               function(item) {
+        //                   return <ListItem
+        //                               key={item._id}
+        //                               item={item}
+        //                               completeItem={this.props.completeItem}
+        //                               deleteItem={this.props.deleteItem}
+        //                               currentList={this.props.currentList} />
+        //               }, this);
+        //           break;
+        //
+        //       case 'active':
+        //           var filteredItems = currentList.items.filter(
+        //               function(item) {
+        //                 return item.completed === false;
+        //               }
+        //           )
+        //           var items = filteredItems.map(
+        //               function(item) {
+        //                   return <ListItem
+        //                               key={item._id}
+        //                               item={item}
+        //                               completeItem={this.props.completeItem}
+        //                               deleteItem={this.props.deleteItem}
+        //                               currentList={this.props.currentList} />
+        //               }, this);
+        //           break;
+        //
+        //       case 'completed':
+        //           var filteredItems = currentListitems.filter(
+        //               function(item) {
+        //                 return item.completed === true;
+        //               }
+        //           )
+        //           var items = filteredItems.map(
+        //               function(item) {
+        //                   return <ListItem
+        //                               key={item._id}
+        //                               item={item}
+        //                               completeItem={this.props.completeItem}
+        //                               deleteItem={this.props.deleteItem}
+        //                               currentList={this.props.currentList} />
+        //               }, this);
+        //           break;
+        //     }
+        // } else {
+        //     var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;
+        // }
 
         return (
             <ul className="list-ul">
-                {listItems}
+                {/* {items} */}
             </ul>
         )
     }
