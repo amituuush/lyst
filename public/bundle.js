@@ -22046,6 +22046,7 @@
 
 	var Promise = __webpack_require__(193);
 	var request = __webpack_require__(203)(__webpack_require__(204), Promise);
+	// var request = require('superagent');
 
 	var FETCH_LISTS = 'FETCH_LISTS';
 	var ADD_LIST = 'ADD_LIST';
@@ -22064,6 +22065,36 @@
 	        });
 	    };
 	};
+
+	// const fetchLists = () => {
+	//   const promise = new Promise((resolve, reject) => {
+	//     request
+	//       .get('/api/lists')
+	//       .end((err, res) => {
+	//         if (err) {
+	//           reject(err);
+	//         } else {
+	//           resolve(res.body);
+	//         }
+	//       });
+	//   });
+	//
+	//   return {
+	//     type:    FETCH_LISTS,
+	//     payload: promise
+	//   };
+	//
+	// };
+
+	// const getPost = id => ({
+	//   type: 'GET_POST',
+	//   payload: new Promise(resolve => {
+	//     setTimeout(() => fetch(`/api/posts/${id}`).then(response => {
+	//       resolve(response.json());
+	//     }), 1000);
+	//   })
+	// });
+
 
 	var addList = function addList(listName) {
 	    return function (dispatch) {
@@ -24958,8 +24989,10 @@
 
 	    render: function render() {
 
-	        var list = this.props.lists;
-	        console.log(list);
+	        var currentList = this.props.lists.filter(function (list) {
+	            return list._id === this.props.currentList;
+	        });
+	        console.log(currentList);
 
 	        //
 	        // if (currentList.items.length) {

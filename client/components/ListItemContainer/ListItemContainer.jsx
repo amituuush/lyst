@@ -16,8 +16,12 @@ var ListItemContainer = React.createClass({
     render: function() {
 
 
-        var list = this.props.lists;
-        console.log(list);
+        var currentList = this.props.lists.filter(function(list) {
+            return list._id === this.props.currentList;
+        });
+        console.log(currentList);
+
+        
 
         //
         // if (currentList.items.length) {
