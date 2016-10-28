@@ -1,21 +1,47 @@
 import lodash from 'lodash'
 import { FETCH_LISTS, ADD_LIST, DELETE_LIST, ADD_ITEM_TO_LIST, CLEAR_LIST, COMPLETE_ITEM, DELETE_ITEM } from '../actions/lists'
 
-var listReducer = (state = [], action) => {
+const initialState = {
+    fetching: false,
+    fetched: false,
+    lists: [],
+    error: null
+};
+
+var listReducer = (state = initialState, action) => {
 
     switch(action.type) {
-        case 'FETCH_LISTS':
-            return action.lists;
+        case 'FETCH_LISTS_PENDING':
+            return {...state, fetching: true}
+            break;
+        case 'FETCH_LISTS_REJECTED':
+            return {...state, fetching: false, error: action.payload}
+            break;
+        case 'FETCH_LISTS_FULFILLED':
+            return {
+                ...state,
+                fetching: false,
+                fetched: true,
+                lists: action.payload.data
+            }
+            break;
         case 'ADD_LIST':
-            return state.concat(action.newList);
+            return {
+                ...state,
+                lists: [...state.lists, action.newList]
+            }
         case 'DELETE_LIST':
-            return state.filter(
+            var newState = state.lists.filter(
                 function(list) {
                     return list._id !== action.list._id;
                 }
             )
+            return {
+                ...state,
+                lists: newState
+            }
         case 'ADD_ITEM_TO_LIST':
-            return state.map(
+            var newState = state.lists.map(
                 function(list) {
                     if (list._id === action.listId) {
                         return Object.assign({}, list, {
@@ -26,8 +52,12 @@ var listReducer = (state = [], action) => {
                     }
                 }, this
             );
+            return {
+                ...state,
+                lists: newState
+            }
         case 'CLEAR_LIST':
-            return state.map(
+            var newState = state.lists.map(
                 function(list) {
                     if (list._id === action.listId) {
                         return Object.assign({}, list, {items: []});
@@ -36,8 +66,12 @@ var listReducer = (state = [], action) => {
                     }
                 }, this
             );
+            return {
+                ...state,
+                lists: newState
+            }
         case 'COMPLETE_ITEM':
-            return _.map(state, function(list) {
+            var newState =  _.map(state.lists, function(list) {
                 if (list._id === action.listId) {
                     var updatedItems = _.forEach(list.items, function(item) {
                         if (item._id === action.itemId) {
@@ -49,9 +83,13 @@ var listReducer = (state = [], action) => {
                 } else {
                     return list;
                 }
-            })
+            });
+            return {
+                ...state,
+                lists: newState
+            }
         case 'DELETE_ITEM':
-            return _.map(state, function(list) {
+            var newState = _.map(state.lists, function(list) {
                 if (list._id === action.listId) {
                     var updatedItems = _.filter(list.items, function(item) {
                         return item._id !== action.itemId;
@@ -61,7 +99,11 @@ var listReducer = (state = [], action) => {
                 } else {
                     return list;
                 }
-            })
+            });
+            return {
+                ...state,
+                lists: newState
+            }
         default:
             return state;
     }

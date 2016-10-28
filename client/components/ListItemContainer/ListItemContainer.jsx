@@ -1,12 +1,11 @@
 const React = require('react');
-const _ = require('lodash');
 const ListItem = require('../ListItem/ListItem')
 require('./list-item-container.less');
 
 var ListItemContainer = React.createClass({
 
     propTypes: {
-        lists: React.PropTypes.array,
+        lists: React.PropTypes.object,
         currentList: React.PropTypes.string,
         deleteItem: React.PropTypes.func,
         completeItem: React.PropTypes.func,
@@ -16,59 +15,66 @@ var ListItemContainer = React.createClass({
     render: function() {
 
 
-        var currentList = this.props.lists.filter(function(list) {
-            return list._id === this.props.currentList;
-        });
+        var currentList = this.props.lists.lists.find(
+            (list) => {
+                return list._id === this.props.currentList;
+            })
         console.log(currentList);
+        var listItems = currentList ?
+            currentList.items.map(function(item) {
+                return <ListItem
+                            key={item._id}
+                            item={item}
+                            completeItem={this.props.completeItem}
+                            deleteItem={this.props.deleteItem}
+                            currentList={this.props.currentList} />
+            }, this)
+        :   <li>No list found</li>
 
-        
 
-        //
-        // if (currentList.items.length) {
+
+        // if (this.props.lists.length) {
         //     switch(this.props.filter) {
         //       case 'all':
-        //           var items = currentList.items.map(
-        //               function(item) {
+        //           var items = this.props.items.map(
+        //               function(arrayItem) {
         //                   return <ListItem
-        //                               key={item._id}
-        //                               item={item}
-        //                               completeItem={this.props.completeItem}
-        //                               deleteItem={this.props.deleteItem}
-        //                               currentList={this.props.currentList} />
+        //                       deleteItem={this.props.deleteItem}
+        //                       key={arrayItem._id}
+        //                       item={arrayItem}
+        //                       markComplete={this.props.markComplete} />
         //               }, this);
         //           break;
         //
         //       case 'active':
-        //           var filteredItems = currentList.items.filter(
+        //           var filteredItems = this.props.items.filter(
         //               function(item) {
         //                 return item.completed === false;
         //               }
         //           )
         //           var items = filteredItems.map(
-        //               function(item) {
+        //               function(arrayItem) {
         //                   return <ListItem
-        //                               key={item._id}
-        //                               item={item}
-        //                               completeItem={this.props.completeItem}
-        //                               deleteItem={this.props.deleteItem}
-        //                               currentList={this.props.currentList} />
+        //                       deleteItem={this.props.deleteItem}
+        //                       key={arrayItem._id}
+        //                       item={arrayItem}
+        //                       markComplete={this.props.markComplete} />
         //               }, this);
         //           break;
         //
         //       case 'completed':
-        //           var filteredItems = currentListitems.filter(
+        //           var filteredItems = this.props.items.filter(
         //               function(item) {
         //                 return item.completed === true;
         //               }
         //           )
         //           var items = filteredItems.map(
-        //               function(item) {
+        //               function(arrayItem) {
         //                   return <ListItem
-        //                               key={item._id}
-        //                               item={item}
-        //                               completeItem={this.props.completeItem}
-        //                               deleteItem={this.props.deleteItem}
-        //                               currentList={this.props.currentList} />
+        //                       deleteItem={this.props.deleteItem}
+        //                       key={arrayItem._id}
+        //                       item={arrayItem}
+        //                       markComplete={this.props.markComplete} />
         //               }, this);
         //           break;
         //     }
@@ -78,7 +84,7 @@ var ListItemContainer = React.createClass({
 
         return (
             <ul className="list-ul">
-                {/* {items} */}
+                {listItems}
             </ul>
         )
     }

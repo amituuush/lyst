@@ -5,7 +5,7 @@ require('./list-container.less');
 var ListContainer = React.createClass({
 
     propTypes: {
-        lists: React.PropTypes.array,
+        lists: React.PropTypes.object,
         addList: React.PropTypes.func,
         deleteList: React.PropTypes.func,
         setCurrentList: React.PropTypes.func
@@ -33,7 +33,7 @@ var ListContainer = React.createClass({
 
     render: function() {
 
-        var lists = this.props.lists.map(
+        var lists = this.props.lists.lists.map(
             function(list) {
                 return <List
                           key={list._id}

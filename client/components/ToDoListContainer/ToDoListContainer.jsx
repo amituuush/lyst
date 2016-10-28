@@ -11,7 +11,7 @@ const ListNavigation = require ('../ListNavigation/ListNavigation');
 var ToDoList = React.createClass({
 
     propTypes: {
-          lists: React.PropTypes.array.isRequired,
+          lists: React.PropTypes.object.isRequired,
           fetchLists: React.PropTypes.func.isRequired,
           addList: React.PropTypes.func,
           deleteList: React.PropTypes.func,
@@ -28,7 +28,6 @@ var ToDoList = React.createClass({
       },
 
   componentWillMount: function() {
-    //   this.props.fetchItems();
       this.props.fetchLists();
   },
 

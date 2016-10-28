@@ -1,6 +1,7 @@
 var Promise = require('promise');
 var request = require('superagent-promise')(require('superagent'), Promise);
 // var request = require('superagent');
+var axios = require('axios');
 
 const FETCH_LISTS = 'FETCH_LISTS';
 const ADD_LIST = 'ADD_LIST';
@@ -9,18 +10,28 @@ const CLEAR_LIST = 'CLEAR_LIST';
 
 const fetchLists = () => {
     return function(dispatch) {
-        request('GET', '/api/lists')
-          .end()
-          .then(function onResult(res) {
-              dispatch({
-                type: FETCH_LISTS,
-                lists: res.body
-              })
-          }, function onError(err) {
-              console.log(err);
-          });
+        dispatch({
+            type: FETCH_LISTS,
+            payload: axios.get('/api/lists')
+        })
     }
 }
+
+
+// const fetchLists = () => {
+//     return function(dispatch) {
+//         request('GET', '/api/lists')
+//           .end()
+//           .then(function onResult(res) {
+//               dispatch({
+//                 type: FETCH_LISTS,
+//                 lists: res.body
+//               })
+//           }, function onError(err) {
+//               console.log(err);
+//           });
+//     }
+// }
 
 // const fetchLists = () => {
 //   const promise = new Promise((resolve, reject) => {

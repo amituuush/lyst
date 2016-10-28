@@ -4,7 +4,7 @@ require('./control-bar.less');
 var ControlBar = React.createClass({
 
     propTypes: {
-          lists: React.PropTypes.array,
+          lists: React.PropTypes.object,
           filter: React.PropTypes.string,
           allItemFilter: React.PropTypes.func,
           activeItemFilter: React.PropTypes.func,
