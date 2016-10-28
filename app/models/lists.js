@@ -8,6 +8,12 @@ var ItemSchema = new Schema({
   dueDate: String
 });
 
-var Item = mongoose.model('Item', ItemSchema);
+var ListSchema = new Schema({
+  name: String,
+  items: [ItemSchema]
 
-module.exports = Item;
+});
+
+var List = mongoose.model('List', ListSchema);
+
+module.exports = List;

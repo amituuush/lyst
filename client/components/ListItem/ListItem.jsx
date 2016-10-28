@@ -4,16 +4,21 @@ require('./list-item.less');
 var ListItem = React.createClass({
 
     propTypes: {
+          item: React.PropTypes.object,
+          currentList: React.PropTypes.shape({
+              id: React.PropTypes.string,
+              name: React.PropTypes.string
+          }),
           deleteItem: React.PropTypes.func,
-          markComplete: React.PropTypes.func
+          completeItem: React.PropTypes.func
       },
 
     _handleCompleteItem: function() {
-        this.props.markComplete(this.props.item._id);
+        this.props.completeItem(this.props.currentList.id, this.props.item._id);
     },
 
     _handleDeleteItem: function() {
-        this.props.deleteItem(this.props.item._id);
+        this.props.deleteItem(this.props.currentList.id, this.props.item._id);
     },
 
     render: function() {

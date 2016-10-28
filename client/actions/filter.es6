@@ -2,7 +2,6 @@ const ALL_ITEM_FILTER = 'ALL_ITEM_FILTER';
 const ACTIVE_ITEM_FILTER = 'ACTIVE_ITEM_FILTER';
 const COMPLETED_ITEM_FILTER = 'COMPLETED_ITEM_FILTER';
 
-// ________________________________________
 
 const allItemFilter = () => {
   return {
@@ -25,6 +24,5 @@ const completedItemFilter = () => {
   }
 }
 
-// _____________________________________________
 
 module.exports = {ALL_ITEM_FILTER, allItemFilter, ACTIVE_ITEM_FILTER, activeItemFilter, COMPLETED_ITEM_FILTER, completedItemFilter};

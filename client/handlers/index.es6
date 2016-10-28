@@ -1,10 +1,15 @@
 const ReactRedux = require('react-redux');
-const { fetchItems, clearItems, addItem, completeItem, deleteItem, deleteCompletedItems } = require('../actions/items');
-const { allItemFilter, activeItemFilter, completedItemFilter } = require('../actions/filter')
+const { fetchLists, addList, deleteList, clearList } = require('../actions/lists');
+const { addItemToList, completeItem, deleteItem, deleteCompletedItems } = require('../actions/listItems');
+const { allItemFilter, activeItemFilter, completedItemFilter } = require('../actions/filter');
+const { setCurrentList } = require('../actions/currentList');
+
 const ToDoListContainer = require('../components/ToDoListContainer/ToDoListContainer');
 const { store } = require('../store');
 
-// __________________________________________
+
+
+// _________________________________________
 
 // In addition to reading the state, container components can dispatch actions.
 
@@ -18,45 +23,57 @@ const { store } = require('../store');
 
 // after the changes happen, `App` will update with the new redux state, causing `ToDoList` to rerender. React will figure out what the new view is supposed to look like and make the required changes to the DOM
 
-const handleFetchItems = (dispatch) => {
+const handleFetchLists = (dispatch) => {
     return () => {
-        dispatch(fetchItems())
+        dispatch(fetchLists())
     }
 }
 
-const handleClearItems = (dispatch) => {
-    return () => {
-        if (store.getState().items.length > 0) {
-            if (confirm('Are you sure you want to completely delete this list?')) {
-                dispatch(clearItems())
-            }
-        } else {
-            alert('There are no items in your list to delete!');
-        }
+const handleAddList = (dispatch) => {
+    return (listName) => {
+        dispatch(addList(listName))
     }
 }
 
-const handleAddItem = (dispatch) => {
-    return (itemName, itemPriority, dueDate) => {
-        dispatch(addItem(itemName, itemPriority, dueDate))
+const handleDeleteList = (dispatch) => {
+    return (listId) => {
+        dispatch(deleteList(listId))
+    }
+}
+
+const handleAddItemToList = (dispatch) => {
+    return (listId, name, priority, dueDate) => {
+        dispatch(addItemToList(listId, name, priority, dueDate))
+    }
+}
+
+const handleSetCurrentList = function(dispatch) {
+    return (listId, listName) => {
+        dispatch(setCurrentList(listId, listName))
+    }
+}
+
+const handleClearList = (dispatch) => {
+    return (listId) => {
+        dispatch(clearList(listId))
     }
 }
 
 const handleCompleteItem = (dispatch) => {
-    return (itemId) => {
-        dispatch(completeItem(itemId))
+    return (listId, itemId) => {
+        dispatch(completeItem(listId, itemId))
     }
 }
 
 const handleDeleteItem = function(dispatch) {
-    return (itemId) => {
-        dispatch(deleteItem(itemId))
+    return (listId, itemId) => {
+        dispatch(deleteItem(listId, itemId))
     }
 }
 
 var handleDeleteCompletedItems = function(dispatch) {
-    return () => {
-        dispatch(deleteCompletedItems())
+    return (listId) => {
+        dispatch(deleteCompletedItems(listId))
     }
 }
 
@@ -80,10 +97,13 @@ const handleCompletedItemFilter = (dispatch) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchItems: handleFetchItems(dispatch),
-        clearList: handleClearItems(dispatch),
-        addItem: handleAddItem(dispatch),
-        markComplete: handleCompleteItem(dispatch),
+        fetchLists: handleFetchLists(dispatch),
+        addList: handleAddList(dispatch),
+        deleteList: handleDeleteList(dispatch),
+        addItemToList: handleAddItemToList(dispatch),
+        setCurrentList: handleSetCurrentList(dispatch),
+        clearList: handleClearList(dispatch),
+        completeItem: handleCompleteItem(dispatch),
         deleteItem: handleDeleteItem(dispatch),
         allItemFilter: handleAllItemFilter(dispatch),
         activeItemFilter: handleActiveItemFilter(dispatch),
