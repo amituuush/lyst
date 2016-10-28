@@ -24936,6 +24936,7 @@
 	                        completeItem: this.props.completeItem,
 	                        filter: this.props.filter }),
 	                    React.createElement(ItemsLeft, {
+	                        lists: this.props.lists,
 	                        currentList: this.props.currentList,
 	                        deleteCompletedItems: this.props.deleteCompletedItems })
 	                )
@@ -24978,7 +24979,6 @@
 	                return list._id === this.props.currentList.id;
 	            }, this);
 
-	            console.log('current list', currentList[0].items);
 	            switch (this.props.filter) {
 	                case 'all':
 	                    var items = currentList[0].items.map(function (item) {
@@ -40358,6 +40358,7 @@
 
 
 	    propTypes: {
+	        lists: React.PropTypes.object,
 	        currentList: React.PropTypes.shape({
 	            id: React.PropTypes.string,
 	            name: React.PropTypes.string
@@ -40366,14 +40367,40 @@
 	    },
 
 	    _handleDeleteCompletedItems: function _handleDeleteCompletedItems() {
-	        this.props.deleteCompletedItems(this.props.currentList.id);
+	        this.props.currentList.id ? this.props.deleteCompletedItems(this.props.currentList.id) : alert('You have to select a list before you can remove completed items!');
 	    },
 
 	    render: function render() {
 
+	        if (this.props.currentList.id) {
+	            var itemsLeft = this.props.lists.lists.filter(function (list) {
+	                return list._id === this.props.currentList.id;
+	            }, this);
+
+	            var completedItemsLeft = itemsLeft[0].items.filter(function (item) {
+	                return item.completed === false;
+	            }, this);
+
+	            var itemsLeftLength = completedItemsLeft.length;
+	            var itemsLeftText;
+
+	            if (itemsLeftLength > 1) {
+	                itemsLeftText = itemsLeftLength + ' items left';
+	            } else if (itemsLeftLength === 1) {
+	                itemsLeftText = itemsLeftLength + ' item left';
+	            } else {
+	                itemsLeftText = '0 items left';
+	            }
+	        }
+
 	        return React.createElement(
 	            'div',
 	            { className: 'items-left-container' },
+	            React.createElement(
+	                'div',
+	                { id: 'items-left' },
+	                itemsLeftText
+	            ),
 	            React.createElement(
 	                'div',
 	                { id: 'clear-completed', onClick: this._handleDeleteCompletedItems },

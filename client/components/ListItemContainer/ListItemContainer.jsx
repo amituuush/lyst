@@ -22,7 +22,6 @@ var ListItemContainer = React.createClass({
                 return list._id === this.props.currentList.id;
             }, this);
 
-            console.log('current list', currentList[0].items);
         switch(this.props.filter) {
           case 'all':
               var items = currentList[0].items.map(
