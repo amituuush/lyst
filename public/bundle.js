@@ -24772,7 +24772,6 @@
 	};
 
 	var deleteCompletedItems = function deleteCompletedItems(listId) {
-	    console.log('deleting completed items');
 	    return function (dispatch) {
 	        request.delete('/api/lists/' + listId + '/items').set('Content-Type', 'application/json').end(function (err, res) {
 	            dispatch({
@@ -40811,6 +40810,20 @@
 	                        return item._id !== action.itemId;
 	                    });
 	                    return Object.assign({}, list, { items: updatedItems });
+	                } else {
+	                    return list;
+	                }
+	            });
+	            return _extends({}, state, {
+	                lists: newState
+	            });
+	        case 'DELETE_COMPLETED_ITEMS':
+	            var newState = _.map(state.lists, function (list) {
+	                if (list._id === action.listId) {
+	                    var removedCompletedItems = _.filter(list.items, function (item) {
+	                        return item.completed === false;
+	                    });
+	                    return Object.assign({}, list, { items: removedCompletedItems });
 	                } else {
 	                    return list;
 	                }

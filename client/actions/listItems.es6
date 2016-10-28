@@ -53,7 +53,6 @@ const deleteItem = (listId, itemId) => {
 };
 
 const deleteCompletedItems = (listId) => {
-    console.log('deleting completed items');
     return function(dispatch) {
         request.delete('/api/lists/' + listId + '/items')
             .set('Content-Type', 'application/json')

@@ -1,5 +1,5 @@
 import lodash from 'lodash'
-import { FETCH_LISTS, ADD_LIST, DELETE_LIST, ADD_ITEM_TO_LIST, CLEAR_LIST, COMPLETE_ITEM, DELETE_ITEM } from '../actions/lists'
+import { FETCH_LISTS, ADD_LIST, DELETE_LIST, ADD_ITEM_TO_LIST, CLEAR_LIST, COMPLETE_ITEM, DELETE_ITEM, DELETE_COMPLETED_ITEMS } from '../actions/lists'
 
 const initialState = {
     fetching: false,
@@ -93,9 +93,24 @@ var listReducer = (state = initialState, action) => {
                 if (list._id === action.listId) {
                     var updatedItems = _.filter(list.items, function(item) {
                         return item._id !== action.itemId;
-                    })
-                    return Object.assign({}, list, {items: updatedItems})
+                    });
+                    return Object.assign({}, list, {items: updatedItems});
 
+                } else {
+                    return list;
+                }
+            });
+            return {
+                ...state,
+                lists: newState
+            }
+        case 'DELETE_COMPLETED_ITEMS':
+            var newState = _.map(state.lists, function(list) {
+                if (list._id === action.listId) {
+                    var removedCompletedItems = _.filter (list.items, function(item) {
+                        return item.completed === false;
+                    });
+                    return Object.assign({}, list, {items: removedCompletedItems});
                 } else {
                     return list;
                 }
