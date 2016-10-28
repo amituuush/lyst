@@ -58,7 +58,9 @@ var ToDoList = React.createClass({
                           clearList={this.props.clearList} />
                       <ControlBar
                           lists={this.props.lists}
+                          currentList={this.props.currentList}
                           filter={this.props.filter}
+                          clearList={this.props.clearList}
                           allItemFilter={this.props.allItemFilter}
                           activeItemFilter={this.props.activeItemFilter}
                           completedItemFilter={this.props.completedItemFilter} />

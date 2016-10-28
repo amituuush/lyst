@@ -24925,7 +24925,9 @@
 	                        clearList: this.props.clearList }),
 	                    React.createElement(ControlBar, {
 	                        lists: this.props.lists,
+	                        currentList: this.props.currentList,
 	                        filter: this.props.filter,
+	                        clearList: this.props.clearList,
 	                        allItemFilter: this.props.allItemFilter,
 	                        activeItemFilter: this.props.activeItemFilter,
 	                        completedItemFilter: this.props.completedItemFilter }),
@@ -25508,12 +25510,6 @@
 	        });
 	    },
 
-	    _handleClearList: function _handleClearList() {
-	        console.log('clearing list');
-	        var userConfirm = confirm('Are you sure you want to clear this list?');
-	        userConfirm ? this.props.clearList(this.props.currentList.id) : '';
-	    },
-
 	    render: function render() {
 
 	        if (this.state.dueDate) {
@@ -25539,11 +25535,6 @@
 	                React.createElement(
 	                    'div',
 	                    { className: 'user-form-top' },
-	                    React.createElement(
-	                        'div',
-	                        { onClick: this._handleClearList, className: 'reset-list' },
-	                        React.createElement('i', { className: 'fa fa-trash fa-lg' })
-	                    ),
 	                    React.createElement('input', { type: 'text', onChange: this._handleNameChange, value: this.state.name, className: 'item-input', placeholder: 'What needs to get done?' }),
 	                    React.createElement(
 	                        'button',
@@ -25622,7 +25613,7 @@
 
 
 	// module
-	exports.push([module.id, ".user-form-container {\n  border-bottom: 1px solid #1A232B;\n}\n.user-form-container .user-form-top {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-top .item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  margin-bottom: 0.25em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #fff;\n  border: 1px solid #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #1C272E;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top .item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 2px #5DAEF2;\n}\n.user-form-container .user-form-top button.add-item {\n  background: #3FB083;\n  border: none;\n  outline: none;\n  padding: 0.7em 1em 0.7em 1em;\n  border-radius: 5px;\n  color: #fff;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top button.add-item:hover {\n  cursor: pointer;\n  background: #52c195;\n}\n.user-form-container .user-form-top .reset-list {\n  background: transparent;\n  border: none;\n  outline: none;\n  margin-right: 15px;\n  position: relative;\n  bottom: 3px;\n  display: inline-block;\n}\n.user-form-container .user-form-top .reset-list:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-top .reset-list .fa-trash {\n  color: #CC4E4C;\n}\n.user-form-container .user-form-top .reset-list .fa-trash:hover {\n  color: #B13535;\n}\n.user-form-container .user-form-bottom {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-bottom .priority-select {\n  background: #fff;\n  font-size: 1em;\n  color: #A9A9A9;\n  border: 1px solid #4F6373 !important;\n  position: relative;\n  right: 10px;\n  height: 33px;\n  border: none;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .priority-select:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .priority-select:focus {\n  outline: none;\n}\n.user-form-container .user-form-bottom .date-picker {\n  background: #fff;\n  width: 7em;\n  position: relative;\n  right: 5px;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n  margin-top: 0.5em;\n  color: #4F6373;\n  border: 1px solid #4F6373;\n  padding: 0.4em 0.5em 0.4em 0.5em;\n  margin-left: 1em;\n  margin-bottom: 1em;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .date-picker:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .date-picker:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n@media only screen and (min-width: 900px) {\n  .user-form-container .user-form-top .item-input {\n    max-width: 20em;\n  }\n}\n", ""]);
+	exports.push([module.id, ".user-form-container {\n  border-bottom: 1px solid #1A232B;\n}\n.user-form-container .user-form-top {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-top .item-input {\n  margin-top: 2em;\n  margin-right: 0.7em;\n  margin-bottom: 0.25em;\n  border: none;\n  padding: .25em .25em;\n  border-radius: 25px;\n  width: 67%;\n  height: 2rem;\n  background: #fff;\n  border: 1px solid #4F6373;\n  font-size: 1.1em;\n  font-weight: 400;\n  text-align: center;\n  color: #1C272E;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top .item-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 2px #5DAEF2;\n}\n.user-form-container .user-form-top button.add-item {\n  background: #3FB083;\n  border: none;\n  outline: none;\n  padding: 0.7em 1em 0.7em 1em;\n  border-radius: 5px;\n  color: #fff;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-top button.add-item:hover {\n  cursor: pointer;\n  background: #52c195;\n}\n.user-form-container .user-form-bottom {\n  width: 100%;\n  text-align: center;\n}\n.user-form-container .user-form-bottom .priority-select {\n  background: #fff;\n  font-size: 1em;\n  color: #A9A9A9;\n  border: 1px solid #4F6373 !important;\n  position: relative;\n  right: 10px;\n  height: 33px;\n  border: none;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .priority-select:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .priority-select:focus {\n  outline: none;\n}\n.user-form-container .user-form-bottom .date-picker {\n  background: #fff;\n  width: 7em;\n  position: relative;\n  right: 5px;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n  margin-top: 0.5em;\n  color: #4F6373;\n  border: 1px solid #4F6373;\n  padding: 0.4em 0.5em 0.4em 0.5em;\n  margin-left: 1em;\n  margin-bottom: 1em;\n  font-family: 'Rubik', sans-serif;\n}\n.user-form-container .user-form-bottom .date-picker:hover {\n  cursor: pointer;\n}\n.user-form-container .user-form-bottom .date-picker:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n@media only screen and (min-width: 900px) {\n  .user-form-container .user-form-top .item-input {\n    max-width: 20em;\n  }\n}\n", ""]);
 
 	// exports
 
@@ -40270,10 +40261,18 @@
 
 	    propTypes: {
 	        lists: React.PropTypes.object,
+	        currentList: React.PropTypes.object,
 	        filter: React.PropTypes.string,
+	        clearList: React.PropTypes.func,
 	        allItemFilter: React.PropTypes.func,
 	        activeItemFilter: React.PropTypes.func,
 	        completedItemFilter: React.PropTypes.func
+	    },
+
+	    _handleClearList: function _handleClearList() {
+	        console.log('clearing list');
+	        var userConfirm = confirm('Are you sure you want to clear this list?');
+	        userConfirm ? this.props.clearList(this.props.currentList.id) : '';
 	    },
 
 	    render: function render() {
@@ -40295,6 +40294,11 @@
 	                'div',
 	                { onClick: this.props.completedItemFilter, className: this.props.filter === 'completed' ? 'filter-button active-filter' : 'filter-button' },
 	                'Completed'
+	            ),
+	            React.createElement(
+	                'div',
+	                { onClick: this._handleClearList, className: 'reset-button' },
+	                'Reset'
 	            )
 	        );
 	    }
@@ -40339,7 +40343,7 @@
 
 
 	// module
-	exports.push([module.id, ".control-bar-container {\n  width: 100%;\n  margin: 0 auto;\n  border-radius: 3px;\n  margin-top: 1em;\n  color: #4F6373;\n  padding: 0.4em;\n}\n.control-bar-container #items-left {\n  display: inline-block;\n  text-align: left;\n}\n.control-bar-container .filter-button {\n  display: inline-block;\n  margin-left: 1.5em;\n  padding: 0.25em;\n  border: 1px solid #fff;\n  position: relative;\n  left: -23px;\n}\n.control-bar-container .filter-button:hover {\n  cursor: pointer;\n  border: 1px solid #9BA1A3;\n  border-radius: 3px;\n}\n.control-bar-container .active-filter {\n  border: 1px solid #4F6373;\n  border-radius: 3px;\n}\n.control-bar-container .active-filter:hover {\n  border: 1px solid #4F6373;\n}\n", ""]);
+	exports.push([module.id, ".control-bar-container {\n  width: 100%;\n  margin: 0 auto;\n  border-radius: 3px;\n  margin-top: 1em;\n  color: #4F6373;\n  padding: 0.4em;\n}\n.control-bar-container #items-left {\n  display: inline-block;\n  text-align: left;\n}\n.control-bar-container .filter-button {\n  display: inline-block;\n  margin-left: 1.5em;\n  padding: 0.25em;\n  border: 1px solid #fff;\n  position: relative;\n  left: -23px;\n}\n.control-bar-container .filter-button:hover {\n  cursor: pointer;\n  border: 1px solid #9BA1A3;\n  border-radius: 3px;\n}\n.control-bar-container .active-filter {\n  border: 1px solid #4F6373;\n  border-radius: 3px;\n}\n.control-bar-container .active-filter:hover {\n  border: 1px solid #4F6373;\n}\n.control-bar-container .reset-button {\n  display: inline-block;\n  float: right;\n  color: #C13331;\n}\n.control-bar-container .reset-button:hover {\n  cursor: pointer;\n  text-decoration: underline;\n}\n", ""]);
 
 	// exports
 

@@ -51,11 +51,7 @@ var UserForm = React.createClass({
         });
     },
 
-    _handleClearList: function() {
-        console.log('clearing list');
-        var userConfirm = confirm('Are you sure you want to clear this list?');
-        userConfirm ? this.props.clearList(this.props.currentList.id) : ''
-    },
+
 
 
     render: function(){
@@ -78,9 +74,6 @@ var UserForm = React.createClass({
         <div className="user-form-container">
             <form onSubmit={this._handleSubmit}>
                 <div className="user-form-top">
-                    <div onClick={this._handleClearList} className='reset-list'>
-                        <i className="fa fa-trash fa-lg"></i>
-                    </div>
 
                     <input type="text" onChange={this._handleNameChange} value={this.state.name} className='item-input' placeholder='What needs to get done?'/>
 
