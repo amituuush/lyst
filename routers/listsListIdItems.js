@@ -25,6 +25,28 @@ router.route('/lists/:list_id/items')
             err ? res.send(err) : res.json(model.items[model.items.length - 1]);
         }
     );
-});
+    })
+
+    .delete(function(req, res) {
+        List.findById(req.params.list_id, function(err, list) {
+            if (err) {
+                res.send(err);
+            }
+            var removedCompletedItems = list.items.filter(
+                function(item) {
+                    return item.completed === false;
+            });
+            console.log(removedCompletedItems);
+            list.items = removedCompletedItems;
+            // console.log(list);
+            list.save(function(err, result) {
+                if (err) {
+                    res.send(err);
+                }
+                console.log(result);
+                res.json('completed items removed');
+            })
+        })
+    });
 
 module.exports = router;

@@ -84,7 +84,9 @@ var ListItemContainer = React.createClass({
 
 
             return (
-                <div>{items}</div>
+                <ul className="list-ul">
+                    {items}
+                </ul>
             );
         } else if (this.props.currentList === '') {
             var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;

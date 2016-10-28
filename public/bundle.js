@@ -22046,7 +22046,6 @@
 
 	var Promise = __webpack_require__(193);
 	var request = __webpack_require__(203)(__webpack_require__(204), Promise);
-	// var request = require('superagent');
 	var axios = __webpack_require__(369);
 
 	var FETCH_LISTS = 'FETCH_LISTS';
@@ -22062,51 +22061,6 @@
 	        });
 	    };
 	};
-
-	// const fetchLists = () => {
-	//     return function(dispatch) {
-	//         request('GET', '/api/lists')
-	//           .end()
-	//           .then(function onResult(res) {
-	//               dispatch({
-	//                 type: FETCH_LISTS,
-	//                 lists: res.body
-	//               })
-	//           }, function onError(err) {
-	//               console.log(err);
-	//           });
-	//     }
-	// }
-
-	// const fetchLists = () => {
-	//   const promise = new Promise((resolve, reject) => {
-	//     request
-	//       .get('/api/lists')
-	//       .end((err, res) => {
-	//         if (err) {
-	//           reject(err);
-	//         } else {
-	//           resolve(res.body);
-	//         }
-	//       });
-	//   });
-	//
-	//   return {
-	//     type:    FETCH_LISTS,
-	//     payload: promise
-	//   };
-	//
-	// };
-
-	// const getPost = id => ({
-	//   type: 'GET_POST',
-	//   payload: new Promise(resolve => {
-	//     setTimeout(() => fetch(`/api/posts/${id}`).then(response => {
-	//       resolve(response.json());
-	//     }), 1000);
-	//   })
-	// });
-
 
 	var addList = function addList(listName) {
 	    return function (dispatch) {
@@ -25061,8 +25015,8 @@
 	            }
 
 	            return React.createElement(
-	                'div',
-	                null,
+	                'ul',
+	                { className: 'list-ul' },
 	                items
 	            );
 	        } else if (this.props.currentList === '') {
