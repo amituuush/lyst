@@ -24982,6 +24982,7 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
+	var _ = __webpack_require__(366);
 	var ListItem = __webpack_require__(214);
 	__webpack_require__(217);
 
@@ -24998,79 +24999,92 @@
 	    },
 
 	    render: function render() {
-	        var _this = this;
 
-	        var currentList = this.props.lists.lists.find(function (list) {
-	            return list._id === _this.props.currentList;
-	        });
-	        console.log(currentList);
-	        var listItems = currentList ? currentList.items.map(function (item) {
-	            return React.createElement(ListItem, {
-	                key: item._id,
-	                item: item,
-	                completeItem: this.props.completeItem,
-	                deleteItem: this.props.deleteItem,
-	                currentList: this.props.currentList });
-	        }, this) : React.createElement(
-	            'li',
-	            null,
-	            'No list found'
-	        );
+	        if (this.props.currentList) {
+	            var currentList = this.props.lists.lists.filter(function (list) {
+	                return list._id === this.props.currentList;
+	            }, this);
 
-	        // if (this.props.lists.length) {
-	        //     switch(this.props.filter) {
-	        //       case 'all':
-	        //           var items = this.props.items.map(
-	        //               function(arrayItem) {
-	        //                   return <ListItem
-	        //                       deleteItem={this.props.deleteItem}
-	        //                       key={arrayItem._id}
-	        //                       item={arrayItem}
-	        //                       markComplete={this.props.markComplete} />
-	        //               }, this);
-	        //           break;
-	        //
-	        //       case 'active':
-	        //           var filteredItems = this.props.items.filter(
-	        //               function(item) {
-	        //                 return item.completed === false;
-	        //               }
-	        //           )
-	        //           var items = filteredItems.map(
-	        //               function(arrayItem) {
-	        //                   return <ListItem
-	        //                       deleteItem={this.props.deleteItem}
-	        //                       key={arrayItem._id}
-	        //                       item={arrayItem}
-	        //                       markComplete={this.props.markComplete} />
-	        //               }, this);
-	        //           break;
-	        //
-	        //       case 'completed':
-	        //           var filteredItems = this.props.items.filter(
-	        //               function(item) {
-	        //                 return item.completed === true;
-	        //               }
-	        //           )
-	        //           var items = filteredItems.map(
-	        //               function(arrayItem) {
-	        //                   return <ListItem
-	        //                       deleteItem={this.props.deleteItem}
-	        //                       key={arrayItem._id}
-	        //                       item={arrayItem}
-	        //                       markComplete={this.props.markComplete} />
-	        //               }, this);
-	        //           break;
-	        //     }
-	        // } else {
-	        //     var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;
-	        // }
+	            // var items = currentList[0].items.map(
+	            //               function(item) {
+	            //                   return <ListItem
+	            //                               key={item._id}
+	            //                               item={item}
+	            //                               completeItem={this.props.completeItem}
+	            //                               deleteItem={this.props.deleteItem}
+	            //                               currentList={this.props.currentList} />
+	            //               }, this);
+	            // console.log(currentList);
+	            // if (currentList.items.length) {
+	            // }
+	            // else
 
-	        return React.createElement(
-	            'ul',
-	            { className: 'list-ul' },
-	            listItems
-	        );
+	            switch (this.props.filter) {
+	                case 'all':
+	                    var items = currentList[0].items.map(function (item) {
+	                        return React.createElement(ListItem, {
+	                            key: item._id,
+	                            item: item,
+	                            completeItem: this.props.completeItem,
+	                            deleteItem: this.props.deleteItem,
+	                            currentList: this.props.currentList });
+	                    }, this);
+	                    break;
+
+	                case 'active':
+	                    var filteredItems = currentList[0].items.filter(function (item) {
+	                        return item.completed === false;
+	                    });
+	                    var items = filteredItems.map(function (item) {
+	                        return React.createElement(ListItem, {
+	                            key: item._id,
+	                            item: item,
+	                            completeItem: this.props.completeItem,
+	                            deleteItem: this.props.deleteItem,
+	                            currentList: this.props.currentList });
+	                    }, this);
+	                    break;
+
+	                case 'completed':
+	                    var filteredItems = currentList[0].items.filter(function (item) {
+	                        return item.completed === true;
+	                    });
+	                    var items = filteredItems.map(function (item) {
+	                        return React.createElement(ListItem, {
+	                            key: item._id,
+	                            item: item,
+	                            completeItem: this.props.completeItem,
+	                            deleteItem: this.props.deleteItem,
+	                            currentList: this.props.currentList });
+	                    }, this);
+	                    break;
+	            }
+
+	            return React.createElement(
+	                'div',
+	                null,
+	                items
+	            );
+	        } else if (this.props.currentList === '') {
+	            var items = React.createElement(
+	                'div',
+	                { className: 'inbox-container' },
+	                React.createElement('i', { className: 'fa fa-inbox fa-5x', 'aria-hidden': 'true' }),
+	                React.createElement(
+	                    'div',
+	                    { className: 'inbox-greeting' },
+	                    'Woohoo! Time to relax!'
+	                )
+	            );
+
+	            return items;
+	        }
+
+	        // return (
+	        //     <ul className="list-ul">
+	        //         {items}
+	        //     </ul>
+	        // )
 	    }
 	});
 
