@@ -7,16 +7,9 @@ require('react-datepicker/dist/react-datepicker.css');
 var UserForm = React.createClass({
 
     propTypes: {
-          addItem: React.PropTypes.func,
-          clearList: React.PropTypes.func
+          clearList: React.PropTypes.func,
+          currentList: React.PropTypes.string
     },
-
-    // componentWillMount: function() {
-    //     var todaysDate = moment().format('L');
-    //     this.setState({
-    //         dueDate: todaysDate
-    //     })
-    // },
 
     getInitialState: function() {
         return {
@@ -29,11 +22,9 @@ var UserForm = React.createClass({
 
     _handleSubmit: function(event) {
         event.preventDefault();
-        if(this.state.name) {
-            this.props.addItem(this.state.name, this.state.priority, this.state.dueDate);
-        } else {
-            alert('You forgot to enter in a task!');
-        }
+        this.state.name ? this.props.addItemToList(this.props.currentList, this.state.name, this.state.priority, this.state.dueDate)
+        : alert('You forgot to enter in a task name!')
+
         this.setState({
             name: '',
             priority: '',
@@ -57,9 +48,12 @@ var UserForm = React.createClass({
         });
     },
 
-    _handleDatePickerClick: function() {
-
+    _handleClearList: function() {
+        console.log('clearing list');
+        var userConfirm = confirm('Are you sure you want to clear this list?');
+        userConfirm ? this.props.clearList(this.props.currentList) : ''
     },
+
 
     render: function(){
 
@@ -81,7 +75,7 @@ var UserForm = React.createClass({
         <div className="user-form-container">
             <form onSubmit={this._handleSubmit}>
                 <div className="user-form-top">
-                    <div onClick={this.props.clearList} className='reset-list'>
+                    <div onClick={this._handleClearList} className='reset-list'>
                         <i className="fa fa-trash fa-lg"></i>
                     </div>
 
