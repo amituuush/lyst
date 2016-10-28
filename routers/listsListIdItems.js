@@ -36,9 +36,8 @@ router.route('/lists/:list_id/items')
                 function(item) {
                     return item.completed === false;
             });
-            console.log(removedCompletedItems);
+
             list.items = removedCompletedItems;
-            // console.log(list);
             list.save(function(err, result) {
                 if (err) {
                     res.send(err);

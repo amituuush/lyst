@@ -3,6 +3,7 @@ var request = require('superagent');
 const ADD_ITEM_TO_LIST = 'ADD_ITEM_TO_LIST';
 const COMPLETE_ITEM = 'COMPLETE_ITEM';
 const DELETE_ITEM = 'DELETE_ITEM';
+const DELETE_COMPLETED_ITEMS = 'DELETE_COMPLETED_ITEMS';
 
 const addItemToList = (listId, itemName, priority, dueDate) => {
         return function(dispatch) {
@@ -51,4 +52,18 @@ const deleteItem = (listId, itemId) => {
     }
 };
 
-module.exports = { addItemToList, ADD_ITEM_TO_LIST, completeItem, COMPLETE_ITEM, deleteItem, DELETE_ITEM };
+const deleteCompletedItems = (listId) => {
+    console.log('deleting completed items');
+    return function(dispatch) {
+        request.delete('/api/lists/' + listId + '/items')
+            .set('Content-Type', 'application/json')
+            .end((err, res) => {
+                dispatch({
+                    type: DELETE_COMPLETED_ITEMS,
+                    listId: listId
+                })
+            })
+    }
+};
+
+module.exports = { addItemToList, ADD_ITEM_TO_LIST, completeItem, COMPLETE_ITEM, deleteItem, DELETE_ITEM, deleteCompletedItems, DELETE_COMPLETED_ITEMS };

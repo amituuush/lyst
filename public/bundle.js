@@ -21893,6 +21893,7 @@
 	var addItemToList = _require2.addItemToList;
 	var completeItem = _require2.completeItem;
 	var deleteItem = _require2.deleteItem;
+	var deleteCompletedItems = _require2.deleteCompletedItems;
 
 	var _require3 = __webpack_require__(210);
 
@@ -21972,12 +21973,12 @@
 	        dispatch(deleteItem(listId, itemId));
 	    };
 	};
-	//
-	// var handleDeleteCompletedItems = function(dispatch) {
-	//     return () => {
-	//         dispatch(deleteCompletedItems())
-	//     }
-	// }
+
+	var handleDeleteCompletedItems = function handleDeleteCompletedItems(dispatch) {
+	    return function (listId) {
+	        dispatch(deleteCompletedItems(listId));
+	    };
+	};
 
 	var handleAllItemFilter = function handleAllItemFilter(dispatch) {
 	    return function () {
@@ -22009,7 +22010,8 @@
 	        deleteItem: handleDeleteItem(dispatch),
 	        allItemFilter: handleAllItemFilter(dispatch),
 	        activeItemFilter: handleActiveItemFilter(dispatch),
-	        completedItemFilter: handleCompletedItemFilter(dispatch)
+	        completedItemFilter: handleCompletedItemFilter(dispatch),
+	        deleteCompletedItems: handleDeleteCompletedItems(dispatch)
 	    };
 	};
 
@@ -24727,6 +24729,7 @@
 	var ADD_ITEM_TO_LIST = 'ADD_ITEM_TO_LIST';
 	var COMPLETE_ITEM = 'COMPLETE_ITEM';
 	var DELETE_ITEM = 'DELETE_ITEM';
+	var DELETE_COMPLETED_ITEMS = 'DELETE_COMPLETED_ITEMS';
 
 	var addItemToList = function addItemToList(listId, itemName, priority, dueDate) {
 	    return function (dispatch) {
@@ -24768,7 +24771,19 @@
 	    };
 	};
 
-	module.exports = { addItemToList: addItemToList, ADD_ITEM_TO_LIST: ADD_ITEM_TO_LIST, completeItem: completeItem, COMPLETE_ITEM: COMPLETE_ITEM, deleteItem: deleteItem, DELETE_ITEM: DELETE_ITEM };
+	var deleteCompletedItems = function deleteCompletedItems(listId) {
+	    console.log('deleting completed items');
+	    return function (dispatch) {
+	        request.delete('/api/lists/' + listId + '/items').set('Content-Type', 'application/json').end(function (err, res) {
+	            dispatch({
+	                type: DELETE_COMPLETED_ITEMS,
+	                listId: listId
+	            });
+	        });
+	    };
+	};
+
+	module.exports = { addItemToList: addItemToList, ADD_ITEM_TO_LIST: ADD_ITEM_TO_LIST, completeItem: completeItem, COMPLETE_ITEM: COMPLETE_ITEM, deleteItem: deleteItem, DELETE_ITEM: DELETE_ITEM, deleteCompletedItems: deleteCompletedItems, DELETE_COMPLETED_ITEMS: DELETE_COMPLETED_ITEMS };
 
 /***/ },
 /* 210 */
@@ -24919,7 +24934,7 @@
 	                        completeItem: this.props.completeItem,
 	                        filter: this.props.filter }),
 	                    React.createElement(ItemsLeft, {
-	                        lists: this.props.lists,
+	                        currentList: this.props.currentList,
 	                        deleteCompletedItems: this.props.deleteCompletedItems })
 	                )
 	            )
@@ -40347,8 +40362,12 @@
 
 
 	    propTypes: {
-	        lists: React.PropTypes.object,
+	        currentList: React.PropTypes.string,
 	        deleteCompletedItems: React.PropTypes.func
+	    },
+
+	    _handleDeleteCompletedItems: function _handleDeleteCompletedItems() {
+	        this.props.deleteCompletedItems(this.props.currentList);
 	    },
 
 	    render: function render() {
@@ -40358,7 +40377,7 @@
 	            { className: 'items-left-container' },
 	            React.createElement(
 	                'div',
-	                { id: 'clear-completed', onClick: this.props.deleteCompletedItems },
+	                { id: 'clear-completed', onClick: this._handleDeleteCompletedItems },
 	                'Clear completed'
 	            )
 	        );

@@ -4,9 +4,13 @@ require('./items-left.less');
 var ItemsLeft = React.createClass({
 
     propTypes: {
-          lists: React.PropTypes.object,
+          currentList: React.PropTypes.string,
           deleteCompletedItems: React.PropTypes.func
       },
+
+    _handleDeleteCompletedItems: function() {
+        this.props.deleteCompletedItems(this.props.currentList);
+    },
 
     render: function() {
 
@@ -27,7 +31,7 @@ var ItemsLeft = React.createClass({
         return (
             <div className="items-left-container">
                 {/* <div id="items-left">{itemsLeftText}</div> */}
-                <div id="clear-completed" onClick={this.props.deleteCompletedItems}>
+                <div id="clear-completed" onClick={this._handleDeleteCompletedItems}>
                     Clear completed
                 </div>
             </div>

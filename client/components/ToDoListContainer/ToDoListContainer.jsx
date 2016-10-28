@@ -66,7 +66,7 @@ var ToDoList = React.createClass({
                           completeItem={this.props.completeItem}
                           filter={this.props.filter} />
                       <ItemsLeft
-                          lists={this.props.lists}
+                          currentList={this.props.currentList}
                           deleteCompletedItems={this.props.deleteCompletedItems} />
                       </div>
               </div>
