@@ -7,7 +7,8 @@ var List = React.createClass({
         id: React.PropTypes.string,
         name: React.PropTypes.string,
         deleteList: React.PropTypes.func,
-        setCurrentList: React.PropTypes.func
+        setCurrentList: React.PropTypes.func,
+        clearCurrentList: React.PropTypes.func
       },
 
     _handleSetCurrentList: function() {
@@ -16,7 +17,10 @@ var List = React.createClass({
 
     _handleDeleteList: function() {
         var userConfirmDelete = confirm('Are you sure you want to delete this list?');
-        userConfirmDelete ? this.props.deleteList(this.props.id) : ''
+        if (userConfirmDelete) {
+            this.props.clearCurrentList();
+            this.props.deleteList(this.props.id);
+        }
 
     },
 

@@ -27,7 +27,8 @@ var ToDoList = React.createClass({
               id: React.PropTypes.string,
               name: React.PropTypes.string
           }),
-          setCurrentList: React.PropTypes.func
+          setCurrentList: React.PropTypes.func,
+          clearCurrentList: React.PropTypes.func
       },
 
   componentWillMount: function() {
@@ -46,7 +47,8 @@ var ToDoList = React.createClass({
                         lists={this.props.lists}
                         addList={this.props.addList}
                         deleteList={this.props.deleteList}
-                        setCurrentList={this.props.setCurrentList} />
+                        setCurrentList={this.props.setCurrentList}
+                        clearCurrentList={this.props.clearCurrentList} />
                 </div>
                 <div id="middle-panel">
                     <div className="middle-panel-content">

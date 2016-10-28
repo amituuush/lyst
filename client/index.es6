@@ -17,7 +17,7 @@ ReactDOM.render(
 // _____________________________________________
 
 
-
+// create box shadow on reset and clear completed buttons on hover
 // move trash can to name of lyst, change wording to clear list
 
 // show an icon of a person relaxing, or something playful when no items are in a list. Maybe show something else upon first creation?

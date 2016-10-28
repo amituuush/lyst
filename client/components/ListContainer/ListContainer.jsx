@@ -8,7 +8,8 @@ var ListContainer = React.createClass({
         lists: React.PropTypes.object,
         addList: React.PropTypes.func,
         deleteList: React.PropTypes.func,
-        setCurrentList: React.PropTypes.func
+        setCurrentList: React.PropTypes.func,
+        clearCurrentList: React.PropTypes.func
     },
 
     getInitialState: function() {
@@ -40,7 +41,8 @@ var ListContainer = React.createClass({
                           id={list._id}
                           name={list.name}
                           deleteList={this.props.deleteList}
-                          setCurrentList={this.props.setCurrentList} />
+                          setCurrentList={this.props.setCurrentList}
+                          clearCurrentList={this.props.clearCurrentList} />
         }, this);
 
         return (

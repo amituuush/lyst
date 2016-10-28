@@ -1,4 +1,4 @@
-import { SET_CURRENT_LIST } from '../actions/currentList'
+import { SET_CURRENT_LIST, CLEAR_CURRENT_LIST } from '../actions/currentList'
 
 var initialState = {
     id: '',
@@ -12,6 +12,11 @@ var currentListReducer = (state = initialState, action) => {
             return {
                 id: action.listId,
                 name: action.listName
+            }
+        case CLEAR_CURRENT_LIST:
+            return {
+                id: '',
+                name: ''
             }
         default:
             return state;

@@ -2,7 +2,7 @@ const ReactRedux = require('react-redux');
 const { fetchLists, addList, deleteList, clearList } = require('../actions/lists');
 const { addItemToList, completeItem, deleteItem, deleteCompletedItems } = require('../actions/listItems');
 const { allItemFilter, activeItemFilter, completedItemFilter } = require('../actions/filter');
-const { setCurrentList } = require('../actions/currentList');
+const { setCurrentList, clearCurrentList } = require('../actions/currentList');
 
 const ToDoListContainer = require('../components/ToDoListContainer/ToDoListContainer');
 const { store } = require('../store');
@@ -50,6 +50,12 @@ const handleAddItemToList = (dispatch) => {
 const handleSetCurrentList = function(dispatch) {
     return (listId, listName) => {
         dispatch(setCurrentList(listId, listName))
+    }
+}
+
+const handleClearCurrentList = function(dispatch) {
+    return () => {
+        dispatch(clearCurrentList())
     }
 }
 
@@ -102,6 +108,7 @@ const mapDispatchToProps = (dispatch) => {
         deleteList: handleDeleteList(dispatch),
         addItemToList: handleAddItemToList(dispatch),
         setCurrentList: handleSetCurrentList(dispatch),
+        clearCurrentList: handleClearCurrentList(dispatch),
         clearList: handleClearList(dispatch),
         completeItem: handleCompleteItem(dispatch),
         deleteItem: handleDeleteItem(dispatch),

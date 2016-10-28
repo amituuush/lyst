@@ -73,6 +73,7 @@
 	// _____________________________________________
 
 
+	// create box shadow on reset and clear completed buttons on hover
 	// move trash can to name of lyst, change wording to clear list
 
 	// show an icon of a person relaxing, or something playful when no items are in a list. Maybe show something else upon first creation?
@@ -21903,6 +21904,7 @@
 	var _require4 = __webpack_require__(211);
 
 	var setCurrentList = _require4.setCurrentList;
+	var clearCurrentList = _require4.clearCurrentList;
 
 
 	var ToDoListContainer = __webpack_require__(212);
@@ -21955,6 +21957,12 @@
 	    };
 	};
 
+	var handleClearCurrentList = function handleClearCurrentList(dispatch) {
+	    return function () {
+	        dispatch(clearCurrentList());
+	    };
+	};
+
 	var handleClearList = function handleClearList(dispatch) {
 	    return function (listId) {
 	        dispatch(clearList(listId));
@@ -22004,6 +22012,7 @@
 	        deleteList: handleDeleteList(dispatch),
 	        addItemToList: handleAddItemToList(dispatch),
 	        setCurrentList: handleSetCurrentList(dispatch),
+	        clearCurrentList: handleClearCurrentList(dispatch),
 	        clearList: handleClearList(dispatch),
 	        completeItem: handleCompleteItem(dispatch),
 	        deleteItem: handleDeleteItem(dispatch),
@@ -24823,6 +24832,7 @@
 	'use strict';
 
 	var SET_CURRENT_LIST = 'SET_CURRENT_LIST';
+	var CLEAR_CURRENT_LIST = 'CLEAR_CURRENT_LIST';
 
 	var setCurrentList = function setCurrentList(listId, listName) {
 	    return {
@@ -24832,7 +24842,13 @@
 	    };
 	};
 
-	module.exports = { setCurrentList: setCurrentList, SET_CURRENT_LIST: SET_CURRENT_LIST };
+	var clearCurrentList = function clearCurrentList() {
+	    return {
+	        type: CLEAR_CURRENT_LIST
+	    };
+	};
+
+	module.exports = { setCurrentList: setCurrentList, SET_CURRENT_LIST: SET_CURRENT_LIST, clearCurrentList: clearCurrentList, CLEAR_CURRENT_LIST: CLEAR_CURRENT_LIST };
 
 /***/ },
 /* 212 */
@@ -24877,7 +24893,8 @@
 	            id: React.PropTypes.string,
 	            name: React.PropTypes.string
 	        }),
-	        setCurrentList: React.PropTypes.func
+	        setCurrentList: React.PropTypes.func,
+	        clearCurrentList: React.PropTypes.func
 	    },
 
 	    componentWillMount: function componentWillMount() {
@@ -24901,7 +24918,8 @@
 	                    lists: this.props.lists,
 	                    addList: this.props.addList,
 	                    deleteList: this.props.deleteList,
-	                    setCurrentList: this.props.setCurrentList })
+	                    setCurrentList: this.props.setCurrentList,
+	                    clearCurrentList: this.props.clearCurrentList })
 	            ),
 	            React.createElement(
 	                'div',
@@ -25257,7 +25275,8 @@
 	        lists: React.PropTypes.object,
 	        addList: React.PropTypes.func,
 	        deleteList: React.PropTypes.func,
-	        setCurrentList: React.PropTypes.func
+	        setCurrentList: React.PropTypes.func,
+	        clearCurrentList: React.PropTypes.func
 	    },
 
 	    getInitialState: function getInitialState() {
@@ -25288,7 +25307,8 @@
 	                id: list._id,
 	                name: list.name,
 	                deleteList: this.props.deleteList,
-	                setCurrentList: this.props.setCurrentList });
+	                setCurrentList: this.props.setCurrentList,
+	                clearCurrentList: this.props.clearCurrentList });
 	        }, this);
 
 	        return React.createElement(
@@ -25341,7 +25361,8 @@
 	        id: React.PropTypes.string,
 	        name: React.PropTypes.string,
 	        deleteList: React.PropTypes.func,
-	        setCurrentList: React.PropTypes.func
+	        setCurrentList: React.PropTypes.func,
+	        clearCurrentList: React.PropTypes.func
 	    },
 
 	    _handleSetCurrentList: function _handleSetCurrentList() {
@@ -25350,7 +25371,10 @@
 
 	    _handleDeleteList: function _handleDeleteList() {
 	        var userConfirmDelete = confirm('Are you sure you want to delete this list?');
-	        userConfirmDelete ? this.props.deleteList(this.props.id) : '';
+	        if (userConfirmDelete) {
+	            this.props.clearCurrentList();
+	            this.props.deleteList(this.props.id);
+	        }
 	    },
 
 	    render: function render() {
@@ -40923,6 +40947,11 @@
 	            return {
 	                id: action.listId,
 	                name: action.listName
+	            };
+	        case _currentList.CLEAR_CURRENT_LIST:
+	            return {
+	                id: '',
+	                name: ''
 	            };
 	        default:
 	            return state;
