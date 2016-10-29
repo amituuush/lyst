@@ -24994,10 +24994,51 @@
 	    },
 
 	    render: function render() {
-	        if (this.props.currentList.id) {
-	            var currentList = this.props.lists.lists.filter(function (list) {
-	                return list._id === this.props.currentList.id;
-	            }, this);
+
+	        var currentList = this.props.lists.lists.filter(function (list) {
+	            return list._id === this.props.currentList.id;
+	        }, this);
+
+	        if (this.props.lists.lists.length === 0) {
+	            var items = React.createElement(
+	                'div',
+	                { className: 'inbox-container' },
+	                React.createElement('i', { className: 'fa fa-plus-circle fa-5x', 'aria-hidden': 'true' }),
+	                React.createElement(
+	                    'div',
+	                    { className: 'inbox-greeting' },
+	                    'Create a list to begin!'
+	                )
+	            );
+
+	            return items;
+	        } else if (this.props.currentList.id === '') {
+	            var items = React.createElement(
+	                'div',
+	                { className: 'inbox-container' },
+	                React.createElement('i', { className: 'fa fa-list-ul fa-5x', 'aria-hidden': 'true' }),
+	                React.createElement(
+	                    'div',
+	                    { className: 'inbox-greeting' },
+	                    'Select a list to begin!'
+	                )
+	            );
+
+	            return items;
+	        } else if (currentList[0].items.length === 0) {
+	            var items = React.createElement(
+	                'div',
+	                { className: 'inbox-container' },
+	                React.createElement('i', { className: 'fa fa-inbox fa-5x', 'aria-hidden': 'true' }),
+	                React.createElement(
+	                    'div',
+	                    { className: 'inbox-greeting' },
+	                    'Woohoo! Time to relax!'
+	                )
+	            );
+
+	            return items;
+	        } else if (this.props.currentList.id) {
 
 	            switch (this.props.filter) {
 	                case 'all':
@@ -25045,20 +25086,13 @@
 	                { className: 'list-ul' },
 	                items
 	            );
-	        } else if (this.props.currentList.id === '') {
-	            var items = React.createElement(
-	                'div',
-	                { className: 'inbox-container' },
-	                React.createElement('i', { className: 'fa fa-inbox fa-5x', 'aria-hidden': 'true' }),
-	                React.createElement(
-	                    'div',
-	                    { className: 'inbox-greeting' },
-	                    'Woohoo! Time to relax!'
-	                )
-	            );
-
-	            return items;
 	        }
+	        //     else if (this.props.currentList.id === '') {
+	        //     var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;
+	        //
+	        //     return items;
+	        // }
+
 
 	        // return (
 	        //     <ul className="list-ul">
@@ -25301,15 +25335,23 @@
 
 	    render: function render() {
 
-	        var lists = this.props.lists.lists.map(function (list) {
-	            return React.createElement(List, {
-	                key: list._id,
-	                id: list._id,
-	                name: list.name,
-	                deleteList: this.props.deleteList,
-	                setCurrentList: this.props.setCurrentList,
-	                clearCurrentList: this.props.clearCurrentList });
-	        }, this);
+	        if (this.props.lists.lists) {
+	            var lists = this.props.lists.lists.map(function (list) {
+	                return React.createElement(List, {
+	                    key: list._id,
+	                    id: list._id,
+	                    name: list.name,
+	                    deleteList: this.props.deleteList,
+	                    setCurrentList: this.props.setCurrentList,
+	                    clearCurrentList: this.props.clearCurrentList });
+	            }, this);
+	        } else if (this.props.lists.lists.length === 0) {
+	            var lists = React.createElement(
+	                'h3',
+	                null,
+	                'Create a list below'
+	            );
+	        }
 
 	        return React.createElement(
 	            'div',
@@ -25509,14 +25551,25 @@
 
 	    _handleSubmit: function _handleSubmit(event) {
 	        event.preventDefault();
-	        this.state.name ? this.props.addItemToList(this.props.currentList.id, this.state.name, this.state.priority, this.state.dueDate) : alert('You forgot to enter in a task name!');
+	        if (this.props.currentList.id === '') {
+	            alert('Select a list to begin entering in items.');
 
-	        this.setState({
-	            name: '',
-	            priority: '',
-	            dueDatePlaceholder: moment(),
-	            dueDate: ''
-	        });
+	            this.setState({
+	                name: '',
+	                priority: '',
+	                dueDatePlaceholder: moment(),
+	                dueDate: ''
+	            });
+	        } else {
+	            this.state.name ? this.props.addItemToList(this.props.currentList.id, this.state.name, this.state.priority, this.state.dueDate) : alert('You forgot to enter in a task name!');
+
+	            this.setState({
+	                name: '',
+	                priority: '',
+	                dueDatePlaceholder: moment(),
+	                dueDate: ''
+	            });
+	        }
 	    },
 
 	    _handleNameChange: function _handleNameChange(event) {
@@ -40951,7 +41004,7 @@
 	        case _currentList.CLEAR_CURRENT_LIST:
 	            return {
 	                id: '',
-	                name: ''
+	                name: 'Lyst'
 	            };
 	        default:
 	            return state;

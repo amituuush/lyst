@@ -16,7 +16,7 @@ var currentListReducer = (state = initialState, action) => {
         case CLEAR_CURRENT_LIST:
             return {
                 id: '',
-                name: ''
+                name: 'Lyst'
             }
         default:
             return state;

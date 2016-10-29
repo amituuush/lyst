@@ -17,10 +17,30 @@ var ListItemContainer = React.createClass({
       },
 
     render: function() {
-        if (this.props.currentList.id) {
-            var currentList = this.props.lists.lists.filter(function(list) {
-                return list._id === this.props.currentList.id;
-            }, this);
+
+        var currentList = this.props.lists.lists.filter(function(list) {
+            return list._id === this.props.currentList.id;
+        }, this);
+
+        if (this.props.lists.lists.length === 0) {
+            var items = <div className="inbox-container"><i className="fa fa-plus-circle fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Create a list to begin!</div></div>;
+
+            return items;
+        }
+
+        else if (this.props.currentList.id === '') {
+            var items = <div className="inbox-container"><i className="fa fa-list-ul fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Select a list to begin!</div></div>;
+
+            return items;
+        }
+
+        else if (currentList[0].items.length === 0) {
+            var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;
+
+            return items;
+        }
+
+        else if (this.props.currentList.id) {
 
         switch(this.props.filter) {
           case 'all':
@@ -76,12 +96,12 @@ var ListItemContainer = React.createClass({
                     {items}
                 </ul>
             );
-            }
-            else if (this.props.currentList.id === '') {
-            var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;
-
-            return items;
         }
+        //     else if (this.props.currentList.id === '') {
+        //     var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;
+        //
+        //     return items;
+        // }
 
 
 

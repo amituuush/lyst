@@ -34,16 +34,20 @@ var ListContainer = React.createClass({
 
     render: function() {
 
-        var lists = this.props.lists.lists.map(
-            function(list) {
-                return <List
-                          key={list._id}
-                          id={list._id}
-                          name={list.name}
-                          deleteList={this.props.deleteList}
-                          setCurrentList={this.props.setCurrentList}
-                          clearCurrentList={this.props.clearCurrentList} />
-        }, this);
+        if (this.props.lists.lists) {
+            var lists = this.props.lists.lists.map(
+                function(list) {
+                    return <List
+                              key={list._id}
+                              id={list._id}
+                              name={list.name}
+                              deleteList={this.props.deleteList}
+                              setCurrentList={this.props.setCurrentList}
+                              clearCurrentList={this.props.clearCurrentList} />
+            }, this);
+        } else if (this.props.lists.lists.length === 0) {
+            var lists = <h3>Create a list below</h3>;
+        }
 
         return (
             <div className="list-container-container">

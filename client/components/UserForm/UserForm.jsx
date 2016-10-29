@@ -25,15 +25,27 @@ var UserForm = React.createClass({
 
     _handleSubmit: function(event) {
         event.preventDefault();
-        this.state.name ? this.props.addItemToList(this.props.currentList.id, this.state.name, this.state.priority, this.state.dueDate)
-        : alert('You forgot to enter in a task name!')
+        if (this.props.currentList.id === '') {
+            alert('Select a list to begin entering in items.');
+            
+            this.setState({
+                name: '',
+                priority: '',
+                dueDatePlaceholder: moment(),
+                dueDate: ''
+            })
+        } else {
+            this.state.name ? this.props.addItemToList(this.props.currentList.id, this.state.name, this.state.priority, this.state.dueDate)
+            : alert('You forgot to enter in a task name!')
 
-        this.setState({
-            name: '',
-            priority: '',
-            dueDatePlaceholder: moment(),
-            dueDate: ''
-        })
+            this.setState({
+                name: '',
+                priority: '',
+                dueDatePlaceholder: moment(),
+                dueDate: ''
+            })
+        }
+
     },
 
     _handleNameChange: function(event) {
