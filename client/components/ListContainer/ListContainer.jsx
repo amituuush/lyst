@@ -53,6 +53,7 @@ var ListContainer = React.createClass({
             <div className="list-container-container">
                 <h2>My Lysts</h2>
                 <div>{lists}</div>
+
             <div className="list-input-container">
                 <form onSubmit={this._handleSubmit}>
                     <input onChange={this._handleAddListChange} className="list-input" type="text" value={this.state.name} placeholder="Create a list" />

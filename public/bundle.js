@@ -24909,7 +24909,12 @@
 	            React.createElement(
 	                'div',
 	                { id: 'navigation' },
-	                React.createElement(ListNavigation, null)
+	                React.createElement(ListNavigation, {
+	                    lists: this.props.lists,
+	                    addList: this.props.addList,
+	                    deleteList: this.props.deleteList,
+	                    setCurrentList: this.props.setCurrentList,
+	                    clearCurrentList: this.props.clearCurrentList })
 	            ),
 	            React.createElement(
 	                'div',
@@ -40549,11 +40554,18 @@
 	    displayName: 'ListNavigation',
 
 
-	    propTypes: {},
+	    propTypes: {
+	        lists: React.PropTypes.object,
+	        addList: React.PropTypes.func,
+	        deleteList: React.PropTypes.func,
+	        setCurrentList: React.PropTypes.func,
+	        clearCurrentList: React.PropTypes.func
+	    },
 
 	    getInitialState: function getInitialState() {
 	        return {
-	            navShow: false
+	            navShow: false,
+	            name: ''
 	        };
 	    },
 
@@ -40563,7 +40575,33 @@
 	        });
 	    },
 
+	    _handleSubmit: function _handleSubmit(event) {
+	        event.preventDefault();
+	        this.state.name ? this.props.addList(this.state.name) : alert('Enter in a list name!');
+	        this.setState({
+	            name: ''
+	        });
+	    },
+
+	    _handleAddListChange: function _handleAddListChange(event) {
+	        this.setState({
+	            name: event.target.value
+	        });
+	    },
+
 	    render: function render() {
+
+	        if (this.props.lists.lists) {
+	            var lists = this.props.lists.lists.map(function (list) {
+	                return React.createElement(NavList, {
+	                    key: list._id,
+	                    id: list._id,
+	                    name: list.name,
+	                    deleteList: this.props.deleteList,
+	                    setCurrentList: this.props.setCurrentList,
+	                    clearCurrentList: this.props.clearCurrentList });
+	            }, this);
+	        }
 
 	        return React.createElement(
 	            'div',
@@ -40579,17 +40617,26 @@
 	                React.createElement(
 	                    'h2',
 	                    null,
-	                    'Navigation List'
+	                    'My Lists'
 	                ),
-	                React.createElement(NavList, { listName: 'Grocery' }),
-	                React.createElement(NavList, { listName: 'Shopping' }),
-	                React.createElement(NavList, { listName: 'Vacation' }),
-	                React.createElement(NavList, { listName: 'Work' }),
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    lists
+	                ),
 	                React.createElement(
 	                    'div',
 	                    { className: 'list-input-container' },
-	                    React.createElement('input', { className: 'list-input', type: 'text' }),
-	                    React.createElement('i', { className: 'fa fa-plus-circle fa-3x', 'aria-hidden': 'true' })
+	                    React.createElement(
+	                        'form',
+	                        { onSubmit: this._handleSubmit },
+	                        React.createElement('input', { onChange: this._handleAddListChange, className: 'list-input', type: 'text', value: this.state.name, placeholder: 'Create a list' }),
+	                        React.createElement(
+	                            'button',
+	                            { type: 'submit' },
+	                            React.createElement('i', { className: 'fa fa-plus-circle fa-3x', 'aria-hidden': 'true' })
+	                        )
+	                    )
 	                )
 	            )
 	        );
@@ -40612,7 +40659,23 @@
 
 
 	    propTypes: {
-	        listName: React.PropTypes.string
+	        id: React.PropTypes.string,
+	        name: React.PropTypes.string,
+	        deleteList: React.PropTypes.func,
+	        setCurrentList: React.PropTypes.func,
+	        clearCurrentList: React.PropTypes.func
+	    },
+
+	    _handleSetCurrentList: function _handleSetCurrentList() {
+	        this.props.setCurrentList(this.props.id, this.props.name);
+	    },
+
+	    _handleDeleteList: function _handleDeleteList() {
+	        var userConfirmDelete = confirm('Are you sure you want to delete this list?');
+	        if (userConfirmDelete) {
+	            this.props.clearCurrentList();
+	            this.props.deleteList(this.props.id);
+	        }
 	    },
 
 	    render: function render() {
@@ -40622,10 +40685,10 @@
 	            { className: 'list' },
 	            React.createElement(
 	                'div',
-	                { className: 'list-name' },
-	                this.props.listName
+	                { onClick: this._handleSetCurrentList, className: 'list-name' },
+	                this.props.name
 	            ),
-	            React.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' })
+	            React.createElement('i', { onClick: this._handleDeleteList, className: 'fa fa-times', 'aria-hidden': 'true' })
 	        );
 	    }
 	});
@@ -40707,7 +40770,7 @@
 
 
 	// module
-	exports.push([module.id, ".list-navigation-container {\n  padding: 0 1em 0 1em;\n}\n.list-navigation-container .nav-top .fa-bars {\n  color: #fff;\n}\n.list-navigation-container .nav-hide {\n  display: none;\n}\n.list-navigation-container h2 {\n  font-size: 2em;\n  text-align: center;\n  color: #E5E5E5;\n  border-bottom: 1px solid #E5E5E5;\n}\n.list-navigation-container .list-input-container {\n  width: 100%;\n  text-align: left;\n}\n.list-navigation-container .list-input-container .list-input {\n  margin-top: 1em;\n  padding: 0.5em;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n}\n.list-navigation-container .list-input-container .list-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n.list-navigation-container .list-input-container .fa-plus-circle {\n  color: #3FB083;\n  vertical-align: middle;\n  margin-left: 0.3em;\n}\n.list-navigation-container .list-input-container .fa-plus-circle:hover {\n  color: #52c195;\n  cursor: pointer;\n}\n", ""]);
+	exports.push([module.id, ".list-navigation-container {\n  padding: 0 1em 0 1em;\n}\n.list-navigation-container .nav-top .fa-bars {\n  color: #fff;\n}\n.list-navigation-container .nav-top .fa-bars:hover {\n  cursor: pointer;\n}\n.list-navigation-container .nav-hide {\n  display: none;\n}\n.list-navigation-container h2 {\n  font-size: 2em;\n  text-align: center;\n  color: #E5E5E5;\n  border-bottom: 1px solid #E5E5E5;\n}\n.list-navigation-container .list-input-container {\n  width: 100%;\n  text-align: left;\n}\n.list-navigation-container .list-input-container .list-input {\n  margin-top: 1em;\n  padding: 0.5em;\n  border: none;\n  font-size: 1em;\n  border-radius: 5px;\n}\n.list-navigation-container .list-input-container .list-input:focus {\n  outline: none;\n  box-shadow: 0px 0px 1px #5DAEF2;\n}\n.list-navigation-container .list-input-container button {\n  background: transparent;\n  width: 50px;\n  height: 50px;\n  border: none;\n}\n.list-navigation-container .list-input-container button:focus {\n  outline: none;\n}\n.list-navigation-container .list-input-container .fa-plus-circle {\n  color: #3FB083;\n  vertical-align: middle;\n  margin-left: 0.1em;\n}\n.list-navigation-container .list-input-container .fa-plus-circle:hover {\n  color: #52c195;\n  cursor: pointer;\n}\n", ""]);
 
 	// exports
 

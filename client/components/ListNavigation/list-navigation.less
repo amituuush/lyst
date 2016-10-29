@@ -5,6 +5,10 @@
 
         .fa-bars {
             color: #fff;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 
@@ -36,10 +40,21 @@
             }
         }
 
+        button {
+            background: transparent;
+            width: 50px;
+            height: 50px;
+            border: none;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
         .fa-plus-circle {
             color: #3FB083;
             vertical-align: middle;
-            margin-left: 0.3em;
+            margin-left: 0.1em;
 
             &:hover {
                 color: lighten(#3FB083, 7%);

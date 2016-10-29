@@ -40,7 +40,12 @@ var ToDoList = React.createClass({
       return (
           <div id="container">
                 <div id="navigation">
-                  <ListNavigation />
+                  <ListNavigation
+                      lists={this.props.lists}
+                      addList={this.props.addList}
+                      deleteList={this.props.deleteList}
+                      setCurrentList={this.props.setCurrentList}
+                      clearCurrentList={this.props.clearCurrentList}  />
                 </div>
                 <div id="left-panel">
                     <ListContainer
