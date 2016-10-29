@@ -40352,9 +40352,13 @@
 	    },
 
 	    _handleClearList: function _handleClearList() {
-	        console.log('clearing list');
-	        var userConfirm = confirm('Are you sure you want to clear this list?');
-	        userConfirm ? this.props.clearList(this.props.currentList.id) : '';
+	        if (this.props.currentList.id === '') {
+	            alert('You have to select a list before you reset it!');
+	        } else {
+	            console.log('clearing list');
+	            var userConfirm = confirm('Are you sure you want to clear this list?');
+	            userConfirm ? this.props.clearList(this.props.currentList.id) : '';
+	        }
 	    },
 
 	    render: function render() {
@@ -40425,7 +40429,7 @@
 
 
 	// module
-	exports.push([module.id, ".control-bar-container {\n  width: 100%;\n  margin: 0 auto;\n  border-radius: 3px;\n  margin-top: 1em;\n  color: #4F6373;\n  padding: 0.4em;\n}\n.control-bar-container #items-left {\n  display: inline-block;\n  text-align: left;\n}\n.control-bar-container .filter-button {\n  display: inline-block;\n  margin-left: 1.5em;\n  padding: 0.25em;\n  border: 1px solid #fff;\n  position: relative;\n  left: -23px;\n}\n.control-bar-container .filter-button:hover {\n  cursor: pointer;\n  border: 1px solid #9BA1A3;\n  border-radius: 3px;\n}\n.control-bar-container .active-filter {\n  border: 1px solid #4F6373;\n  border-radius: 3px;\n}\n.control-bar-container .active-filter:hover {\n  border: 1px solid #4F6373;\n}\n.control-bar-container .reset-button {\n  display: inline-block;\n  float: right;\n  color: #C13331;\n}\n.control-bar-container .reset-button:hover {\n  cursor: pointer;\n  text-decoration: underline;\n}\n", ""]);
+	exports.push([module.id, ".control-bar-container {\n  width: 100%;\n  margin: 0 auto;\n  border-radius: 3px;\n  margin-top: 1em;\n  color: #4F6373;\n  padding: 0.4em;\n}\n.control-bar-container #items-left {\n  display: inline-block;\n  text-align: left;\n}\n.control-bar-container .filter-button {\n  display: inline-block;\n  margin-left: 1.5em;\n  padding: 0.25em;\n  border: 1px solid #fff;\n  position: relative;\n  left: -23px;\n}\n.control-bar-container .filter-button:hover {\n  cursor: pointer;\n  border: 1px solid #9BA1A3;\n  border-radius: 3px;\n}\n.control-bar-container .active-filter {\n  border: 1px solid #4F6373;\n  border-radius: 3px;\n}\n.control-bar-container .active-filter:hover {\n  border: 1px solid #4F6373;\n}\n.control-bar-container .reset-button {\n  display: inline-block;\n  float: right;\n  color: #C13331;\n  padding: 0.2em;\n  border-radius: 3px;\n}\n.control-bar-container .reset-button:hover {\n  cursor: pointer;\n  box-shadow: 0px 0px 0.5px #000;\n}\n.control-bar-container .reset-button:active {\n  box-shadow: inset 0 0 3px #000;\n}\n", ""]);
 
 	// exports
 
@@ -40453,7 +40457,11 @@
 	    },
 
 	    _handleDeleteCompletedItems: function _handleDeleteCompletedItems() {
-	        this.props.currentList.id ? this.props.deleteCompletedItems(this.props.currentList.id) : alert('You have to select a list before you can remove completed items!');
+	        if (this.props.currentList.id === '') {
+	            alert('You have to select a list before you can clear its completed items!');
+	        } else {
+	            this.props.currentList.id ? this.props.deleteCompletedItems(this.props.currentList.id) : alert('You have to select a list before you can remove completed items!');
+	        }
 	    },
 
 	    render: function render() {
@@ -40535,7 +40543,7 @@
 
 
 	// module
-	exports.push([module.id, ".items-left-container {\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 1em;\n  padding: 0.5em 0.5em 1em 0em;\n}\n.items-left-container #items-left {\n  color: #4F6373;\n  display: inline-block;\n  float: left;\n}\n.items-left-container #clear-completed {\n  display: inline-block;\n  color: #4F6373;\n  float: right;\n}\n.items-left-container #clear-completed:hover {\n  cursor: pointer;\n  text-decoration: underline;\n}\n", ""]);
+	exports.push([module.id, ".items-left-container {\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 1em;\n  padding: 0.5em 0.5em 1em 0em;\n}\n.items-left-container #items-left {\n  color: #4F6373;\n  display: inline-block;\n  float: left;\n}\n.items-left-container #clear-completed {\n  display: inline-block;\n  color: #4F6373;\n  float: right;\n  padding: 0.2em;\n  border-radius: 3px;\n}\n.items-left-container #clear-completed:hover {\n  cursor: pointer;\n  box-shadow: 0px 0px 0.5px #000;\n}\n.items-left-container #clear-completed:active {\n  box-shadow: inset 0 0 3px #000;\n}\n", ""]);
 
 	// exports
 

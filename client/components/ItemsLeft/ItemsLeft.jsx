@@ -13,9 +13,13 @@ var ItemsLeft = React.createClass({
     },
 
     _handleDeleteCompletedItems: function() {
-        this.props.currentList.id ?
-        this.props.deleteCompletedItems(this.props.currentList.id)
-        : alert('You have to select a list before you can remove completed items!');
+        if (this.props.currentList.id === '') {
+            alert('You have to select a list before you can clear its completed items!');
+        } else {
+            this.props.currentList.id ?
+            this.props.deleteCompletedItems(this.props.currentList.id)
+            : alert('You have to select a list before you can remove completed items!');
+        }
     },
 
     render: function() {

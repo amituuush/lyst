@@ -14,9 +14,13 @@ var ControlBar = React.createClass({
       },
 
     _handleClearList: function() {
-      console.log('clearing list');
-      var userConfirm = confirm('Are you sure you want to clear this list?');
-      userConfirm ? this.props.clearList(this.props.currentList.id) : ''
+        if (this.props.currentList.id === '') {
+            alert('You have to select a list before you reset it!');
+        } else {
+          console.log('clearing list');
+          var userConfirm = confirm('Are you sure you want to clear this list?');
+          userConfirm ? this.props.clearList(this.props.currentList.id) : ''
+        }
     },
 
     render: function() {
