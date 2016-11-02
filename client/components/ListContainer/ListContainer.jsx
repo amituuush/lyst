@@ -36,7 +36,7 @@ var ListContainer = React.createClass({
 
         if (this.props.lists.lists) {
             var lists = this.props.lists.lists.map(
-                function(list) {
+                function(list, i) {
                     return <List
                               key={list._id}
                               id={list._id}

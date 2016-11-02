@@ -36,9 +36,6 @@ app.use('/api', lists);
 app.use('/api', listsListId);
 app.use('/api', listsListIdItems);
 app.use('/api', listsListIdItemsItemsId);
-// app.use('/api', items);
-// app.use('/api', itemsCompleted);
-// app.use('/api', itemsItemId);
 
 app.listen(port);
 console.log('Magic happens on port ' + port);

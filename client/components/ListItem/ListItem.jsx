@@ -1,6 +1,7 @@
 const React = require('react');
 require('./list-item.less');
 
+
 var ListItem = React.createClass({
 
     propTypes: {

@@ -43,7 +43,7 @@ var ListNavigation = React.createClass({
 
         if (this.props.lists.lists) {
             var lists = this.props.lists.lists.map(
-                function(list) {
+                function(list, i) {
                     return <NavList
                               key={list._id}
                               id={list._id}
@@ -52,7 +52,7 @@ var ListNavigation = React.createClass({
                               setCurrentList={this.props.setCurrentList}
                               clearCurrentList={this.props.clearCurrentList} />
             }, this);
-        } 
+        }
 
         return (
             <div className="list-navigation-container">

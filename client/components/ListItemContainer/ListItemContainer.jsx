@@ -2,6 +2,7 @@ const React = require('react');
 const _ = require('lodash');
 const ListItem = require('../ListItem/ListItem')
 require('./list-item-container.less');
+const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 var ListItemContainer = React.createClass({
 
@@ -93,51 +94,13 @@ var ListItemContainer = React.createClass({
 
             return (
                 <ul className="list-ul">
-                    {items}
+
+                        {items}
+
                 </ul>
             );
         }
-        //     else if (this.props.currentList.id === '') {
-        //     var items = <div className="inbox-container"><i className="fa fa-inbox fa-5x" aria-hidden="true"></i><div className="inbox-greeting">Woohoo! Time to relax!</div></div>;
-        //
-        //     return items;
-        // }
-
-
-
-        // return (
-        //     <ul className="list-ul">
-        //         {items}
-        //     </ul>
-        // )
     }
 });
 
 module.exports = ListItemContainer;
-
-
-
-
-// const reqList = () => {
-//     // return dispatch => {
-//     //     axio.get(url)
-//     //         .then(res => dispatch(recList(res)))
-//     //         .catch(err => dispatch(recListError))
-//     // }
-//     return dispatch => {
-//         const promise = new Promise(resolve, reject) => {
-//             request().end(resolve(data))
-//         }
-//
-//         dispatch({
-//             type: igniwngi,
-//             promise
-//         })
-//     }
-//
-// }
-//
-// const recList = res => ({
-//     type: RECEIVED_LIST,
-//     payload: res.body
-// })
