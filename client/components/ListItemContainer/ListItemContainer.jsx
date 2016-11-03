@@ -2,7 +2,7 @@ const React = require('react');
 const _ = require('lodash');
 const ListItem = require('../ListItem/ListItem')
 require('./list-item-container.less');
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+// const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 var ListItemContainer = React.createClass({
 
