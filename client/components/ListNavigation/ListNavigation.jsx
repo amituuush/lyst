@@ -50,7 +50,8 @@ var ListNavigation = React.createClass({
                               name={list.name}
                               deleteList={this.props.deleteList}
                               setCurrentList={this.props.setCurrentList}
-                              clearCurrentList={this.props.clearCurrentList} />
+                              clearCurrentList={this.props.clearCurrentList}
+                              handleNavShow={this._handleNavShow} />
             }, this);
         }
 

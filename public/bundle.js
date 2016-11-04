@@ -73466,7 +73466,8 @@
 	                    name: list.name,
 	                    deleteList: this.props.deleteList,
 	                    setCurrentList: this.props.setCurrentList,
-	                    clearCurrentList: this.props.clearCurrentList });
+	                    clearCurrentList: this.props.clearCurrentList,
+	                    handleNavShow: this._handleNavShow });
 	            }, this);
 	        }
 
@@ -73533,8 +73534,9 @@
 	        clearCurrentList: React.PropTypes.func
 	    },
 
-	    _handleSetCurrentList: function _handleSetCurrentList() {
+	    _handleListClick: function _handleListClick() {
 	        this.props.setCurrentList(this.props.id, this.props.name);
+	        this.props.handleNavShow();
 	    },
 
 	    _handleDeleteList: function _handleDeleteList() {
@@ -73552,7 +73554,7 @@
 	            { className: 'list' },
 	            React.createElement(
 	                'div',
-	                { onClick: this._handleSetCurrentList, className: 'list-name' },
+	                { onClick: this._handleListClick, className: 'list-name' },
 	                this.props.name
 	            ),
 	            React.createElement('i', { onClick: this._handleDeleteList, className: 'fa fa-times', 'aria-hidden': 'true' })

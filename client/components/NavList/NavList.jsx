@@ -11,8 +11,9 @@ var NavList = React.createClass({
         clearCurrentList: React.PropTypes.func
     },
 
-    _handleSetCurrentList: function() {
+    _handleListClick: function() {
         this.props.setCurrentList(this.props.id, this.props.name);
+        this.props.handleNavShow();
     },
 
     _handleDeleteList: function() {
@@ -27,7 +28,7 @@ var NavList = React.createClass({
 
         return (
             <div className="list">
-                <div onClick={this._handleSetCurrentList} className="list-name">{this.props.name}</div>
+                <div onClick={this._handleListClick} className="list-name">{this.props.name}</div>
                 <i onClick={this._handleDeleteList} className="fa fa-times" aria-hidden="true"></i>
             </div>
         )
