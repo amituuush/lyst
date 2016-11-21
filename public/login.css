@@ -1,15 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+
+
+body {
+    background: #C13331;
+    font-family: 'Rubik', sans-serif;
+}
+
 .login-container {
     width: 100%;
-    margin-top: 5em;
+    margin-top: 10em;
+}
+
+.login-container h1 {
+    font-size: 3.5em;
+    color: #fff;
+    text-align: center;
 }
 
 .login-module {
     width: 90%;
     margin: 0 auto;
-    border: 1px solid grey;
+    /*box-shadow: 0px 0px 5px #21252B;*/
     text-align: center;
     border-radius: 5px;
-    padding: 2em 0em;
+    padding: 2em 0em 3em 0em;
+    background: #C13331;
+}
+
+.login-module h3 {
+    font-size: 1.5em;
+    text-align: center;
+    display: none;
 }
 
 .facebook-image {
