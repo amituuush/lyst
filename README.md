@@ -1,12 +1,12 @@
 # Lyst
 <br />
 ## Overview
-Lyst is a full-stack multi to do list application built in React, Redux, Node.js/Express, and Mongoose. The app features priority and due date settings, filter options, check/uncheck list item options, and deleting lists and items.
+Lyst is a full-stack multi to do list application built in React, Redux, Node.js/Express, and Mongoose. The app features priority and due date settings, filter options, check/uncheck list item options, adding/deleting lists and items, and clearing completed items of a given list.
 
 <a href="http://lyst-app.herokuapp.com/">Click here</a> for a demo.
 
 ## Technical
-• The front end of the app is built in React, using LESS as a CSS extension language, and webpack as a module bundler.<br />
+• The front end of the app is built in React and Redux, using LESS as a CSS extension language, and webpack as a module bundler.<br />
 • The back end is built in Node.js/Express, and uses MongoDB as a database with Mongoose.<br />
 • Passport is used for Facebook authentication.<br />
 • Travis CI is used for distributed continuous integration.
